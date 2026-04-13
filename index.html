@@ -13,6 +13,9 @@
         <button class="icon-btn" id="sidebarToggle" aria-label="Toggle Menu">
             <i class="fas fa-bars"></i>
         </button>
+        
+        <h1 class="header-title">Ahmed Faraz's Portfolio</h1>
+        
         <div class="header-actions">
             <button class="icon-btn" id="themeToggle" aria-label="Toggle light/dark mode">
                 <i class="fas fa-moon"></i>
@@ -28,14 +31,7 @@
         </div>
     </nav>
 
-    <div class="floating-socials">
-        <a href="https://www.linkedin.com/in/ahmedfarazuoft/" target="_blank" aria-label="LinkedIn">
-            <i class="fab fa-linkedin-in"></i>
-        </a>
-    </div>
-
     <main class="project-grid" id="projects">
-
         <article class="project-card">
             <h2>TriggerPredict CDSS</h2>
             <p>Developing a Clinical Decision Support Software application with a focus on system architecture, design specifications, and Pugh chart evaluations.</p>
@@ -82,8 +78,26 @@
                  <span>[Suspension Render Placeholder]</span>
             </div>
         </article>
-
     </main>
+
+    <section id="about" class="about-section">
+        <div class="profile-pic placeholder-image" style="background-color: #3c4043;">
+            <span>[Your Photo]</span>
+        </div>
+        <div class="about-box">
+            <h2>About Me</h2>
+            <p>I am a first-year Mechanical Engineering student at the University of Toronto with a strong focus on advanced material science, FEA, and mechanical design. I currently serve as an Opto-Mechanical Engineer for the UTAT FINCH satellite team and actively contribute to UTFR's suspension design. Whether I am developing a multi-hazard alarm system in a hackathon or programming in Python, I am passionate about solving complex engineering problems from the ground up.</p>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <a href="mailto:ahmed.faraz@mail.utoronto.ca" class="footer-link">
+            <i class="fas fa-envelope"></i> ahmed.faraz@mail.utoronto.ca
+        </a>
+        <a href="https://www.linkedin.com/in/ahmedfarazuoft/" target="_blank" class="footer-link">
+            <i class="fab fa-linkedin"></i> LinkedIn
+        </a>
+    </footer>
 
     <script>
         const sidebar = document.getElementById('sidebar');
