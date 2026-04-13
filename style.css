@@ -84,7 +84,7 @@ body {
     font-weight: 800;
     font-size: 1.2rem;
     letter-spacing: 0.5px;
-    text-decoration: none; /* Removes link underline */
+    text-decoration: none; 
     color: var(--text-primary);
     transition: color 0.2s;
 }
@@ -177,15 +177,52 @@ body {
     font-size: 0.95rem;
 }
 
-/* Hero Section */
+/* Hero Section - Video Background Setup */
 .hero {
+    position: relative;
+    overflow: hidden; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 85vh; 
+    margin-bottom: 6rem;
+    padding: 4rem 2rem;
+}
+
+.video-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.bg-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+}
+
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.65); /* 65% dark tint for readability */
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2; /* Forces content to sit on top of the video */
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 5rem;
     max-width: 1200px;
-    margin: 4rem auto 8rem auto;
-    padding: 0 2rem;
+    width: 100%;
 }
 
 .hero-image {
@@ -199,7 +236,7 @@ body {
     max-width: 480px;
     border-radius: 40px; 
     object-fit: cover;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.4); 
     min-height: 480px; 
     background-color: var(--card-bg); 
 }
@@ -210,7 +247,8 @@ body {
     padding-right: 2rem;
 }
 
-.hero-text h1 {
+.hero-title {
+    color: #ffffff;
     font-size: 3rem;
     font-weight: 900;
     line-height: 1.2;
@@ -218,10 +256,10 @@ body {
     letter-spacing: -1px;
 }
 
-.hero-text p {
+.hero-bio {
+    color: #f0f0f0;
     font-size: 1rem;
     line-height: 1.6;
-    color: var(--text-secondary);
     margin-bottom: 1.5rem;
     padding: 0 1.5rem;
 }
@@ -235,8 +273,10 @@ body {
 }
 
 .btn {
-    background-color: var(--btn-bg);
-    color: var(--btn-text);
+    background-color: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(5px);
     text-decoration: none;
     padding: 0.8rem 2rem;
     border-radius: 50px;
@@ -244,11 +284,11 @@ body {
     font-size: 0.9rem;
     width: 260px;
     letter-spacing: 1.5px;
-    transition: background-color 0.3s, transform 0.1s;
+    transition: all 0.3s ease;
 }
 
 .btn:hover {
-    background-color: var(--btn-hover);
+    background-color: rgba(255, 255, 255, 0.3);
     transform: scale(1.02);
 }
 
@@ -257,7 +297,7 @@ body {
     max-width: 1200px;
     margin: 0 auto 6rem auto;
     padding: 0 2rem;
-    scroll-margin-top: 100px; /* Prevents navbar from hiding the section title */
+    scroll-margin-top: 100px; 
 }
 
 .section-title {
@@ -268,12 +308,11 @@ body {
     letter-spacing: -0.5px;
 }
 
-/* Grid Layout ensuring equal heights */
 .card-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 2.5rem;
-    align-items: stretch; /* Forces equal height columns */
+    align-items: stretch; 
 }
 
 .project-card {
@@ -282,7 +321,7 @@ body {
     padding: 2rem;
     display: flex;
     flex-direction: column;
-    height: 100%; /* Fill available height */
+    height: 100%; 
     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
     transition: transform 0.2s, background-color 0.3s;
 }
@@ -301,7 +340,7 @@ body {
     color: var(--text-secondary);
     margin: 0 0 1rem 0;
     font-size: 0.95rem;
-    flex-grow: 1; /* Pushes tags and images to the bottom */
+    flex-grow: 1; 
 }
 
 .tags {
@@ -320,7 +359,6 @@ body {
     font-weight: 600;
 }
 
-/* General Image Box */
 .card-image {
     width: 100%;
     height: 220px;
@@ -346,7 +384,6 @@ body {
     background: none;
 }
 
-/* Strict sizing for Certification Images to look clean */
 .cert-card {
     align-items: center;
     text-align: center;
@@ -359,7 +396,7 @@ body {
 }
 
 .cert-image img {
-    object-fit: contain; /* Shows the whole certificate without cropping */
+    object-fit: contain; 
 }
 
 /* Mobile Responsiveness */
@@ -368,12 +405,12 @@ body {
         padding: 1rem;
     }
     .nav-title {
-        display: none; /* Hide title on small screens to fit links */
+        display: none; 
     }
     .nav-center {
         justify-content: flex-start;
     }
-    .hero {
+    .hero-content {
         flex-direction: column;
         gap: 3rem;
         margin-top: 2rem;
