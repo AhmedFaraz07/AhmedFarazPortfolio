@@ -1,1 +1,1 @@
-I will update this portfolio over the longterm to showcase my progression as an enigneer!
+I will update this portfolio over the long term to showcase my progression as an engineer!
