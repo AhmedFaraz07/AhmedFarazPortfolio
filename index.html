@@ -51,16 +51,14 @@
         </div>
     </div>
 
-    <main class="hero" id="home">
-        
+    <section class="hero" id="home">
         <div class="hero-image">
-            <img src="headshot.jpeg" alt="Ahmed Faraz">
+            <img src="ahmedfarazportfolio.jpg" alt="Ahmed Faraz">
         </div>
-
         <div class="hero-text">
             <h1>I'm Ahmed Faraz,<br>a Mechanical Engineering student.</h1>
             
-            <p>I am a first-year student at the University of Toronto exploring various areas of engineering. I have dabbled in multiple design teams, including UTSM, UTFR, & UTAT. While I intend to dedicate myself to one in the near future, it has been an enjoyable experience learning from all three! Over my first-year summer, I intend to explore the realm of Mechatronics through building a robot! Besides that, I also enjoy learning outside the classroom, gaining knowledge through online courses such as UMichigan's "AI for Mechanical Engineers" or building practical skills by participating in hackathons. </p>
+            <p>I am a first-year student at the University of Toronto exploring various areas of engineering. I have dabbled in multiple design teams, including UTSM, UTFR, & UTAT. While I intend to dedicate myself to one in the near future, it has been an enjoyable experience learning from all three! Over my first-year summer, I intend to explore the realm of Mechatronics through building a robot! Besides that, I also enjoy learning outside the classroom, gaining knowledge through online courses such as UMichigan's "AI for Mechanical Engineers" or building practical skills by participating in hackathons.</p>
             
             <p>Scroll below to see how I'm applying engineering principles to real-world hardware!</p>
             
@@ -70,8 +68,94 @@
                 <a href="#certifications" class="btn">CERTIFICATIONS</a>
             </div>
         </div>
+    </section>
 
-    </main>
+    <section id="projects" class="content-section">
+        <h2 class="section-title">Projects</h2>
+        <div class="card-grid">
+            
+            <article class="project-card">
+                <h3>TriggerPredict CDSS</h3>
+                <p>Developing a Clinical Decision Support Software application with a focus on system architecture, design specifications, and Pugh chart evaluations.</p>
+                <div class="tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">System Design</span>
+                </div>
+            </article>
+
+            <article class="project-card">
+                <h3>Multi-Hazard Alarm System</h3>
+                <p>Hardware-based diagnostic system developed for early hazard detection and alerting, utilizing microcontroller integration.</p>
+                <p class="date">Feb 2026</p>
+                <div class="tags">
+                    <span class="tag">Arduino</span>
+                    <span class="tag">C++</span>
+                    <span class="tag">Hardware</span>
+                </div>
+                <div class="card-image placeholder-image">
+                    <span>[Project Image Placeholder]</span>
+                </div>
+            </article>
+
+            <article class="project-card">
+                <h3>FINCH Satellite Opto-Mechanical Design</h3>
+                <p>Structural modeling and component integration for aerospace applications, ensuring operational integrity under launch conditions.</p>
+                <p class="date">Ongoing</p>
+                <div class="tags">
+                    <span class="tag">SolidWorks</span>
+                    <span class="tag">Aerospace</span>
+                </div>
+            </article>
+
+            <article class="project-card">
+                <h3>Formula Racing Suspension</h3>
+                <p>Finite Element Analysis (FEA) and dynamic simulation of suspension sub-assemblies to optimize weight and cornering performance.</p>
+                <p class="date">Nov 2025</p>
+                <div class="tags">
+                    <span class="tag">FEA</span>
+                    <span class="tag">Ansys</span>
+                    <span class="tag">Mechanical Design</span>
+                </div>
+                <div class="card-image placeholder-image">
+                     <span>[Suspension Render Placeholder]</span>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <section id="certifications" class="content-section">
+        <h2 class="section-title">Certifications</h2>
+        <div class="card-grid">
+            
+            <article class="project-card cert-card">
+                <div class="card-image cert-image">
+                    <img src="ai-certificate.jpg" alt="AI for Design and Optimization Certificate">
+                </div>
+                <h3>AI for Design and Optimization</h3>
+                <p>University of Michigan via Coursera</p>
+                <p class="date">March 2026</p>
+            </article>
+
+            <article class="project-card cert-card">
+                <div class="card-image cert-image">
+                    <img src="ilead-certificate.jpg" alt="ILead Emerging Leaders Certificate">
+                </div>
+                <h3>Emerging Leaders Program</h3>
+                <p>University of Toronto - Troost Institute for Leadership Education in Engineering</p>
+                <p class="date">2025</p>
+            </article>
+
+            <article class="project-card cert-card">
+                <div class="card-image cert-image">
+                    <img src="ap-capstone.jpg" alt="AP Capstone Diploma">
+                </div>
+                <h3>AP Capstone Diploma</h3>
+                <p>International Schools Group (ISG) Dammam</p>
+                <p class="date">Completed</p>
+            </article>
+
+        </div>
+    </section>
 
     <script>
         // Sidebar Logic
@@ -115,7 +199,6 @@
             contactModal.style.display = 'none';
         });
 
-        // Close modal if clicking outside of the box
         window.addEventListener('click', (e) => {
             if (e.target === contactModal) {
                 contactModal.style.display = 'none';
