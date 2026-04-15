@@ -210,13 +210,13 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.65); /* 65% dark tint for readability */
+    background: rgba(0, 0, 0, 0.65);
     z-index: 1;
 }
 
 .hero-content {
     position: relative;
-    z-index: 2; /* Forces content to sit on top of the video */
+    z-index: 2; 
     display: flex;
     align-items: center;
     justify-content: center;
@@ -225,8 +225,17 @@ body {
     width: 100%;
 }
 
-.hero-image {
+/* New Left Column Layout */
+.hero-left {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1.5rem;
+}
+
+.hero-image {
+    width: 100%;
     display: flex;
     justify-content: flex-end;
 }
@@ -241,6 +250,66 @@ body {
     background-color: var(--card-bg); 
 }
 
+/* Glassmorphism Skills & GPA Grid */
+.quick-stats {
+    width: 100%;
+    max-width: 480px;
+    display: flex;
+    gap: 1rem;
+}
+
+.gpa-box {
+    background-color: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+    padding: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    min-width: 110px;
+}
+
+.gpa-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.9;
+}
+
+.gpa-value {
+    font-size: 2rem;
+    font-weight: 900;
+    line-height: 1.1;
+}
+
+.skills-box {
+    background-color: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+    padding: 1rem;
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-content: center;
+    justify-content: center;
+}
+
+.skill {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    padding: 0.4rem 0.8rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+/* Right Column */
 .hero-text {
     flex: 1;
     text-align: center;
@@ -308,6 +377,7 @@ body {
     letter-spacing: -0.5px;
 }
 
+/* Grid Layout ensuring equal heights */
 .card-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -359,6 +429,7 @@ body {
     font-weight: 600;
 }
 
+/* General Image Box */
 .card-image {
     width: 100%;
     height: 220px;
@@ -384,6 +455,7 @@ body {
     background: none;
 }
 
+/* Strict sizing for Certification Images to look clean */
 .cert-card {
     align-items: center;
     text-align: center;
@@ -415,8 +487,14 @@ body {
         gap: 3rem;
         margin-top: 2rem;
     }
+    .hero-left {
+        align-items: center; 
+    }
     .hero-image {
         justify-content: center;
+    }
+    .quick-stats {
+        justify-content: center; 
     }
     .hero-text {
         padding-right: 0;
