@@ -341,17 +341,18 @@ body {
 }
 
 /* Hero Buttons - Horizontal Alignment */
+/* Hero Buttons - True Horizontal Alignment */
 .hero-buttons {
     display: flex;
     flex-direction: row; /* Forces side-by-side */
-    flex-wrap: wrap;     /* Wraps nicely if screen is too small */
     gap: 1.5rem;
     align-items: center;
     justify-content: flex-start;
     margin-top: 2.5rem;
+    width: 100%;
 }
 
-/* Buttons (Ultra Glassy) */
+/* Buttons (Ultra Glassy, Auto-Width) */
 .btn {
     background-color: rgba(255, 255, 255, 0.15);
     -webkit-backdrop-filter: blur(16px);
@@ -360,14 +361,19 @@ body {
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
     color: #ffffff;
     text-decoration: none;
-    padding: 0.9rem 2rem; /* Adjusted padding so they fit side-by-side better */
+    /* Reduced padding slightly so they fit next to each other */
+    padding: 0.9rem 1.5rem; 
     border-radius: 50px;
     font-weight: 700;
-    font-size: 0.95rem;
-    letter-spacing: 1.5px;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
     text-align: center;
     transition: all 0.3s ease;
     text-transform: uppercase;
+    /* Removed the fixed 280px width, using auto to let them shrink if needed */
+    width: auto; 
+    flex: 1; /* Makes both buttons exactly the same width while fitting the container */
+    max-width: 250px; /* Prevents them from getting too massive on huge screens */
 }
 
 .btn:hover {
@@ -375,7 +381,6 @@ body {
     border-color: rgba(255, 255, 255, 0.7);
     transform: scale(1.02);
 }
-
 /* Projects & Certifications Sections */
 .content-section {
     max-width: 1200px;
