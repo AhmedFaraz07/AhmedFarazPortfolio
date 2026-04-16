@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ahmed Faraz's Portfolio</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -69,9 +74,9 @@
             <div class="hero-text">
                 <h1 class="hero-title">I'm Ahmed Faraz,<br>a Mechanical Engineering student.</h1>
                 
-                <p class="hero-bio">I am a first-year student at the University of Toronto exploring various areas of engineering. I have dabbled in multiple design teams, including UTSM, UTFR, & UTAT. While I intend to dedicate myself to one in the near future, it has been an enjoyable experience learning from all three! Over my first-year summer, I intend to explore the realm of Mechatronics through building a robot! Besides that, I also enjoy learning outside the classroom, gaining knowledge through online courses such as UMichigan's "AI for Mechanical Engineers" or building practical skills by participating in hackathons.</p>
+                <p class="hero-bio">I am a first-year student at the University of Toronto exploring various areas of engineering. I have dabbled in multiple design teams, including UTSM, UTFR, & UTAT. While I intend to dedicate myself to one in the near future, it has been an enjoyable experience learning from all three! Over my first-year summer, I intend to explore the realm of Mechatronics through building a robot! Besides that, I am honored to be researching aerogel composites at the Toronto Smart Materials & Structures (TSMART) lab. I also enjoy learning outside the classroom, gaining knowledge through online courses such as UMichigan's "AI for Mechanical Engineers" or building practical skills by participating in hackathons.</p>
                 
-                <p class="hero-bio">Scroll below to see how I'm applying engineering principles to real-world hardware!</p>
+                <p class="hero-bio hero-bio-scrolldown">Scroll below to see how I'm applying engineering principles to real-world hardware!</p>
                 
                 <div class="hero-buttons">
                     <a href="#projects" class="btn">ENGINEERING PROJECTS</a>
@@ -135,21 +140,32 @@
     </section>
 
     <script>
-        // Theme Toggle Logic
+        // Theme Toggle Logic with LocalStorage Memory
         const themeToggle = document.getElementById('themeToggle');
         const themeIcon = themeToggle.querySelector('i');
         const body = document.body;
 
+        // 1. Check browser memory on load
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme === 'dark') {
+            body.classList.add('dark-mode');
+            themeIcon.classList.replace('fa-moon', 'fa-sun');
+        }
+
+        // 2. Toggle and save to memory on click
         themeToggle.addEventListener('click', () => {
             body.classList.toggle('dark-mode');
+            
             if (body.classList.contains('dark-mode')) {
                 themeIcon.classList.replace('fa-moon', 'fa-sun');
+                localStorage.setItem('theme', 'dark'); // Save dark mode
             } else {
                 themeIcon.classList.replace('fa-sun', 'fa-moon');
+                localStorage.setItem('theme', 'light'); // Save light mode
             }
         });
 
-        // Modal Logic
+        // Contact Modal Logic
         const contactModal = document.getElementById('contactModal');
         const contactToggle = document.getElementById('contactToggle');
         const closeModal = document.getElementById('closeModal');
