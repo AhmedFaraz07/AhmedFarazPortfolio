@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAIDIO | Ahmed Faraz</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Specific styles for Notion-like project pages */
+        .project-page-header {
+            max-width: 900px;
+            margin: 4rem auto 2rem auto;
+            padding: 0 2rem;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            transition: color 0.2s;
+        }
+        .back-link:hover {
+            color: var(--text-primary);
+        }
+        .project-page-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin: 0 0 1rem 0;
+            letter-spacing: -1px;
+        }
+        .project-page-meta {
+            display: flex;
+            gap: 1rem;
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-bottom: 2rem;
+        }
+        .project-cover-image {
+            width: 100%;
+            max-width: 900px;
+            height: 400px;
+            margin: 0 auto 3rem auto;
+            border-radius: 20px;
+            overflow: hidden;
+            background-color: var(--card-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .project-cover-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .project-content {
+            max-width: 800px; /* Slightly narrower than header for readable line length */
+            margin: 0 auto 6rem auto;
+            padding: 0 2rem;
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: var(--text-primary);
+        }
+        .project-content h2 {
+            font-size: 2rem;
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body class="dark-mode"> <header class="navbar">
+        <div class="nav-left">
+            <a href="index.html" class="nav-title">Ahmed Faraz's Portfolio</a>
+        </div>
+        <div class="nav-center"></div>
+        <div class="nav-right">
+            <button class="icon-btn" id="themeToggle" aria-label="Toggle light/dark mode"><i class="fas fa-sun"></i></button>
+        </div>
+    </header>
+
+    <header class="project-page-header">
+        <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+        <h1 class="project-page-title">RAIDIO</h1>
+        <div class="project-page-meta">
+            <span>Hack Without Borders 2026</span>
+            <span>•</span>
+            <span>Hardware / Python</span>
+        </div>
+    </header>
+
+    <div class="project-cover-image placeholder-image">
+        <span>[RAIDIO Cover Image Placeholder]</span>
+    </div>
+
+    <main class="project-content">
+        <h2>Overview</h2>
+        <p>This project was engineered for the Hack Without Borders 2026 event. The goal was to create a robust system capable of providing offline AI access utilizing analog radio protocols.</p>
+        
+        <h2>System Architecture</h2>
+        <p>By leveraging Slow-Scan Television (SSTV) protocols, the system allows for data transmission in environments completely devoid of standard internet infrastructure. The backend logic is driven by Python, interfacing directly with the Gemini API to process and format the transmitted data.</p>
+        
+        <h2>Challenges & Solutions</h2>
+        <p>You can use this space to write out your design process, testing phases, and the hardware components you used for the receiver/transmitter setup.</p>
+    </main>
+
+    <script>
+        // Simple Theme Toggle for Project Page
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+        const body = document.body;
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            if (body.classList.contains('dark-mode')) {
+                themeIcon.classList.replace('fa-moon', 'fa-sun');
+            } else {
+                themeIcon.classList.replace('fa-sun', 'fa-moon');
+            }
+        });
+    </script>
+</body>
+</html>
