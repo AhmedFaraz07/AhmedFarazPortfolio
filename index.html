@@ -53,6 +53,7 @@
     </div>
 
     <section class="hero" id="home">
+        
         <div class="video-container">
             <video autoplay loop muted playsinline class="bg-video">
                 <source src="background.mp4" type="video/mp4">
@@ -61,6 +62,7 @@
         </div>
 
         <div class="hero-content">
+            
             <div class="hero-left">
                 <div class="hero-image">
                     <img src="headshot.jpeg" alt="Ahmed Faraz">
@@ -91,7 +93,7 @@
 
     <section id="projects" class="content-section">
         <h2 class="section-title">Engineering Projects</h2>
-        <div class="card-grid">
+        <div class="project-grid">
             
             <a href="raidio.html" class="project-card-link">
                 <article class="project-card">
@@ -102,8 +104,8 @@
                         <span class="tag">Gemini API</span>
                         <span class="tag">Hardware</span>
                     </div>
-                    <div class="card-image placeholder-image">
-                        <span>[RAIDIO Image Placeholder]</span>
+                    <div class="card-image">
+                        <img src="RAIDIOTHUMBNAIL.PNG" alt="RAIDIO Project Thumbnail">
                     </div>
                 </article>
             </a>
@@ -143,29 +145,26 @@
     </section>
 
     <script>
-        // Theme Toggle Logic
         const themeToggle = document.getElementById('themeToggle');
         const themeIcon = themeToggle.querySelector('i');
         const body = document.body;
 
-        // Set correct icon on load based on memory
         if (body.classList.contains('dark-mode')) {
             themeIcon.classList.replace('fa-moon', 'fa-sun');
         }
 
-        // Toggle and save memory on click
         themeToggle.addEventListener('click', () => {
             body.classList.toggle('dark-mode');
+            
             if (body.classList.contains('dark-mode')) {
                 themeIcon.classList.replace('fa-moon', 'fa-sun');
-                localStorage.setItem('theme', 'dark');
+                localStorage.setItem('theme', 'dark'); 
             } else {
                 themeIcon.classList.replace('fa-sun', 'fa-moon');
-                localStorage.setItem('theme', 'light');
+                localStorage.setItem('theme', 'light'); 
             }
         });
 
-        // Contact Modal Logic
         const contactModal = document.getElementById('contactModal');
         const contactToggle = document.getElementById('contactToggle');
         const closeModal = document.getElementById('closeModal');
