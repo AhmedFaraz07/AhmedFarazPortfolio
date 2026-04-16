@@ -225,7 +225,7 @@ body {
     width: 100%;
 }
 
-/* New Left Column Layout */
+/* Left Column Layout */
 .hero-left {
     flex: 1;
     display: flex;
@@ -250,63 +250,41 @@ body {
     background-color: var(--card-bg); 
 }
 
-/* Glassmorphism Skills & GPA Grid */
-.quick-stats {
+/* Education Box */
+.education-box {
     width: 100%;
     max-width: 480px;
-    display: flex;
-    gap: 1rem;
-}
-
-.gpa-box {
     background-color: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 20px;
-    padding: 1.2rem;
+    padding: 1.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    text-align: center;
     color: #ffffff;
-    min-width: 110px;
+    gap: 0.3rem;
 }
 
-.gpa-label {
-    font-size: 0.8rem;
+.edu-label {
+    font-size: 0.85rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
-    opacity: 0.9;
+    opacity: 0.8;
+    margin-bottom: 0.2rem;
 }
 
-.gpa-value {
-    font-size: 2rem;
-    font-weight: 900;
-    line-height: 1.1;
+.edu-text {
+    font-size: 1.05rem;
+    font-weight: 500;
 }
 
-.skills-box {
-    background-color: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 20px;
-    padding: 1rem;
-    flex: 1;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    align-content: center;
-    justify-content: center;
-}
-
-.skill {
-    background-color: rgba(255, 255, 255, 0.2);
-    color: #ffffff;
-    padding: 0.4rem 0.8rem;
-    border-radius: 50px;
-    font-size: 0.85rem;
-    font-weight: 600;
+.edu-highlight {
+    font-size: 1.2rem;
+    font-weight: 800;
+    margin-top: 0.5rem;
 }
 
 /* Right Column */
@@ -385,6 +363,19 @@ body {
     align-items: stretch; 
 }
 
+/* Clickable Project Cards */
+.project-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    height: 100%;
+    transition: transform 0.2s;
+}
+
+.project-card-link:hover {
+    transform: translateY(-5px);
+}
+
 .project-card {
     background-color: var(--card-bg);
     border-radius: 20px;
@@ -393,11 +384,7 @@ body {
     flex-direction: column;
     height: 100%; 
     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-    transition: transform 0.2s, background-color 0.3s;
-}
-
-.project-card:hover {
-    transform: translateY(-5px);
+    transition: background-color 0.3s;
 }
 
 .project-card h3 {
@@ -459,6 +446,11 @@ body {
 .cert-card {
     align-items: center;
     text-align: center;
+    transition: transform 0.2s, background-color 0.3s;
+}
+
+.cert-card:hover {
+    transform: translateY(-5px);
 }
 
 .cert-image {
@@ -492,9 +484,6 @@ body {
     }
     .hero-image {
         justify-content: center;
-    }
-    .quick-stats {
-        justify-content: center; 
     }
     .hero-text {
         padding-right: 0;
