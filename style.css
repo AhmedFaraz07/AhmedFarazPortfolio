@@ -320,25 +320,28 @@ body {
 }
 
 .btn {
-    background-color: rgba(255, 255, 255, 0.15);
-    color: #ffffff;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(5px);
+    background-color: var(--edu-bg); /* Matches the Education box background */
+    backdrop-filter: blur(5px);      /* Creates the frosted glass effect */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Thin translucent border */
+    color: #ffffff;                  /* Forces white text over the dark video */
     text-decoration: none;
-    padding: 0.8rem 2rem;
+    padding: 0.9rem 2.5rem;
     border-radius: 50px;
     font-weight: 700;
-    font-size: 0.9rem;
-    width: 260px;
+    font-size: 0.95rem;
+    width: 280px; 
     letter-spacing: 1.5px;
+    text-align: center;
     transition: all 0.3s ease;
+    text-transform: uppercase;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Soft shadow to lift it off the video */
 }
 
 .btn:hover {
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.25); /* Gets slightly brighter on hover */
+    border-color: rgba(255, 255, 255, 0.6);
     transform: scale(1.02);
 }
-
 /* Projects & Certifications Sections */
 .content-section {
     max-width: 1200px;
