@@ -12,13 +12,11 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* Specific styles for Notion-like project pages */
         .project-page-header { max-width: 900px; margin: 4rem auto 2rem auto; padding: 0 2rem; }
         .back-link { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--text-secondary); text-decoration: none; font-weight: 600; margin-bottom: 2rem; transition: color 0.2s; }
         .back-link:hover { color: var(--text-primary); }
         .project-page-title { font-size: 3.5rem; font-weight: 900; line-height: 1.1; margin: 0 0 1rem 0; letter-spacing: -1px; }
         
-        /* Updated Meta and Date Styling */
         .project-page-meta { display: flex; flex-wrap: wrap; gap: 1rem; color: var(--text-secondary); font-size: 1rem; margin-bottom: 0.5rem; }
         .project-page-date { color: var(--text-primary); font-weight: 700; font-size: 1.1rem; margin-bottom: 2rem; opacity: 0.9; }
         
@@ -39,8 +37,9 @@
         .project-content { max-width: 800px; margin: 0 auto 6rem auto; padding: 0 2rem; font-size: 1.15rem; line-height: 1.8; color: var(--text-primary); }
         .project-content h2 { font-size: 2rem; margin-top: 3.5rem; margin-bottom: 1rem; letter-spacing: -0.5px; }
         .project-content p { margin-bottom: 1.5rem; color: var(--text-secondary); }
+        .project-content ul { color: var(--text-secondary); margin-bottom: 1.5rem; padding-left: 1.5rem; }
+        .project-content li { margin-bottom: 0.5rem; }
         
-        /* New class for adding images inside your sections later */
         .project-inline-image { width: 100%; border-radius: 12px; margin: 2rem 0; box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
     </style>
 </head>
@@ -65,8 +64,6 @@
         
         <div class="project-page-meta">
             <span>Hack Without Borders 2026</span>
-            <span>•</span>
-            <span>Hardware / Python</span>
         </div>
         <div class="project-page-date">March 24-25, 2026</div>
     </header>
@@ -78,19 +75,44 @@
     <main class="project-content">
         
         <h2>Overview</h2>
-        <p>This project was engineered for the Hack Without Borders 2026 hackathon by me, Meher Patel, Tomas Chen, & Tayeb Marikar. The goal was to create a robust system capable of providing offline AI access utilizing analog radio protocols.</p>
+        <p>This project was engineered for the Hack Without Borders 2026 hackathon by me, Meher Patel, Tomas Chen, & Tayeb Marikar. The goal was to create a robust system capable of providing offline AI access to remote villages utilizing analog radio protocols.</p>
         
         <h2>Inspiration</h2>
-        <p>After doing research what we discovered was that as the entire world is revolutionized by AI and LLM Transformers, many in undeveloped, rural villages cannot access this technology due to a lack of pre-existing internet infrastructure. We wanted to fill this gap with a realistic solution, so to say, a starting step towards the right direction.</p>
+        <p>After doing research, what we discovered was that as the entire world is revolutionized by AI and LLM Transformers, millions in rural Sub-Saharan Africa remain excluded. We identified three significant barriers to entry: limited computing power in financially strained remote villages, a lack of Wi-Fi infrastructure, and limited text literacy. We wanted to fill this gap with a realistic solution—a starting step towards bridging the digital divide.</p>
 
         <h2>How We Built It</h2>
-        <p></p>
+        <p>To tackle this multifaceted issue, we engineered a system that merges cutting-edge multimodal AI with commonplace analog radios and older mobile phones. By converting visual questions into audible answers, we provide a lifeline of information to those off the grid. The architecture operates in four main stages:</p>
+        
+        <ul>
+            <li><strong>Input & Encoding:</strong> Users capture images of crop pests, medical concerns, or anything else using the app. We utilized Slow-Scan Television (SSTV) protocols (specifically Martin 1) to encode these images into audio tones. Alternatively, users can bypass images entirely and speak directly to the app.</li>
+        </ul>
+
+        <img src="IMG_0472.jpg" class="project-inline-image" alt="Android Studio Layout Inspector showing the RAIDIO app interface">
+
+        <ul>
+            <li><strong>Transmission:</strong> These encoded audio tones travel over standard radio frequencies, completely bypassing the need for an internet connection.</li>
+            <li><strong>The "Intelligence" Hub:</strong> At a central receiving station, the tones are recorded and decoded back into images. We then integrated the <strong>Gemini 2.5 Flash API</strong> to analyze the decoded visuals and generate expert, contextual advice.</li>
+            <li><strong>Audio Output:</strong> Using Google Text-to-Speech (gTTS), the AI’s guidance is broadcast back over the radio in local languages, making the information accessible to everyone regardless of text literacy levels.</li>
+        </ul>
+
+        <img src="IMG_0488.jpg" class="project-inline-image" alt="SSTV decoding software and radio frequency waterfall interface at the intelligence hub">
 
         <h2>Challenges & Solutions</h2>
-        <p></p>
+        <p><strong>Module Integration & App Deployment:</strong> Our biggest hurdle was the seamless integration of disparate code modules into a single, functional application. We had to bridge Python backend logic with a mobile frontend using tools like Buildozer and Android Studio. Specifically, getting the Gemini API to efficiently handle raw audio inputs required over 16 hours of intense debugging. Seeing the entire interface finally work as a cohesive app felt like magic.</p>
+        
+        <img src="IMG_0470.jpg" class="project-inline-image" alt="Terminal showing extensive Android Buildozer compilation logs during debugging">
+
+        <p><strong>Signal Processing:</strong> Real-world radio transmission is noisy. Turning degraded, static-filled audio signals back into clear, decoded images was a major challenge. We had to heavily adjust audio filters and tweak our SSTV protocol handling to ensure the AI received legible images.</p>
+
+        <p><strong>The Live Demo:</strong> As is a rite of passage in any hackathon, our live demo during the final presentation went wrong! It taught us a valuable lesson about the unpredictability of hardware and testing in live presentation environments versus controlled development setups.</p>
 
         <h2>Accomplishments & Skills Learnt</h2>
-        <p></p>
+        <p>Coming into this event as a team of entirely Mechanical Engineers, this was our very first software hackathon. Building a complete, deployed application from scratch was a massive milestone for us.</p>
+        <ul>
+            <li><strong>Full-Stack Mobile Development:</strong> This was our first time coding an app. We successfully learned to build a frontend UI, utilize Android Studio, and package Python code for mobile devices.</li>
+            <li><strong>API Integration:</strong> We learned how to securely manage API keys and route data through complex endpoints like the Gemini 2.5 Flash API and Google TTS.</li>
+            <li><strong>Systems Engineering:</strong> We gained hands-on experience marrying hardware (analog radio, SDRs) with software (SSTV protocols, AI).</li>
+        </ul>
 
     </main>
 </body>
