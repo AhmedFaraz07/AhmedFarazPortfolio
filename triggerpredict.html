@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TriggerPredict CDSS | Ahmed Faraz</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .project-page-header { max-width: 900px; margin: 4rem auto 2rem auto; padding: 0 2rem; }
+        .back-link { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--text-secondary); text-decoration: none; font-weight: 600; margin-bottom: 2rem; transition: color 0.2s; }
+        .back-link:hover { color: var(--text-primary); }
+        .project-page-title { font-size: 3.5rem; font-weight: 900; line-height: 1.1; margin: 0 0 1rem 0; letter-spacing: -1px; }
+        
+        .project-page-meta { display: flex; flex-wrap: wrap; gap: 1rem; color: var(--text-secondary); font-size: 1rem; margin-bottom: 0.5rem; }
+        .project-page-date { color: var(--text-primary); font-weight: 700; font-size: 1.1rem; margin-bottom: 2rem; opacity: 0.9; }
+        
+        .project-cover-image { 
+            width: 100%; 
+            max-width: 900px; 
+            height: 500px; 
+            margin: 0 auto 3rem auto; 
+            border-radius: 20px; 
+            overflow: hidden; 
+            background-color: var(--card-bg); 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+        }
+        .project-cover-image img { width: 100%; height: 100%; object-fit: cover; }
+        .project-cover-image iframe { width: 100%; height: 100%; border: none; }
+        
+        .project-content { max-width: 800px; margin: 0 auto 6rem auto; padding: 0 2rem; font-size: 1.15rem; line-height: 1.8; color: var(--text-primary); }
+        .project-content h2 { font-size: 2rem; margin-top: 3.5rem; margin-bottom: 1rem; letter-spacing: -0.5px; }
+        .project-content p { margin-bottom: 1.5rem; color: var(--text-secondary); }
+        .project-content ul { color: var(--text-secondary); margin-bottom: 1.5rem; padding-left: 1.5rem; }
+        .project-content li { margin-bottom: 0.5rem; }
+        
+        .project-inline-image { width: 100%; border-radius: 12px; margin: 2rem 0; box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
+        
+        /* Video Embed Styling */
+        .video-embed-container {
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 2rem 0;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            aspect-ratio: 16/9;
+            background-color: var(--card-bg);
+        }
+        .video-embed-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+        }
+    </script>
+
+    <header class="navbar">
+        <div class="nav-left">
+            <a href="index.html" class="nav-title">Ahmed Faraz's Portfolio</a>
+        </div>
+        <div class="nav-center"></div>
+        <div class="nav-right"></div>
+    </header>
+
+    <header class="project-page-header">
+        <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+        <h1 class="project-page-title">TriggerPredict CDSS</h1>
+        
+        <div class="project-page-meta">
+            <span>Mount Sinai Hospital</span>
+            <span>•</span>
+            <span>Systems Engineering / Python UI</span>
+        </div>
+        <div class="project-page-date">January — April 2026</div>
+    </header>
+
+    <div class="project-cover-image">
+        <img src="image_690bba.png" alt="TriggerPredict UI Cover Image">
+    </div>
+
+    <main class="project-content">
+        
+        <h2>Overview</h2>
+        <p>Over a rigorous 4-month period for the APS112 engineering design course, my team (Team 128) partnered with Dr. Claire Jones, a leading infertility specialist at Mount Sinai Hospital. We were tasked with developing a Clinical Decision Support Software (CDSS) algorithm to optimize In-Vitro Fertilization (IVF) trigger shot timing. Working alongside my talented team members, we successfully engineered the <strong>TriggerPredict App</strong>—a streamlined, locally-hosted Python application that translates complex patient datasets into data-backed medical recommendations.</p>
+        
+        <h2>Inspiration</h2>
+        <p>An IVF cycle requires a strict 10-12 day monitoring period of numerous clinical factors. The critical step in this entire process is the "Trigger Shot," which prompts final egg maturation just before retrieval. Administering it too early or too late drastically reduces pregnancy success rates and can cause severe medical complications like Ovarian Hyperstimulation Syndrome (OHSS).</p>
+        <p>Currently, Mount Sinai physicians rely heavily on personal clinical judgment when reviewing complex spreadsheets (stim sheets) of hormone levels and follicle sizes, which often leads to disagreements among specialists. Our inspiration was to bridge this gap. We wanted to create a standardized, evidence-based framework that would seamlessly integrate into the clinic's daily meetings, reducing cognitive load for physicians while providing transparent, research-backed justifications for every trigger decision.</p>
+
+        <h2>How We Built It</h2>
+        <p>This project was an exercise in comprehensive systems engineering and the iterative design process. We constructed a rigorous decision-tree flowchart based on current medical literature, specifically evaluating the four key variables of IVF timing:</p>
+        <ul>
+            <li><strong>Luteinizing Hormone (LH):</strong> Helps trigger ovulation. In IVF cycles, LH levels help doctors know the best timing for egg retrieval.</li>
+            <li><strong>Estradiol (E2 / Estrogen):</strong> Released as eggs grow. It thickens the uterine lining, supports healthy egg growth, and regulates the menstrual cycle.</li>
+            <li><strong>Progesterone:</strong> Crucial for preparing the uterus to support an embryo after ovulation. Balanced progesterone ensures the uterus is receptive.</li>
+            <li><strong>Follicle Size & Count:</strong> Through our research, we defined the optimal target as ~15 follicles, heavily favoring those matured to a size of 16-20mm.</li>
+        </ul>
+        <p>Using free brainstorming, SCAMPER, blue sky thinking, and morph charts, we generated 124 potential solutions. We filtered these ideas using feasibility checks and a Pugh Chart to evaluate our top designs against our core objectives (intuitiveness, system integration, justification provision, and human error minimization), ultimately culminating in the TriggerPredict Python UI.</p>
+
+        <h2>Product Demo</h2>
+        <p>Below is a demonstration of the TriggerPredict application in action, showcasing how specialists can securely input patient data, run the preliminary safety checks, and receive algorithmically justified recommendations for trigger timing.</p>
+        
+        <div class="video-embed-container">
+            <iframe src="https://www.youtube.com/embed/Dk45x6Icnrc" title="TriggerPredict App Demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+
+        <h2>Challenges & Solutions</h2>
+        <p><strong>Strict Legal & Ethical Constraints:</strong> The healthcare sector is highly regulated. Our solution had to comply with the Personal Health Information Protection Act (PHIPA) and Health Canada’s SaMD CDSS classification standards. <em>Solution:</em> We designed the app to run locally on a Python backend. It evaluates patient data instantly but purposefully does not store any personal identifiers between uses, ensuring total patient privacy.</p>
+        
+        <p><strong>Cognitive Load vs. Accuracy:</strong> One of our alternative designs was a highly accurate, massive physical flowchart poster. However, we realized that navigating a dense flowchart actually increases cognitive load in a fast-paced clinical setting. <em>Solution:</em> We opted for the app-based interface. It requires manual data entry (a slight trade-off), but it drastically simplifies the visual presentation and provides automatic, algorithm-driven evaluations with one-click references for the medical staff.</p>
+
+        <h2>Accomplishments & Skills Learnt</h2>
+        <p>This project was a massive leap forward in my understanding of professional engineering design.</p>
+        <ul>
+            <li><strong>Systems Thinking:</strong> I learned how to evaluate a problem holistically, identifying all interest holders (from the physicians to the hospital's research ethics board) and plotting them on an Influence vs. Impact matrix.</li>
+            <li><strong>Medical Logic Translation:</strong> Translating complex, heavily researched medical literature into a binary, logical decision tree that a computer program could execute.</li>
+            <li><strong>Testing Methodology:</strong> We developed a robust measure of success (MoS) plan using the Subjective Assessment (Adapted QUESI) and Observational Coding (CHAI) frameworks to rigorously test the UI's intuitiveness with actual users.</li>
+        </ul>
+
+    </main>
+</body>
+</html>
