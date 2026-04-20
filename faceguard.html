@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FaceGuard | Ahmed Faraz</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .project-page-header { max-width: 900px; margin: 4rem auto 2rem auto; padding: 0 2rem; }
+        .back-link { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--text-secondary); text-decoration: none; font-weight: 600; margin-bottom: 2rem; transition: color 0.2s; }
+        .back-link:hover { color: var(--text-primary); }
+        .project-page-title { font-size: 3.5rem; font-weight: 900; line-height: 1.1; margin: 0 0 1rem 0; letter-spacing: -1px; }
+        
+        .project-page-meta { display: flex; flex-wrap: wrap; gap: 1rem; color: var(--text-secondary); font-size: 1rem; margin-bottom: 0.5rem; }
+        .project-page-date { color: var(--text-primary); font-weight: 700; font-size: 1.1rem; margin-bottom: 2rem; opacity: 0.9; }
+        
+        .project-content { max-width: 800px; margin: 0 auto 6rem auto; padding: 0 2rem; font-size: 1.15rem; line-height: 1.8; color: var(--text-primary); }
+        .project-content h2 { font-size: 2rem; margin-top: 3.5rem; margin-bottom: 1rem; letter-spacing: -0.5px; }
+        .project-content p { margin-bottom: 1.5rem; color: var(--text-secondary); }
+        .project-content ul { color: var(--text-secondary); margin-bottom: 1.5rem; padding-left: 1.5rem; }
+        .project-content li { margin-bottom: 0.5rem; }
+        
+        .project-inline-image { width: 100%; border-radius: 12px; margin: 2rem 0; box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
+        
+        /* Video Grid styled as a top cover element */
+        .video-grid { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 1.5rem; 
+            max-width: 900px;
+            margin: 0 auto 3rem auto; 
+            padding: 0 2rem;
+        }
+        .video-grid video { 
+            width: 100%; 
+            border-radius: 12px; 
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1); 
+            background-color: var(--card-bg); 
+            aspect-ratio: 16/9;
+            object-fit: cover;
+        }
+        
+        @media (max-width: 768px) {
+            .video-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <script>
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+        }
+    </script>
+
+    <header class="navbar">
+        <div class="nav-left">
+            <a href="index.html" class="nav-title">Ahmed Faraz's Portfolio</a>
+        </div>
+        <div class="nav-center"></div>
+        <div class="nav-right"></div>
+    </header>
+
+    <header class="project-page-header">
+        <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+        <h1 class="project-page-title">FaceGuard</h1>
+        
+        <div class="project-page-meta">
+            <span>MakeUofT 2026 Hackathon</span>
+            <span>•</span>
+            <span>Arduino / C++ / Hardware</span>
+        </div>
+        <div class="project-page-date">February 2026</div>
+    </header>
+
+    <div class="video-grid">
+        <video controls muted playsinline autoplay loop>
+            <source src="IMG_0144.mp4" type="video/mp4">
+        </video>
+        <video controls muted playsinline autoplay loop>
+            <source src="IMG_0139 4.mp4" type="video/mp4">
+        </video>
+        <video controls muted playsinline autoplay loop>
+            <source src="IMG_0135.mp4" type="video/mp4">
+        </video>
+        <video controls muted playsinline autoplay loop>
+            <source src="IMG_0139 3.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <main class="project-content">
+        
+        <h2>Overview</h2>
+        <p>I just wrapped up an incredible weekend at MakeUofT 2026, my very first hackathon! Tasked with the theme of "D-Day" (Disaster Preparedness), my team and I developed an all-in-one safety hub designed for vulnerable living situations. We wanted to create an accessible, low-cost solution to monitor environmental threats that often go unnoticed until it’s too late.</p>
+        <p>Huge thanks to my partners Sauhard Srivastava and Hans Jeon for the late-night troubleshooting and to the organizers for a seamless event!</p>
+        
+        <h2>Inspiration</h2>
+        <p>FaceGuard was inspired by disaster and survival scenarios where situational awareness becomes critical for human safety. During emergencies such as fires, building collapses, earthquakes, or hazardous environments, people often lose the ability to quickly assess danger due to stress, low visibility, or environmental chaos.</p>
+        <p>We wanted to create a compact system that could act as an intelligent companion during high-risk situations — detecting threats, interpreting environmental signals, and alerting users before conditions become life-threatening. Our motivation was to design a tool that could assist individuals in survival situations where every second matters.</p>
+
+        <h2>What It Does</h2>
+        <p>FaceGuard is a multi-sensor hazard detection system designed for disaster response and survival environments. The device continuously monitors environmental conditions and classifies risk into three levels:</p>
+        <ul>
+            <li><strong>Green (Safe):</strong> Stable conditions</li>
+            <li><strong>Yellow (Warning):</strong> Human presence</li>
+            <li><strong>Red (Critical):</strong> Immediate threatening hazard</li>
+        </ul>
+        
+        <img src="1771220731975.jpeg" class="project-inline-image" alt="FaceGuard Box Prototype">
+
+        <p>It actively detects the presence of fire, smoke and gas concentrations, sudden impacts or abnormal motion (seismic activity), environmental noise, and nearby human movement. When danger is detected, FaceGuard provides visual alerts through a multi-stage LED diagnostic system and audible alarm patterns via a high-decibel buzzer.</p>
+
+        <h2>How We Built It</h2>
+        <p>We built FaceGuard using an Arduino platform combined with multiple environmental sensors to achieve real-time hazard awareness. The system integrates:</p>
+        <ul>
+            <li><strong>MPU6050 accelerometer</strong> for motion, seismic, and impact detection</li>
+            <li><strong>Sound sensor</strong> for acoustic anomaly detection</li>
+            <li><strong>Smoke sensor</strong> for hazardous gas detection</li>
+            <li><strong>Flame sensor</strong> for fire detection</li>
+            <li><strong>PIR sensor</strong> for nearby human movement</li>
+        </ul>
+
+        <img src="1771220732106.jpeg" class="project-inline-image" alt="Inside view of the Arduino and breadboard wiring">
+
+        <h2>Challenges We Ran Into</h2>
+        <p>Beyond the code, this weekend was a masterclass in rapid prototyping. We encountered several technical difficulties, including:</p>
+        <ul>
+            <li>Sensor calibration, debugging sensor interference, and noise filtering.</li>
+            <li>Designing real-time alert logic using C++ without blocking delays.</li>
+            <li>Determining thresholds that balance sensitivity and false alarms.</li>
+        </ul>
+
+        <h2>Accomplishments & What We Learned</h2>
+        <p>Our key accomplishments include executing multi-sensor fusion on a low-cost embedded platform and creating real-time risk classification with prioritized safety logic within a limited 24-hour timeframe.</p>
+        <p>We learned embedded system integration with multiple sensors, real-time hazard detection logic, and rapid prototyping under intense time pressure. Most importantly, we gained insight into how engineering solutions can directly impact human safety during emergencies.</p>
+
+        <h2>What's Next for FaceGuard</h2>
+        <p>Future improvements include wireless communication for remote alerts, integration with mobile devices or rescue networks, a battery-powered portable design, a rugged enclosure for harsh environments, and GPS-based emergency location tracking.</p>
+
+    </main>
+</body>
+</html>
