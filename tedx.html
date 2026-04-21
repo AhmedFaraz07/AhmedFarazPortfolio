@@ -18,6 +18,7 @@
         .project-page-title { font-size: 3.5rem; font-weight: 900; line-height: 1.1; margin: 0 0 1rem 0; letter-spacing: -1px; }
         
         .project-page-meta { display: flex; flex-wrap: wrap; gap: 1rem; color: var(--text-secondary); font-size: 1rem; margin-bottom: 0.5rem; }
+        .project-page-date { color: var(--text-primary); font-weight: 700; font-size: 1.1rem; margin-bottom: 2rem; opacity: 0.9; }
         
         /* Cover Video Styling */
         .project-cover-image { 
@@ -40,6 +41,23 @@
         .project-content p { margin-bottom: 1.5rem; color: var(--text-secondary); }
         .project-content ul { color: var(--text-secondary); margin-bottom: 1.5rem; padding-left: 1.5rem; }
         .project-content li { margin-bottom: 0.8rem; }
+        
+        /* Inline Image Styling */
+        .project-inline-image { width: 100%; border-radius: 12px; margin: 2rem 0; box-shadow: 0 8px 24px rgba(0,0,0,0.1); object-fit: cover; }
+        
+        /* Link styling for the article */
+        .article-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-primary);
+            font-weight: 700;
+            text-decoration: underline;
+            transition: opacity 0.2s;
+        }
+        .article-link:hover {
+            opacity: 0.7;
+        }
     </style>
 </head>
 <body>
@@ -63,9 +81,8 @@
         
         <div class="project-page-meta">
             <span>TEDx Talk</span>
-            <span>•</span>
-            <span>Scitech Center, Khobar</span>
         </div>
+        <div class="project-page-date">October 10, 2024</div>
     </header>
 
     <div class="project-cover-image">
@@ -75,7 +92,7 @@
     <main class="project-content">
         
         <h2>Overview</h2>
-        <p>As part of the "Imagine the Impossible" TEDx event held at the Scitech Center in Khobar, I had the honor of taking the stage to explore the rapidly evolving intersection of Artificial Intelligence and learning.</p>
+        <p>As part of the "Imagine the Impossible" TEDx event held at International Schools Group (ISG) Dammam, I had the honor of taking the stage to explore the rapidly evolving intersection of Artificial Intelligence and learning.</p>
         
         <ul>
             <li><strong>Developed a TEDx speech</strong> focusing on AI's role in education and how it is reshaping the way we process information.</li>
@@ -83,6 +100,13 @@
             <li><strong>Represented my school</strong> on a large public stage, showcasing my insights on AI and technological advancement.</li>
             <li><strong>Enhanced public speaking and research skills</strong> through the rigorous preparation, drafting, and live delivery of the speech.</li>
         </ul>
+
+        <h2>Press & Recognition</h2>
+        <p>Following the event, I was honored to be interviewed by <strong>Arab News</strong> to discuss my perspectives on AI's integration into modern education systems and the future of tech-driven learning.</p>
+        
+        <p><a href="https://www.arabnews.com/node/2574806/saudi-arabia" target="_blank" class="article-link">Read the full interview on Arab News <i class="fas fa-external-link-alt"></i></a></p>
+
+        <img src="image_feef5e.png" class="project-inline-image" alt="Arab News Feature Article">
 
     </main>
 </body>
