@@ -20,10 +20,11 @@
         .project-page-meta { display: flex; flex-wrap: wrap; gap: 1rem; color: var(--text-secondary); font-size: 1rem; margin-bottom: 0.5rem; }
         .project-page-date { color: var(--text-primary); font-weight: 700; font-size: 1.1rem; margin-bottom: 2rem; opacity: 0.9; }
         
+        /* Cover Video Styling */
         .project-cover-image { 
             width: 100%; 
             max-width: 900px; 
-            height: 500px; 
+            aspect-ratio: 16/9; 
             margin: 0 auto 3rem auto; 
             border-radius: 20px; 
             overflow: hidden; 
@@ -31,8 +32,8 @@
             display: flex; 
             align-items: center; 
             justify-content: center; 
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
         }
-        .project-cover-image img { width: 100%; height: 100%; object-fit: cover; }
         .project-cover-image iframe { width: 100%; height: 100%; border: none; }
         
         .project-content { max-width: 800px; margin: 0 auto 6rem auto; padding: 0 2rem; font-size: 1.15rem; line-height: 1.8; color: var(--text-primary); }
@@ -41,23 +42,8 @@
         .project-content ul { color: var(--text-secondary); margin-bottom: 1.5rem; padding-left: 1.5rem; }
         .project-content li { margin-bottom: 0.5rem; }
         
-        .project-inline-image { width: 100%; border-radius: 12px; margin: 2rem 0; box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
-        
-        /* Video Embed Styling */
-        .video-embed-container {
-            width: 100%;
-            border-radius: 12px;
-            overflow: hidden;
-            margin: 2rem 0;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-            aspect-ratio: 16/9;
-            background-color: var(--card-bg);
-        }
-        .video-embed-container iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
+        /* Inline Image Styling */
+        .project-inline-image { width: 100%; border-radius: 12px; margin: 2rem 0; box-shadow: 0 8px 24px rgba(0,0,0,0.1); object-fit: cover; }
     </style>
 </head>
 <body>
@@ -88,13 +74,15 @@
     </header>
 
     <div class="project-cover-image">
-        <img src="image_690bba.png" alt="TriggerPredict UI Cover Image">
+        <iframe src="https://www.youtube.com/embed/Dk45x6Icnrc" title="TriggerPredict App Demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
     </div>
 
     <main class="project-content">
         
         <h2>Overview</h2>
         <p>Over a rigorous 4-month period for the APS112 engineering design course, my team (Team 128) partnered with Dr. Claire Jones, a leading infertility specialist at Mount Sinai Hospital. We were tasked with developing a Clinical Decision Support Software (CDSS) algorithm to optimize In-Vitro Fertilization (IVF) trigger shot timing. Working alongside my talented team members, we successfully engineered the <strong>TriggerPredict App</strong>—a streamlined, locally-hosted Python application that translates complex patient datasets into data-backed medical recommendations.</p>
+        
+        <img src="IMG_0885.jpg" class="project-inline-image" alt="APS112 Engineering Team 128">
         
         <h2>Inspiration</h2>
         <p>An IVF cycle requires a strict 10-12 day monitoring period of numerous clinical factors. The critical step in this entire process is the "Trigger Shot," which prompts final egg maturation just before retrieval. Administering it too early or too late drastically reduces pregnancy success rates and can cause severe medical complications like Ovarian Hyperstimulation Syndrome (OHSS).</p>
@@ -110,12 +98,7 @@
         </ul>
         <p>Using free brainstorming, SCAMPER, blue sky thinking, and morph charts, we generated 124 potential solutions. We filtered these ideas using feasibility checks and a Pugh Chart to evaluate our top designs against our core objectives (intuitiveness, system integration, justification provision, and human error minimization), ultimately culminating in the TriggerPredict Python UI.</p>
 
-        <h2>Product Demo</h2>
-        <p>Below is a demonstration of the TriggerPredict application in action, showcasing how specialists can securely input patient data, run the preliminary safety checks, and receive algorithmically justified recommendations for trigger timing.</p>
-        
-        <div class="video-embed-container">
-            <iframe src="https://www.youtube.com/embed/Dk45x6Icnrc" title="TriggerPredict App Demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-        </div>
+        <img src="image_690bba.png" class="project-inline-image" alt="TriggerPredict UI Screen">
 
         <h2>Challenges & Solutions</h2>
         <p><strong>Strict Legal & Ethical Constraints:</strong> The healthcare sector is highly regulated. Our solution had to comply with the Personal Health Information Protection Act (PHIPA) and Health Canada’s SaMD CDSS classification standards. <em>Solution:</em> We designed the app to run locally on a Python backend. It evaluates patient data instantly but purposefully does not store any personal identifiers between uses, ensuring total patient privacy.</p>
