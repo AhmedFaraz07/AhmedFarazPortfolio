@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Nuanced Dawn of Education | TEDx</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .project-page-header { max-width: 900px; margin: 4rem auto 2rem auto; padding: 0 2rem; }
+        .back-link { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--text-secondary); text-decoration: none; font-weight: 600; margin-bottom: 2rem; transition: color 0.2s; }
+        .back-link:hover { color: var(--text-primary); }
+        .project-page-title { font-size: 3.5rem; font-weight: 900; line-height: 1.1; margin: 0 0 1rem 0; letter-spacing: -1px; }
+        
+        .project-page-meta { display: flex; flex-wrap: wrap; gap: 1rem; color: var(--text-secondary); font-size: 1rem; margin-bottom: 0.5rem; }
+        
+        /* Cover Video Styling */
+        .project-cover-image { 
+            width: 100%; 
+            max-width: 900px; 
+            aspect-ratio: 16/9; 
+            margin: 0 auto 3rem auto; 
+            border-radius: 20px; 
+            overflow: hidden; 
+            background-color: var(--card-bg); 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        }
+        .project-cover-image iframe { width: 100%; height: 100%; border: none; }
+        
+        .project-content { max-width: 800px; margin: 0 auto 6rem auto; padding: 0 2rem; font-size: 1.15rem; line-height: 1.8; color: var(--text-primary); }
+        .project-content h2 { font-size: 2rem; margin-top: 3.5rem; margin-bottom: 1rem; letter-spacing: -0.5px; }
+        .project-content p { margin-bottom: 1.5rem; color: var(--text-secondary); }
+        .project-content ul { color: var(--text-secondary); margin-bottom: 1.5rem; padding-left: 1.5rem; }
+        .project-content li { margin-bottom: 0.8rem; }
+    </style>
+</head>
+<body>
+    <script>
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+        }
+    </script>
+
+    <header class="navbar">
+        <div class="nav-left">
+            <a href="index.html" class="nav-title">Ahmed Faraz's Portfolio</a>
+        </div>
+        <div class="nav-center"></div>
+        <div class="nav-right"></div>
+    </header>
+
+    <header class="project-page-header">
+        <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+        <h1 class="project-page-title">A Nuanced Dawn of Education</h1>
+        
+        <div class="project-page-meta">
+            <span>TEDx Talk</span>
+            <span>•</span>
+            <span>Scitech Center, Khobar</span>
+        </div>
+    </header>
+
+    <div class="project-cover-image">
+        <iframe src="https://www.youtube.com/embed/jiXYy8JNsPQ" title="A Nuanced Dawn of Education | Ahmed Faraz | TEDx" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </div>
+
+    <main class="project-content">
+        
+        <h2>Overview</h2>
+        <p>As part of the "Imagine the Impossible" TEDx event held at the Scitech Center in Khobar, I had the honor of taking the stage to explore the rapidly evolving intersection of Artificial Intelligence and learning.</p>
+        
+        <ul>
+            <li><strong>Developed a TEDx speech</strong> focusing on AI's role in education and how it is reshaping the way we process information.</li>
+            <li><strong>Guided educational institutions</strong> on adapting to the rise of Large Language Models (LLMs), moving away from strict prohibition and towards responsible integration.</li>
+            <li><strong>Represented my school</strong> on a large public stage, showcasing my insights on AI and technological advancement.</li>
+            <li><strong>Enhanced public speaking and research skills</strong> through the rigorous preparation, drafting, and live delivery of the speech.</li>
+        </ul>
+
+    </main>
+</body>
+</html>
