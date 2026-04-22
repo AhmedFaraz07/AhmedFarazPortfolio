@@ -58,11 +58,11 @@ a { text-decoration: none; color: inherit; }
 .nav-right { display: flex; gap: 1rem; align-items: center; }
 .icon-btn { background: none; border: none; font-size: 1.2rem; color: var(--text-primary); cursor: pointer; opacity: 0.7; }
 
-/* --- Hero Section --- */
+/* --- Hero Section (Desktop Default) --- */
 .hero {
     position: relative; min-height: 100vh;
     display: flex; align-items: center; justify-content: center;
-    padding: 120px 2rem 60px 2rem;
+    padding: 100px 2rem 60px 2rem;
 }
 .video-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; overflow: hidden; }
 .bg-video { width: 100%; height: 100%; object-fit: cover; }
@@ -75,14 +75,15 @@ a { text-decoration: none; color: inherit; }
         "img title"
         "img bio"
         "img buttons";
-    gap: 1rem 4rem; 
+    gap: 0.5rem 4rem; 
     max-width: 1100px; width: 100%; z-index: 1;
+    align-items: start;
 }
 
 .hero-left { grid-area: img; }
-.hero-title-container { grid-area: title; }
+.hero-title-container { grid-area: title; align-self: end; }
 .hero-bio-container { grid-area: bio; }
-.hero-buttons { grid-area: buttons; display: flex; gap: 1rem; padding-top: 1rem; }
+.hero-buttons { grid-area: buttons; display: flex; gap: 1rem; align-self: start; padding-top: 1rem; }
 
 .hero-image { width: 100%; aspect-ratio: 1; border-radius: 30px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
 .hero-image img { width: 100%; height: 100%; object-fit: cover; }
@@ -92,10 +93,21 @@ a { text-decoration: none; color: inherit; }
 .edu-text { display: block; font-weight: 600; color: var(--text-primary); }
 .edu-highlight { color: var(--deans-list-color); font-weight: 800; font-size: 0.95rem; margin-top: 0.2rem; display: block; }
 
-.hero-title { font-size: 3.5rem; font-weight: 900; line-height: 1.1; margin-bottom: 0.5rem; letter-spacing: -1.5px; }
-.hero-bio { font-size: 1.15rem; color: var(--bio-color); font-weight: 700; }
+.hero-title { font-size: 3.2rem; font-weight: 900; line-height: 1.1; margin-bottom: 0.5rem; letter-spacing: -1.5px; }
+.hero-bio { font-size: 1.15rem; color: var(--bio-color); font-weight: 700; margin-bottom: 1rem; }
 
-.btn { padding: 1rem 2rem; border-radius: 12px; font-weight: 700; background: var(--text-primary); color: var(--bg-color); transition: transform 0.2s; text-align: center; }
+.btn { 
+    padding: 1rem 1.5rem; 
+    border-radius: 12px; 
+    font-weight: 700; 
+    background: var(--text-primary); 
+    color: var(--bg-color); 
+    transition: transform 0.2s; 
+    text-align: center;
+    font-size: 0.85rem;
+    white-space: nowrap;
+}
+.btn:hover { transform: translateY(-3px); }
 
 /* --- Project Grid --- */
 .content-section { padding: 4rem 2rem; max-width: 1000px; margin: 0 auto; }
@@ -121,13 +133,15 @@ a { text-decoration: none; color: inherit; }
 
     .hero-content { display: flex; flex-direction: column; text-align: center; gap: 2rem; }
     
-    /* NEW REORDERING: Title -> Img/Edu -> Bio -> Buttons */
+    /* Reordering: Title -> Img/Edu -> Bio -> Buttons */
     .hero-title-container { order: 1; }
     .hero-left { order: 2; max-width: 300px; margin: 0 auto; }
     .hero-bio-container { order: 3; }
     .hero-buttons { order: 4; flex-direction: column; width: 100%; }
 
     .hero-title { font-size: 2.1rem; }
+    .btn { width: 100%; font-size: 0.9rem; }
+    
     .project-grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
     .project-card { padding: 0.75rem; }
     .project-card h3 { font-size: 0.9rem; }
