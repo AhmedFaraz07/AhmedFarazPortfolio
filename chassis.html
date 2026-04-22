@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chassis Dynamometer | Ahmed Faraz</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .project-page-header { max-width: 900px; margin: 4rem auto 2rem auto; padding: 0 2rem; }
+        .back-link { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--text-secondary); text-decoration: none; font-weight: 600; margin-bottom: 2rem; transition: color 0.2s; }
+        .back-link:hover { color: var(--text-primary); }
+        .project-page-title { font-size: 3.5rem; font-weight: 900; line-height: 1.1; margin: 0 0 1rem 0; letter-spacing: -1px; }
+        
+        .project-page-meta { display: flex; flex-wrap: wrap; gap: 1rem; color: var(--text-secondary); font-size: 1rem; margin-bottom: 0.5rem; }
+        .project-page-date { color: var(--text-primary); font-weight: 700; font-size: 1.1rem; margin-bottom: 2rem; opacity: 0.9; }
+        
+        .project-cover-image { 
+            width: 100%; 
+            max-width: 900px; 
+            margin: 0 auto 3rem auto; 
+            border-radius: 20px; 
+            overflow: hidden; 
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        }
+        .project-cover-image img { width: 100%; height: auto; display: block; }
+        
+        .project-content { max-width: 800px; margin: 0 auto 6rem auto; padding: 0 2rem; font-size: 1.15rem; line-height: 1.8; color: var(--text-primary); }
+        .project-content h2 { font-size: 2rem; margin-top: 3.5rem; margin-bottom: 1rem; letter-spacing: -0.5px; }
+        .project-content p { margin-bottom: 1.5rem; color: var(--text-secondary); }
+        .project-content ul { color: var(--text-secondary); margin-bottom: 1.5rem; padding-left: 1.5rem; }
+        .project-content li { margin-bottom: 0.8rem; }
+    </style>
+</head>
+<body>
+    <script>
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+        }
+    </script>
+
+    <header class="navbar">
+        <div class="nav-left">
+            <a href="index.html" class="nav-title">Ahmed Faraz's Portfolio</a>
+        </div>
+        <div class="nav-center"></div>
+        <div class="nav-right"></div>
+    </header>
+
+    <header class="project-page-header">
+        <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+        <h1 class="project-page-title">Chassis Dynamometer</h1>
+        
+        <div class="project-page-meta">
+            <span>UofT Supermileage (UTSM)</span>
+            <span>•</span>
+            <span>Mechanical Design & Machining</span>
+        </div>
+        <div class="project-page-date">2025 — 2026</div>
+    </header>
+
+    <div class="project-cover-image">
+        <img src="chassis_dynoi.jpeg" alt="UTSM Dynamometer Assembly">
+    </div>
+
+    <main class="project-content">
+        
+        <h2>Overview</h2>
+        <p>For my first major engineering project at the University of Toronto, I collaborated with a team of three other engineers to design and remanufacture the dynamometer for our 2026 prototype vehicle. This system is critical for simulating road loads and measuring engine performance in a controlled environment.</p>
+        
+        <p>This project represented a steep learning curve in professional engineering, requiring me to bridge the gap between theoretical functions and physical manufacturing constraints. I am incredibly grateful to my teammates for their mentorship and guidance throughout this process.</p>
+        
+        <h2>Key Contributions</h2>
+        <ul>
+            <li><strong>Redesigned the 2026 prototype vehicle chassis dynamometer</strong> using technical sketching to iterate through various design concepts.</li>
+            <li><strong>Collaborated with mechanical and electrical engineers</strong> to ensure the seamless integration of instrumentation and testing systems.</li>
+            <li><strong>Contributed to the machining and fabrication</strong> of the entire dynamometer assembly, ensuring high-precision tolerances.</li>
+            <li><strong>Analyzed functions, objectives, and constraints</strong> to ensure the design met the rigorous testing requirements of the Supermileage team.</li>
+        </ul>
+
+        <h2>Tools & Fabrication</h2>
+        <p>To bring the design to life, I gained hands-on experience with industrial fabrication equipment. Moving from technical sketches to a functional assembly required a deep understanding of material properties and tool safety.</p>
+        <ul>
+            <li><strong>Bandsaw:</strong> Used for primary stock cutting and material preparation.</li>
+            <li><strong>Drill Press:</strong> Utilized for high-accuracy hole placement for mounting instrumentation.</li>
+            <li><strong>General Machining:</strong> Assisted in the alignment and assembly of the chassis frame to ensure structural rigidity during high-speed testing.</li>
+        </ul>
+
+    </main>
+</body>
+</html>
