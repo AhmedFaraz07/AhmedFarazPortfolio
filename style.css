@@ -5,9 +5,9 @@ html {
 
 :root {
     --bg-color: #ffffff;
-    --text-primary: #111827;
+    --text-primary: #111827; /* This is the color of your title */
     --text-secondary: #4b5563;
-    --bio-color: #003366; /* Deep Dark Blue for Light Mode */
+    --bio-color: #111827;    /* NOW MATCHES THE TITLE EXACTLY */
     --accent-color: #2563eb;
     --card-bg: #f9fafb;
     --nav-bg: rgba(255, 255, 255, 0.8);
@@ -18,7 +18,7 @@ html {
     --bg-color: #0b0f1a;
     --text-primary: #f3f4f6;
     --text-secondary: #9ca3af;
-    --bio-color: #ffffff; /* Pure White for Dark Mode */
+    --bio-color: #ffffff;    /* Pure White for Dark Mode */
     --accent-color: #3b82f6;
     --card-bg: #161e2e;
     --nav-bg: rgba(11, 15, 26, 0.8);
@@ -85,12 +85,11 @@ a { text-decoration: none; color: inherit; }
 
 .hero-title { font-size: 3.5rem; font-weight: 900; line-height: 1.1; margin-bottom: 2rem; letter-spacing: -1.5px; }
 
-/* --- UPDATED BIO STYLING --- */
 .hero-bio { 
     font-size: 1.15rem; 
     color: var(--bio-color); 
     margin-bottom: 1.5rem; 
-    font-weight: 700; /* Increased weight for more boldness */
+    font-weight: 700; 
     transition: color 0.3s ease;
 }
 
