@@ -44,7 +44,7 @@
             <div class="hero-left">
                 <div class="hero-image"><img src="headshot.jpeg" alt="Ahmed Faraz"></div>
                 <div class="education-box">
-                    <span class="edu-label">Education:</span>
+                    <span class="edu-label">Education</span>
                     <span class="edu-text">University of Toronto 2T9</span>
                     <span class="edu-text">BASc Mechanical Engineering</span>
                     <span class="edu-highlight">1x Dean's List</span>
@@ -119,6 +119,7 @@
     </section>
 
     <script>
+        // Theme Toggle
         const body = document.body;
         const themeToggle = document.getElementById('themeToggle');
         themeToggle.addEventListener('click', () => {
@@ -127,6 +128,8 @@
             themeToggle.querySelector('i').className = isDark ? 'fas fa-sun' : 'fas fa-moon';
             localStorage.setItem('theme', isDark ? 'dark' : 'light');
         });
+
+        // Contact Modal
         const modal = document.getElementById('contactModal');
         document.getElementById('contactToggle').onclick = () => modal.style.display = 'flex';
         document.getElementById('closeModal').onclick = () => modal.style.display = 'none';
