@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EBS Pressure Gauge | Ahmed Faraz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .project-page-header { max-width: 900px; margin: 4rem auto 2rem auto; padding: 0 2rem; }
+        .back-link { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--text-secondary); text-decoration: none; font-weight: 600; margin-bottom: 2rem; transition: color 0.2s; }
+        .back-link:hover { color: var(--text-primary); }
+        .project-page-title { font-size: 3.5rem; font-weight: 900; line-height: 1.1; margin: 0 0 1rem 0; letter-spacing: -1px; }
+        
+        .project-page-meta { display: flex; flex-wrap: wrap; gap: 1rem; color: var(--text-secondary); font-size: 1rem; margin-bottom: 2rem; }
+        
+        /* Compact 2x2 Grid Styling */
+        .image-gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            max-width: 700px;
+            margin: 0 auto 3rem auto;
+            padding: 0 20px;
+        }
+        .gallery-item {
+            width: 100%;
+            aspect-ratio: 1; /* Keeping these square for the gauge views */
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border: 1px solid var(--border-color);
+        }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+
+        .project-content { max-width: 800px; margin: 0 auto 6rem auto; padding: 0 2rem; font-size: 1.15rem; line-height: 1.8; color: var(--text-primary); }
+        .project-content h2 { font-size: 2rem; margin-top: 3.5rem; margin-bottom: 1rem; letter-spacing: -0.5px; }
+        .project-content p { margin-bottom: 1.5rem; color: var(--text-secondary); }
+        .project-content ul { color: var(--text-secondary); margin-bottom: 1.5rem; padding-left: 1.5rem; }
+        .project-content li { margin-bottom: 0.8rem; }
+
+        @media (max-width: 768px) {
+            .project-page-title { font-size: 2.5rem; }
+            .image-gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        }
+    </style>
+</head>
+<body>
+    <script>if (localStorage.getItem('theme') === 'dark') document.body.classList.add('dark-mode');</script>
+
+    <header class="navbar">
+        <div class="nav-left"><a href="index.html" class="nav-title">Ahmed Faraz's Portfolio</a></div>
+    </header>
+
+    <header class="project-page-header">
+        <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+        <h1 class="project-page-title">EBS Pressure Gauge</h1>
+        <div class="project-page-meta">
+            <span>UofT Formula Racing (UTFR)</span>
+            <span>•</span>
+            <span>Reverse Engineering</span>
+            <span>•</span>
+            <span>SolidWorks</span>
+        </div>
+    </header>
+
+    <div class="image-gallery-grid">
+        <div class="gallery-item"><img src="EBS5.jpeg" alt="Gauge Perspective View"></div>
+        <div class="gallery-item"><img src="EBS3.jpeg" alt="Gauge Top View"></div>
+        <div class="gallery-item"><img src="EBS2.jpeg" alt="Gauge Front View"></div>
+        <div class="gallery-item"><img src="EBS1.jpeg" alt="Gauge Side View"></div>
+    </div>
+
+    <main class="project-content">
+        <h2>Overview</h2>
+        <p>As part of my involvement with the University of Toronto Formula Racing (UTFR) team, I was tasked with modeling the Emergency Brake System (EBS) Pressure Gauge. This project centered on high-fidelity reverse engineering, where I had to recreate a digital twin of a physical component to ensure accurate integration into the vehicle's braking sub-assembly.</p>
+        
+        <h2>Technical Challenges</h2>
+        <ul>
+            <li><strong>Precision Measurement:</strong> Capturing the dimensions of the physical gauge was a significant challenge. Due to the very small dimensions of the internal features, standard caliper measurements required extreme care to minimize tolerance stack-up during the modeling process.</li>
+            <li><strong>Symmetric Geometry:</strong> I utilized temporary planes to efficiently mirror complex internal and external features across the gauge's center axis, ensuring perfect symmetry.</li>
+            <li><strong>Advanced Feature Implementation:</strong> This project allowed me to expand my SolidWorks proficiency by learning to use the <strong>Hole Wizard</strong> for threaded ports and applying <strong>Chamfers</strong> to match the edge finishes of the real-world part.</li>
+        </ul>
+
+        <h2>Impact</h2>
+        <p>By producing an accurate CAD model of the EBS Pressure Gauge, the team can now perform more reliable packaging studies and ensure that sensor fittings are correctly sized before the final assembly of the 2026 racing season vehicle.</p>
+    </main>
+</body>
+</html>
