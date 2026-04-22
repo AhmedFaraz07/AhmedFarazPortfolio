@@ -17,24 +17,30 @@
         
         .project-page-meta { display: flex; flex-wrap: wrap; gap: 1rem; color: var(--text-secondary); font-size: 1rem; margin-bottom: 2rem; }
         
-        /* Compact 2x2 Grid Styling */
+        /* Grid styling matched exactly to the Back Wheel Mount grid */
         .image-gallery-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 15px;
-            max-width: 700px;
+            max-width: 700px; /* Matched to mount.html */
             margin: 0 auto 3rem auto;
             padding: 0 20px;
         }
         .gallery-item {
             width: 100%;
-            aspect-ratio: 1; /* Keeping these square for the gauge views */
+            aspect-ratio: 1; 
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             border: 1px solid var(--border-color);
+            background-color: #f3f4f6; /* Blends with CAD background */
         }
-        .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+        .gallery-item img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: contain; /* Zooms out the model to show everything */
+            padding: 10px; /* Extra breathing room */
+        }
 
         .project-content { max-width: 800px; margin: 0 auto 6rem auto; padding: 0 2rem; font-size: 1.15rem; line-height: 1.8; color: var(--text-primary); }
         .project-content h2 { font-size: 2rem; margin-top: 3.5rem; margin-bottom: 1rem; letter-spacing: -0.5px; }
@@ -44,7 +50,7 @@
 
         @media (max-width: 768px) {
             .project-page-title { font-size: 2.5rem; }
-            .image-gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+            .image-gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 0 15px; }
         }
     </style>
 </head>
