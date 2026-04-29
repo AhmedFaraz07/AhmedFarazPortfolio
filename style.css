@@ -58,7 +58,7 @@ a { text-decoration: none; color: inherit; }
 .nav-right { display: flex; gap: 1rem; align-items: center; }
 .icon-btn { background: none; border: none; font-size: 1.2rem; color: var(--text-primary); cursor: pointer; opacity: 0.7; }
 
-/* --- Hero Section (Desktop) --- */
+/* --- Hero Section --- */
 .hero {
     position: relative; min-height: 100vh;
     display: flex; align-items: center; justify-content: center;
@@ -83,7 +83,14 @@ a { text-decoration: none; color: inherit; }
 .hero-left { grid-area: img; }
 .hero-title-container { grid-area: title; align-self: end; }
 .hero-bio-container { grid-area: bio; }
-.hero-buttons { grid-area: buttons; display: flex; gap: 1rem; align-self: start; padding-top: 1rem; }
+.hero-buttons { 
+    grid-area: buttons; 
+    display: flex; 
+    flex-wrap: wrap;
+    gap: 1rem; 
+    align-self: start; 
+    padding-top: 1rem; 
+}
 
 .hero-image { width: 100%; aspect-ratio: 1; border-radius: 30px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
 .hero-image img { width: 100%; height: 100%; object-fit: cover; }
@@ -102,30 +109,63 @@ a { text-decoration: none; color: inherit; }
 }
 .btn:hover { transform: translateY(-3px); }
 
-/* --- Project Grid --- */
+.btn-resume {
+    background: var(--accent-color) !important;
+    color: white !important;
+}
+
+/* --- Project Grid & Tabs --- */
 .content-section { padding: 4rem 2rem; max-width: 1000px; margin: 0 auto; }
-.section-title { font-size: 2.5rem; font-weight: 900; margin-bottom: 3rem; text-align: center; }
+.section-title { font-size: 2.5rem; font-weight: 900; margin-bottom: 2rem; text-align: center; }
+
+.tab-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+}
+
+.tab-btn {
+    padding: 0.6rem 1.2rem;
+    border: 1px solid var(--border-color);
+    background: var(--card-bg);
+    color: var(--text-secondary);
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.tab-btn.active {
+    background: var(--text-primary);
+    color: var(--bg-color);
+    border-color: var(--text-primary);
+}
+
 .project-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
 .project-card { background: var(--card-bg); border-radius: 20px; padding: 1.5rem; border: 1px solid var(--border-color); display: flex; flex-direction: column; height: 100%; transition: transform 0.3s; }
 .project-card:hover { transform: translateY(-8px); }
 .project-card h3 { font-size: 1.3rem; font-weight: 800; margin-bottom: 0.75rem; }
 .project-card p { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.5; }
+
+.project-card-wrapper.hidden {
+    display: none;
+}
+
 .card-image {
     width: 100%;
     border-radius: 12px;
     overflow: hidden;
     margin-top: auto;
     aspect-ratio: 16/10;
-    /* Added a background color so it blends with the SolidWorks white/gray background */
     background-color: #f3f4f6; 
 }
 
 .card-image img {
     width: 100%;
     height: 100%;
-    /* Changed from cover to contain to "zoom out" and show the whole part */
     object-fit: contain; 
-    /* Added padding to give it even more breathing room */
     padding: 15px; 
 }
 
@@ -139,14 +179,14 @@ a { text-decoration: none; color: inherit; }
     .nav-title { font-size: 0.9rem; }
     .nav-center { display: none; }
     .hero-content { display: flex; flex-direction: column; text-align: center; gap: 2rem; }
-    
     .hero-title-container { order: 1; }
     .hero-left { order: 2; max-width: 300px; margin: 0 auto; }
     .hero-bio-container { order: 3; }
     .hero-buttons { order: 4; flex-direction: column; width: 100%; }
-
     .hero-title { font-size: 2.1rem; }
     .btn { width: 100%; font-size: 0.9rem; }
+    .tab-container { flex-wrap: wrap; gap: 0.5rem; }
+    .tab-btn { font-size: 0.75rem; padding: 0.5rem 1rem; }
     .project-grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
     .project-card { padding: 0.75rem; }
     .project-card h3 { font-size: 0.9rem; }
