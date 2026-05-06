@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ahmed Faraz | Portfolio</title>
     
+    <!-- Meta Tags for Social Sharing (Thumbnail) -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://ahmedfaraz.org/">
     <meta property="og:title" content="Ahmed Faraz | Portfolio">
@@ -13,6 +14,7 @@
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:image" content="https://ahmedfaraz.org/og-thumbnail.jpg">
 
+    <!-- Fonts & Styles -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
@@ -44,6 +46,7 @@
         </div>
     </div>
 
+    <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="video-container">
             <video autoplay loop muted playsinline class="bg-video"><source src="background.mp4" type="video/mp4"></video>
@@ -61,6 +64,7 @@
                     <span class="edu-label">Education</span>
                     <span class="edu-text">University of Toronto 2T9</span>
                     <span class="edu-text">BASc Mechanical Engineering</span>
+                    <span class="edu-subtext">Eligible for Canadian co-op/internship employment through UofT PEY/co-op work authorization.</span>
                     <span class="edu-highlight">1x Dean's List</span>
                 </div>
             </div>
@@ -82,6 +86,7 @@
     <section id="projects" class="content-section">
         <h2 class="section-title">Beyond the Curriculum</h2>
 
+        <!-- Category Tabs -->
         <div class="tab-container">
             <button class="tab-btn active" onclick="filterProjects('all')">All Projects</button>
             <button class="tab-btn" onclick="filterProjects('design')">Design Teams</button>
@@ -91,14 +96,16 @@
 
         <div class="project-grid">
             
+            <!-- HIJRA (Misc) - UPDATED TITLE -->
             <div class="project-card-wrapper" data-category="misc">
                 <div class="project-card">
-                    <h3>Highly Autonomous Jointed Robotic Assistant (HIJRA)</h3>
+                    <h3>Highly Intuitive Jointed Robotic Assistant (HIJRA)</h3>
                     <p>This is under construction over the summer, please stay tuned!</p>
                     <div class="card-image"><img src="image_1c8627.png" alt="Under Construction"></div>
                 </div>
             </div>
 
+            <!-- TSMART (Research) -->
             <div class="project-card-wrapper" data-category="research">
                 <div class="project-card">
                     <h3>Toronto Smart Materials & Structures (TSMART)</h3>
@@ -107,14 +114,16 @@
                 </div>
             </div>
 
+            <!-- RAIDIO (Misc) -->
             <div class="project-card-wrapper" data-category="misc">
                 <a href="raidio.html" class="project-card-link"><article class="project-card">
                     <h3>RAIDIO</h3>
-                    <p>Engineered "Radio-Vision AI" for Hack Without Borders. A system providing offline AI access via analog radio protocols.</p>
+                    <p>Engineered "Radio-Vision AI" for Hack Without Borders 2026. A system providing offline AI access via analog radio protocols.</p>
                     <div class="card-image"><img src="RAIDIOTHUMBNAIL.PNG" alt="RAIDIO Thumbnail"></div>
                 </article></a>
             </div>
 
+            <!-- FaceGuard (Misc) -->
             <div class="project-card-wrapper" data-category="misc">
                 <a href="faceguard.html" class="project-card-link"><article class="project-card">
                     <h3>FaceGuard</h3>
@@ -123,6 +132,7 @@
                 </article></a>
             </div>
 
+            <!-- TriggerPredict (Misc) -->
             <div class="project-card-wrapper" data-category="misc">
                 <a href="triggerpredict.html" class="project-card-link"><article class="project-card">
                     <h3>TriggerPredict CDSS</h3>
@@ -131,6 +141,7 @@
                 </article></a>
             </div>
 
+            <!-- TEDx (Misc) -->
             <div class="project-card-wrapper" data-category="misc">
                 <a href="tedx.html" class="project-card-link"><article class="project-card">
                     <h3>A Nuanced Dawn of Education</h3>
@@ -139,6 +150,7 @@
                 </article></a>
             </div>
 
+            <!-- Chassis Dyno (Design) -->
             <div class="project-card-wrapper" data-category="design">
                 <a href="chassis.html" class="project-card-link"><article class="project-card">
                     <h3>Chassis Dynamometer</h3>
@@ -147,6 +159,7 @@
                 </article></a>
             </div>
 
+            <!-- Wheel Mount (Design) -->
             <div class="project-card-wrapper" data-category="design">
                 <a href="mount.html" class="project-card-link"><article class="project-card">
                     <h3>UTSM Back Wheel Mount</h3>
@@ -155,6 +168,7 @@
                 </article></a>
             </div>
             
+            <!-- EBS Gauge (Design) -->
             <div class="project-card-wrapper" data-category="design">
                 <a href="ebs.html" class="project-card-link"><article class="project-card">
                     <h3>EBS Pressure Gauge</h3>
@@ -170,7 +184,7 @@
         <h2 class="section-title">Relevant Certifications</h2>
         <div class="card-grid">
             <div class="project-card cert-card"><div class="card-image"><img src="ai-certificate.jpg" alt="U of Michigan Certificate"></div><h3>AI for Design</h3><p>University of Michigan</p></div>
-            <div class="project-card cert-card"><div class="card-image"><img src="ilead-certificate.jpg" alt="UofT ILead Certificate"></div><h3>Emerging Leaders</h3><p>U of T - ILead</p></div>
+            <div class="project-card cert-card"><div class="card-image"><img src="ilead-certificate.jpg" alt="UofT ILead Certificate"></div><h3>Emerging Leaders</h3><p>U of T - Troost Institute</p></div>
             <div class="project-card cert-card"><div class="card-image"><img src="ap-capstone.jpg" alt="AP Capstone Diploma"></div><h3>AP Capstone</h3><p>College Board</p></div>
         </div>
     </section>
@@ -192,7 +206,7 @@
         document.getElementById('closeModal').onclick = () => modal.style.display = 'none';
         window.onclick = (e) => { if (e.target == modal) modal.style.display = 'none'; }
 
-        // Bulletproof Smooth Scroll
+        // Smooth Scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -203,7 +217,7 @@
             });
         });
 
-        // Project Filtering Logic
+        // Project Filtering
         function filterProjects(category) {
             const cards = document.querySelectorAll('.project-card-wrapper');
             const buttons = document.querySelectorAll('.tab-btn');
