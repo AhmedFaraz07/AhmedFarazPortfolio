@@ -27,9 +27,9 @@
     <header class="navbar">
         <div class="nav-left"><a href="#home" class="nav-title">Ahmed Faraz's Portfolio</a></div>
         <div class="nav-center">
-            <a href="#projects" class="nav-link">Projects</a>
-            <a href="#certifications" class="nav-link">Certifications</a>
-            <a href="#about" class="nav-link">About</a>
+            <a href="#projects" class="nav-link">Beyond the Curriculum</a>
+            <a href="#certifications" class="nav-link">Relevant Certifications</a>
+            <a href="#about" class="nav-link">About Me</a>
         </div>
         <div class="nav-right">
             <button class="icon-btn" id="themeToggle" aria-label="Toggle Theme"><i class="fas fa-moon"></i></button>
@@ -76,11 +76,11 @@
             </div>
 
             <div class="hero-buttons">
-                <a href="#projects" class="btn">PROJECTS</a>
-                <a href="#certifications" class="btn">CERTIFICATIONS</a>
+                <a href="#projects" class="btn">BEYOND THE CURRICULUM</a>
+                <a href="#certifications" class="btn">RELEVANT CERTIFICATIONS</a>
                 <a href="#about" class="btn">ABOUT ME</a>
                 <a href="Ahmed_Faraz_Resume.pdf" download class="btn btn-resume">
-                    <i class="fas fa-file-download" style="margin-right: 8px;"></i> RESUME
+                    <i class="fas fa-file-download" style="margin-right: 8px;"></i> DOWNLOAD RESUME
                 </a>
             </div>
         </div>
@@ -90,8 +90,9 @@
     <section id="projects" class="content-section">
         <h2 class="section-title">Beyond the Curriculum</h2>
 
+        <!-- Category Tabs -->
         <div class="tab-container">
-            <button class="tab-btn active" onclick="filterProjects('all')">All</button>
+            <button class="tab-btn active" onclick="filterProjects('all')">All Projects</button>
             <button class="tab-btn" onclick="filterProjects('design')">Design Teams</button>
             <button class="tab-btn" onclick="filterProjects('research')">Research</button>
             <button class="tab-btn" onclick="filterProjects('misc')">Miscellaneous</button>
@@ -102,78 +103,91 @@
             <div class="project-card-wrapper" data-category="misc">
                 <div class="project-card">
                     <h3>Highly Intuitive Jointed Robotic Assistant (HIJRA)</h3>
-                    <p>Voice-controlled mobile manipulator project currently under construction.</p>
-                    <div class="card-image"><img src="image_1c8627.png" alt="HIJRA Robotic Arm"></div>
+                    <p>This is under construction over the summer, please stay tuned!</p>
+                    <div class="card-image"><img src="image_1c8627.png" alt="Under Construction"></div>
                 </div>
             </div>
 
             <!-- TSMART (Research) -->
             <div class="project-card-wrapper" data-category="research">
                 <div class="project-card">
-                    <h3>TSMART Research Lab</h3>
-                    <p>Synthesizing Polyimide-MXene aerogel composites for advanced thermal management.</p>
-                    <div class="card-image"><img src="image_1c8627.png" alt="TSMART Lab Research"></div>
+                    <h3>Toronto Smart Materials & Structures (TSMART)</h3>
+                    <p>Toronto Smart Materials and Structures. This is under construction over the summer, please stay tuned!</p>
+                    <div class="card-image"><img src="image_1c8627.png" alt="Under Construction"></div>
                 </div>
             </div>
 
-            <!-- Design Team Projects -->
-            <div class="project-card-wrapper" data-category="design">
-                <a href="chassis.html"><article class="project-card">
-                    <h3>Chassis Dynamometer</h3>
-                    <p>Redesigned the 2026 UTSM dynamometer assembly for prototype vehicle testing.</p>
-                    <div class="card-image"><img src="chassis_dynoi.jpeg" alt="UTSM Dynamometer"></div>
-                </article></a>
-            </div>
-
-            <div class="project-card-wrapper" data-category="design">
-                <a href="mount.html"><article class="project-card">
-                    <h3>UTSM Back Wheel Mount</h3>
-                    <p>Optimized 2027 prototype car component to improve mass distribution.</p>
-                    <div class="card-image"><img src="mount4.jpeg" alt="Wheel Mount CAD"></div>
-                </article></a>
-            </div>
-
-            <div class="project-card-wrapper" data-category="design">
-                <a href="ebs.html"><article class="project-card">
-                    <h3>EBS Pressure Gauge</h3>
-                    <p>Reverse-engineered high-precision UTFR component modeled in SolidWorks.</p>
-                    <div class="card-image"><img src="EBS5.jpeg" alt="UTFR EBS Gauge"></div>
-                </article></a>
-            </div>
-
-            <!-- Misc Projects -->
+            <!-- RAIDIO (Misc) -->
             <div class="project-card-wrapper" data-category="misc">
-                <a href="raidio.html"><article class="project-card">
+                <a href="raidio.html" class="project-card-link"><article class="project-card">
                     <h3>RAIDIO</h3>
-                    <p>Offline AI diagnostic system winning Hack Without Borders 2026.</p>
+                    <p>Engineered "Radio-Vision AI" for Hack Without Borders. A system providing offline AI access via analog radio protocols.</p>
                     <div class="card-image"><img src="RAIDIOTHUMBNAIL.PNG" alt="RAIDIO Thumbnail"></div>
                 </article></a>
             </div>
 
+            <!-- FaceGuard (Misc) -->
             <div class="project-card-wrapper" data-category="misc">
-                <a href="faceguard.html"><article class="project-card">
+                <a href="faceguard.html" class="project-card-link"><article class="project-card">
                     <h3>FaceGuard</h3>
-                    <p>All-in-one multi-hazard safety sensor hub developed during MakeUofT.</p>
-                    <div class="card-image"><img src="1771220731975.jpeg" alt="FaceGuard Device"></div>
+                    <p>An all-in-one safety hub and multi-sensor hazard detection system for disaster response environments.</p>
+                    <div class="card-image"><img src="1771220731975.jpeg" alt="FaceGuard Thumbnail"></div>
                 </article></a>
             </div>
 
+            <!-- TriggerPredict (Misc) -->
             <div class="project-card-wrapper" data-category="misc">
-                <a href="triggerpredict.html"><article class="project-card">
+                <a href="triggerpredict.html" class="project-card-link"><article class="project-card">
                     <h3>TriggerPredict CDSS</h3>
-                    <p>Software optimized for IVF trigger shot timing at Mount Sinai Fertility.</p>
-                    <div class="card-image"><img src="image_690bba.png" alt="TriggerPredict UI"></div>
+                    <p>Clinical Decision Support Software application developed to optimize IVF trigger shot timing for Mount Sinai Fertility.</p>
+                    <div class="card-image"><img src="image_690bba.png" alt="TriggerPredict UI Screen"></div>
+                </article></a>
+            </div>
+
+            <!-- TEDx (Misc) -->
+            <div class="project-card-wrapper" data-category="misc">
+                <a href="tedx.html" class="project-card-link"><article class="project-card">
+                    <h3>A Nuanced Dawn of Education</h3>
+                    <p>My TEDx speech on the theme "Imagine the Impossible," exploring AI's role in future educational institutions.</p>
+                    <div class="card-image"><img src="https://img.youtube.com/vi/jiXYy8JNsPQ/maxresdefault.jpg" alt="TEDx Talk Thumbnail"></div>
+                </article></a>
+            </div>
+
+            <!-- Chassis Dyno (Design) -->
+            <div class="project-card-wrapper" data-category="design">
+                <a href="chassis.html" class="project-card-link"><article class="project-card">
+                    <h3>Chassis Dynamometer</h3>
+                    <p>Redesigned and manufactured the 2026 prototype vehicle dynamometer for UTSM prototype vehicles.</p>
+                    <div class="card-image"><img src="chassis_dynoi.jpeg" alt="Chassis Dyno Physical Build"></div>
+                </article></a>
+            </div>
+
+            <!-- Wheel Mount (Design) -->
+            <div class="project-card-wrapper" data-category="design">
+                <a href="mount.html" class="project-card-link"><article class="project-card">
+                    <h3>UTSM Back Wheel Mount</h3>
+                    <p>Optimized 2027 prototype car component designed to enhance mass distribution and structural stress properties.</p>
+                    <div class="card-image"><img src="mount4.jpeg" alt="Wheel Mount SolidWorks CAD"></div>
+                </article></a>
+            </div>
+            
+            <!-- EBS Gauge (Design) -->
+            <div class="project-card-wrapper" data-category="design">
+                <a href="ebs.html" class="project-card-link"><article class="project-card">
+                    <h3>EBS Pressure Gauge</h3>
+                    <p>High-precision SolidWorks modeling of an Emergency Brake System pressure gauge for UTFR sub-assembly.</p>
+                    <div class="card-image"><img src="EBS5.jpeg" alt="EBS Gauge Zoomed Perspective"></div>
                 </article></a>
             </div>
         </div>
     </section>
 
-    <!-- Certifications -->
+    <!-- Certifications Section -->
     <section id="certifications" class="content-section">
         <h2 class="section-title">Relevant Certifications</h2>
         <div class="card-grid">
-            <div class="project-card cert-card"><div class="card-image"><img src="ai-certificate.jpg" alt="UMich AI Cert"></div><h3>AI for Design</h3><p>University of Michigan</p></div>
-            <div class="project-card cert-card"><div class="card-image"><img src="ilead-certificate.jpg" alt="Troost ILead Cert"></div><h3>Emerging Leaders</h3><p>U of T - Troost ILead</p></div>
+            <div class="project-card cert-card"><div class="card-image"><img src="ai-certificate.jpg" alt="U of Michigan Certificate"></div><h3>AI for Design</h3><p>University of Michigan</p></div>
+            <div class="project-card cert-card"><div class="card-image"><img src="ilead-certificate.jpg" alt="UofT ILead Certificate"></div><h3>Emerging Leaders</h3><p>U of T - Troost Institute</p></div>
             <div class="project-card cert-card"><div class="card-image"><img src="ap-capstone.jpg" alt="AP Capstone Diploma"></div><h3>AP Capstone</h3><p>College Board</p></div>
         </div>
     </section>
@@ -182,30 +196,28 @@
     <section id="about" class="content-section">
         <h2 class="section-title">About Me</h2>
         <div class="about-container">
+            <!-- Highlights Carousel -->
             <div class="highlights-column">
-                <h3 class="highlights-title">Highlights at UofT</h3>
+                <h3 class="highlights-title">My Highlights at UofT</h3>
                 <div class="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="utfr_action.jpg" alt="Presenting design rationales at UTFR">
-                            <p class="carousel-caption">Suspension Design Rationale with UTFR</p>
+                            <img src="utfr-highlight.jpg" alt="UTFR Highlights">
+                            <p class="carousel-caption">Presenting Design Rationales with UTFR</p>
                         </div>
                         <div class="carousel-item">
-                            <img src="utsm_fab.jpg" alt="Machining dynamometer components">
-                            <p class="carousel-caption">Machining Components for UTSM Supermileage</p>
+                            <img src="utsm-highlight.jpg" alt="UTSM Highlights">
+                            <p class="carousel-caption">Machining for UTSM Supermileage</p>
                         </div>
                         <div class="carousel-item">
-                            <img src="hackathon_win.jpg" alt="Winning Hack Without Borders">
+                            <img src="hackathon-highlight.jpg" alt="Hackathon Highlights">
                             <p class="carousel-caption">1st Place - Hack Without Borders 2026</p>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="utat_align.jpg" alt="Aligning FINCH Eye spectrograph">
-                            <p class="carousel-caption">Optomechanical Alignment for UTAT FINCH</p>
                         </div>
                     </div>
                 </div>
             </div>
 
+            <!-- Personal Bio -->
             <div class="bio-column">
                 <p class="personal-statement">
                     Outside of my career, I wake up everyday to live life to the fullest. I like to tell my friends, 
@@ -238,21 +250,28 @@
         document.getElementById('closeModal').onclick = () => modal.style.display = 'none';
         window.onclick = (e) => { if (e.target == modal) modal.style.display = 'none'; }
 
-        // Filtering
+        // Project Filtering Logic
         function filterProjects(category) {
             const cards = document.querySelectorAll('.project-card-wrapper');
             const buttons = document.querySelectorAll('.tab-btn');
+
             buttons.forEach(btn => {
                 btn.classList.remove('active');
-                if (btn.innerText.toLowerCase().includes(category) || (category === 'all' && btn.innerText.includes('All'))) btn.classList.add('active');
+                if (btn.innerText.toLowerCase().includes(category) || (category === 'all' && btn.innerText.includes('All'))) {
+                    btn.classList.add('active');
+                }
             });
+
             cards.forEach(card => {
-                if (category === 'all' || card.getAttribute('data-category') === category) card.classList.remove('hidden');
-                else card.classList.add('hidden');
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
             });
         }
 
-        // Carousel
+        // About Me Carousel Logic
         let currentSlide = 0;
         const slides = document.querySelectorAll('.carousel-item');
         function cycleSlides() {
@@ -267,7 +286,9 @@
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
-                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
             });
         });
     </script>
