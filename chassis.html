@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en" data-media="vellum">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chassis Dynamometer — DWG NO. AF-006 | Ahmed Faraz</title>
+<meta name="description" content="Redesigned and manufactured the 2026 prototype vehicle dynamometer for UTSM prototype vehicles.">
+<meta property="og:title" content="Chassis Dynamometer | Ahmed Faraz">
+<meta property="og:description" content="Redesigned and manufactured the 2026 prototype vehicle dynamometer for UTSM prototype vehicles.">
+<meta property="og:image" content="https://ahmedfaraz.org/og-thumbnail.jpg">
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:image" content="https://ahmedfaraz.org/og-thumbnail.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+
+/* ============================================================
+   DETAIL DRAWING — DWG NO. AF-005 (TRIGGERPREDICT CDSS)
+   Child sheet of AF-2029. Same media system.
+   ============================================================ */
+:root{
+  --paper:#F7F5EC; --paper-2:#EFECE0; --ink:#191913; --ink-2:#5E5D50;
+  --red:#C22317; --faint:rgba(25,25,19,.16); --hair:rgba(25,25,19,.32);
+  --grid:rgba(25,25,19,.055); --white-frame:#FFFFFF;
+  --mono:'IBM Plex Mono', ui-monospace, monospace; --disp:'Archivo', sans-serif;
+}
+html[data-media="ozalid"]{
+  --paper:#13273C; --paper-2:#0E2033; --ink:#DFE9F2; --ink-2:#8CA4B8;
+  --red:#FF6A50; --faint:rgba(223,233,242,.2); --hair:rgba(223,233,242,.42);
+  --grid:rgba(223,233,242,.055); --white-frame:#0B1A2B;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  background:var(--paper);color:var(--ink);font-family:var(--mono);
+  font-size:14px;line-height:1.62;cursor:crosshair;
+  background-image:linear-gradient(var(--grid) 1px, transparent 1px),linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size:24px 24px;transition:background-color .25s,color .25s;
+}
+::selection{background:var(--red);color:var(--paper);}
+a{color:inherit;} img{display:block;max-width:100%;}
+button{font-family:var(--mono);cursor:pointer;}
+:focus-visible{outline:2px solid var(--red);outline-offset:2px;}
+
+.frame{position:fixed;inset:8px;border:2px solid var(--ink);pointer-events:none;z-index:60;}
+.frame::after{content:"";position:absolute;inset:6px;border:1px solid var(--hair);}
+#chx,#chy{position:fixed;background:var(--red);opacity:.35;pointer-events:none;z-index:55;display:none;}
+#chx{top:0;bottom:0;width:1px;left:0;} #chy{left:0;right:0;height:1px;top:0;}
+@media (hover:hover) and (pointer:fine){ #chx,#chy{display:block;} }
+
+.indexbar{
+  position:fixed;top:8px;left:8px;right:8px;z-index:65;display:flex;align-items:stretch;
+  border-bottom:2px solid var(--ink);background:var(--paper);height:40px;font-size:11px;letter-spacing:.1em;
+}
+.indexbar .dwgno{display:flex;align-items:center;padding:0 14px;border-right:1px solid var(--hair);font-weight:600;white-space:nowrap;}
+.indexbar a.back{display:flex;align-items:center;padding:0 14px;text-decoration:none;color:var(--ink-2);white-space:nowrap;}
+.indexbar a.back:hover{background:var(--ink);color:var(--paper);}
+.mediaswitch{display:flex;align-items:center;padding:0 10px;border-left:1px solid var(--hair);margin-left:auto;}
+.mediaswitch span{font-size:10px;color:var(--ink-2);margin-right:8px;letter-spacing:.1em;}
+.mediaswitch button{border:1px solid var(--ink);background:transparent;color:var(--ink);font-size:10px;letter-spacing:.1em;padding:4px 8px;}
+.mediaswitch button[aria-pressed="true"]{background:var(--ink);color:var(--paper);}
+.mediaswitch button+button{border-left:none;}
+
+main{padding:72px 40px 40px;max-width:1240px;margin:0 auto;}
+section.sheet{position:relative;border:1px solid var(--ink);margin-bottom:56px;background:var(--paper);}
+.sheet-head{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--ink);padding:8px 16px;font-size:11px;letter-spacing:.14em;color:var(--ink-2);}
+.sheet-head b{color:var(--ink);font-weight:600;}
+.sheet-body{position:relative;padding:32px;}
+.eyebrow{font-size:10px;letter-spacing:.22em;color:var(--red);font-weight:600;}
+.giant{font-family:var(--disp);font-weight:900;text-transform:uppercase;font-size:clamp(34px,6vw,76px);line-height:.95;margin:8px 0 14px;}
+.meta-strip{display:flex;flex-wrap:wrap;gap:0;border:1px solid var(--ink);margin:24px 0 34px;font-size:11px;}
+.meta-cell{padding:9px 16px;border-right:1px solid var(--faint);text-transform:uppercase;letter-spacing:.06em;}
+.meta-cell small{display:block;font-size:9px;letter-spacing:.16em;color:var(--ink-2);}
+.meta-cell:last-child{border-right:none;}
+
+.two-col{display:grid;grid-template-columns:1.15fr .85fr;gap:36px;align-items:start;}
+.videoframe{border:2px solid var(--ink);background:var(--white-frame);}
+.videoframe .vf-cap{border-top:1px solid var(--ink);padding:8px 12px;font-size:10px;letter-spacing:.14em;color:var(--ink-2);display:flex;justify-content:space-between;text-transform:uppercase;}
+.videoframe .vf-cap b{color:var(--ink);}
+.videoframe .ratio{position:relative;aspect-ratio:16/9;}
+.videoframe iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+.figframe{border:2px solid var(--ink);background:var(--white-frame);margin:26px 0;}
+.figframe img{width:100%;}
+.figframe .vf-cap{border-top:1px solid var(--ink);padding:8px 12px;font-size:10px;letter-spacing:.14em;color:var(--ink-2);display:flex;justify-content:space-between;text-transform:uppercase;}
+.figframe .vf-cap b{color:var(--ink);}
+.placeholder{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+  aspect-ratio:16/9;background:var(--white-frame);color:var(--ink-2);
+  font-size:10px;letter-spacing:.14em;text-align:center;padding:14px;
+  background-image:linear-gradient(45deg, transparent 49.6%, var(--faint) 49.6%, var(--faint) 50.4%, transparent 50.4%),
+                   linear-gradient(-45deg, transparent 49.6%, var(--faint) 49.6%, var(--faint) 50.4%, transparent 50.4%);
+}
+.placeholder b{color:var(--ink);font-size:11px;}
+
+.note{margin-bottom:34px;}
+.note-head{display:flex;align-items:baseline;gap:14px;border-bottom:2px solid var(--ink);padding-bottom:8px;margin-bottom:16px;}
+.note-head .num{font-family:var(--disp);font-weight:900;font-size:26px;color:var(--red);line-height:1;}
+.note-head h2{font-family:var(--disp);font-weight:900;text-transform:uppercase;font-size:clamp(17px,2.2vw,24px);letter-spacing:.02em;}
+.note-head .tag{margin-left:auto;font-size:9px;letter-spacing:.18em;color:var(--ink-2);text-transform:uppercase;}
+.note p{margin-bottom:14px;max-width:74ch;}
+.note strong{font-weight:600;}
+.vartable{width:100%;border-collapse:collapse;font-size:12.5px;margin:6px 0 14px;}
+.vartable td{border:1px solid var(--faint);padding:9px 12px;vertical-align:top;}
+.vartable td:first-child{width:26%;font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em;background:var(--paper-2);}
+.ncr{border:1px solid var(--ink);margin-bottom:16px;}
+.ncr-head{display:flex;justify-content:space-between;background:var(--paper-2);border-bottom:1px solid var(--ink);padding:8px 12px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;}
+.ncr-head b{color:var(--red);}
+.ncr-body{padding:12px 14px;}
+.ncr-body p{margin-bottom:10px;max-width:74ch;}
+.ncr-body p:last-child{margin-bottom:0;}
+.ncr-body .disp{border-left:3px solid var(--red);padding-left:12px;}
+.team{display:flex;flex-wrap:wrap;gap:0;border:1px solid var(--ink);font-size:11px;margin-top:8px;}
+.team div{padding:8px 14px;border-right:1px solid var(--faint);text-transform:uppercase;letter-spacing:.05em;}
+.team div:last-child{border-right:none;}
+.team small{display:block;font-size:9px;letter-spacing:.16em;color:var(--ink-2);}
+
+.titleblock{display:grid;grid-template-columns:repeat(6,1fr);border:2px solid var(--ink);margin-top:24px;font-size:11px;}
+.tb-cell{border:1px solid var(--faint);padding:6px 10px;min-height:52px;display:flex;flex-direction:column;justify-content:space-between;text-transform:uppercase;}
+.tb-cell small{font-size:9px;letter-spacing:.14em;color:var(--ink-2);}
+.tb-cell b{font-weight:600;font-size:12px;}
+.tb-title{grid-column:span 3;}
+.tb-title b{font-family:var(--disp);font-weight:900;font-size:15px;}
+.open-dwg{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--ink);padding:9px 14px;font-size:10px;letter-spacing:.16em;text-decoration:none;text-transform:uppercase;}
+.open-dwg:hover{background:var(--ink);color:var(--paper);}
+footer{padding:0 40px 60px;max-width:1240px;margin:0 auto;font-size:10px;letter-spacing:.14em;color:var(--ink-2);text-transform:uppercase;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+
+@media (max-width:980px){
+  main{padding:64px 18px 24px;} .sheet-body{padding:20px 16px;}
+  .two-col{grid-template-columns:1fr;}
+  .titleblock{grid-template-columns:repeat(3,1fr);} .tb-title{grid-column:span 3;}
+  .frame{inset:4px;} footer{padding:0 18px 40px;}
+  .indexbar .dwgno{display:none;}
+}
+@media (prefers-reduced-motion:reduce){ *{animation:none!important;transition:none!important;} }
+
+/* detail-chain nav */
+.indexbar a.nav{display:flex;align-items:center;padding:0 12px;text-decoration:none;color:var(--ink-2);white-space:nowrap;border-left:1px solid var(--faint);}
+.indexbar a.nav:hover{background:var(--ink);color:var(--paper);}
+.indexbar .spacer{flex:1;}
+/* status stamp */
+.stamp{
+  position:absolute;top:26px;right:28px;border:3px solid var(--red);color:var(--red);
+  padding:6px 14px;font-weight:600;font-size:12px;letter-spacing:.2em;transform:rotate(6deg);
+  text-transform:uppercase;z-index:3;background:var(--paper);
+}
+/* orthographic view grid (mount) */
+.viewgrid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin:26px 0;}
+.viewgrid .figframe{margin:0;}
+/* video grid (faceguard) */
+.vidgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.vidframe{border:2px solid var(--ink);background:var(--white-frame);}
+.vidframe video{width:100%;height:auto;max-height:300px;object-fit:contain;background:var(--white-frame);display:block;}
+.vidframe .vf-cap{border-top:1px solid var(--ink);padding:7px 10px;font-size:9px;letter-spacing:.12em;color:var(--ink-2);display:flex;justify-content:space-between;text-transform:uppercase;}
+.vidframe .vf-cap b{color:var(--ink);}
+.risk-g{font-weight:600;}
+.risk-r{color:var(--red);font-weight:600;}
+@media (max-width:720px){ .viewgrid,.vidgrid{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+
+<div class="frame" aria-hidden="true"></div>
+<div id="chx" aria-hidden="true"></div>
+<div id="chy" aria-hidden="true"></div>
+
+<header class="indexbar">
+  <div class="dwgno">AF-006 · CHILD OF AF-2029</div>
+  <a class="back" href="index.html">← 3D MODEL</a>
+  <a class="back" href="drawing.html#bom">2D BOM</a>
+  <span class="spacer"></span>
+  <a class="nav" href="triggerpredict.html" title="Previous detail drawing">◀ AF-005</a>
+  <a class="nav" href="mount.html" title="Next detail drawing">AF-007 ▶</a>
+  <div class="mediaswitch">
+    <span>MEDIA</span>
+    <button id="btn-vellum" aria-pressed="true" onclick="setMedia('vellum')">VELLUM</button>
+    <button id="btn-ozalid" aria-pressed="false" onclick="setMedia('ozalid')">OZALID</button>
+  </div>
+</header>
+
+<main>
+<section class="sheet">
+
+  <div class="sheet-head"><span><b>DETAIL DRAWING</b> — ITEM 6 · DWG REF AF-006</span><span>SCALE: NTS</span></div>
+  <div class="sheet-body">
+
+    <p class="eyebrow">UTSM 2026 PROTOTYPE VEHICLE — TEST EQUIPMENT</p>
+    <h1 class="giant">CHASSIS<br>DYNAMOMETER</h1>
+
+    <div class="meta-strip">
+      <div class="meta-cell"><small>TEAM</small>UofT Supermileage (UTSM)</div>
+      <div class="meta-cell"><small>DISCIPLINE</small>Mechanical Design &amp; Machining</div>
+      <div class="meta-cell"><small>PERIOD</small>2025 — 2026</div>
+      <div class="meta-cell"><small>CREW</small>4 Engineers</div>
+    </div>
+
+    <div class="figframe" style="max-width:860px;">
+      <div data-slot="assembly" data-alt="UTSM dynamometer assembly"></div>
+      <div class="vf-cap"><span><b>FIG. 1</b> — UTSM DYNAMOMETER ASSEMBLY</span><span>PHOTO REF</span></div>
+    </div>
+
+    <div class="note">
+      <div class="note-head"><span class="num">1</span><h2>Overview</h2><span class="tag">GENERAL</span></div>
+      <p>For my first major engineering project at the University of Toronto, I collaborated with a team of three other engineers to design and remanufacture the dynamometer for our 2026 prototype vehicle. This system is critical for simulating road loads and measuring engine performance in a controlled environment.</p>
+      <p>This project represented a steep learning curve in professional engineering, requiring me to bridge the gap between theoretical functions and physical manufacturing constraints. I am incredibly grateful to my teammates for their mentorship and guidance throughout this process.</p>
+    </div>
+
+    <div class="note">
+      <div class="note-head"><span class="num">2</span><h2>Key Contributions</h2><span class="tag">SCOPE OF WORK</span></div>
+      <table class="vartable">
+        <tr><td>Redesign</td><td>Redesigned the 2026 prototype vehicle chassis dynamometer using technical sketching to iterate through various design concepts.</td></tr>
+        <tr><td>Collaboration</td><td>Collaborated with mechanical and electrical engineers to ensure the seamless integration of instrumentation and testing systems.</td></tr>
+        <tr><td>Fabrication</td><td>Contributed to the machining and fabrication of the entire dynamometer assembly, ensuring high-precision tolerances.</td></tr>
+        <tr><td>Analysis</td><td>Analyzed functions, objectives, and constraints to ensure the design met the rigorous testing requirements of the Supermileage team.</td></tr>
+      </table>
+    </div>
+
+    <div class="note">
+      <div class="note-head"><span class="num">3</span><h2>Tools &amp; Fabrication</h2><span class="tag">PROCESS SHEET</span></div>
+      <p>To bring the design to life, I gained hands-on experience with industrial fabrication equipment. Moving from technical sketches to a functional assembly required a deep understanding of material properties and tool safety.</p>
+      <table class="vartable">
+        <tr><td>Bandsaw</td><td>Used for primary stock cutting and material preparation.</td></tr>
+        <tr><td>Drill Press</td><td>Utilized for high-accuracy hole placement for mounting instrumentation.</td></tr>
+        <tr><td>General Machining</td><td>Assisted in the alignment and assembly of the chassis frame to ensure structural rigidity during high-speed testing.</td></tr>
+      </table>
+    </div>
+
+    <a class="open-dwg" href="index.html#bom">← RETURN TO BILL OF MATERIALS</a>
+
+    <div class="titleblock" role="table" aria-label="Title block">
+      <div class="tb-cell"><small>DRAWN BY</small><b>A. FARAZ + UTSM</b></div>
+      <div class="tb-cell"><small>CLIENT</small><b>UTSM</b></div>
+      <div class="tb-cell"><small>PERIOD</small><b>2025–2026</b></div>
+      <div class="tb-cell tb-title"><small>TITLE</small><b>CHASSIS DYNAMOMETER — DETAIL DRAWING</b></div>
+      <div class="tb-cell"><small>SCALE</small><b>NTS</b></div>
+      <div class="tb-cell"><small>UNITS</small><b>MM</b></div>
+      <div class="tb-cell"><small>DWG NO.</small><b>AF-006</b></div>
+      <div class="tb-cell"><small>REV</small><b>C</b></div>
+      <div class="tb-cell"><small>SHEET</small><b>1 OF 1</b></div>
+      <div class="tb-cell"><small>PARENT DWG</small><b>AF-2029</b></div>
+    </div>
+  </div>
+
+</section>
+</main>
+
+<footer>
+  <span>AHMED FARAZ · UNIVERSITY OF TORONTO · MECH ENG 2T9</span>
+  <span>DWG NO. AF-006 · REV C · DO NOT SCALE DRAWING</span>
+</footer>
+
+<script>
+/* IMAGE MANIFEST — edit filenames here */
+const IMG = { assembly:'chassis_dynoi.jpeg' };
+
+function setMedia(m){
+  document.documentElement.dataset.media = m;
+  document.getElementById('btn-vellum').setAttribute('aria-pressed', m==='vellum');
+  document.getElementById('btn-ozalid').setAttribute('aria-pressed', m==='ozalid');
+}
+/* crosshair */
+(function(){
+  if(!window.matchMedia('(hover:hover) and (pointer:fine)').matches) return;
+  const chx=document.getElementById('chx'), chy=document.getElementById('chy');
+  document.addEventListener('mousemove', e=>{
+    chx.style.left=e.clientX+'px'; chy.style.top=e.clientY+'px';
+  },{passive:true});
+})();
+/* mount every [data-slot] figure from the IMG manifest, white slot fallback */
+(function(){
+  document.querySelectorAll('[data-slot]').forEach(box=>{
+    const key = box.dataset.slot;
+    const file = IMG[key];
+    const ph = ()=>{ box.innerHTML =
+      `<div class="placeholder"><b>NO IMAGE REF</b><span>SLOT: ${key.toUpperCase()}</span><span>SET FILENAME IN IMAGE MANIFEST</span></div>`; };
+    if(!file){ ph(); return; }
+    const im=new Image(); im.src=encodeURI(file); im.alt=box.dataset.alt||key;
+    im.onerror=ph; box.appendChild(im);
+  });
+  /* videos */
+  document.querySelectorAll('[data-vslot]').forEach(box=>{
+    const key = box.dataset.vslot;
+    const file = (typeof VID!=='undefined') ? VID[key] : '';
+    const ph = ()=>{ box.innerHTML =
+      `<div class="placeholder" style="aspect-ratio:16/10;"><b>NO VIDEO REF</b><span>SLOT: ${key.toUpperCase()}</span><span>SET FILENAME IN VIDEO MANIFEST</span></div>`; };
+    if(!file){ ph(); return; }
+    const v=document.createElement('video');
+    v.controls=true; v.preload='metadata'; v.src=encodeURI(file);
+    v.addEventListener('error', ph, {once:true});
+    box.appendChild(v);
+  });
+})();
+</script>
+</body>
+</html>

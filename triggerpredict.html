@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en" data-media="vellum">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TriggerPredict CDSS — DWG NO. AF-005 | Ahmed Faraz</title>
+<meta name="description" content="Clinical Decision Support Software developed to optimize IVF trigger shot timing for Mount Sinai Fertility.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   DETAIL DRAWING — DWG NO. AF-005 (TRIGGERPREDICT CDSS)
+   Child sheet of AF-2029. Same media system.
+   ============================================================ */
+:root{
+  --paper:#F7F5EC; --paper-2:#EFECE0; --ink:#191913; --ink-2:#5E5D50;
+  --red:#C22317; --faint:rgba(25,25,19,.16); --hair:rgba(25,25,19,.32);
+  --grid:rgba(25,25,19,.055); --white-frame:#FFFFFF;
+  --mono:'IBM Plex Mono', ui-monospace, monospace; --disp:'Archivo', sans-serif;
+}
+html[data-media="ozalid"]{
+  --paper:#13273C; --paper-2:#0E2033; --ink:#DFE9F2; --ink-2:#8CA4B8;
+  --red:#FF6A50; --faint:rgba(223,233,242,.2); --hair:rgba(223,233,242,.42);
+  --grid:rgba(223,233,242,.055); --white-frame:#0B1A2B;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  background:var(--paper);color:var(--ink);font-family:var(--mono);
+  font-size:14px;line-height:1.62;cursor:crosshair;
+  background-image:linear-gradient(var(--grid) 1px, transparent 1px),linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size:24px 24px;transition:background-color .25s,color .25s;
+}
+::selection{background:var(--red);color:var(--paper);}
+a{color:inherit;} img{display:block;max-width:100%;}
+button{font-family:var(--mono);cursor:pointer;}
+:focus-visible{outline:2px solid var(--red);outline-offset:2px;}
+
+.frame{position:fixed;inset:8px;border:2px solid var(--ink);pointer-events:none;z-index:60;}
+.frame::after{content:"";position:absolute;inset:6px;border:1px solid var(--hair);}
+#chx,#chy{position:fixed;background:var(--red);opacity:.35;pointer-events:none;z-index:55;display:none;}
+#chx{top:0;bottom:0;width:1px;left:0;} #chy{left:0;right:0;height:1px;top:0;}
+@media (hover:hover) and (pointer:fine){ #chx,#chy{display:block;} }
+
+.indexbar{
+  position:fixed;top:8px;left:8px;right:8px;z-index:65;display:flex;align-items:stretch;
+  border-bottom:2px solid var(--ink);background:var(--paper);height:40px;font-size:11px;letter-spacing:.1em;
+}
+.indexbar .dwgno{display:flex;align-items:center;padding:0 14px;border-right:1px solid var(--hair);font-weight:600;white-space:nowrap;}
+.indexbar a.back{display:flex;align-items:center;padding:0 14px;text-decoration:none;color:var(--ink-2);white-space:nowrap;}
+.indexbar a.back:hover{background:var(--ink);color:var(--paper);}
+.mediaswitch{display:flex;align-items:center;padding:0 10px;border-left:1px solid var(--hair);margin-left:auto;}
+.mediaswitch span{font-size:10px;color:var(--ink-2);margin-right:8px;letter-spacing:.1em;}
+.mediaswitch button{border:1px solid var(--ink);background:transparent;color:var(--ink);font-size:10px;letter-spacing:.1em;padding:4px 8px;}
+.mediaswitch button[aria-pressed="true"]{background:var(--ink);color:var(--paper);}
+.mediaswitch button+button{border-left:none;}
+.indexbar a.nav{display:flex;align-items:center;padding:0 12px;text-decoration:none;color:var(--ink-2);white-space:nowrap;border-left:1px solid var(--faint);}
+.indexbar a.nav:hover{background:var(--ink);color:var(--paper);}
+.indexbar .spacer{flex:1;}
+
+main{padding:72px 40px 40px;max-width:1240px;margin:0 auto;}
+section.sheet{position:relative;border:1px solid var(--ink);margin-bottom:56px;background:var(--paper);}
+.sheet-head{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--ink);padding:8px 16px;font-size:11px;letter-spacing:.14em;color:var(--ink-2);}
+.sheet-head b{color:var(--ink);font-weight:600;}
+.sheet-body{position:relative;padding:32px;}
+.eyebrow{font-size:10px;letter-spacing:.22em;color:var(--red);font-weight:600;}
+.giant{font-family:var(--disp);font-weight:900;text-transform:uppercase;font-size:clamp(34px,6vw,76px);line-height:.95;margin:8px 0 14px;}
+.meta-strip{display:flex;flex-wrap:wrap;gap:0;border:1px solid var(--ink);margin:24px 0 34px;font-size:11px;}
+.meta-cell{padding:9px 16px;border-right:1px solid var(--faint);text-transform:uppercase;letter-spacing:.06em;}
+.meta-cell small{display:block;font-size:9px;letter-spacing:.16em;color:var(--ink-2);}
+.meta-cell:last-child{border-right:none;}
+
+.two-col{display:grid;grid-template-columns:1.15fr .85fr;gap:36px;align-items:start;}
+.videoframe{border:2px solid var(--ink);background:var(--white-frame);}
+.videoframe .vf-cap{border-top:1px solid var(--ink);padding:8px 12px;font-size:10px;letter-spacing:.14em;color:var(--ink-2);display:flex;justify-content:space-between;text-transform:uppercase;}
+.videoframe .vf-cap b{color:var(--ink);}
+.videoframe .ratio{position:relative;aspect-ratio:16/9;}
+.videoframe iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+.figframe{border:2px solid var(--ink);background:var(--white-frame);margin:26px 0;}
+.figframe img{width:100%;}
+.figframe .vf-cap{border-top:1px solid var(--ink);padding:8px 12px;font-size:10px;letter-spacing:.14em;color:var(--ink-2);display:flex;justify-content:space-between;text-transform:uppercase;}
+.figframe .vf-cap b{color:var(--ink);}
+.placeholder{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+  aspect-ratio:16/9;background:var(--white-frame);color:var(--ink-2);
+  font-size:10px;letter-spacing:.14em;text-align:center;padding:14px;
+  background-image:linear-gradient(45deg, transparent 49.6%, var(--faint) 49.6%, var(--faint) 50.4%, transparent 50.4%),
+                   linear-gradient(-45deg, transparent 49.6%, var(--faint) 49.6%, var(--faint) 50.4%, transparent 50.4%);
+}
+.placeholder b{color:var(--ink);font-size:11px;}
+
+.note{margin-bottom:34px;}
+.note-head{display:flex;align-items:baseline;gap:14px;border-bottom:2px solid var(--ink);padding-bottom:8px;margin-bottom:16px;}
+.note-head .num{font-family:var(--disp);font-weight:900;font-size:26px;color:var(--red);line-height:1;}
+.note-head h2{font-family:var(--disp);font-weight:900;text-transform:uppercase;font-size:clamp(17px,2.2vw,24px);letter-spacing:.02em;}
+.note-head .tag{margin-left:auto;font-size:9px;letter-spacing:.18em;color:var(--ink-2);text-transform:uppercase;}
+.note p{margin-bottom:14px;max-width:74ch;}
+.note strong{font-weight:600;}
+.vartable{width:100%;border-collapse:collapse;font-size:12.5px;margin:6px 0 14px;}
+.vartable td{border:1px solid var(--faint);padding:9px 12px;vertical-align:top;}
+.vartable td:first-child{width:26%;font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em;background:var(--paper-2);}
+.ncr{border:1px solid var(--ink);margin-bottom:16px;}
+.ncr-head{display:flex;justify-content:space-between;background:var(--paper-2);border-bottom:1px solid var(--ink);padding:8px 12px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;}
+.ncr-head b{color:var(--red);}
+.ncr-body{padding:12px 14px;}
+.ncr-body p{margin-bottom:10px;max-width:74ch;}
+.ncr-body p:last-child{margin-bottom:0;}
+.ncr-body .disp{border-left:3px solid var(--red);padding-left:12px;}
+.team{display:flex;flex-wrap:wrap;gap:0;border:1px solid var(--ink);font-size:11px;margin-top:8px;}
+.team div{padding:8px 14px;border-right:1px solid var(--faint);text-transform:uppercase;letter-spacing:.05em;}
+.team div:last-child{border-right:none;}
+.team small{display:block;font-size:9px;letter-spacing:.16em;color:var(--ink-2);}
+
+.titleblock{display:grid;grid-template-columns:repeat(6,1fr);border:2px solid var(--ink);margin-top:24px;font-size:11px;}
+.tb-cell{border:1px solid var(--faint);padding:6px 10px;min-height:52px;display:flex;flex-direction:column;justify-content:space-between;text-transform:uppercase;}
+.tb-cell small{font-size:9px;letter-spacing:.14em;color:var(--ink-2);}
+.tb-cell b{font-weight:600;font-size:12px;}
+.tb-title{grid-column:span 3;}
+.tb-title b{font-family:var(--disp);font-weight:900;font-size:15px;}
+.open-dwg{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--ink);padding:9px 14px;font-size:10px;letter-spacing:.16em;text-decoration:none;text-transform:uppercase;}
+.open-dwg:hover{background:var(--ink);color:var(--paper);}
+footer{padding:0 40px 60px;max-width:1240px;margin:0 auto;font-size:10px;letter-spacing:.14em;color:var(--ink-2);text-transform:uppercase;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+
+@media (max-width:980px){
+  main{padding:64px 18px 24px;} .sheet-body{padding:20px 16px;}
+  .two-col{grid-template-columns:1fr;}
+  .titleblock{grid-template-columns:repeat(3,1fr);} .tb-title{grid-column:span 3;}
+  .frame{inset:4px;} footer{padding:0 18px 40px;}
+  .indexbar .dwgno{display:none;}
+}
+@media (prefers-reduced-motion:reduce){ *{animation:none!important;transition:none!important;} }
+</style>
+<meta property="og:image" content="https://ahmedfaraz.org/og-thumbnail.jpg">
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:image" content="https://ahmedfaraz.org/og-thumbnail.jpg">
+</head>
+<body>
+
+<div class="frame" aria-hidden="true"></div>
+<div id="chx" aria-hidden="true"></div>
+<div id="chy" aria-hidden="true"></div>
+
+<header class="indexbar">
+  <div class="dwgno">AF-005 · CHILD OF AF-2029</div>
+  <a class="back" href="index.html">← 3D MODEL</a>
+  <a class="back" href="drawing.html#bom">2D BOM</a>
+  <span class="spacer"></span>
+  <a class="nav" href="faceguard.html" title="Previous detail drawing">◀ AF-004</a>
+  <a class="nav" href="chassis.html" title="Next detail drawing">AF-006 ▶</a>
+  <div class="mediaswitch">
+    <span>MEDIA</span>
+    <button id="btn-vellum" aria-pressed="true" onclick="setMedia('vellum')">VELLUM</button>
+    <button id="btn-ozalid" aria-pressed="false" onclick="setMedia('ozalid')">OZALID</button>
+  </div>
+</header>
+
+<main>
+<section class="sheet">
+  <div class="sheet-head"><span><b>DETAIL DRAWING</b> — ITEM 5 · DWG REF AF-005</span><span>SCALE: NTS</span></div>
+  <div class="sheet-body">
+
+    <p class="eyebrow">CLINICAL DECISION SUPPORT SOFTWARE</p>
+    <h1 class="giant">TRIGGERPREDICT<br>CDSS</h1>
+
+    <div class="meta-strip">
+      <div class="meta-cell"><small>CLIENT</small>Mount Sinai Hospital</div>
+      <div class="meta-cell"><small>DISCIPLINE</small>Systems Engineering / Python UI</div>
+      <div class="meta-cell"><small>PERIOD</small>January — April 2026</div>
+      <div class="meta-cell"><small>COURSE</small>APS112 Engineering Design</div>
+    </div>
+
+    <div class="two-col">
+      <div class="videoframe">
+        <div class="ratio">
+          <iframe src="https://www.youtube.com/embed/Dk45x6Icnrc" title="TriggerPredict CDSS demonstration video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="vf-cap"><span><b>VIDEO REF VR-1</b> — SYSTEM DEMONSTRATION</span><span>YOUTUBE</span></div>
+      </div>
+
+      <div class="note" style="margin-bottom:0;">
+        <div class="note-head"><span class="num">1</span><h2>Overview</h2><span class="tag">GENERAL</span></div>
+        <p>Over a rigorous 4-month period for the APS112 engineering design course, my team partnered with Dr. Claire Jones, a leading infertility specialist at Mount Sinai Hospital. We were tasked with developing a Clinical Decision Support Software (CDSS) algorithm to optimize In-Vitro Fertilization (IVF) trigger shot timing.</p>
+        <p>Working alongside my talented team members, we successfully engineered the <strong>TriggerPredict App</strong> — a streamlined, locally-hosted Python application that translates complex patient datasets into data-backed medical recommendations.</p>
+        <div class="team">
+          <div><small>TEAM 128</small>Ahmed Faraz</div>
+          <div><small>&nbsp;</small>Mateo Castano-Yepes</div>
+          <div><small>&nbsp;</small>April Huynh</div>
+          <div><small>&nbsp;</small>Ximena Saishio Garcia</div>
+          <div><small>&nbsp;</small>Hui Ming Sun</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="figframe">
+      <div id="teamimg"></div>
+      <div class="vf-cap"><span><b>FIG. 2</b> — APS112 ENGINEERING TEAM 128</span><span>PHOTO REF</span></div>
+    </div>
+
+    <div class="note">
+      <div class="note-head"><span class="num">2</span><h2>Inspiration</h2><span class="tag">DESIGN INTENT</span></div>
+      <p>An IVF cycle requires a strict 10–12 day monitoring period of numerous clinical factors. The critical step in this entire process is the "Trigger Shot," which prompts final egg maturation just before retrieval. Administering it too early or too late drastically reduces pregnancy success rates and can cause severe medical complications like Ovarian Hyperstimulation Syndrome (OHSS).</p>
+      <p>Currently, Mount Sinai physicians rely heavily on personal clinical judgment when reviewing complex spreadsheets (stim sheets) of hormone levels and follicle sizes, which often leads to disagreements among specialists. Our inspiration was to bridge this gap: a standardized, evidence-based framework that seamlessly integrates into the clinic's daily meetings, reducing cognitive load for physicians while providing transparent, research-backed justifications for every trigger decision.</p>
+    </div>
+
+    <div class="note">
+      <div class="note-head"><span class="num">3</span><h2>How We Built It</h2><span class="tag">METHOD</span></div>
+      <p>This project was an exercise in comprehensive systems engineering and the iterative design process. We constructed a rigorous decision-tree flowchart based on current medical literature, evaluating the four key variables of IVF timing:</p>
+      <table class="vartable">
+        <tr><td>Luteinizing Hormone (LH)</td><td>Helps trigger ovulation. In IVF cycles, LH levels help doctors know the best timing for egg retrieval.</td></tr>
+        <tr><td>Estradiol (E2 / Estrogen)</td><td>Released as eggs grow. It thickens the uterine lining, supports healthy egg growth, and regulates the menstrual cycle.</td></tr>
+        <tr><td>Progesterone</td><td>Crucial for preparing the uterus to support an embryo after ovulation. Balanced progesterone ensures the uterus is receptive.</td></tr>
+        <tr><td>Follicle Size &amp; Count</td><td>Through our research, we defined the optimal target as ~15 follicles, heavily favoring those matured to a size of 16–20&nbsp;mm.</td></tr>
+      </table>
+      <p>Using free brainstorming, SCAMPER, blue sky thinking, and morph charts, we generated 124 potential solutions. We filtered these ideas using feasibility checks and a Pugh Chart to evaluate our top designs against our core objectives — intuitiveness, system integration, justification provision, and human error minimization — ultimately culminating in the TriggerPredict Python UI.</p>
+    </div>
+
+    <div class="note">
+      <div class="note-head"><span class="num">4</span><h2>Challenges &amp; Solutions</h2><span class="tag">NCR / DISPOSITION</span></div>
+      <div class="ncr">
+        <div class="ncr-head"><span><b>NCR-01</b> — STRICT LEGAL &amp; ETHICAL CONSTRAINTS</span><span>DISPOSITION: RESOLVED</span></div>
+        <div class="ncr-body">
+          <p>The healthcare sector is highly regulated. Our solution had to comply with the Personal Health Information Protection Act (PHIPA) and Health Canada's SaMD CDSS classification standards.</p>
+          <p class="disp"><strong>Solution:</strong> We designed the app to run locally on a Python backend. It evaluates patient data instantly but purposefully does not store any personal identifiers between uses, ensuring total patient privacy.</p>
+        </div>
+      </div>
+      <div class="ncr">
+        <div class="ncr-head"><span><b>NCR-02</b> — COGNITIVE LOAD VS. ACCURACY</span><span>DISPOSITION: RESOLVED</span></div>
+        <div class="ncr-body">
+          <p>One of our alternative designs was a highly accurate, massive physical flowchart poster. However, we realized that navigating a dense flowchart actually increases cognitive load in a fast-paced clinical setting.</p>
+          <p class="disp"><strong>Solution:</strong> We opted for the app-based interface. It requires manual data entry (a slight trade-off), but it drastically simplifies the visual presentation and provides automatic, algorithm-driven evaluations with one-click references for the medical staff.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="note">
+      <div class="note-head"><span class="num">5</span><h2>Accomplishments &amp; Skills Learnt</h2><span class="tag">INSPECTION RESULTS</span></div>
+      <p>This project was a massive leap forward in my understanding of professional engineering design.</p>
+      <table class="vartable">
+        <tr><td>Systems Thinking</td><td>Evaluating a problem holistically — identifying all interest holders (from the physicians to the hospital's research ethics board) and plotting them on an Influence vs. Impact matrix.</td></tr>
+        <tr><td>Medical Logic Translation</td><td>Translating complex, heavily researched medical literature into a binary, logical decision tree that a computer program could execute.</td></tr>
+        <tr><td>Testing Methodology</td><td>Developing a robust Measure of Success (MoS) plan using the Subjective Assessment (Adapted QUESI) and Observational Coding (CHAI) frameworks to rigorously test the UI's intuitiveness with actual users.</td></tr>
+      </table>
+    </div>
+
+    <a class="open-dwg" href="index.html#bom">← RETURN TO BILL OF MATERIALS</a>
+
+    <div class="titleblock" role="table" aria-label="Title block">
+      <div class="tb-cell"><small>DRAWN BY</small><b>A. FARAZ + TEAM 128</b></div>
+      <div class="tb-cell"><small>CLIENT</small><b>MOUNT SINAI</b></div>
+      <div class="tb-cell"><small>PERIOD</small><b>JAN–APR 2026</b></div>
+      <div class="tb-cell tb-title"><small>TITLE</small><b>TRIGGERPREDICT CDSS — DETAIL DRAWING</b></div>
+      <div class="tb-cell"><small>SCALE</small><b>NTS</b></div>
+      <div class="tb-cell"><small>UNITS</small><b>MM</b></div>
+      <div class="tb-cell"><small>DWG NO.</small><b>AF-005</b></div>
+      <div class="tb-cell"><small>REV</small><b>C</b></div>
+      <div class="tb-cell"><small>SHEET</small><b>1 OF 1</b></div>
+      <div class="tb-cell"><small>PARENT DWG</small><b>AF-2029</b></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <span>AHMED FARAZ · UNIVERSITY OF TORONTO · MECH ENG 2T9</span>
+  <span>DWG NO. AF-005 · REV C · DO NOT SCALE DRAWING</span>
+</footer>
+
+<script>
+/* IMAGE MANIFEST — edit filename here */
+const IMG = { team: 'IMG_0885.jpg' };
+
+function setMedia(m){
+  document.documentElement.dataset.media = m;
+  document.getElementById('btn-vellum').setAttribute('aria-pressed', m==='vellum');
+  document.getElementById('btn-ozalid').setAttribute('aria-pressed', m==='ozalid');
+}
+/* crosshair */
+(function(){
+  if(!window.matchMedia('(hover:hover) and (pointer:fine)').matches) return;
+  const chx=document.getElementById('chx'), chy=document.getElementById('chy');
+  document.addEventListener('mousemove', e=>{
+    chx.style.left=e.clientX+'px'; chy.style.top=e.clientY+'px';
+  },{passive:true});
+})();
+/* team image with white slot fallback */
+(function(){
+  const box = document.getElementById('teamimg');
+  function ph(){
+    box.innerHTML = `<div class="placeholder"><b>NO IMAGE REF</b><span>SLOT: TEAM</span><span>SET FILENAME IN IMAGE MANIFEST</span></div>`;
+  }
+  if(!IMG.team){ ph(); return; }
+  const im = new Image();
+  im.src = IMG.team; im.alt = 'APS112 Engineering Team 128';
+  im.onerror = ph;
+  box.appendChild(im);
+})();
+</script>
+</body>
+</html>
