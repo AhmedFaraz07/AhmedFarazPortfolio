@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en" data-media="vellum">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ahmed Faraz — DWG NO. AF-2029 · REV C (2D)</title>
+<meta name="description" content="Mechanical Engineering student at the University of Toronto exploring Mechatronics, Aerospace, and Smart Materials.">
+<meta property="og:title" content="Ahmed Faraz | Portfolio">
+<meta property="og:description" content="Mechanical Engineering student at the University of Toronto exploring Mechatronics, Aerospace, and Smart Materials.">
+<meta property="og:url" content="https://ahmedfaraz.org/">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   DWG NO. AF-2029  REV C — "THE DRAWING PACKAGE"
+   MEDIA: VELLUM (default) / OZALID (diazo negative)
+   ============================================================ */
+:root{
+  --paper:#F7F5EC;
+  --paper-2:#EFECE0;
+  --ink:#191913;
+  --ink-2:#5E5D50;
+  --red:#C22317;
+  --faint:rgba(25,25,19,.16);
+  --hair:rgba(25,25,19,.32);
+  --grid:rgba(25,25,19,.055);
+  --white-frame:#FFFFFF;
+  --mono:'IBM Plex Mono', ui-monospace, monospace;
+  --disp:'Archivo', sans-serif;
+}
+html[data-media="ozalid"]{
+  --paper:#13273C;
+  --paper-2:#0E2033;
+  --ink:#DFE9F2;
+  --ink-2:#8CA4B8;
+  --red:#FF6A50;
+  --faint:rgba(223,233,242,.2);
+  --hair:rgba(223,233,242,.42);
+  --grid:rgba(223,233,242,.055);
+  --white-frame:#0B1A2B;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:auto;}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--mono);
+  font-size:14px;
+  line-height:1.55;
+  cursor:crosshair;
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size:24px 24px;
+  transition:background-color .25s, color .25s;
+}
+::selection{background:var(--red);color:var(--paper);}
+a{color:inherit;}
+img{display:block;max-width:100%;}
+button{font-family:var(--mono);cursor:pointer;}
+:focus-visible{outline:2px solid var(--red);outline-offset:2px;}
+
+/* ---------- SHEET FRAME (fixed border + zone ticks) ---------- */
+.frame{position:fixed;inset:8px;border:2px solid var(--ink);pointer-events:none;z-index:60;transition:border-color .25s;}
+.frame::after{content:"";position:absolute;inset:6px;border:1px solid var(--hair);}
+.zones{position:fixed;z-index:60;pointer-events:none;font-size:10px;color:var(--ink-2);letter-spacing:.08em;}
+.zones.top{top:-2px;left:8px;right:8px;height:16px;display:flex;}
+.zones.bottom{bottom:-2px;left:8px;right:8px;height:16px;display:flex;align-items:flex-end;}
+.zones.left{left:-1px;top:8px;bottom:8px;width:14px;display:flex;flex-direction:column;}
+.zones.right{right:-1px;top:8px;bottom:8px;width:14px;display:flex;flex-direction:column;}
+.zones span{flex:1;display:flex;align-items:center;justify-content:center;}
+
+/* ---------- CROSSHAIR + HUD ---------- */
+#chx,#chy{position:fixed;background:var(--red);opacity:.35;pointer-events:none;z-index:55;display:none;}
+#chx{top:0;bottom:0;width:1px;left:0;}
+#chy{left:0;right:0;height:1px;top:0;}
+#hud{
+  position:fixed;left:20px;bottom:20px;z-index:70;
+  background:var(--paper);border:1px solid var(--ink);
+  font-size:10px;letter-spacing:.06em;padding:5px 10px;
+  display:none;gap:14px;color:var(--ink-2);
+}
+#hud b{color:var(--ink);font-weight:600;}
+#hud .hud-ref{color:var(--red);}
+@media (hover:hover) and (pointer:fine){
+  #chx,#chy{display:block;}
+  #hud{display:flex;}
+}
+
+/* ---------- TOP INDEX STRIP ---------- */
+.indexbar{
+  position:fixed;top:8px;left:8px;right:8px;z-index:65;
+  display:flex;align-items:stretch;border-bottom:2px solid var(--ink);
+  background:var(--paper);height:40px;font-size:11px;letter-spacing:.1em;
+}
+.indexbar .dwgno{display:flex;align-items:center;padding:0 14px;border-right:1px solid var(--hair);font-weight:600;white-space:nowrap;}
+.indexbar nav{display:flex;flex:1;}
+.indexbar nav a{
+  display:flex;align-items:center;padding:0 14px;text-decoration:none;
+  border-right:1px solid var(--faint);color:var(--ink-2);white-space:nowrap;
+}
+.indexbar nav a:hover{background:var(--ink);color:var(--paper);}
+.mediaswitch{display:flex;align-items:center;gap:0;padding:0 10px;border-left:1px solid var(--hair);margin-left:auto;}
+.mediaswitch span{font-size:10px;color:var(--ink-2);margin-right:8px;letter-spacing:.1em;}
+.mediaswitch button{
+  border:1px solid var(--ink);background:transparent;color:var(--ink);
+  font-size:10px;letter-spacing:.1em;padding:4px 8px;
+}
+.mediaswitch button[aria-pressed="true"]{background:var(--ink);color:var(--paper);}
+.mediaswitch button+button{border-left:none;}
+
+/* ---------- SHEET SECTIONS ---------- */
+main{padding:72px 40px 40px;max-width:1440px;margin:0 auto;}
+section.sheet{position:relative;border:1px solid var(--ink);margin-bottom:56px;background:var(--paper);}
+.sheet-head{
+  display:flex;justify-content:space-between;align-items:center;
+  border-bottom:1px solid var(--ink);padding:8px 16px;
+  font-size:11px;letter-spacing:.14em;color:var(--ink-2);
+}
+.sheet-head b{color:var(--ink);font-weight:600;}
+.sheet-body{position:relative;padding:32px;}
+.svg-anno{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:5;}
+
+/* ---------- TYPE ---------- */
+.giant{
+  display:inline-block;
+  font-family:var(--disp);font-weight:900;text-transform:uppercase;
+  font-size:clamp(44px,8.5vw,118px);line-height:.92;letter-spacing:-.01em;
+  margin:8px 0 4px;
+}
+.giant .thin{font-weight:500;color:var(--ink-2);}
+h2.blocktitle{
+  font-family:var(--disp);font-weight:900;text-transform:uppercase;
+  font-size:clamp(24px,3.4vw,40px);letter-spacing:.01em;line-height:1;
+}
+.eyebrow{font-size:10px;letter-spacing:.22em;color:var(--red);font-weight:600;}
+
+/* ---------- SHEET 1: GENERAL ARRANGEMENT ---------- */
+.ga-grid{display:grid;grid-template-columns:1.25fr .9fr;gap:40px;align-items:start;}
+.notes h3, .datatable-cap, .fig-cap{
+  font-size:11px;letter-spacing:.16em;font-weight:600;margin-bottom:10px;
+  border-bottom:1px solid var(--hair);padding-bottom:6px;
+}
+.notes ol{list-style:none;counter-reset:n;margin:0 0 26px;}
+.notes ol li{
+  counter-increment:n;position:relative;padding-left:34px;margin-bottom:10px;
+  font-size:13px;color:var(--ink);text-transform:uppercase;letter-spacing:.02em;
+}
+.notes ol li::before{
+  content:counter(n)".";position:absolute;left:0;color:var(--red);font-weight:600;
+}
+.datatable{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:26px;}
+.datatable td{border:1px solid var(--faint);padding:7px 10px;vertical-align:top;text-transform:uppercase;}
+.datatable td:first-child{color:var(--ink-2);font-size:10px;letter-spacing:.12em;width:34%;}
+.stamp{
+  display:inline-block;border:2px solid var(--red);color:var(--red);
+  font-weight:600;font-size:10px;letter-spacing:.18em;padding:4px 10px;
+  transform:rotate(-3deg);text-transform:uppercase;
+}
+/* FIG 1 — operator */
+.fig{position:relative;border:1px solid var(--ink);background:var(--white-frame);}
+.fig-inner{position:relative;aspect-ratio:4/4.6;overflow:hidden;}
+.fig canvas{width:100%;height:100%;display:block;}
+.fig .lens{
+  position:absolute;width:150px;height:150px;border-radius:50%;
+  border:2px solid var(--red);pointer-events:none;display:none;
+  background-repeat:no-repeat;box-shadow:0 0 0 1px var(--paper);
+}
+.fig-cap{margin:0;border-bottom:none;border-top:1px solid var(--ink);padding:8px 12px;display:flex;justify-content:space-between;color:var(--ink-2);}
+.fig-cap b{color:var(--ink);}
+.placeholder{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+  width:100%;height:100%;background:var(--white-frame);color:var(--ink-2);
+  font-size:10px;letter-spacing:.14em;text-align:center;padding:14px;
+  background-image:linear-gradient(45deg, transparent 49.6%, var(--faint) 49.6%, var(--faint) 50.4%, transparent 50.4%),
+                   linear-gradient(-45deg, transparent 49.6%, var(--faint) 49.6%, var(--faint) 50.4%, transparent 50.4%);
+}
+.placeholder b{color:var(--ink);font-size:11px;}
+.links-strip{display:flex;flex-wrap:wrap;gap:0;border:1px solid var(--ink);margin-top:26px;}
+.links-strip a,.links-strip button{
+  flex:1;display:flex;align-items:center;justify-content:center;gap:8px;
+  padding:12px 10px;text-decoration:none;font-size:11px;letter-spacing:.14em;
+  border-right:1px solid var(--ink);background:transparent;color:var(--ink);text-transform:uppercase;min-width:150px;
+}
+.links-strip>*:last-child{border-right:none;}
+.links-strip a:hover,.links-strip button:hover{background:var(--red);color:#fff;}
+
+/* ---------- TITLE BLOCK ---------- */
+.titleblock{display:grid;grid-template-columns:repeat(6,1fr);border:2px solid var(--ink);margin-top:36px;font-size:11px;}
+.tb-cell{border:1px solid var(--faint);padding:6px 10px;min-height:52px;display:flex;flex-direction:column;justify-content:space-between;text-transform:uppercase;}
+.tb-cell small{font-size:9px;letter-spacing:.14em;color:var(--ink-2);}
+.tb-cell b{font-weight:600;font-size:12px;}
+.tb-title{grid-column:span 3;}
+.tb-title b{font-family:var(--disp);font-weight:900;font-size:15px;letter-spacing:.02em;}
+
+/* ---------- SHEET 2: BOM ---------- */
+.bom-grid{display:grid;grid-template-columns:1.35fr 1fr;gap:36px;align-items:start;}
+table.bom{width:100%;border-collapse:collapse;font-size:12px;}
+.bom th{
+  text-align:left;font-size:10px;letter-spacing:.16em;color:var(--ink-2);
+  border-bottom:2px solid var(--ink);padding:8px 10px;font-weight:600;
+}
+.bom td{border-bottom:1px solid var(--faint);padding:12px 10px;vertical-align:top;}
+.bom tbody tr{cursor:pointer;}
+.bom tbody tr:hover td, .bom tbody tr.active td{background:var(--paper-2);}
+.bom tbody tr.active td:first-child{box-shadow:inset 3px 0 0 var(--red);}
+.bom .item-no{font-weight:600;color:var(--red);}
+.bom .pname{font-family:var(--disp);font-weight:700;text-transform:uppercase;font-size:13px;letter-spacing:.02em;}
+.bom .pdesc{color:var(--ink-2);font-size:11.5px;margin-top:3px;max-width:44ch;}
+.bom .dwgref{font-size:10px;letter-spacing:.1em;color:var(--ink-2);white-space:nowrap;}
+.bom .status{font-size:9px;letter-spacing:.14em;white-space:nowrap;}
+.bom .status.rel{color:var(--ink-2);}
+.bom .status.pre{color:var(--red);font-weight:600;}
+/* Detail view panel */
+.detail{position:sticky;top:96px;border:2px solid var(--ink);background:var(--paper);}
+.detail-head{display:flex;justify-content:space-between;border-bottom:1px solid var(--ink);padding:8px 12px;font-size:10px;letter-spacing:.16em;color:var(--ink-2);}
+.detail-img{position:relative;aspect-ratio:16/10.5;background:var(--white-frame);border-bottom:1px solid var(--ink);overflow:hidden;}
+.detail-img img{width:100%;height:100%;object-fit:cover;}
+.detail-body{padding:14px 16px 16px;}
+.detail-body .pname{font-family:var(--disp);font-weight:900;text-transform:uppercase;font-size:19px;line-height:1.05;}
+.detail-body .pdesc{color:var(--ink-2);font-size:12px;margin:8px 0 12px;}
+.specslot{
+  border:1px dashed var(--hair);padding:8px 10px;font-size:10px;letter-spacing:.12em;
+  color:var(--ink-2);text-transform:uppercase;margin-bottom:12px;
+}
+.specslot.filled{border-style:solid;border-color:var(--ink);color:var(--ink);}
+.specslot .lbl{color:var(--red);font-weight:600;margin-right:8px;}
+.open-dwg{
+  display:inline-flex;align-items:center;gap:8px;border:1px solid var(--ink);
+  padding:9px 14px;font-size:10px;letter-spacing:.16em;text-decoration:none;text-transform:uppercase;
+}
+.open-dwg:hover{background:var(--ink);color:var(--paper);}
+.detail .stamp-overlay{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-11deg);
+  border:3px solid var(--red);color:var(--red);padding:8px 16px;
+  font-weight:600;font-size:13px;letter-spacing:.2em;text-transform:uppercase;
+  background:color-mix(in srgb, var(--paper) 78%, transparent);white-space:nowrap;
+}
+#leader{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:6;}
+
+/* ---------- SHEET 3: INSPECTION / CERTS ---------- */
+.stampgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:20px;}
+.certstamp{
+  border:2px solid var(--ink);background:transparent;color:var(--ink);
+  padding:0;text-align:left;position:relative;transition:transform .12s;
+}
+.certstamp:nth-child(odd){transform:rotate(-.8deg);}
+.certstamp:nth-child(even){transform:rotate(.7deg);}
+.certstamp:hover{transform:rotate(0) scale(1.02);border-color:var(--red);}
+.certstamp .cs-top{display:flex;justify-content:space-between;border-bottom:1px solid var(--faint);padding:7px 10px;font-size:9px;letter-spacing:.14em;color:var(--ink-2);text-transform:uppercase;}
+.certstamp .cs-name{font-family:var(--disp);font-weight:900;text-transform:uppercase;font-size:16px;padding:14px 10px 4px;line-height:1.05;}
+.certstamp .cs-issuer{padding:0 10px 10px;font-size:10px;letter-spacing:.1em;color:var(--ink-2);text-transform:uppercase;}
+.certstamp .cs-pass{
+  position:absolute;top:36px;right:10px;border:1.5px solid var(--red);color:var(--red);
+  font-size:8px;letter-spacing:.2em;padding:2px 6px;transform:rotate(6deg);font-weight:600;
+}
+/* Appendix modal */
+dialog#appendix{
+  border:2px solid var(--ink);background:var(--paper);color:var(--ink);
+  padding:0;max-width:min(760px,92vw);width:100%;
+  margin:auto;max-height:90vh;overflow:hidden;
+}
+dialog#appendix[open]{display:flex;flex-direction:column;}
+dialog#appendix::backdrop{background:color-mix(in srgb, var(--ink) 55%, transparent);}
+.apx-head{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--ink);padding:10px 14px;font-size:10px;letter-spacing:.16em;text-transform:uppercase;}
+.apx-head button{border:1px solid var(--ink);background:none;color:var(--ink);padding:5px 10px;font-size:10px;letter-spacing:.12em;}
+.apx-head button:hover{background:var(--red);color:#fff;border-color:var(--red);}
+.apx-img{background:var(--white-frame);flex:1;min-height:0;display:flex;align-items:center;justify-content:center;overflow:auto;padding:10px;}
+.apx-img img{max-height:100%;max-width:100%;width:auto;height:auto;object-fit:contain;display:block;}
+
+/* ---------- SHEET 4: SERIAL CONSOLE ---------- */
+.comms-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:36px;align-items:start;}
+.console{border:2px solid var(--ink);background:var(--paper-2);display:flex;flex-direction:column;min-height:340px;}
+.console-head{display:flex;justify-content:space-between;border-bottom:1px solid var(--ink);padding:8px 12px;font-size:10px;letter-spacing:.16em;color:var(--ink-2);text-transform:uppercase;}
+.console-out{flex:1;padding:14px;font-size:12.5px;overflow-y:auto;max-height:320px;white-space:pre-wrap;word-break:break-word;}
+.console-out .cmd{color:var(--red);}
+.console-out .dim{color:var(--ink-2);}
+.console-in{display:flex;border-top:1px solid var(--ink);}
+.console-in .prompt{padding:10px 0 10px 14px;color:var(--red);font-weight:600;}
+.console-in input{
+  flex:1;background:transparent;border:none;color:var(--ink);
+  font-family:var(--mono);font-size:13px;padding:10px 12px;outline:none;
+}
+.revtable{width:100%;border-collapse:collapse;font-size:11px;margin-bottom:24px;}
+.revtable th{border:1px solid var(--ink);padding:6px 10px;font-size:9px;letter-spacing:.16em;color:var(--ink-2);text-align:left;}
+.revtable td{border:1px solid var(--faint);padding:8px 10px;text-transform:uppercase;}
+.contact-big{font-family:var(--disp);font-weight:900;text-transform:uppercase;font-size:clamp(20px,2.6vw,30px);line-height:1.05;margin-bottom:6px;word-break:break-all;}
+.contact-note{color:var(--ink-2);font-size:12px;text-transform:uppercase;letter-spacing:.06em;}
+
+footer{padding:0 40px 60px;max-width:1440px;margin:0 auto;font-size:10px;letter-spacing:.14em;color:var(--ink-2);text-transform:uppercase;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+
+/* ---------- DIMENSION ENGINE ---------- */
+.dimline{stroke:var(--ink-2);stroke-width:1;fill:none;}
+.dimtick{stroke:var(--ink-2);stroke-width:1.2;}
+.dimtext{font-family:var(--mono);font-size:10px;fill:var(--ink-2);letter-spacing:.08em;}
+.leaderline{stroke:var(--red);stroke-width:1.2;fill:none;}
+.balloon{fill:var(--paper);stroke:var(--red);stroke-width:1.5;}
+.balloontext{font-family:var(--mono);font-size:11px;font-weight:600;fill:var(--red);text-anchor:middle;}
+.drawpath{stroke-dasharray:var(--len,600);stroke-dashoffset:var(--len,600);}
+.in-view .drawpath{animation:draw .9s ease forwards;}
+@keyframes draw{to{stroke-dashoffset:0;}}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width:980px){
+  .ga-grid,.bom-grid,.comms-grid{grid-template-columns:1fr;}
+  .detail{position:static;}
+  main{padding:64px 18px 24px;}
+  .sheet-body{padding:20px 16px;}
+  .titleblock{grid-template-columns:repeat(3,1fr);}
+  .tb-title{grid-column:span 3;}
+  .indexbar .dwgno{display:none;}
+  .indexbar nav{overflow-x:auto;}
+  .frame{inset:4px;}
+  .zones{display:none !important;}
+  .svg-anno{display:none;}
+  .giant{display:block;}
+  footer{padding:0 18px 40px;}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none !important;transition:none !important;}
+  .drawpath{stroke-dashoffset:0 !important;}
+}
+</style>
+<meta property="og:image" content="https://ahmedfaraz.org/og-thumbnail.jpg">
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:image" content="https://ahmedfaraz.org/og-thumbnail.jpg">
+</head>
+<body>
+
+<!-- SHEET FRAME -->
+<div class="frame" aria-hidden="true"></div>
+<div class="zones top" aria-hidden="true"></div>
+<div class="zones bottom" aria-hidden="true"></div>
+<div class="zones left" aria-hidden="true"></div>
+<div class="zones right" aria-hidden="true"></div>
+<div id="chx" aria-hidden="true"></div>
+<div id="chy" aria-hidden="true"></div>
+<div id="hud" aria-hidden="true">
+  <span>X <b id="hud-x">0000.0</b></span>
+  <span>Y <b id="hud-y">0000.0</b></span>
+  <span>ZONE <b id="hud-z">—</b></span>
+  <span class="hud-ref" id="hud-ref">REF: —</span>
+</div>
+
+<!-- INDEX STRIP -->
+<header class="indexbar">
+  <div class="dwgno">AF-2029 · REV C</div>
+  <nav aria-label="Sheet index">
+    <a href="index.html" style="color:var(--red);font-weight:600;">REV D — 3D ↗</a>
+    <a href="#ga">S1 · GENERAL ARRANGEMENT</a>
+    <a href="#bom">S2 · BILL OF MATERIALS</a>
+    <a href="#qa">S3 · INSPECTION</a>
+    <a href="#comms">S4 · SERIAL CONSOLE</a>
+  </nav>
+  <div class="mediaswitch">
+    <span>MEDIA</span>
+    <button id="btn-vellum" aria-pressed="true" onclick="setMedia('vellum')">VELLUM</button>
+    <button id="btn-ozalid" aria-pressed="false" onclick="setMedia('ozalid')">OZALID</button>
+  </div>
+</header>
+
+<main>
+
+<!-- ================= SHEET 1 : GENERAL ARRANGEMENT ================= -->
+<section class="sheet" id="ga" data-ref="SHT-1">
+  <div class="sheet-head"><span><b>SHEET 1 OF 4</b> — GENERAL ARRANGEMENT</span><span>SCALE: NTS · THIRD-ANGLE PROJECTION</span></div>
+  <div class="sheet-body">
+    <svg class="svg-anno" id="anno-ga" aria-hidden="true"></svg>
+
+    <p class="eyebrow">OPERATOR IDENTIFICATION</p>
+    <h1 class="giant" id="dim-name">AHMED<br>FARAZ<span class="thin">.</span></h1>
+    <p style="text-transform:uppercase;letter-spacing:.1em;font-size:12px;color:var(--ink-2);margin:48px 0 34px;">
+      MECHANICAL ENGINEERING STUDENT — UNIVERSITY OF TORONTO
+    </p>
+
+    <div class="ga-grid">
+      <div class="notes">
+        <h3>GENERAL NOTES — UNLESS OTHERWISE SPECIFIED</h3>
+        <ol>
+          <li>Operator is a first-year student at the University of Toronto exploring various areas of engineering.</li>
+          <li>Active design-team experience: UTFR and UTSM.</li>
+          <li>Learns beyond the curriculum through online courses.</li>
+          <li>Builds practical skills through hackathons and personal projects.</li>
+          <li>All inquiries answered as soon as possible — see Sheet 4.</li>
+        </ol>
+
+        <h3 class="datatable-cap">TABLE 1 — EDUCATION DATA</h3>
+        <table class="datatable">
+          <tr><td>INSTITUTION</td><td>University of Toronto</td></tr>
+          <tr><td>PROGRAM</td><td>BASc Mechanical Engineering — Class of 2T9</td></tr>
+          <tr><td>STANDING</td><td>Dean's List &nbsp;<span class="stamp">VERIFIED</span></td></tr>
+          <tr><td>WORK AUTH.</td><td>Eligible for Canadian co-op / internship employment through UofT PEY / co-op work authorization</td></tr>
+        </table>
+
+        <div class="links-strip">
+          <a href="https://www.linkedin.com/in/ahmedfarazuoft/" target="_blank" rel="noopener" data-ref="LNK-01">LINKEDIN ↗</a>
+          <a href="mailto:ahmedfarazpro@gmail.com" data-ref="LNK-02">EMAIL</a>
+          <a href="#bom" data-ref="LNK-03">GO TO B.O.M. ↓</a>
+        </div>
+      </div>
+
+      <figure class="fig" id="fig1" data-ref="FIG-1">
+        <div class="fig-inner" id="fig1-inner">
+          <canvas id="halftone" aria-label="Halftone plot render of Ahmed Faraz"></canvas>
+          <div class="lens" id="lens"></div>
+        </div>
+        <figcaption class="fig-cap"><span><b>FIG. 1</b> — OPERATOR</span><span>PLOT RENDER · HOVER FOR PHOTO REF</span></figcaption>
+      </figure>
+    </div>
+
+    <!-- TITLE BLOCK -->
+    <div class="titleblock" role="table" aria-label="Title block">
+      <div class="tb-cell"><small>DRAWN BY</small><b>A. FARAZ</b></div>
+      <div class="tb-cell"><small>CHECKED</small><b>—</b></div>
+      <div class="tb-cell"><small>DATE</small><b id="tb-date">—</b></div>
+      <div class="tb-cell tb-title"><small>TITLE</small><b>PERSONAL ENGINEERING PORTFOLIO — GENERAL ARRANGEMENT</b></div>
+      <div class="tb-cell"><small>SCALE</small><b>NTS</b></div>
+      <div class="tb-cell"><small>UNITS</small><b>MM</b></div>
+      <div class="tb-cell"><small>DWG NO.</small><b>AF-2029</b></div>
+      <div class="tb-cell"><small>REV</small><b>C</b></div>
+      <div class="tb-cell"><small>SHEET</small><b>1 OF 4</b></div>
+      <div class="tb-cell"><small>MATERIAL</small><b>CURIOSITY, 6061-T6</b></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SHEET 2 : BILL OF MATERIALS ================= -->
+<section class="sheet" id="bom" data-ref="SHT-2">
+  <div class="sheet-head"><span><b>SHEET 2 OF 4</b> — BILL OF MATERIALS · BEYOND THE CURRICULUM</span><span>QTY REQ'D: ALL</span></div>
+  <div class="sheet-body">
+    <p class="eyebrow">PARTS LIST</p>
+    <h2 class="blocktitle" id="dim-bom" style="margin-bottom:22px;">BEYOND THE CURRICULUM</h2>
+
+    <div class="bom-grid" id="bom-grid" style="position:relative;">
+      <svg id="leader" aria-hidden="true"></svg>
+      <div>
+        <table class="bom" id="bom-table">
+          <thead>
+            <tr><th>ITEM</th><th>DWG REF</th><th>PART NAME / DESCRIPTION</th><th>STATUS</th></tr>
+          </thead>
+          <tbody><!-- rows injected --></tbody>
+        </table>
+        <p style="font-size:10px;letter-spacing:.12em;color:var(--ink-2);margin-top:14px;text-transform:uppercase;">
+          NOTE: SELECT ANY LINE ITEM TO LOAD ITS DETAIL VIEW. ITEMS WITH A DWG REF LINK OPEN A FULL DETAIL DRAWING.
+        </p>
+      </div>
+
+      <aside class="detail" id="detail" data-ref="DET-V" aria-live="polite">
+        <div class="detail-head"><span>DETAIL VIEW</span><span id="detail-scale">SCALE 2:1</span></div>
+        <div class="detail-img" id="detail-img"></div>
+        <div class="detail-body">
+          <p class="pname" id="detail-name">—</p>
+          <p class="pdesc" id="detail-desc">—</p>
+          <div class="specslot" id="detail-spec"><span class="lbl">SPEC</span>AWAITING DATA — TO BE PROVIDED</div>
+          <a class="open-dwg" id="detail-link" href="#" style="display:none;">OPEN DETAIL DWG →</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SHEET 3 : INSPECTION ================= -->
+<section class="sheet" id="qa" data-ref="SHT-3">
+  <div class="sheet-head"><span><b>SHEET 3 OF 4</b> — INSPECTION &amp; APPROVALS · CERTIFICATIONS</span><span>ALL ITEMS: PASSED</span></div>
+  <div class="sheet-body">
+    <p class="eyebrow">QUALITY RECORD</p>
+    <h2 class="blocktitle" style="margin-bottom:22px;">RELEVANT CERTIFICATIONS</h2>
+    <div class="stampgrid" id="stampgrid"><!-- stamps injected --></div>
+    <p style="font-size:10px;letter-spacing:.12em;color:var(--ink-2);margin-top:18px;text-transform:uppercase;">
+      SELECT A STAMP TO VIEW THE ATTACHED CERTIFICATE APPENDIX.
+    </p>
+  </div>
+</section>
+
+<!-- ================= SHEET 4 : SERIAL CONSOLE ================= -->
+<section class="sheet" id="comms" data-ref="SHT-4">
+  <div class="sheet-head"><span><b>SHEET 4 OF 4</b> — COMMUNICATIONS · SERIAL CONSOLE</span><span>115200 BAUD · 8-N-1</span></div>
+  <div class="sheet-body">
+    <div class="comms-grid">
+      <div class="console" data-ref="CON-01">
+        <div class="console-head"><span>/DEV/TTY.AF2029</span><span>CONNECTED</span></div>
+        <div class="console-out" id="con-out" aria-live="polite"></div>
+        <div class="console-in">
+          <span class="prompt">&gt;</span>
+          <input id="con-in" type="text" autocomplete="off" spellcheck="false" aria-label="Serial console input. Type help for commands." placeholder="type 'help' + enter">
+        </div>
+      </div>
+      <div>
+        <p class="eyebrow">DIRECT LINE</p>
+        <p class="contact-big"><a href="mailto:ahmedfarazpro@gmail.com" style="text-decoration:none;">AHMEDFARAZPRO<wbr>@GMAIL.COM</a></p>
+        <p class="contact-note" style="margin-bottom:30px;">I will reply as soon as I can.</p>
+
+        <h3 class="datatable-cap" style="font-size:11px;letter-spacing:.16em;font-weight:600;border-bottom:1px solid var(--hair);padding-bottom:6px;margin-bottom:10px;">REVISION HISTORY</h3>
+        <table class="revtable">
+          <tr><th>REV</th><th>DATE</th><th>DESCRIPTION</th><th>BY</th></tr>
+          <tr><td>C</td><td id="rev-date">2026-08</td><td>Complete redraw — drawing-package format</td><td>AF</td></tr>
+        </table>
+        <a class="open-dwg" href="https://www.linkedin.com/in/ahmedfarazuoft/" target="_blank" rel="noopener">LINKEDIN PROFILE ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <span>AHMED FARAZ · UNIVERSITY OF TORONTO · MECH ENG 2T9</span>
+  <span>DWG NO. AF-2029 · REV C · DO NOT SCALE DRAWING</span>
+</footer>
+
+<!-- APPENDIX MODAL -->
+<dialog id="appendix">
+  <div class="apx-head">
+    <span id="apx-title">APPENDIX</span>
+    <button onclick="document.getElementById('appendix').close()">CLOSE ✕</button>
+  </div>
+  <div class="apx-img" id="apx-img"></div>
+</dialog>
+
+<script>
+/* ============================================================
+   IMAGE MANIFEST — EDIT FILENAMES HERE.
+   Leave '' (empty) for a white "NO IMAGE REF" frame that shows
+   which slot it is. Drop the file next to index.html and set
+   the name; it will appear everywhere it's referenced.
+   ============================================================ */
+const IMG = {
+  headshot:       'headshot.jpeg',
+  hijra:          'image_1c8627.png',
+  scd:            'SCDCHAMBER.jpg',
+  raidio:         'RAIDIOTHUMBNAIL.PNG',
+  faceguard:      '1771220731975.jpeg',
+  triggerpredict: 'image_690bba.png',
+  chassis:        'chassis_dynoi.jpeg',
+  mount:          'mount4.jpeg',
+  certAI:         'ai-certificate.jpg',
+  certLead:       'ilead-certificate.jpg',
+  certAP:         'ap-capstone.jpg',
+  certCSWA:       'CSWACERTIFICATE.jpg',
+  certCSWP:       'CSWPCERTIFICATE.png',
+  certSim:        'SIMULINKONRAMPCERT.png'
+};
+
+/* ============================================================
+   SPEC MANIFEST — EDIT ONE-LINE SPEC FACTS HERE.
+   Leave '' to show the "AWAITING DATA" slot.
+   Example: scd: 'RATED 10.3 MPa @ 40°C — CO2 SUPERCRITICAL'
+   ============================================================ */
+const SPEC = {
+  hijra: '', scd: '', raidio: '', faceguard: '',
+  triggerpredict: '', chassis: '', mount: ''
+};
+
+/* ---------- PROJECT DATA (content preserved from site) ---------- */
+const PROJECTS = [
+  {key:'hijra', item:1, ref:'AF-001', name:'HIJRA', full:'Highly Intuitive Jointed Robotic Assistant',
+   desc:'Under construction over the summer — please stay tuned.',
+   status:'PRELIMINARY', link:null},
+  {key:'scd', item:2, ref:'AF-002', name:'SUPERCRITICAL DRYING CHAMBER', full:'Supercritical Drying Chamber',
+   desc:'Supercritical drying process chamber designed for advanced aerogel synthesis and thermal management research.',
+   status:'RELEASED', link:null},
+  {key:'raidio', item:3, ref:'AF-003', name:'RAIDIO', full:'Radio-Vision AI',
+   desc:'"Radio-Vision AI" engineered for Hack Without Borders — a system providing offline AI access via analog radio protocols.',
+   status:'RELEASED', link:'raidio.html'},
+  {key:'faceguard', item:4, ref:'AF-004', name:'FACEGUARD', full:'FaceGuard',
+   desc:'All-in-one safety hub and multi-sensor hazard detection system for disaster response environments.',
+   status:'RELEASED', link:'faceguard.html'},
+  {key:'triggerpredict', item:5, ref:'AF-005', name:'TRIGGERPREDICT CDSS', full:'TriggerPredict CDSS',
+   desc:'Clinical Decision Support Software developed to optimize IVF trigger shot timing for Mount Sinai Fertility.',
+   status:'RELEASED', link:'triggerpredict.html'},
+  {key:'chassis', item:6, ref:'AF-006', name:'CHASSIS DYNAMOMETER', full:'Chassis Dynamometer',
+   desc:'Redesigned and manufactured the 2026 prototype vehicle dynamometer for UTSM prototype vehicles.',
+   status:'RELEASED', link:'chassis.html'},
+  {key:'mount', item:7, ref:'AF-007', name:'UTSM BACK WHEEL MOUNT', full:'UTSM Back Wheel Mount',
+   desc:'Optimized 2027 prototype car component designed to enhance mass distribution and structural stress properties.',
+   status:'RELEASED', link:'mount.html'}
+];
+
+const CERTS = [
+  {key:'certAI',   name:'AI FOR DESIGN',   issuer:'UNIVERSITY OF MICHIGAN', ref:'QC-01'},
+  {key:'certLead', name:'EMERGING LEADERS',issuer:'U OF T — TROOST INSTITUTE', ref:'QC-02'},
+  {key:'certAP',   name:'AP CAPSTONE',     issuer:'COLLEGE BOARD', ref:'QC-03'},
+  {key:'certCSWA', name:'CSWA',            issuer:'DASSAULT SYSTÈMES', ref:'QC-04'},
+  {key:'certCSWP', name:'CSWP',            issuer:'DASSAULT SYSTÈMES', ref:'QC-05'},
+  {key:'certSim',  name:'SIMULINK ONRAMP', issuer:'MATHWORKS', ref:'QC-06'}
+];
+
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const finePointer = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+
+/* ---------- helpers ---------- */
+function el(tag, cls, html){const e=document.createElement(tag);if(cls)e.className=cls;if(html!==undefined)e.innerHTML=html;return e;}
+function placeholderNode(slotKey){
+  const p = el('div','placeholder');
+  p.innerHTML = `<b>NO IMAGE REF</b><span>SLOT: ${slotKey.toUpperCase()}</span><span>SET FILENAME IN IMAGE MANIFEST</span>`;
+  return p;
+}
+function mountImage(container, slotKey, alt){
+  container.innerHTML='';
+  const file = IMG[slotKey];
+  if(!file){ container.appendChild(placeholderNode(slotKey)); return; }
+  const im = new Image();
+  im.src = file; im.alt = alt || slotKey;
+  im.onerror = ()=>{ container.innerHTML=''; container.appendChild(placeholderNode(slotKey)); };
+  container.appendChild(im);
+}
+
+/* ---------- MEDIA SWITCH ---------- */
+function setMedia(m){
+  document.documentElement.dataset.media = m;
+  document.getElementById('btn-vellum').setAttribute('aria-pressed', m==='vellum');
+  document.getElementById('btn-ozalid').setAttribute('aria-pressed', m==='ozalid');
+  drawHalftone(); // re-ink the plot
+  conPrint(`<span class="dim">media set → ${m.toUpperCase()}</span>`);
+}
+
+/* ---------- ZONE TICKS ---------- */
+(function zones(){
+  const mk = (sel, arr)=>{const c=document.querySelector(sel); arr.forEach(t=>c.appendChild(el('span','',t)));};
+  mk('.zones.top',    ['8','7','6','5','4','3','2','1']);
+  mk('.zones.bottom', ['8','7','6','5','4','3','2','1']);
+  mk('.zones.left',   ['D','C','B','A']);
+  mk('.zones.right',  ['D','C','B','A']);
+})();
+
+/* ---------- CROSSHAIR + HUD ---------- */
+(function hud(){
+  if(!finePointer) return;
+  const chx=document.getElementById('chx'), chy=document.getElementById('chy');
+  const hx=document.getElementById('hud-x'), hy=document.getElementById('hud-y'),
+        hz=document.getElementById('hud-z'), hr=document.getElementById('hud-ref');
+  const PXMM = 3.7795;
+  document.addEventListener('mousemove', e=>{
+    chx.style.left = e.clientX+'px';
+    chy.style.top  = e.clientY+'px';
+    hx.textContent = (e.clientX/PXMM).toFixed(1).padStart(6,'0');
+    hy.textContent = (e.clientY/PXMM).toFixed(1).padStart(6,'0');
+    const col = 8 - Math.min(7, Math.floor(e.clientX/window.innerWidth*8));
+    const row = 'ABCD'[3 - Math.min(3, Math.floor(e.clientY/window.innerHeight*4))];
+    hz.textContent = row + col;
+    const refEl = e.target.closest('[data-ref]');
+    hr.textContent = 'REF: ' + (refEl ? refEl.dataset.ref : '—');
+  }, {passive:true});
+})();
+
+/* ---------- FIG.1 HALFTONE PLOT + MAGNIFIER LENS ---------- */
+const figImg = new Image();
+let figReady = false;
+function drawHalftone(){
+  const cv = document.getElementById('halftone');
+  const inner = document.getElementById('fig1-inner');
+  if(!cv || !inner) return;
+  const w = inner.clientWidth, h = inner.clientHeight;
+  if(!w||!h) return;
+  cv.width = w*2; cv.height = h*2;             // 2x for crispness
+  const ctx = cv.getContext('2d');
+  const ink = getComputedStyle(document.documentElement).getPropertyValue('--ink').trim();
+  const bg  = getComputedStyle(document.documentElement).getPropertyValue('--white-frame').trim();
+  ctx.fillStyle = bg; ctx.fillRect(0,0,cv.width,cv.height);
+  if(!figReady){
+    // waiting / failed → show slot placeholder over canvas
+    if(!inner.querySelector('.placeholder')){
+      const p = placeholderNode('headshot');
+      p.style.position='absolute'; p.style.inset='0';
+      inner.appendChild(p);
+    }
+    return;
+  }
+  const ph = inner.querySelector('.placeholder'); if(ph) ph.remove();
+  // sample the image on a coarse grid, plot ink dots sized by darkness
+  const cols = 78;
+  const cell = cv.width/cols;
+  const rows = Math.ceil(cv.height/cell);
+  const off = document.createElement('canvas');
+  off.width = cols; off.height = rows;
+  const octx = off.getContext('2d', {willReadFrequently:true});
+  // cover-fit the source image into the sample grid
+  const sRatio = figImg.width/figImg.height, dRatio = cols/rows;
+  let sw, sh, sx, sy;
+  if(sRatio > dRatio){ sh = figImg.height; sw = sh*dRatio; sx=(figImg.width-sw)/2; sy=0; }
+  else { sw = figImg.width; sh = sw/dRatio; sx=0; sy=(figImg.height-sh)/2; }
+  octx.drawImage(figImg, sx, sy, sw, sh, 0, 0, cols, rows);
+  let data;
+  try { data = octx.getImageData(0,0,cols,rows).data; }
+  catch(e){ // canvas tainted (cross-origin during preview) → draw the raw image instead
+    ctx.drawImage(figImg, sx, sy, sw, sh, 0, 0, cv.width, cv.height); return;
+  }
+  ctx.fillStyle = ink;
+  for(let y=0;y<rows;y++){
+    for(let x=0;x<cols;x++){
+      const i=(y*cols+x)*4;
+      const lum=(data[i]*.299+data[i+1]*.587+data[i+2]*.114)/255;
+      const r=(1-lum)*cell*0.62;
+      if(r<0.4) continue;
+      ctx.beginPath();
+      // stagger alternate rows like a plotted halftone screen
+      ctx.arc(x*cell+cell/2+(y%2?cell*0.25:0), y*cell+cell/2, r, 0, Math.PI*2);
+      ctx.fill();
+    }
+  }
+}
+(function initFig(){
+  if(IMG.headshot){
+    figImg.src = IMG.headshot;
+    figImg.onload = ()=>{ figReady = true; drawHalftone(); initLens(); };
+    figImg.onerror = ()=>{ figReady = false; drawHalftone(); };
+  }
+  drawHalftone();
+  window.addEventListener('resize', ()=>drawHalftone());
+})();
+function initLens(){
+  if(!finePointer) return;
+  const inner = document.getElementById('fig1-inner');
+  const lens = document.getElementById('lens');
+  lens.style.backgroundImage = `url('${IMG.headshot}')`;
+  inner.addEventListener('mousemove', e=>{
+    const r = inner.getBoundingClientRect();
+    const x = e.clientX-r.left, y = e.clientY-r.top;
+    lens.style.display='block';
+    lens.style.left = (x-75)+'px'; lens.style.top = (y-75)+'px';
+    // photo shown at cover-scale ×1.4 zoom, aligned to cursor
+    const zoom = 1.4;
+    const cover = Math.max(r.width/figImg.width, r.height/figImg.height)*zoom;
+    const bw = figImg.width*cover, bh = figImg.height*cover;
+    lens.style.backgroundSize = bw+'px '+bh+'px';
+    lens.style.backgroundPosition = (-(x*zoom - (r.width*zoom - r.width)/2)+75)+'px '+(-(y*zoom - (r.height*zoom - r.height)/2)+75)+'px';
+  });
+  inner.addEventListener('mouseleave', ()=> lens.style.display='none');
+}
+
+/* ---------- BOM TABLE + DETAIL VIEW + LEADER LINES ---------- */
+(function bom(){
+  const tbody = document.querySelector('#bom-table tbody');
+  PROJECTS.forEach(p=>{
+    const tr = el('tr');
+    tr.dataset.key = p.key;
+    tr.dataset.ref = p.ref;
+    tr.tabIndex = 0;
+    tr.setAttribute('role','button');
+    tr.setAttribute('aria-label', `Load detail view: ${p.full}`);
+    tr.innerHTML = `
+      <td class="item-no">${p.item}</td>
+      <td class="dwgref">${p.ref}</td>
+      <td><div class="pname">${p.name}</div><div class="pdesc">${p.desc}</div></td>
+      <td class="status ${p.status==='PRELIMINARY'?'pre':'rel'}">${p.status}</td>`;
+    tr.addEventListener('mouseenter', ()=>{ selectProject(p.key,false); drawLeader(tr); });
+    tr.addEventListener('mouseleave', clearLeader);
+    tr.addEventListener('click', ()=> selectProject(p.key,true));
+    tr.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();selectProject(p.key,true);} });
+    tbody.appendChild(tr);
+  });
+  selectProject('scd', true); // default loaded detail
+})();
+
+function selectProject(key, sticky){
+  const p = PROJECTS.find(x=>x.key===key);
+  if(!p) return;
+  if(sticky){
+    document.querySelectorAll('#bom-table tbody tr').forEach(tr=>tr.classList.toggle('active', tr.dataset.key===key));
+    window._stickyKey = key;
+  }
+  document.getElementById('detail-name').textContent = p.full.toUpperCase();
+  document.getElementById('detail-desc').textContent = p.desc;
+  document.getElementById('detail-scale').textContent = 'ITEM '+p.item+' · '+p.ref;
+  const spec = document.getElementById('detail-spec');
+  if(SPEC[p.key]){ spec.classList.add('filled'); spec.innerHTML = `<span class="lbl">SPEC</span>${SPEC[p.key]}`; }
+  else { spec.classList.remove('filled'); spec.innerHTML = `<span class="lbl">SPEC</span>AWAITING DATA — TO BE PROVIDED`; }
+  const link = document.getElementById('detail-link');
+  if(p.link){ link.style.display='inline-flex'; link.href = p.link; }
+  else { link.style.display='none'; }
+  const imgbox = document.getElementById('detail-img');
+  mountImage(imgbox, p.key, p.full);
+  const old = imgbox.querySelector('.stamp-overlay'); if(old) old.remove();
+  if(p.status==='PRELIMINARY'){
+    imgbox.appendChild(el('div','stamp-overlay','PRELIMINARY — NOT FOR CONSTRUCTION'));
+  }
+}
+function drawLeader(tr){
+  if(!finePointer) return;
+  const svg = document.getElementById('leader');
+  const grid = document.getElementById('bom-grid');
+  const detail = document.getElementById('detail');
+  const g = grid.getBoundingClientRect(), r = tr.getBoundingClientRect(), d = detail.getBoundingClientRect();
+  const x1 = r.right-g.left, y1 = r.top-g.top+r.height/2;
+  const x2 = d.left-g.left, y2 = d.top-g.top+34;
+  const midx = x1+(x2-x1)*0.45;
+  svg.innerHTML = `
+    <path class="leaderline" d="M ${x1} ${y1} L ${midx} ${y1} L ${x2-14} ${y2}"></path>
+    <circle class="balloon" cx="${x1+13}" cy="${y1}" r="11"></circle>
+    <text class="balloontext" x="${x1+13}" y="${y1+4}">${tr.querySelector('.item-no').textContent}</text>`;
+}
+function clearLeader(){
+  document.getElementById('leader').innerHTML='';
+  if(window._stickyKey) selectProject(window._stickyKey, true);
+}
+
+/* ---------- CERT STAMPS + APPENDIX ---------- */
+(function certs(){
+  const grid = document.getElementById('stampgrid');
+  CERTS.forEach((c,i)=>{
+    const b = el('button','certstamp');
+    b.dataset.ref = c.ref;
+    b.setAttribute('aria-label', `View certificate: ${c.name}, ${c.issuer}`);
+    b.innerHTML = `
+      <div class="cs-top"><span>${c.ref}</span><span>INSP. RECORD</span></div>
+      <div class="cs-pass">PASSED</div>
+      <div class="cs-name">${c.name}</div>
+      <div class="cs-issuer">${c.issuer}</div>`;
+    b.addEventListener('click', ()=>{
+      document.getElementById('apx-title').textContent = `APPENDIX ${String.fromCharCode(65+i)} — ${c.name} · ${c.issuer}`;
+      mountImage(document.getElementById('apx-img'), c.key, c.name+' certificate');
+      document.getElementById('appendix').showModal();
+    });
+    grid.appendChild(b);
+  });
+})();
+
+/* ---------- SERIAL CONSOLE ---------- */
+const conOut = document.getElementById('con-out');
+const conIn  = document.getElementById('con-in');
+function conPrint(html){
+  const line = el('div','',html);
+  conOut.appendChild(line);
+  conOut.scrollTop = conOut.scrollHeight;
+}
+const CMDS = {
+  help(){ conPrint(
+`<span class="dim">available commands:</span>
+  help        this list
+  whoami      operator identification
+  ls          list sheets
+  goto &lt;id&gt;   jump to sheet (ga | bom | qa | comms)
+  bom         list all line items
+  email       copy contact email
+  linkedin    open linkedin profile
+  media       toggle vellum / ozalid
+  clear       clear terminal`);},
+  whoami(){ conPrint('AHMED FARAZ — MECH ENG STUDENT, UNIVERSITY OF TORONTO (2T9). DEAN\'S LIST. UTFR · UTSM.'); },
+  ls(){ conPrint('S1 GENERAL-ARRANGEMENT   S2 BILL-OF-MATERIALS   S3 INSPECTION   S4 SERIAL-CONSOLE'); },
+  bom(){ conPrint(PROJECTS.map(p=>`  ${p.item}  ${p.ref}  ${p.name}`).join('\n')); },
+  email(){
+    navigator.clipboard && navigator.clipboard.writeText('ahmedfarazpro@gmail.com').catch(()=>{});
+    conPrint('ahmedfarazpro@gmail.com <span class="dim">— copied to clipboard. I will reply as soon as I can.</span>');
+  },
+  linkedin(){ window.open('https://www.linkedin.com/in/ahmedfarazuoft/','_blank'); conPrint('<span class="dim">opening linkedin ↗</span>'); },
+  media(){ setMedia(document.documentElement.dataset.media==='vellum'?'ozalid':'vellum'); },
+  clear(){ conOut.innerHTML=''; }
+};
+conIn && conIn.addEventListener('keydown', e=>{
+  if(e.key!=='Enter') return;
+  const raw = conIn.value.trim(); conIn.value='';
+  if(!raw) return;
+  conPrint(`<span class="cmd">&gt; ${raw.replace(/</g,'&lt;')}</span>`);
+  const [cmd, arg] = raw.toLowerCase().split(/\s+/);
+  if(cmd==='goto' && arg){
+    const t = document.getElementById(arg);
+    if(t){ t.scrollIntoView({behavior: reduceMotion?'auto':'smooth'}); conPrint(`<span class="dim">jumping → ${arg.toUpperCase()}</span>`); }
+    else conPrint(`<span class="dim">unknown sheet '${arg}'. try: ga bom qa comms</span>`);
+  }
+  else if(CMDS[cmd]) CMDS[cmd]();
+  else conPrint(`<span class="dim">unknown command '${cmd}'. type 'help'.</span>`);
+});
+conPrint('<span class="dim">AF-2029 serial link established @ 115200 baud.\ntype \'help\' for available commands.</span>');
+
+/* ---------- DIMENSION ENGINE ---------- */
+function dimension(targetId, svgId, label){
+  const t = document.getElementById(targetId);
+  const svg = document.getElementById(svgId);
+  if(!t || !svg) return;
+  const sBody = svg.parentElement.getBoundingClientRect();
+  const r = t.getBoundingClientRect();
+  const x1 = r.left - sBody.left, x2 = r.right - sBody.left;
+  const y  = r.bottom - sBody.top + 16;
+  const mm = ((x2-x1)/3.7795).toFixed(1);
+  const g = document.createElementNS('http://www.w3.org/2000/svg','g');
+  g.dataset.dim = targetId;
+  const len = (x2-x1) + 40;
+  g.innerHTML = `
+    <line class="dimline drawpath" style="--len:${len}" x1="${x1}" y1="${r.bottom-sBody.top+4}" x2="${x1}" y2="${y+5}"></line>
+    <line class="dimline drawpath" style="--len:${len}" x1="${x2}" y1="${r.bottom-sBody.top+4}" x2="${x2}" y2="${y+5}"></line>
+    <line class="dimline drawpath" style="--len:${len}" x1="${x1}" y1="${y}" x2="${x2}" y2="${y}"></line>
+    <line class="dimtick drawpath" style="--len:20" x1="${x1-4}" y1="${y+4}" x2="${x1+4}" y2="${y-4}"></line>
+    <line class="dimtick drawpath" style="--len:20" x1="${x2-4}" y1="${y+4}" x2="${x2+4}" y2="${y-4}"></line>
+    <text class="dimtext" x="${(x1+x2)/2}" y="${y-5}" text-anchor="middle">${label||''}${mm} mm</text>`;
+  const old = svg.querySelector(`[data-dim="${targetId}"]`); if(old) old.remove();
+  svg.appendChild(g);
+}
+function runDims(){
+  dimension('dim-name','anno-ga','W = ');
+}
+window.addEventListener('load', runDims);
+let rT; window.addEventListener('resize', ()=>{clearTimeout(rT); rT=setTimeout(runDims,150);});
+
+/* draw-in on scroll */
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(en=>{ if(en.isIntersecting) en.target.classList.add('in-view'); });
+},{threshold:.2});
+document.querySelectorAll('section.sheet').forEach(s=>io.observe(s));
+
+/* ---------- title-block live date ---------- */
+(function(){
+  const d = new Date();
+  const iso = d.toISOString().slice(0,10);
+  document.getElementById('tb-date').textContent = iso;
+})();
+</script>
+</body>
+</html>

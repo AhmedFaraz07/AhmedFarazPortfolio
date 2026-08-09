@@ -1,0 +1,1475 @@
+<!DOCTYPE html>
+<html lang="en" data-media="vellum">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ahmed Faraz — AF-2029 REV D · Digital Twin</title>
+<meta name="description" content="Mechanical Engineering student at the University of Toronto exploring Mechatronics, Aerospace, and Smart Materials.">
+<meta property="og:title" content="Ahmed Faraz | Portfolio">
+<meta property="og:description" content="Mechanical Engineering student at the University of Toronto exploring Mechatronics, Aerospace, and Smart Materials.">
+<meta property="og:url" content="https://ahmedfaraz.org/">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://ahmedfaraz.org/og-thumbnail.jpg">
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:image" content="https://ahmedfaraz.org/og-thumbnail.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   DWG NO. AF-2029 · REV D — "THE DIGITAL TWIN"
+   The machine described by drawing.html (REV C).
+   ============================================================ */
+:root{
+  --paper:#F7F5EC; --paper-2:#EFECE0; --ink:#191913; --ink-2:#5E5D50;
+  --red:#C22317; --faint:rgba(25,25,19,.16); --hair:rgba(25,25,19,.32);
+  --white-frame:#FFFFFF;
+  --mono:'IBM Plex Mono', ui-monospace, monospace; --disp:'Archivo', sans-serif;
+}
+html[data-media="ozalid"]{
+  --paper:#13273C; --paper-2:#0E2033; --ink:#DFE9F2; --ink-2:#8CA4B8;
+  --red:#FF6A50; --faint:rgba(223,233,242,.2); --hair:rgba(223,233,242,.42);
+  --white-frame:#0B1A2B;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{height:100%;overflow:hidden;}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:var(--mono); font-size:14px;
+  cursor:crosshair; transition:background-color .25s,color .25s;
+}
+::selection{background:var(--red);color:var(--paper);}
+a{color:inherit;}
+button{font-family:var(--mono);cursor:crosshair;}
+:focus-visible{outline:2px solid var(--red);outline-offset:2px;}
+#gl{position:fixed;inset:0;width:100%;height:100%;display:block;touch-action:none;}
+
+/* ---------- SHEET FRAME ---------- */
+.frame{position:fixed;inset:8px;border:2px solid var(--ink);pointer-events:none;z-index:60;}
+.frame::after{content:"";position:absolute;inset:6px;border:1px solid var(--hair);}
+.zones{position:fixed;z-index:60;pointer-events:none;font-size:10px;color:var(--ink-2);letter-spacing:.08em;}
+.zones.top{top:-2px;left:8px;right:8px;height:16px;display:flex;}
+.zones.bottom{bottom:-2px;left:8px;right:8px;height:16px;display:flex;align-items:flex-end;}
+.zones.left{left:-1px;top:8px;bottom:8px;width:14px;display:flex;flex-direction:column;}
+.zones.right{right:-1px;top:8px;bottom:8px;width:14px;display:flex;flex-direction:column;}
+.zones span{flex:1;display:flex;align-items:center;justify-content:center;}
+
+/* ---------- CROSSHAIR ---------- */
+#chx,#chy{position:fixed;background:var(--red);opacity:.32;pointer-events:none;z-index:55;display:none;}
+#chx{top:0;bottom:0;width:1px;left:0;} #chy{left:0;right:0;height:1px;top:0;}
+@media (hover:hover) and (pointer:fine){ #chx,#chy{display:block;} }
+
+/* ---------- INDEX BAR ---------- */
+.indexbar{
+  position:fixed;top:8px;left:8px;right:8px;z-index:65;display:flex;align-items:stretch;
+  border-bottom:2px solid var(--ink);background:var(--paper);height:40px;font-size:11px;letter-spacing:.1em;
+}
+.indexbar .dwgno{display:flex;align-items:center;padding:0 14px;border-right:1px solid var(--hair);font-weight:600;white-space:nowrap;}
+.indexbar nav{display:flex;flex:1;min-width:0;overflow-x:auto;scrollbar-width:none;}
+.mediaswitch{flex:none;}
+.indexbar nav::-webkit-scrollbar{display:none;}
+.indexbar nav button, .indexbar nav a{
+  display:flex;align-items:center;padding:0 13px;text-decoration:none;background:none;border:none;
+  border-right:1px solid var(--faint);color:var(--ink-2);white-space:nowrap;font-size:11px;letter-spacing:.1em;
+}
+.indexbar nav button:hover,.indexbar nav a:hover{background:var(--ink);color:var(--paper);}
+.indexbar nav button.active{color:var(--red);font-weight:600;}
+.mediaswitch{display:flex;align-items:center;padding:0 10px;border-left:1px solid var(--hair);margin-left:auto;}
+.mediaswitch span{font-size:10px;color:var(--ink-2);margin-right:8px;letter-spacing:.1em;}
+.mediaswitch button{border:1px solid var(--ink);background:transparent;color:var(--ink);font-size:10px;letter-spacing:.1em;padding:4px 8px;}
+.mediaswitch button[aria-pressed="true"]{background:var(--ink);color:var(--paper);}
+.mediaswitch button+button{border-left:none;}
+
+/* ---------- HUD: TELEMETRY ---------- */
+#hud{
+  position:fixed;left:20px;bottom:20px;z-index:70;background:var(--paper);border:1px solid var(--ink);
+  font-size:10px;letter-spacing:.06em;padding:5px 10px;display:flex;gap:13px;color:var(--ink-2);flex-wrap:wrap;max-width:calc(100vw - 40px);
+}
+#hud b{color:var(--ink);font-weight:600;}
+#hud .hud-ref{color:var(--red);}
+@media (max-width:1500px){ #hud .coord{display:none;} }
+
+/* ---------- HINT LINE ---------- */
+#hint{
+  position:fixed;left:50%;bottom:20px;transform:translateX(-50%);z-index:66;
+  font-size:10px;letter-spacing:.18em;color:var(--ink-2);background:var(--paper);
+  border:1px solid var(--faint);padding:5px 12px;white-space:nowrap;pointer-events:none;
+  text-transform:uppercase;
+}
+
+/* ---------- MINIMAP ---------- */
+#minimap{
+  position:fixed;right:20px;bottom:20px;z-index:70;background:var(--paper);
+  border:1px solid var(--ink);display:block;
+}
+
+/* ---------- READOUT PANEL (S2 inspection) ---------- */
+#readout{
+  position:fixed;left:20px;bottom:52px;transform:translateY(16px);z-index:68;
+  width:min(430px, calc(100vw - 32px));
+  border:2px solid var(--ink);background:var(--paper);opacity:0;pointer-events:none;
+  transition:opacity .25s, transform .25s;
+}
+#readout.show{opacity:1;pointer-events:auto;transform:translateY(0);}
+@media (max-width:860px){
+  #readout{left:16px;right:16px;width:auto;}
+}
+#readout .ro-head{display:flex;justify-content:space-between;border-bottom:1px solid var(--ink);padding:7px 12px;font-size:10px;letter-spacing:.16em;color:var(--ink-2);text-transform:uppercase;}
+#readout .ro-body{padding:12px 14px 14px;position:relative;}
+#readout .ro-name{font-family:var(--disp);font-weight:900;text-transform:uppercase;font-size:19px;line-height:1.02;}
+#readout.prelim-on .ro-name{padding-right:106px;}
+#readout .ro-desc{color:var(--ink-2);font-size:12px;margin:7px 0 10px;max-width:60ch;}
+#readout .specslot{border:1px dashed var(--hair);padding:7px 10px;font-size:10px;letter-spacing:.12em;color:var(--ink-2);text-transform:uppercase;margin-bottom:10px;}
+#readout .specslot.filled{border-style:solid;border-color:var(--ink);color:var(--ink);}
+#readout .specslot .lbl{color:var(--red);font-weight:600;margin-right:8px;}
+#readout .ro-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+.open-dwg{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--ink);background:none;color:var(--ink);padding:8px 13px;font-size:10px;letter-spacing:.16em;text-decoration:none;text-transform:uppercase;}
+.open-dwg:hover{background:var(--ink);color:var(--paper);}
+.idx-btn{border:1px solid var(--ink);background:none;color:var(--ink);padding:8px 11px;font-size:11px;}
+.idx-btn:hover{background:var(--red);border-color:var(--red);color:#fff;}
+#readout .prelim{
+  position:absolute;top:8px;right:12px;border:2px solid var(--red);color:var(--red);
+  padding:3px 8px;font-weight:600;font-size:9px;letter-spacing:.16em;transform:rotate(-6deg);text-transform:uppercase;
+}
+
+/* ---------- CONSOLE PANEL (S4) ---------- */
+#conpanel{
+  position:fixed;left:50%;bottom:52px;transform:translateX(-50%) translateY(16px);z-index:68;
+  width:min(680px, calc(100vw - 32px));
+  border:2px solid var(--ink);background:var(--paper-2);opacity:0;pointer-events:none;
+  transition:opacity .25s, transform .25s;display:flex;flex-direction:column;
+}
+#conpanel.show{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0);}
+.console-head{display:flex;justify-content:space-between;border-bottom:1px solid var(--ink);padding:7px 12px;font-size:10px;letter-spacing:.16em;color:var(--ink-2);text-transform:uppercase;}
+.console-head a{color:var(--red);text-decoration:none;font-weight:600;}
+.console-out{padding:12px 14px;font-size:12.5px;overflow-y:auto;height:190px;white-space:pre-wrap;word-break:break-word;}
+.console-out .cmd{color:var(--red);}
+.console-out .dim{color:var(--ink-2);}
+.console-in{display:flex;border-top:1px solid var(--ink);}
+.console-in .prompt{padding:9px 0 9px 14px;color:var(--red);font-weight:600;}
+.console-in input{flex:1;background:transparent;border:none;color:var(--ink);font-family:var(--mono);font-size:13px;padding:9px 12px;outline:none;}
+
+/* ---------- APPENDIX DIALOG ---------- */
+dialog#appendix{
+  border:2px solid var(--ink);background:var(--paper);color:var(--ink);
+  padding:0;max-width:min(760px,92vw);width:100%;
+  margin:auto;max-height:90vh;overflow:hidden;
+}
+dialog#appendix[open]{display:flex;flex-direction:column;}
+dialog#appendix::backdrop{background:rgba(20,20,15,.55);}
+.apx-head{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--ink);padding:10px 14px;font-size:10px;letter-spacing:.16em;text-transform:uppercase;}
+.apx-head button{border:1px solid var(--ink);background:none;color:var(--ink);padding:5px 10px;font-size:10px;letter-spacing:.12em;}
+.apx-head button:hover{background:var(--red);color:#fff;border-color:var(--red);}
+.apx-img{background:var(--white-frame);min-height:280px;flex:1;min-height:0;display:flex;align-items:center;justify-content:center;overflow:auto;padding:10px;}
+.apx-img img{max-height:100%;max-width:100%;width:auto;height:auto;object-fit:contain;display:block;}
+.placeholder{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+  width:100%;min-height:280px;background:var(--white-frame);color:var(--ink-2);
+  font-size:10px;letter-spacing:.14em;text-align:center;padding:14px;
+  background-image:linear-gradient(45deg, transparent 49.6%, var(--faint) 49.6%, var(--faint) 50.4%, transparent 50.4%),
+                   linear-gradient(-45deg, transparent 49.6%, var(--faint) 49.6%, var(--faint) 50.4%, transparent 50.4%);
+}
+.placeholder b{color:var(--ink);font-size:11px;}
+
+/* ---------- INTRO / LOADING ---------- */
+#skip{
+  position:fixed;left:50%;bottom:64px;transform:translateX(-50%);z-index:80;
+  border:1px solid var(--ink);background:var(--paper);color:var(--ink);
+  font-size:10px;letter-spacing:.2em;padding:8px 16px;text-transform:uppercase;
+}
+#skip:hover{background:var(--ink);color:var(--paper);}
+#plotting{
+  position:fixed;top:56px;right:20px;z-index:80;font-size:10px;letter-spacing:.2em;
+  color:var(--red);text-transform:uppercase;
+}
+#nogl{
+  position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;
+  background:var(--paper);padding:24px;text-align:center;font-size:12px;letter-spacing:.08em;
+}
+#nogl a{color:var(--red);font-weight:600;}
+
+@media (max-width:680px){
+  .mediaswitch span{display:none;}
+  .mediaswitch{padding:0 6px;}
+  .indexbar nav button, .indexbar nav a{padding:0 10px;}
+}
+@media (max-width:860px){
+  .indexbar .dwgno{display:none;}
+  #minimap{display:none;}
+  #hint{bottom:16px;font-size:9px;max-width:calc(100vw - 24px);white-space:normal;text-align:center;}
+  #hud{left:12px;bottom:56px;gap:9px;font-size:9px;}
+  #readout,#conpanel{bottom:86px;}
+  .console-out{height:150px;}
+  .frame{inset:4px;}
+  .zones{display:none !important;}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition:none !important;}
+}
+</style>
+</head>
+<body>
+
+<canvas id="gl"></canvas>
+
+<div class="frame" aria-hidden="true"></div>
+<div class="zones top" aria-hidden="true"></div>
+<div class="zones bottom" aria-hidden="true"></div>
+<div class="zones left" aria-hidden="true"></div>
+<div class="zones right" aria-hidden="true"></div>
+<div id="chx" aria-hidden="true"></div>
+<div id="chy" aria-hidden="true"></div>
+
+<header class="indexbar">
+  <div class="dwgno">AF-2029 · REV D</div>
+  <nav aria-label="Station index">
+    <button data-st="0" class="active">S1 · OPERATOR</button>
+    <button data-st="1">S2 · PART MAGAZINE</button>
+    <button data-st="2">S3 · QA RACK</button>
+    <button data-st="3">S4 · TERMINAL</button>
+    <a href="drawing.html" title="2D drawing package (REV C)">2D DWG →</a>
+  </nav>
+  <div class="mediaswitch">
+    <span>MEDIA</span>
+    <button id="btn-vellum" aria-pressed="true">VELLUM</button>
+    <button id="btn-ozalid" aria-pressed="false">OZALID</button>
+  </div>
+</header>
+
+<div id="hud" aria-hidden="true">
+  <span class="coord">X <b id="hud-x">0000.0</b></span>
+  <span class="coord">Y <b id="hud-y">0000.0</b></span>
+  <span class="coord">ZONE <b id="hud-z">—</b></span>
+  <span>STN <b id="hud-st">S1</b></span>
+  <span>CRANK <b id="hud-rpm">0.0</b> RPM</span>
+  <span>IDX <b id="hud-idx">—</b></span>
+  <span class="hud-ref" id="hud-ref">REF: —</span>
+</div>
+
+<div id="hint">SCROLL · CRANK BETWEEN STATIONS</div>
+<canvas id="minimap" width="200" height="58" aria-hidden="true"></canvas>
+
+<!-- S2 INSPECTION READOUT -->
+<aside id="readout" aria-live="polite">
+  <div class="ro-head"><span>INSPECTION READOUT</span><span id="ro-ref">—</span></div>
+  <div class="ro-body">
+    <div class="prelim" id="ro-prelim" style="display:none;">PRELIMINARY</div>
+    <p class="ro-name" id="ro-name">—</p>
+    <p class="ro-desc" id="ro-desc">—</p>
+    <div class="specslot" id="ro-spec"><span class="lbl">SPEC</span>AWAITING DATA — TO BE PROVIDED</div>
+    <div class="ro-row">
+      <button class="idx-btn" id="ro-prev" aria-label="Previous item">◀</button>
+      <button class="idx-btn" id="ro-next" aria-label="Next item">▶</button>
+      <a class="open-dwg" id="ro-link" href="#" style="display:none;">OPEN DETAIL DWG →</a>
+    </div>
+  </div>
+</aside>
+
+<!-- S4 CONSOLE -->
+<aside id="conpanel">
+  <div class="console-head">
+    <span>/DEV/TTY.AF2029 · 115200 · 8-N-1</span>
+    <span><a href="mailto:ahmedfarazpro@gmail.com">AHMEDFARAZPRO@GMAIL.COM</a></span>
+  </div>
+  <div class="console-out" id="con-out" aria-live="polite"></div>
+  <div class="console-in">
+    <span class="prompt">&gt;</span>
+    <input id="con-in" type="text" autocomplete="off" spellcheck="false" aria-label="Serial console input. Type help for commands." placeholder="type 'help' + enter">
+  </div>
+</aside>
+
+<button id="skip">SKIP PLOT ⏎</button>
+<div id="plotting">PLOTTING WORLD…</div>
+
+<div id="nogl"><p>THIS MACHINE REQUIRES WEBGL.<br><br><a href="drawing.html">OPEN THE 2D DRAWING PACKAGE (REV C) INSTEAD →</a></p></div>
+
+<dialog id="appendix">
+  <div class="apx-head">
+    <span id="apx-title">APPENDIX</span>
+    <button onclick="document.getElementById('appendix').close()">CLOSE ✕</button>
+  </div>
+  <div class="apx-img" id="apx-img"></div>
+</dialog>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>if(!window.THREE){document.write('<script src="three.min.js"><\/script>');}</script>
+<script>
+'use strict';
+/* ============================================================
+   IMAGE MANIFEST — EDIT FILENAMES HERE. '' = white NO-IMAGE slot.
+   ============================================================ */
+const IMG = {
+  headshot:       'headshot.jpeg',
+  hijra:          'image_1c8627.png',
+  scd:            'SCDCHAMBER.jpg',
+  raidio:         'RAIDIOTHUMBNAIL.PNG',
+  faceguard:      '1771220731975.jpeg',
+  triggerpredict: 'image_690bba.png',
+  chassis:        'chassis_dynoi.jpeg',
+  mount:          'mount4.jpeg',
+  certAI:         'ai-certificate.jpg',
+  certLead:       'ilead-certificate.jpg',
+  certAP:         'ap-capstone.jpg',
+  certCSWA:       'CSWACERTIFICATE.jpg',
+  certCSWP:       'CSWPCERTIFICATE.png',
+  certSim:        'SIMULINKONRAMPCERT.png'
+};
+/* ============================================================
+   SPEC MANIFEST — one-line spec facts. '' = AWAITING DATA slot.
+   ============================================================ */
+const SPEC = { hijra:'', scd:'', raidio:'', faceguard:'', triggerpredict:'', chassis:'', mount:'' };
+/* ============================================================
+   PARTS LIST — append entries here; the magazine rebuilds itself.
+   ============================================================ */
+const PROJECTS = [
+  {key:'hijra', name:'HIJRA', full:'Highly Intuitive Jointed Robotic Assistant',
+   desc:'Under construction over the summer — please stay tuned.', status:'PRELIMINARY', link:null},
+  {key:'scd', name:'SUPERCRITICAL DRYING CHAMBER', full:'Supercritical Drying Chamber',
+   desc:'Supercritical drying process chamber designed for advanced aerogel synthesis and thermal management research.', status:'RELEASED', link:null},
+  {key:'raidio', name:'RAIDIO', full:'RAIDIO — Radio-Vision AI',
+   desc:'"Radio-Vision AI" engineered for Hack Without Borders — a system providing offline AI access via analog radio protocols.', status:'RELEASED', link:'raidio.html'},
+  {key:'faceguard', name:'FACEGUARD', full:'FaceGuard',
+   desc:'All-in-one safety hub and multi-sensor hazard detection system for disaster response environments.', status:'RELEASED', link:'faceguard.html'},
+  {key:'triggerpredict', name:'TRIGGERPREDICT CDSS', full:'TriggerPredict CDSS',
+   desc:'Clinical Decision Support Software developed to optimize IVF trigger shot timing for Mount Sinai Fertility.', status:'RELEASED', link:'triggerpredict.html'},
+  {key:'chassis', name:'CHASSIS DYNAMOMETER', full:'Chassis Dynamometer',
+   desc:'Redesigned and manufactured the 2026 prototype vehicle dynamometer for UTSM prototype vehicles.', status:'RELEASED', link:'chassis.html'},
+  {key:'mount', name:'UTSM BACK WHEEL MOUNT', full:'UTSM Back Wheel Mount',
+   desc:'Optimized 2027 prototype car component designed to enhance mass distribution and structural stress properties.', status:'RELEASED', link:'mount.html'}
+];
+const CERTS = [
+  {key:'certAI',   name:'AI FOR DESIGN',    issuer:'UNIVERSITY OF MICHIGAN',    ref:'QC-01'},
+  {key:'certLead', name:'EMERGING LEADERS', issuer:'U OF T — TROOST INSTITUTE', ref:'QC-02'},
+  {key:'certAP',   name:'AP CAPSTONE',      issuer:'COLLEGE BOARD',             ref:'QC-03'},
+  {key:'certCSWA', name:'CSWA',             issuer:'DASSAULT SYSTÈMES',         ref:'QC-04'},
+  {key:'certCSWP', name:'CSWP',             issuer:'DASSAULT SYSTÈMES',         ref:'QC-05'},
+  {key:'certSim',  name:'SIMULINK ONRAMP',  issuer:'MATHWORKS',                 ref:'QC-06'}
+];
+
+/* ---------- palettes ---------- */
+const PALETTES = {
+  vellum:{paper:0xF7F5EC, ink:0x191913, ink2:0x5E5D50, red:0xC22317, white:0xFFFFFF,
+          cssPaper:'#F7F5EC', cssInk:'#191913', cssInk2:'#5E5D50', cssRed:'#C22317', cssWhite:'#FFFFFF', cssPaper2:'#EFECE0'},
+  ozalid:{paper:0x13273C, ink:0xDFE9F2, ink2:0x8CA4B8, red:0xFF6A50, white:0x0B1A2B,
+          cssPaper:'#13273C', cssInk:'#DFE9F2', cssInk2:'#8CA4B8', cssRed:'#FF6A50', cssWhite:'#0B1A2B', cssPaper2:'#0E2033'}
+};
+let MEDIA = 'vellum';
+const PAL = ()=>PALETTES[MEDIA];
+
+const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const COARSE  = window.matchMedia('(pointer: coarse)').matches;
+const FINE    = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+
+/* ---------- WebGL gate ---------- */
+(function gate(){
+  try{
+    const c=document.createElement('canvas');
+    if(!(c.getContext('webgl')||c.getContext('experimental-webgl'))) throw 0;
+    if(!window.THREE) throw 0;
+  }catch(e){
+    document.getElementById('nogl').style.display='flex';
+    document.getElementById('skip').style.display='none';
+    document.getElementById('plotting').style.display='none';
+    throw new Error('no webgl — offered REV C');
+  }
+})();
+
+/* ============================================================
+   RENDERER / SCENE
+   ============================================================ */
+const canvas = document.getElementById('gl');
+const renderer = new THREE.WebGLRenderer({canvas, antialias:true, powerPreference:'high-performance'});
+renderer.setPixelRatio(Math.min(window.devicePixelRatio||1, COARSE?1.5:1.75));
+renderer.localClippingEnabled = true;
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(PAL().paper);
+scene.fog = new THREE.Fog(PAL().paper, 26, 64);
+const camera = new THREE.PerspectiveCamera(46, 1, 0.1, 300);
+
+/* global "plot" clipping plane (world prints upward during intro) */
+const plotPlane = new THREE.Plane(new THREE.Vector3(0,-1,0), REDUCED?14:0.06);
+const clipArr = [plotPlane];
+
+/* ---------- material registry (media re-ink) ---------- */
+const matReg = {ink:[], ink2:[], red:[], paper:[], white:[]};
+const canvasPlates = [];   // {tex, draw}
+const shaderMats = [];     // uniforms with uPaper/uInk/uRed
+function reg(mat, role, clipped=true){
+  if(clipped) mat.clippingPlanes = clipArr;
+  matReg[role].push(mat); return mat;
+}
+function inkLine(op=1){ return reg(new THREE.LineBasicMaterial({color:PAL().ink, transparent:op<1, opacity:op}), 'ink'); }
+function ink2Line(op=1){ return reg(new THREE.LineBasicMaterial({color:PAL().ink2, transparent:op<1, opacity:op}), 'ink2'); }
+function redLine(op=1){ return reg(new THREE.LineBasicMaterial({color:PAL().red, transparent:op<1, opacity:op}), 'red'); }
+function paperMat(){ return reg(new THREE.MeshBasicMaterial({color:PAL().paper, polygonOffset:true, polygonOffsetFactor:1.5, polygonOffsetUnits:1.5}), 'paper'); }
+
+/* ---------- helpers ---------- */
+function edgesOf(geom, mat){ return new THREE.LineSegments(new THREE.EdgesGeometry(geom, 12), mat); }
+/* solid occluder + visible edges + (optional) dashed hidden edges */
+function draftBox(w,h,d, opts={}){
+  const g = new THREE.Group();
+  const geom = new THREE.BoxGeometry(w,h,d);
+  g.add(new THREE.Mesh(geom, paperMat()));
+  g.add(edgesOf(geom, opts.red? redLine() : inkLine()));
+  if(opts.hidden && !COARSE){
+    const eg = new THREE.EdgesGeometry(geom, 12);
+    const hm = reg(new THREE.LineDashedMaterial({color:PAL().ink2, transparent:true, opacity:.32,
+      dashSize:.11, gapSize:.09, depthFunc:THREE.GreaterDepth, depthWrite:false}), 'ink2');
+    const hl = new THREE.LineSegments(eg, hm); hl.computeLineDistances(); g.add(hl);
+  }
+  return g;
+}
+function line(points, mat){
+  const g = new THREE.BufferGeometry().setFromPoints(points.map(p=>new THREE.Vector3(...p)));
+  return new THREE.Line(g, mat);
+}
+function segs(pairs, mat){
+  const pts=[]; pairs.forEach(([a,b])=>{pts.push(new THREE.Vector3(...a), new THREE.Vector3(...b));});
+  const g = new THREE.BufferGeometry().setFromPoints(pts);
+  return new THREE.LineSegments(g, mat);
+}
+
+/* canvas-texture plate: crisp baked 2D drawing on a plane */
+function makePlate(w, h, px, drawFn, opts={}){
+  const cv = document.createElement('canvas');
+  const scale = COARSE?0.72:1;
+  cv.width = Math.round(px*scale); cv.height = Math.round(px*(h/w)*scale);
+  const tex = new THREE.CanvasTexture(cv);
+  tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+  const draw = ()=>{ const ctx=cv.getContext('2d'); ctx.setTransform(cv.width/1000,0,0,cv.width/1000,0,0);
+    drawFn(ctx, 1000, 1000*(h/w), PAL()); tex.needsUpdate=true; };
+  canvasPlates.push({draw}); draw();
+  const mat = reg(new THREE.MeshBasicMaterial({map:tex, transparent:!!opts.transparent}), 'white');
+  const mesh = new THREE.Mesh(new THREE.PlaneGeometry(w,h), mat);
+  const grp = new THREE.Group(); grp.add(mesh);
+  if(!opts.noFrame) grp.add(edgesOf(new THREE.PlaneGeometry(w,h), inkLine()));
+  grp.userData.mesh = mesh;
+  return grp;
+}
+/* billboard text sprite */
+function makeSprite(text, worldH, role='ink2', weight='500'){
+  const cv=document.createElement('canvas'); cv.width=1024; cv.height=128;
+  const tex=new THREE.CanvasTexture(cv);
+  const draw=()=>{ const ctx=cv.getContext('2d'); ctx.clearRect(0,0,1024,128);
+    let fs=64; ctx.font=`${weight} ${fs}px "IBM Plex Mono", monospace`;
+    while(fs>22 && ctx.measureText(text).width>984){ fs-=2; ctx.font=`${weight} ${fs}px "IBM Plex Mono", monospace`; }
+    ctx.textAlign='center'; ctx.textBaseline='middle';
+    ctx.fillStyle = role==='red'?PAL().cssRed: role==='ink'?PAL().cssInk:PAL().cssInk2;
+    ctx.fillText(text, 512, 66); tex.needsUpdate=true; };
+  canvasPlates.push({draw}); draw();
+  const m = new THREE.SpriteMaterial({map:tex, transparent:true, depthWrite:false});
+  m.clippingPlanes = clipArr;
+  const s = new THREE.Sprite(m);
+  const asp = 1024/128;
+  s.scale.set(worldH*asp, worldH, 1);
+  return s;
+}
+/* placeholder texture (white slot with X) */
+function placeholderTex(slot){
+  const cv=document.createElement('canvas'); cv.width=640; cv.height=440;
+  const tex=new THREE.CanvasTexture(cv);
+  const draw=()=>{const x=cv.getContext('2d'); const P=PAL();
+    x.fillStyle=P.cssWhite; x.fillRect(0,0,640,440);
+    x.strokeStyle='rgba(128,128,128,.35)'; x.lineWidth=3;
+    x.beginPath(); x.moveTo(0,0); x.lineTo(640,440); x.moveTo(640,0); x.lineTo(0,440); x.stroke();
+    x.fillStyle=P.cssInk; x.font='600 26px "IBM Plex Mono", monospace'; x.textAlign='center';
+    x.fillText('NO IMAGE REF', 320, 200);
+    x.fillStyle=P.cssInk2; x.font='500 20px "IBM Plex Mono", monospace';
+    x.fillText('SLOT: '+slot.toUpperCase(), 320, 238);
+    x.fillText('SET FILENAME IN IMAGE MANIFEST', 320, 270);
+    tex.needsUpdate=true;};
+  canvasPlates.push({draw}); draw();
+  return tex;
+}
+/* crop-to-fill (CSS object-fit: cover) for a texture on a given plane aspect */
+function fitCover(tex, planeAspect){
+  const img = tex.image;
+  if(!img || !img.width || !img.height) return;
+  const ia = img.width/img.height;
+  tex.wrapS = tex.wrapT = THREE.ClampToEdgeWrapping;
+  if(ia > planeAspect){            // image wider — crop sides
+    const s = planeAspect/ia;
+    tex.repeat.set(s,1); tex.offset.set((1-s)/2, 0);
+  } else {                          // image taller — crop top/bottom
+    const s = ia/planeAspect;
+    tex.repeat.set(1,s); tex.offset.set(0,(1-s)/2);
+  }
+  tex.needsUpdate = true;
+}
+const texLoader = new THREE.TextureLoader();
+function projectTexture(slot, onReady){
+  const file = IMG[slot];
+  if(!file){ onReady(placeholderTex(slot)); return; }
+  texLoader.load(file, t=>{t.anisotropy=renderer.capabilities.getMaxAnisotropy(); onReady(t);},
+    undefined, ()=>onReady(placeholderTex(slot)));
+}
+
+/* 3D dimension: A→B with offset direction, tick ends, sprite label */
+function dim3D(parent, A, B, off, label){
+  const a=new THREE.Vector3(...A), b=new THREE.Vector3(...B), o=new THREE.Vector3(...off);
+  const a2=a.clone().add(o), b2=b.clone().add(o);
+  const g=new THREE.Group();
+  const m=ink2Line(.85);
+  g.add(line([[a.x,a.y,a.z],[a2.x,a2.y,a2.z]],m));
+  g.add(line([[b.x,b.y,b.z],[b2.x,b2.y,b2.z]],m));
+  g.add(line([[a2.x,a2.y,a2.z],[b2.x,b2.y,b2.z]],m));
+  const dir=b2.clone().sub(a2).normalize();
+  const t1=new THREE.Vector3().addVectors(dir, o.clone().normalize()).multiplyScalar(.09);
+  [[a2],[b2]].forEach(([p])=>{
+    g.add(line([[p.x-t1.x,p.y-t1.y,p.z-t1.z],[p.x+t1.x,p.y+t1.y,p.z+t1.z]], m));
+  });
+  const mid=a2.clone().lerp(b2,.5).add(o.clone().normalize().multiplyScalar(.24));
+  const s=makeSprite(label,.34,'ink2');
+  s.position.copy(mid); g.add(s);
+  parent.add(g); return g;
+}
+
+/* ============================================================
+   WORLD — floor grid, centerline
+   ============================================================ */
+const world = new THREE.Group(); scene.add(world);
+function gridLines(x0,x1,z0,z1,step,mat,y=0){
+  const pairs=[];
+  for(let x=x0;x<=x1+0.001;x+=step) pairs.push([[x,y,z0],[x,y,z1]]);
+  for(let z=z0;z<=z1+0.001;z+=step) pairs.push([[x0,y,z],[x1,y,z]]);
+  return segs(pairs, mat);
+}
+world.add(gridLines(-14,100,-12,16, COARSE?2:1, ink2Line(.14)));
+world.add(gridLines(-14,100,-12,16, 6, ink2Line(.3)));
+/* red dashed centerline along travel axis */
+{
+  const g=new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(-12,0.012,0), new THREE.Vector3(98,0.012,0)]);
+  const m=reg(new THREE.LineDashedMaterial({color:PAL().red, transparent:true, opacity:.5, dashSize:.5, gapSize:.35}),'red');
+  const l=new THREE.Line(g,m); l.computeLineDistances(); world.add(l);
+  [0,30,60,85].forEach(x=>{ world.add(segs([[[x,0.012,-.6],[x,0.012,.6]]], redLine(.5))); });
+}
+
+/* ============================================================
+   S1 — OPERATOR STATION (x = 0)
+   ============================================================ */
+const S1 = new THREE.Group(); S1.position.set(0,0,0); world.add(S1);
+
+/* name plate */
+const namePlate = makePlate(10.5,2.2,2048,(ctx,W,H,P)=>{
+  ctx.fillStyle=P.cssPaper; ctx.fillRect(0,0,W,H);
+  ctx.textBaseline='alphabetic';
+  const NAME='AHMED FARAZ', PAD=34;
+  let ts=128; ctx.font=`900 ${ts}px Archivo, sans-serif`;
+  const need=()=> ctx.measureText(NAME).width + 6 + ctx.measureText('.').width;
+  while(ts>48 && PAD+need() > W-PAD){ ts-=2; ctx.font=`900 ${ts}px Archivo, sans-serif`; }
+  const base=128, maxW=W-2*PAD, tw=need();
+  ctx.save();
+  if(tw>maxW){ ctx.translate(PAD,0); ctx.scale(maxW/tw,1); ctx.translate(-PAD,0); }
+  ctx.fillStyle=P.cssInk; ctx.fillText(NAME, PAD, base);
+  ctx.fillStyle=P.cssRed; ctx.fillText('.', PAD+ctx.measureText(NAME).width+6, base);
+  ctx.restore();
+  ctx.fillStyle=P.cssRed; ctx.font='600 22px "IBM Plex Mono", monospace'; ctx.fillText('OPERATOR IDENTIFICATION', 36, 168);
+  ctx.fillStyle=P.cssInk2;
+  const sub='MECHANICAL ENGINEERING STUDENT — UNIVERSITY OF TORONTO';
+  let sf=30; ctx.font=`500 ${sf}px "IBM Plex Mono", monospace`;
+  while(sf>16 && 36+ctx.measureText(sub).width > W-34){ sf--; ctx.font=`500 ${sf}px "IBM Plex Mono", monospace`; }
+  ctx.fillText(sub, 36, 200);
+});
+namePlate.position.set(-0.4, 6.7, -2.2); S1.add(namePlate);
+dim3D(S1, [-5.65,7.8,-2.2],[4.85,7.8,-2.2],[0,0.5,0],'W = 10.5 u');
+
+/* FIG.1 — halftone portrait shader plate */
+const FIG_Y = 2.78;
+const figG = new THREE.Group(); figG.position.set(-3.4, FIG_Y, 0); S1.add(figG);
+const figW=4.45, figH=5.2;
+const figUniforms = {
+  uTex:{value:null}, uHasTex:{value:0},
+  uPaper:{value:new THREE.Color(PAL().white)}, uInk:{value:new THREE.Color(PAL().ink)},
+  uRed:{value:new THREE.Color(PAL().red)},
+  uMouse:{value:new THREE.Vector2(-9,-9)}, uMouseOn:{value:0},
+  uCells:{value: COARSE?44:64}, uAspect:{value:figW/figH},
+  uUvScale:{value:new THREE.Vector2(1,1)}, uUvOff:{value:new THREE.Vector2(0,0)}
+};
+shaderMats.push(figUniforms);
+const figMat = new THREE.ShaderMaterial({
+  uniforms:figUniforms, clippingPlanes:clipArr, clipping:true,
+  vertexShader:`varying vec2 vUv; void main(){ vUv=uv; gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}`,
+  fragmentShader:`
+    varying vec2 vUv;
+    uniform sampler2D uTex; uniform float uHasTex;
+    uniform vec3 uPaper,uInk,uRed; uniform vec2 uMouse; uniform float uMouseOn,uCells,uAspect;
+    uniform vec2 uUvScale, uUvOff;
+    vec3 tex(vec2 uv){ return texture2D(uTex, clamp(uv,0.0,1.0)*uUvScale + uUvOff).rgb; }
+    void main(){
+      vec3 col = uPaper;
+      if(uHasTex>0.5){
+        // base: the photograph itself, full colour
+        col = tex(vUv);
+        // hover lens reveals the plotted halftone screening
+        float md = distance(vec2(vUv.x, vUv.y/uAspect), vec2(uMouse.x, uMouse.y/uAspect));
+        float R = 0.17;
+        if(uMouseOn>0.5 && md<R){
+          vec2 cellUv = vec2(vUv.x, vUv.y/uAspect);
+          vec2 cell = floor(cellUv*uCells)/uCells + 0.5/uCells;
+          float row = floor(cellUv.y*uCells);
+          cell.x += mod(row,2.0)*0.25/uCells;
+          float q = 0.26/uCells;
+          vec3 s = ( tex(vec2(cell.x-q,(cell.y-q)*uAspect)) + tex(vec2(cell.x+q,(cell.y-q)*uAspect))
+                   + tex(vec2(cell.x-q,(cell.y+q)*uAspect)) + tex(vec2(cell.x+q,(cell.y+q)*uAspect)) ) * 0.25;
+          float lum = dot(s, vec3(.299,.587,.114));
+          lum = clamp((lum - 0.5)*1.30 + 0.50, 0.0, 1.0);
+          float r = (1.0-lum)*0.78/uCells;
+          float d = length(cellUv-cell);
+          float aa = 0.30/uCells;
+          col = mix(uPaper, uInk, 1.0 - smoothstep(r-aa, r+aa, d));
+        }
+        if(uMouseOn>0.5 && abs(md-R)<0.005){ col = uRed; }
+      } else {
+        // no texture: hatch placeholder
+        float h = step(0.5, fract((vUv.x+vUv.y)*14.0));
+        col = mix(uPaper, uInk, h*0.06);
+      }
+      gl_FragColor = vec4(col,1.0);
+    }`
+});
+const figMesh = new THREE.Mesh(new THREE.PlaneGeometry(figW,figH), figMat);
+figG.add(figMesh);
+figG.add(edgesOf(new THREE.PlaneGeometry(figW,figH), inkLine()));
+let figHasPhoto=false;
+function setFigPlaceholder(){
+  figUniforms.uHasTex.value=0; figHasPhoto=false;
+  const ph = makePlate(figW,figH,760,(ctx,W,H,P)=>{
+    ctx.fillStyle=P.cssWhite; ctx.fillRect(0,0,W,H);
+    ctx.strokeStyle='rgba(128,128,128,.35)'; ctx.lineWidth=3;
+    ctx.beginPath(); ctx.moveTo(0,0); ctx.lineTo(W,H); ctx.moveTo(W,0); ctx.lineTo(0,H); ctx.stroke();
+    ctx.textAlign='center';
+    ctx.fillStyle=P.cssInk; ctx.font='600 44px "IBM Plex Mono", monospace';
+    ctx.fillText('NO IMAGE REF', W/2, H/2-30);
+    ctx.fillStyle=P.cssInk2; ctx.font='500 30px "IBM Plex Mono", monospace';
+    ctx.fillText('SLOT: HEADSHOT', W/2, H/2+22);
+    ctx.fillText('SET FILENAME IN IMAGE MANIFEST', W/2, H/2+68);
+    ctx.textAlign='left';
+  },{noFrame:true});
+  ph.position.z=0.012; figG.add(ph);
+}
+if(!IMG.headshot){ setFigPlaceholder(); }
+else texLoader.load(IMG.headshot,
+  t=>{t.anisotropy=renderer.capabilities.getMaxAnisotropy();
+      fitCover(t, figW/figH);
+      figUniforms.uUvScale.value.copy(t.repeat);
+      figUniforms.uUvOff.value.copy(t.offset);
+      figUniforms.uTex.value=t; figUniforms.uHasTex.value=1; figHasPhoto=true;},
+  undefined, setFigPlaceholder);
+figG.add((()=>{const s=makeSprite('FIG. 1 — OPERATOR · HOVER = HALFTONE SCREEN',.3,'ink2'); s.position.set(0,-figH/2-0.26,0); return s;})());
+/* easel legs */
+figG.add(segs([[[-figW/2,-figH/2,0],[-figW/2-0.7,-FIG_Y,0.7]], [[figW/2,-figH/2,0],[figW/2+0.7,-FIG_Y,0.7]],
+               [[-figW/2,-figH/2,0],[-figW/2-0.7,-FIG_Y,-0.7]], [[figW/2,-figH/2,0],[figW/2+0.7,-FIG_Y,-0.7]]], inkLine()));
+
+/* NOTES board */
+const notes = makePlate(6.6, 5.0, 1400, (ctx,W,H,P)=>{
+  ctx.fillStyle=P.cssPaper; ctx.fillRect(0,0,W,H);
+  const M=44; let y=70;
+  ctx.fillStyle=P.cssInk; ctx.font='600 30px "IBM Plex Mono", monospace';
+  ctx.fillText('GENERAL NOTES — UNLESS OTHERWISE SPECIFIED', M, y);
+  ctx.strokeStyle=P.cssInk2; ctx.lineWidth=2; ctx.beginPath(); ctx.moveTo(M,y+14); ctx.lineTo(W-M,y+14); ctx.stroke();
+  y+=64;
+  const items=[
+    'OPERATOR IS A FIRST-YEAR STUDENT AT THE UNIVERSITY OF','TORONTO EXPLORING VARIOUS AREAS OF ENGINEERING.',
+    'ACTIVE DESIGN-TEAM EXPERIENCE: UTFR AND UTSM.',
+    'LEARNS BEYOND THE CURRICULUM THROUGH ONLINE COURSES.',
+    'BUILDS PRACTICAL SKILLS THROUGH HACKATHONS AND','PERSONAL PROJECTS.',
+    'ALL INQUIRIES ANSWERED ASAP — SEE STATION S4.'];
+  const nums=[1,0,2,3,4,0,5];
+  ctx.font='500 27px "IBM Plex Mono", monospace';
+  items.forEach((t,i)=>{
+    if(nums[i]){ ctx.fillStyle=P.cssRed; ctx.fillText(nums[i]+'.', M, y);}
+    ctx.fillStyle=P.cssInk; ctx.fillText(t, M+56, y); y+=44;
+  });
+  y+=26;
+  ctx.fillStyle=P.cssInk; ctx.font='600 30px "IBM Plex Mono", monospace';
+  ctx.fillText('TABLE 1 — EDUCATION DATA', M, y);
+  ctx.strokeStyle=P.cssInk2; ctx.beginPath(); ctx.moveTo(M,y+14); ctx.lineTo(W-M,y+14); ctx.stroke();
+  y+=52;
+  const rows=[['INSTITUTION','UNIVERSITY OF TORONTO'],
+              ['PROGRAM','BASc MECH ENG — CLASS OF 2T9'],
+              ['STANDING',"DEAN'S LIST"],
+              ['WORK AUTH.','PEY / CO-OP ELIGIBLE (CANADA)']];
+  let stampY=0;
+  rows.forEach(r=>{
+    ctx.strokeStyle='rgba(128,128,128,.4)'; ctx.strokeRect(M, y-34, W-2*M, 48);
+    ctx.fillStyle=P.cssInk2; ctx.font='500 22px "IBM Plex Mono", monospace'; ctx.fillText(r[0], M+16, y);
+    ctx.fillStyle=P.cssInk; ctx.font='500 26px "IBM Plex Mono", monospace'; ctx.fillText(r[1], M+300, y);
+    if(r[0]==='STANDING') stampY=y-10;
+    y+=48;
+  });
+  ctx.save(); ctx.translate(W-170,stampY); ctx.rotate(-0.06);
+  ctx.strokeStyle=P.cssRed; ctx.lineWidth=5; ctx.strokeRect(-92,-26,184,52);
+  ctx.fillStyle=P.cssRed; ctx.font='600 26px "IBM Plex Mono", monospace'; ctx.textAlign='center';
+  ctx.fillText('VERIFIED',0,9); ctx.restore(); ctx.textAlign='left';
+});
+notes.position.set(3.4, 2.9, 0); S1.add(notes);
+notes.add(segs([[[-3.3,-2.5,0],[-3.3,-2.9,0]],[[3.3,-2.5,0],[3.3,-2.9,0]]], inkLine()));
+
+/* GA sheet lying on floor (the REV C document) — clickable */
+const sheet = makePlate(7.6, 5.0, 1500, (ctx,W,H,P)=>{
+  ctx.fillStyle=P.cssPaper; ctx.fillRect(0,0,W,H);
+  ctx.strokeStyle=P.cssInk; ctx.lineWidth=5; ctx.strokeRect(18,18,W-36,H-36);
+  ctx.lineWidth=2; ctx.strokeRect(34,34,W-68,H-68);
+  ctx.fillStyle=P.cssInk; ctx.font='900 92px Archivo, sans-serif';
+  ctx.fillText('AHMED FARAZ.', 70, 170);
+  ctx.font='500 26px "IBM Plex Mono", monospace'; ctx.fillStyle=P.cssInk2;
+  ctx.fillText('PERSONAL ENGINEERING PORTFOLIO — 2D DRAWING PACKAGE', 72, 218);
+  /* mini title block */
+  const bx=70, by=H-210, bw=W-140, bh=132;
+  ctx.strokeStyle=P.cssInk; ctx.lineWidth=4; ctx.strokeRect(bx,by,bw,bh);
+  ctx.lineWidth=1.5;
+  [0.22,0.44,0.62,0.8].forEach(f=>{ctx.beginPath();ctx.moveTo(bx+bw*f,by);ctx.lineTo(bx+bw*f,by+bh);ctx.stroke();});
+  ctx.beginPath();ctx.moveTo(bx,by+bh/2);ctx.lineTo(bx+bw,by+bh/2);ctx.stroke();
+  ctx.fillStyle=P.cssInk2; ctx.font='500 17px "IBM Plex Mono", monospace';
+  const lab=['DWG NO.','REV','SCALE','SHEET','MEDIA']; lab.forEach((l,i)=>ctx.fillText(l, bx+bw*[0,0.22,0.44,0.62,0.8][i]+12, by+26));
+  ctx.fillStyle=P.cssInk; ctx.font='600 24px "IBM Plex Mono", monospace';
+  const val=['AF-2029','C','1:1','1 OF 4','VELLUM']; val.forEach((v,i)=>ctx.fillText(v, bx+bw*[0,0.22,0.44,0.62,0.8][i]+12, by+56));
+  ctx.fillStyle=P.cssRed; ctx.font='600 24px "IBM Plex Mono", monospace';
+  ctx.fillText('THIS DOCUMENT DESCRIBES THE MACHINE ABOVE.', bx+12, by+96);
+  ctx.fillText('CLICK TO OPEN 2D DRAWING (REV C) ↗', bx+12, by+124);
+}, {});
+sheet.rotation.x = -Math.PI/2;
+sheet.position.set(0.6, 0.02, 5.0);
+/* exempt the sheet from the plot clip so it exists from frame 0 */
+sheet.traverse(o=>{ if(o.material) o.material.clippingPlanes = []; });
+S1.add(sheet);
+
+/* ============================================================
+   S2 — PARAMETRIC CHAIN PART MAGAZINE (x = 30)
+   Paternoster / ATC chain: pockets stay upright; count = PROJECTS.length
+   ============================================================ */
+const S2 = new THREE.Group(); S2.position.set(30,0,0); world.add(S2);
+const MAG = (()=>{
+  const N = PROJECTS.length;
+  const r = 2.1;
+  /* straights grow with N so pockets never collide */
+  const straight = Math.max(5.5, (N*3.35 - 2*Math.PI*r)/2);
+  const cy = 5.5;
+  const cL = -straight/2, cR = straight/2;
+  const L = 2*straight + 2*Math.PI*r;
+  function P(s){ // s in [0,1) → x,y on stadium, starting bottom-center, moving toward left
+    let d = ((s%1)+1)%1 * L;
+    const half = straight/2;
+    if(d<half) return [ -d, cy-r ];
+    d-=half;
+    if(d<Math.PI*r){ const th=1.5*Math.PI - d/r; return [cL+r*Math.cos(th), cy+r*Math.sin(th)]; }
+    d-=Math.PI*r;
+    if(d<straight) return [ cL+d, cy+r ];
+    d-=straight;
+    if(d<Math.PI*r){ const th=0.5*Math.PI - d/r; return [cR+r*Math.cos(th), cy+r*Math.sin(th)]; }
+    d-=Math.PI*r;
+    return [ cR-d, cy-r ];
+  }
+  /* guide rails: two offset outlines */
+  [-0.16, 0.16].forEach(dz=>{
+    const pts=[]; for(let i=0;i<=140;i++){const [x,y]=P(i/140); pts.push(new THREE.Vector3(x,y,dz));}
+    const g=new THREE.BufferGeometry().setFromPoints(pts);
+    S2.add(new THREE.Line(g, inkLine(.9)));
+  });
+  /* chain links (dotted pin markers along path) */
+  const pinGeo = new THREE.CircleGeometry(0.05, 10);
+  const pinMat = inkLine();
+  const pins = [];
+  const pinCount = Math.round(L/0.55);
+  for(let i=0;i<pinCount;i++){
+    const e = new THREE.LineLoop(new THREE.EdgesGeometry(pinGeo)? new THREE.CircleGeometry(0.05,10): null, pinMat);
+    // simpler: little cross ticks as chain links
+  }
+  /* chain link ticks group (rebuilt per-frame is wasteful; use points along path updated with offset) */
+  const linkGrp = new THREE.Group(); S2.add(linkGrp);
+  const linkSegGeo = new THREE.BufferGeometry();
+  const linkVerts = new Float32Array(pinCount*2*3);
+  linkSegGeo.setAttribute('position', new THREE.BufferAttribute(linkVerts,3));
+  const linkLines = new THREE.LineSegments(linkSegGeo, ink2Line(.8));
+  linkGrp.add(linkLines);
+
+  /* sprockets: procedural gears at both centers */
+  function gear(rr, teeth){
+    const shape = new THREE.Shape();
+    const inner=rr*0.86, outer=rr*1.02;
+    for(let i=0;i<teeth;i++){
+      const a0=i/teeth*Math.PI*2, a1=(i+0.35)/teeth*Math.PI*2, a2=(i+0.5)/teeth*Math.PI*2, a3=(i+0.85)/teeth*Math.PI*2;
+      if(i===0) shape.moveTo(Math.cos(a0)*outer, Math.sin(a0)*outer);
+      else shape.lineTo(Math.cos(a0)*outer, Math.sin(a0)*outer);
+      shape.lineTo(Math.cos(a1)*outer, Math.sin(a1)*outer);
+      shape.lineTo(Math.cos(a2)*inner, Math.sin(a2)*inner);
+      shape.lineTo(Math.cos(a3)*inner, Math.sin(a3)*inner);
+    }
+    shape.closePath();
+    const hole = new THREE.Path(); hole.absarc(0,0,rr*0.2,0,Math.PI*2,true); shape.holes.push(hole);
+    const geo = new THREE.ExtrudeGeometry(shape,{depth:0.22,bevelEnabled:false});
+    geo.translate(0,0,-0.11);
+    const grp = new THREE.Group();
+    grp.add(new THREE.Mesh(geo, paperMat()));
+    grp.add(edgesOf(geo, inkLine()));
+    /* spokes */
+    for(let i=0;i<4;i++){const a=i*Math.PI/2; grp.add(segs([[[Math.cos(a)*rr*0.22,Math.sin(a)*rr*0.22,0],[Math.cos(a)*inner*0.96,Math.sin(a)*inner*0.96,0]]], ink2Line(.8)));}
+    return grp;
+  }
+  const gearL = gear(r,15), gearR = gear(r,15);
+  gearL.position.set(cL,cy,0); gearR.position.set(cR,cy,0);
+  S2.add(gearL, gearR);
+  /* shafts + A-frame stands */
+  [[cL],[cR]].forEach(([cx])=>{
+    S2.add(draftBox(0.24,0.24,1.6).translateX(cx).translateY(cy));
+    S2.add(segs([
+      [[cx-1.5,0,0.85],[cx,cy,0.85]], [[cx+1.5,0,0.85],[cx,cy,0.85]],
+      [[cx-1.5,0,-0.85],[cx,cy,-0.85]], [[cx+1.5,0,-0.85],[cx,cy,-0.85]],
+      [[cx-1.5,0,0.85],[cx-1.5,0,-0.85]], [[cx+1.5,0,0.85],[cx+1.5,0,-0.85]]
+    ], inkLine()));
+  });
+  /* base plate */
+  const base = draftBox(straight+2*r+4.4, 0.22, 3.4, {hidden:true}); base.position.set(0,0.11,0); S2.add(base);
+
+  /* crank + connecting rod at right sprocket */
+  const crank = new THREE.Group(); crank.position.set(cR, cy, 1.05); S2.add(crank);
+  const crankArm = new THREE.Group();
+  crankArm.add(segs([[[0,0.045,0],[0.9,0.045,0]],[[0,-0.045,0],[0.9,-0.045,0]],[[0,0.045,0],[0,-0.045,0]]], redLine()));
+  crankArm.add(edgesOf(new THREE.RingGeometry(0.07,0.115,14), redLine()).translateX(0.9).translateZ(0.1));
+  crankArm.add(segs([[[0.9,0,0],[0.9,0,0.28]]], redLine()));
+  crank.add(crankArm);
+
+  /* pockets */
+  const pockets = [];
+  const pocketGrp = new THREE.Group(); S2.add(pocketGrp);
+  PROJECTS.forEach((p,i)=>{
+    const g = new THREE.Group();
+    const plate = new THREE.Group();
+    /* image area 1.9 x 1.15 */
+    const imgMat = reg(new THREE.MeshBasicMaterial({map:placeholderTex(p.key)}), 'white');
+    projectTexture(p.key, t=>{ fitCover(t, 1.9/1.15); imgMat.map=t; imgMat.needsUpdate=true; });
+    const imgMesh = new THREE.Mesh(new THREE.PlaneGeometry(1.9,1.15), imgMat);
+    imgMesh.position.y = 0.19;
+    plate.add(imgMesh);
+    /* label strip */
+    const label = makePlate(1.9,0.38,760,(ctx,W,H,P2)=>{
+      ctx.fillStyle=P2.cssPaper; ctx.fillRect(0,0,W,H);
+      ctx.fillStyle=P2.cssRed; ctx.font='600 62px "IBM Plex Mono", monospace';
+      ctx.fillText(String(i+1).padStart(2,'0'), 26, 132);
+      ctx.fillStyle=P2.cssInk; ctx.font='700 58px Archivo, sans-serif';
+      let nm = p.name; if(nm.length>22) nm = nm.slice(0,21)+'…';
+      ctx.fillText(nm, 118, 130);
+    },{noFrame:true});
+    label.position.y = -0.575; label.position.z = 0.008; plate.add(label);
+    plate.add(edgesOf(new THREE.PlaneGeometry(1.9,1.53), inkLine()).translateY(0.0));
+    /* backer occluder so plates hide chain behind them */
+    const backer = new THREE.Mesh(new THREE.PlaneGeometry(1.9,1.53), paperMat());
+    backer.position.z=-0.02; plate.add(backer);
+    plate.position.y = -1.12; /* hangs below pin */
+    const swing = new THREE.Group();
+    /* hanger */
+    swing.add(segs([[[0,0,0],[-0.75,-0.34,0]],[[0,0,0],[0.75,-0.34,0]]], ink2Line(.9)));
+    swing.add(plate);
+    g.add(swing);
+    /* pin stays on the chain */
+    g.add(edgesOf(new THREE.CylinderGeometry(0.07,0.07,0.5,10).rotateX(Math.PI/2), inkLine()));
+    g.userData = {plate, swing, idx:i, ref:'AF-'+String(i+1).padStart(3,'0'), project:p};
+    pocketGrp.add(g);
+    pockets.push(g);
+  });
+  /* HIJRA preliminary hologram handled via readout + red frame swap on active */
+
+  /* capacity callout + pitch dimension */
+  const capS = makeSprite(`CAPACITY = ${N} POCKETS — PARAMETRIC (EXPANDABLE)`, .34, 'ink2');
+  capS.position.set(0, cy+r+0.8, 0); S2.add(capS);
+  dim3D(S2, [ -L/N/2 - L/N, cy-r, 0.2], [ L/N/2 - L/N, cy-r, 0.2], [0,-2.1,0], `PITCH = ${(L/N).toFixed(2)} u`);
+  const titleS = makeSprite('S2 — BEYOND THE CURRICULUM · PART MAGAZINE', .4, 'ink');
+  titleS.position.set(0, cy+r+1.4, 0); S2.add(titleS);
+
+  /* physics state */
+  const st = {
+    N, L, P, off: 0, vel: 0, target:null,
+    cL, cR, cy, r,
+    pockets, gearL, gearR, crankArm, linkVerts, linkSegGeo, pinCount, activeIdx: -1
+  };
+  return st;
+})();
+
+/* magazine per-frame update */
+/* Halftone ruling must track the plate's on-screen size: a dot needs roughly
+   5 device px to read as a dot. Finer than the pixels allow and it moires. */
+const _hv1=new THREE.Vector3(), _hv2=new THREE.Vector3();
+function updateHalftoneRuling(){
+  if(!figHasPhoto) return;
+  figG.updateMatrixWorld();
+  _hv1.set(-figW/2,0,0).applyMatrix4(figG.matrixWorld).project(camera);
+  _hv2.set( figW/2,0,0).applyMatrix4(figG.matrixWorld).project(camera);
+  const px = Math.abs(_hv2.x-_hv1.x)*0.5*renderer.domElement.width;
+  const want = THREE.MathUtils.clamp(px/5.2, 26, 120);
+  const cur = figUniforms.uCells.value;
+  figUniforms.uCells.value = cur + (want-cur)*0.12;   // ease so it never pops
+}
+
+function updateMagazine(dt){
+  const m = MAG;
+  /* autopilot toward target detent */
+  if(m.target!==null){
+    const d = m.target - m.off;
+    m.vel = d * (REDUCED? 60 : 6);
+    if(Math.abs(d)<0.0012){ m.off=m.target; m.vel=0; m.target=null; }
+  } else {
+    /* friction */
+    m.vel *= Math.exp(-2.6*dt);
+    /* detent magnet when slow */
+    if(Math.abs(m.vel) < 0.35/m.N){
+      const near = Math.round(m.off*m.N)/m.N;
+      m.vel += (near - m.off) * 26 * dt;
+      m.vel *= Math.exp(-6*dt);
+    }
+  }
+  m.off += m.vel*dt;
+
+  /* position pockets */
+  let bestI=-1, bestD=1e9;
+  m.pockets.forEach((g,i)=>{
+    const s = (i/m.N + m.off);
+    const [x,y] = m.P(s);
+    g.position.set(x,y,0.34);
+    const dBot = Math.min(Math.abs(((s%1)+1)%1), 1-((s%1)+1)%1); /* distance from param 0 */
+    if(dBot<bestD){bestD=dBot; bestI=i;}
+    /* deploy factor: active pocket leans out toward camera */
+    const dep = Math.max(0, 1 - dBot*m.N*2.2);
+    const sw = g.userData.swing;
+    sw.rotation.x = -dep*0.34;
+    sw.rotation.z = THREE.MathUtils.clamp(m.vel*26, -0.32, 0.32) * (1-dep);
+    sw.scale.setScalar(1 + dep*0.15);
+    sw.position.z = dep*0.5;
+    g.userData.deploy = dep;
+  });
+  /* gears + crank */
+  const ang = (m.off*m.L)/m.r;
+  m.gearL.rotation.z = ang; m.gearR.rotation.z = ang;
+  m.crankArm.rotation.z = ang*2;
+  /* chain link ticks along path */
+  const vv = m.linkVerts;
+  for(let i=0;i<m.pinCount;i++){
+    const s = i/m.pinCount + m.off;
+    const [x,y] = m.P(s);
+    const [x2,y2] = m.P(s+0.0018);
+    const dx=x2-x, dy=y2-y, il=1/Math.hypot(dx,dy)*0.1;
+    vv[i*6]=x-dx*il; vv[i*6+1]=y-dy*il; vv[i*6+2]=0;
+    vv[i*6+3]=x+dx*il; vv[i*6+4]=y+dy*il; vv[i*6+5]=0;
+  }
+  m.linkSegGeo.attributes.position.needsUpdate=true;
+
+  if(bestI!==m.activeIdx && bestD < 0.02){
+    m.activeIdx = bestI;
+    updateReadout(bestI);
+  }
+}
+function magVelKick(v){ MAG.target=null; MAG.vel += v; }
+function magGoto(i){
+  /* nearest unwrapped detent for index i */
+  const want = -i/MAG.N;
+  const k = Math.round((MAG.off - want));
+  MAG.target = want + k;
+}
+
+/* ============================================================
+   S3 — QA RACK (x = 60)
+   ============================================================ */
+const S3 = new THREE.Group(); S3.position.set(60,0,0); world.add(S3);
+{
+  const w=10.4, R0=4.35, R1=2.3;
+  /* frame */
+  S3.add(segs([
+    [[-w/2,0,0],[-w/2,R0+0.35,0]], [[w/2,0,0],[w/2,R0+0.35,0]],
+    [[-w/2,R0+0.35,0],[w/2,R0+0.35,0]],
+    [[-w/2,R0,0],[w/2,R0,0]], [[-w/2,R1,0],[w/2,R1,0]],
+    [[-w/2,0,0],[-w/2-0.8,0,0.9]], [[w/2,0,0],[w/2+0.8,0,0.9]],
+    [[-w/2,0,0],[-w/2-0.8,0,-0.9]], [[w/2,0,0],[w/2+0.8,0,-0.9]]
+  ], inkLine()));
+  const t=makeSprite('S3 — INSPECTION & APPROVALS · CERTIFICATIONS', .4, 'ink');
+  t.position.set(0,5.5,0); S3.add(t);
+  window.CERT_PLATES = [];
+  CERTS.forEach((c,i)=>{
+    const col=i%3, row=Math.floor(i/3);
+    const plate = makePlate(2.6,1.75,900,(ctx,W,H,P)=>{
+      ctx.fillStyle=P.cssPaper; ctx.fillRect(0,0,W,H);
+      ctx.fillStyle=P.cssInk2; ctx.font='500 34px "IBM Plex Mono", monospace';
+      ctx.fillText(c.ref, 40, 70); ctx.fillText('INSP. RECORD', W-270, 70);
+      ctx.strokeStyle='rgba(128,128,128,.4)'; ctx.lineWidth=2;
+      ctx.beginPath(); ctx.moveTo(0,96); ctx.lineTo(W,96); ctx.stroke();
+      ctx.fillStyle=P.cssInk; ctx.font='900 74px Archivo, sans-serif';
+      ctx.fillText(c.name, 40, 320);
+      ctx.fillStyle=P.cssInk2; ctx.font='500 34px "IBM Plex Mono", monospace';
+      ctx.fillText(c.issuer, 40, 386);
+      ctx.save(); ctx.translate(W-160,190); ctx.rotate(0.1);
+      ctx.strokeStyle=P.cssRed; ctx.lineWidth=6; ctx.strokeRect(-110,-34,220,68);
+      ctx.fillStyle=P.cssRed; ctx.font='600 40px "IBM Plex Mono", monospace'; ctx.textAlign='center';
+      ctx.fillText('PASSED',0,14); ctx.restore(); ctx.textAlign='left';
+    });
+    const x = (col-1)*3.3, rail = row===0? R0 : R1;
+    plate.position.set(x, rail-0.98, 0.12);
+    /* hangers */
+    S3.add(segs([[[x-0.5,rail,0.12],[x-0.5,rail-0.1,0.12]],
+                 [[x+0.5,rail,0.12],[x+0.5,rail-0.1,0.12]]], ink2Line(.9)));
+    plate.userData.cert = c; plate.userData.certIndex = i;
+    S3.add(plate);
+    CERT_PLATES.push(plate);
+  });
+}
+
+/* ============================================================
+   S4 — TERMINAL (x = 85)
+   ============================================================ */
+const S4 = new THREE.Group(); S4.position.set(85,0,0); world.add(S4);
+let screenPlateDraw=null;
+{
+  const desk = draftBox(4.6,0.16,2.0,{hidden:true}); desk.position.set(0,1.55,0); S4.add(desk);
+  [[-2.0,0.85],[2.0,0.85],[-2.0,-0.85],[2.0,-0.85]].forEach(([x,z])=>{
+    S4.add(segs([[[x,0,z],[x,1.47,z]]], inkLine()));
+  });
+  const mon = draftBox(3.3,2.5,0.5,{hidden:true}); mon.position.set(0,3.05,-0.35); mon.rotation.x=-0.06; S4.add(mon);
+  /* screen with baked scanline canvas */
+  const scr = makePlate(2.9,2.1,900,(ctx,W,H,P)=>{
+    ctx.fillStyle=P.cssPaper2 || P.cssPaper; ctx.fillStyle=P.cssWhite; ctx.fillRect(0,0,W,H);
+    ctx.fillStyle=P.cssInk2;
+    for(let y=0;y<H;y+=7){ctx.globalAlpha=.10;ctx.fillRect(0,y,W,2);}
+    ctx.globalAlpha=1;
+    ctx.fillStyle=P.cssRed; ctx.font='600 40px "IBM Plex Mono", monospace';
+    ctx.fillText('AF-2029 TTY', 46, 92);
+    ctx.fillStyle=P.cssInk; ctx.font='500 32px "IBM Plex Mono", monospace';
+    ctx.fillText('SERIAL LINK READY —', 46, 160);
+    ctx.fillText('DOCK AT S4 TO OPERATE.', 46, 208);
+    ctx.fillText('> _', 46, 290);
+  },{noFrame:true});
+  scr.position.set(0,3.08,-0.06); scr.rotation.x=-0.06; S4.add(scr);
+  scr.userData.isTerminal = true;
+  window.TERMINAL_PLATE = scr;
+  const kb = draftBox(2.0,0.09,0.75); kb.position.set(0,1.68,0.45); kb.rotation.x=0.09; S4.add(kb);
+  /* cable */
+  const cpts=[new THREE.Vector3(0.4,1.63,0.1),new THREE.Vector3(0.9,1.2,0.3),new THREE.Vector3(0.7,0.4,0.1),new THREE.Vector3(1.4,0.02,0.2)];
+  const curve=new THREE.CatmullRomCurve3(cpts);
+  const cgeo=new THREE.BufferGeometry().setFromPoints(curve.getPoints(30));
+  S4.add(new THREE.Line(cgeo, ink2Line(.9)));
+  const t=makeSprite('S4 — COMMUNICATIONS · SERIAL CONSOLE', .4, 'ink');
+  t.position.set(0,5.1,0); S4.add(t);
+  const rev=makeSprite('REV C · 2026-08 · COMPLETE REDRAW — AF   |   REV D · 2026-08 · DIGITAL TWIN — AF', .26, 'ink2');
+  rev.position.set(0,4.55,0); S4.add(rev);
+}
+
+/* ============================================================
+   CAMERA RIG — crank travel between stations, orbit offsets
+   ============================================================ */
+const posCurve = new THREE.CatmullRomCurve3([
+  new THREE.Vector3(0,4.6,14.8), new THREE.Vector3(30,4.3,14.6),
+  new THREE.Vector3(60,3.75,11.9), new THREE.Vector3(85,3.1,9.7)
+], false, 'catmullrom', 0.5);
+const lookCurve = new THREE.CatmullRomCurve3([
+  new THREE.Vector3(0,3.3,0), new THREE.Vector3(30,3.6,0),
+  new THREE.Vector3(60,3.2,0), new THREE.Vector3(85,2.7,0)
+], false, 'catmullrom', 0.5);
+
+const rig = { t:0, vel:0, ap:null, yaw:0, pitch:0, yawT:0, pitchT:0 };
+function stationOf(t){ return Math.round(t*3); }
+let curStation = 0;
+
+function updateCamera(dt){
+  /* autopilot */
+  if(rig.ap!==null){
+    const d = rig.ap - rig.t;
+    rig.t += d * Math.min(1,(REDUCED?60:4.2)*dt);
+    rig.vel = 0;
+    if(Math.abs(d)<0.0008){ rig.t=rig.ap; rig.ap=null; }
+  } else {
+    rig.vel *= Math.exp(-2.4*dt);
+    if(Math.abs(rig.vel)<0.05){
+      const near = Math.round(rig.t*3)/3;
+      rig.vel += (near - rig.t)*14*dt;
+      rig.vel *= Math.exp(-5*dt);
+    }
+    rig.t += rig.vel*dt;
+  }
+  if(rig.t<0){ rig.t=0; rig.vel*=-0.25; }
+  if(rig.t>1){ rig.t=1; rig.vel*=-0.25; }
+
+  /* orbit offsets ease */
+  const easing = (rig.ap!==null || Math.abs(rig.vel)>0.05)? 3.2 : 1.2;
+  rig.yaw   += (rig.yawT  -rig.yaw  )*Math.min(1,easing*dt);
+  rig.pitch += (rig.pitchT-rig.pitch)*Math.min(1,easing*dt);
+  if(rig.ap!==null || Math.abs(rig.vel)>0.08){ rig.yawT*=Math.exp(-2*dt); rig.pitchT*=Math.exp(-2*dt); }
+
+  const P0 = posCurve.getPoint(THREE.MathUtils.clamp(rig.t,0,1));
+  const L0 = lookCurve.getPoint(THREE.MathUtils.clamp(rig.t,0,1));
+  /* gentle travel bob */
+  P0.y += Math.sin(rig.t*Math.PI*3)*0.12;
+  /* orbit around look point */
+  const offset = P0.clone().sub(L0);
+  const sph = new THREE.Spherical().setFromVector3(offset);
+  sph.theta += rig.yaw; sph.phi = THREE.MathUtils.clamp(sph.phi + rig.pitch, 0.7, 1.9);
+  offset.setFromSpherical(sph);
+  offset.multiplyScalar(camDistScale);
+  camera.position.copy(L0).add(offset);
+  camera.lookAt(L0);
+
+  const st = stationOf(rig.t);
+  if(st!==curStation){ curStation = st; onStationChange(st); }
+}
+
+/* ---------- station side-effects ---------- */
+const readout = document.getElementById('readout');
+const conpanel = document.getElementById('conpanel');
+const hint = document.getElementById('hint');
+function onStationChange(st){
+  document.querySelectorAll('.indexbar nav button').forEach(b=>b.classList.toggle('active', +b.dataset.st===st));
+  document.getElementById('hud-st').textContent = 'S'+(st+1);
+  readout.classList.toggle('show', st===1);
+  conpanel.classList.toggle('show', st===3);
+  const hints = COARSE? [
+    'SWIPE ↕ TRAVEL · TAP A STATION ABOVE',
+    'SWIPE ⟷ INDEX MAGAZINE · TAP POCKET = SELECT',
+    'TAP A STAMP TO OPEN ITS CERTIFICATE',
+    'TYPE COMMANDS BELOW — TRY “HELP”'
+  ]:[
+    'SCROLL · CRANK BETWEEN STATIONS — DRAG TO ORBIT',
+    'DRAG ⟷ INDEX MAGAZINE · CLICK POCKET = SELECT · SCROLL = TRAVEL',
+    'CLICK A STAMP TO OPEN ITS CERTIFICATE APPENDIX',
+    'SERIAL LINK OPEN — TYPE “HELP” IN THE CONSOLE'
+  ];
+  hint.textContent = hints[st];
+  if(st===3 && FINE) setTimeout(()=>document.getElementById('con-in').focus({preventScroll:true}), 260);
+}
+
+/* ---------- readout (S2 DOM panel) ---------- */
+function updateReadout(i){
+  const p = PROJECTS[i];
+  document.getElementById('ro-ref').textContent = 'ITEM '+(i+1)+' OF '+PROJECTS.length+' · AF-'+String(i+1).padStart(3,'0');
+  document.getElementById('ro-name').textContent = p.full.toUpperCase();
+  document.getElementById('ro-desc').textContent = p.desc;
+  const spec = document.getElementById('ro-spec');
+  if(SPEC[p.key]){ spec.classList.add('filled'); spec.innerHTML = '<span class="lbl">SPEC</span>'+SPEC[p.key]; }
+  else { spec.classList.remove('filled'); spec.innerHTML = '<span class="lbl">SPEC</span>AWAITING DATA — TO BE PROVIDED'; }
+  const link = document.getElementById('ro-link');
+  if(p.link){ link.style.display='inline-flex'; link.href=p.link; } else link.style.display='none';
+  const isPrelim = p.status==='PRELIMINARY';
+  document.getElementById('ro-prelim').style.display = isPrelim?'block':'none';
+  readout.classList.toggle('prelim-on', isPrelim);
+  document.getElementById('hud-idx').textContent = (i+1)+'/'+PROJECTS.length;
+}
+document.getElementById('ro-prev').addEventListener('click', ()=> magGoto((MAG.activeIdx-1+MAG.N)%MAG.N));
+document.getElementById('ro-next').addEventListener('click', ()=> magGoto((MAG.activeIdx+1)%MAG.N));
+
+/* ============================================================
+   INPUT — wheel crank, drag (orbit / chain), keys, touch
+   ============================================================ */
+let introDone = false;
+window.addEventListener('wheel', e=>{
+  if(!introDone) return;
+  const d = (e.deltaMode===1? e.deltaY*16 : e.deltaY);
+  rig.ap = null;
+  rig.vel += d * 0.00042;
+}, {passive:true});
+
+let dragging=false, lastX=0, lastY=0, dragAxis=null, downT=0, moved=0;
+canvas.addEventListener('pointerdown', e=>{
+  dragging=true; lastX=e.clientX; lastY=e.clientY; dragAxis=null; downT=performance.now(); moved=0;
+  canvas.setPointerCapture(e.pointerId);
+});
+canvas.addEventListener('pointermove', e=>{
+  onPointerMoveHUD(e);
+  if(!dragging || !introDone) return;
+  const dx=e.clientX-lastX, dy=e.clientY-lastY;
+  lastX=e.clientX; lastY=e.clientY; moved += Math.abs(dx)+Math.abs(dy);
+  if(!dragAxis && (Math.abs(dx)+Math.abs(dy))>2) dragAxis = Math.abs(dx)>Math.abs(dy)? 'h':'v';
+  if(dragAxis==='h'){
+    if(curStation===1){ magVelKick(dx*0.00042*3); MAG.off += dx*0.00042; }
+    else { rig.yawT = THREE.MathUtils.clamp(rig.yawT - dx*0.0035, -0.55, 0.55); }
+  } else if(dragAxis==='v'){
+    if(COARSE){ rig.ap=null; rig.vel += dy*0.00028; }
+    else { rig.pitchT = THREE.MathUtils.clamp(rig.pitchT - dy*0.0028, -0.3, 0.3); }
+  }
+});
+window.addEventListener('pointerup', e=>{
+  if(dragging && moved<6 && introDone) handleClick(e);
+  dragging=false; dragAxis=null;
+});
+window.addEventListener('keydown', e=>{
+  if(!introDone) return;
+  if(e.target.tagName==='INPUT') return;
+  if(e.key==='ArrowRight'){ if(curStation===1) magGoto((MAG.activeIdx+1)%MAG.N); else gotoStation(Math.min(3,curStation+1)); }
+  if(e.key==='ArrowLeft'){ if(curStation===1) magGoto((MAG.activeIdx-1+MAG.N)%MAG.N); else gotoStation(Math.max(0,curStation-1)); }
+  if(e.key==='ArrowDown'||e.key==='PageDown'){ gotoStation(Math.min(3,curStation+1)); }
+  if(e.key==='ArrowUp'||e.key==='PageUp'){ gotoStation(Math.max(0,curStation-1)); }
+});
+function gotoStation(i){ rig.ap = i/3; }
+
+/* ---------- picking ---------- */
+const ray = new THREE.Raycaster(); const ndc = new THREE.Vector2();
+let hoverRef='—';
+function pickables(){
+  const arr=[];
+  MAG.pockets.forEach(g=>arr.push(g));
+  CERT_PLATES.forEach(p=>arr.push(p));
+  arr.push(sheet); arr.push(TERMINAL_PLATE);
+  arr.push(figG);
+  return arr;
+}
+function pickAt(e){
+  const r = canvas.getBoundingClientRect();
+  ndc.x = ((e.clientX-r.left)/r.width)*2-1;
+  ndc.y = -((e.clientY-r.top)/r.height)*2+1;
+  ray.setFromCamera(ndc, camera);
+  const hits = ray.intersectObjects(pickables(), true);
+  if(!hits.length) return null;
+  let o = hits[0].object;
+  while(o && !o.userData.idx && o.userData.idx!==0 && !o.userData.cert && o!==sheet && !o.userData.isTerminal && o!==figG){ o=o.parent; }
+  return {obj:o, hit:hits[0]};
+}
+function onPointerMoveHUD(e){
+  /* screen-space HUD */
+  const PXMM=3.7795;
+  document.getElementById('chx').style.left=e.clientX+'px';
+  document.getElementById('chy').style.top=e.clientY+'px';
+  document.getElementById('hud-x').textContent=(e.clientX/PXMM).toFixed(1).padStart(6,'0');
+  document.getElementById('hud-y').textContent=(e.clientY/PXMM).toFixed(1).padStart(6,'0');
+  const col = 8-Math.min(7,Math.floor(e.clientX/innerWidth*8));
+  const row = 'ABCD'[3-Math.min(3,Math.floor(e.clientY/innerHeight*4))];
+  document.getElementById('hud-z').textContent=row+col;
+  if(!introDone) return;
+  const p = pickAt(e);
+  let ref='—';
+  if(p){
+    const u=p.obj.userData;
+    if(u.idx!==undefined) ref=u.ref;
+    else if(u.cert) ref=u.cert.ref;
+    else if(p.obj===sheet) ref='DOC AF-2029-C';
+    else if(u.isTerminal) ref='CON-01';
+    else if(p.obj===figG){ ref='FIG-1';
+      /* magnifier uv */
+      const uv=p.hit.uv; if(uv){figUniforms.uMouse.value.set(uv.x, uv.y); figUniforms.uMouseOn.value=(FINE&&figHasPhoto)?1:0;}
+    }
+  }
+  if(!p || p.obj!==figG) figUniforms.uMouseOn.value=0;
+  hoverRef=ref;
+  document.getElementById('hud-ref').textContent='REF: '+ref;
+}
+function handleClick(e){
+  const p = pickAt(e); if(!p) return;
+  const u = p.obj.userData;
+  if(u.idx!==undefined){
+    if(MAG.activeIdx===u.idx && u.project.link) window.open(u.project.link,'_self');
+    else magGoto(u.idx);
+    if(curStation!==1) gotoStation(1);
+  }
+  else if(u.cert){ openAppendix(u.certIndex); }
+  else if(p.obj===sheet){ window.open('drawing.html','_self'); }
+  else if(u.isTerminal){ gotoStation(3); }
+}
+
+/* ---------- appendix dialog ---------- */
+function mountImage(container, slotKey, alt){
+  container.innerHTML='';
+  const file = IMG[slotKey];
+  const ph = ()=>{ container.innerHTML =
+    `<div class="placeholder"><b>NO IMAGE REF</b><span>SLOT: ${slotKey.toUpperCase()}</span><span>SET FILENAME IN IMAGE MANIFEST</span></div>`; };
+  if(!file){ ph(); return; }
+  const im=new Image(); im.src=file; im.alt=alt||slotKey;
+  im.onerror=ph; container.appendChild(im);
+}
+function openAppendix(i){
+  const c=CERTS[i];
+  document.getElementById('apx-title').textContent=`APPENDIX ${String.fromCharCode(65+i)} — ${c.name} · ${c.issuer}`;
+  mountImage(document.getElementById('apx-img'), c.key, c.name);
+  document.getElementById('appendix').showModal();
+}
+
+/* ============================================================
+   CONSOLE
+   ============================================================ */
+const conOut=document.getElementById('con-out'), conIn=document.getElementById('con-in');
+function conPrint(html){ const d=document.createElement('div'); d.innerHTML=html; conOut.appendChild(d); conOut.scrollTop=conOut.scrollHeight; }
+const CMDS={
+  help(){conPrint(`<span class="dim">available commands:</span>
+  help        this list
+  whoami      operator identification
+  ls          list stations
+  goto &lt;id&gt;   fly to station (ga | bom | qa | comms)
+  bom         list all line items
+  index &lt;n&gt;   rotate magazine to item n
+  email       copy contact email
+  linkedin    open linkedin profile
+  media       toggle vellum / ozalid
+  2d          open the 2D drawing package (REV C)
+  clear       clear terminal`);},
+  whoami(){conPrint("AHMED FARAZ — MECH ENG STUDENT, UNIVERSITY OF TORONTO (2T9). DEAN'S LIST. UTFR · UTSM.");},
+  ls(){conPrint('S1 OPERATOR   S2 PART-MAGAZINE   S3 QA-RACK   S4 TERMINAL');},
+  bom(){conPrint(PROJECTS.map((p,i)=>`  ${i+1}  AF-${String(i+1).padStart(3,'0')}  ${p.name}`).join('\n'));},
+  email(){ if(navigator.clipboard) navigator.clipboard.writeText('ahmedfarazpro@gmail.com').catch(()=>{});
+    conPrint('ahmedfarazpro@gmail.com <span class="dim">— copied. I will reply as soon as I can.</span>');},
+  linkedin(){window.open('https://www.linkedin.com/in/ahmedfarazuoft/','_blank');conPrint('<span class="dim">opening linkedin ↗</span>');},
+  media(){setMedia(MEDIA==='vellum'?'ozalid':'vellum');},
+  '2d'(){window.open('drawing.html','_self');},
+  clear(){conOut.innerHTML='';}
+};
+conIn.addEventListener('keydown', e=>{
+  if(e.key!=='Enter') return;
+  const raw=conIn.value.trim(); conIn.value='';
+  if(!raw) return;
+  conPrint(`<span class="cmd">&gt; ${raw.replace(/</g,'&lt;')}</span>`);
+  const [cmd,arg]=raw.toLowerCase().split(/\s+/);
+  if(cmd==='goto'&&arg){
+    const map={ga:0,bom:1,projects:1,qa:2,certs:2,certifications:2,comms:3,contact:3};
+    if(map[arg]!==undefined){gotoStation(map[arg]);conPrint(`<span class="dim">flying → S${map[arg]+1}</span>`);}
+    else conPrint(`<span class="dim">unknown station '${arg}'. try: ga bom qa comms</span>`);
+  }
+  else if(cmd==='index'&&arg){
+    const n=parseInt(arg,10);
+    if(n>=1&&n<=MAG.N){ magGoto(n-1); gotoStation(1); conPrint(`<span class="dim">indexing → ITEM ${n}</span>`);}
+    else conPrint(`<span class="dim">range 1–${MAG.N}</span>`);
+  }
+  else if(CMDS[cmd]) CMDS[cmd]();
+  else conPrint(`<span class="dim">unknown command '${cmd}'. type 'help'.</span>`);
+});
+conPrint('<span class="dim">AF-2029 serial link established @ 115200 baud.\ntype \'help\' for available commands.</span>');
+
+/* ============================================================
+   MEDIA SWITCH
+   ============================================================ */
+function setMedia(m){
+  MEDIA=m;
+  document.documentElement.dataset.media=m;
+  document.getElementById('btn-vellum').setAttribute('aria-pressed', m==='vellum');
+  document.getElementById('btn-ozalid').setAttribute('aria-pressed', m==='ozalid');
+  const P=PAL();
+  scene.background.set(P.paper); scene.fog.color.set(P.paper);
+  matReg.ink.forEach(x=>x.color.set(P.ink));
+  matReg.ink2.forEach(x=>x.color.set(P.ink2));
+  matReg.red.forEach(x=>x.color.set(P.red));
+  matReg.paper.forEach(x=>x.color.set(P.paper));
+  shaderMats.forEach(u=>{u.uPaper.value.set(P.white);u.uInk.value.set(P.ink);u.uRed.value.set(P.red);});
+  canvasPlates.forEach(c=>c.draw());
+}
+document.getElementById('btn-vellum').addEventListener('click',()=>setMedia('vellum'));
+document.getElementById('btn-ozalid').addEventListener('click',()=>setMedia('ozalid'));
+document.querySelectorAll('.indexbar nav button').forEach(b=>b.addEventListener('click',()=>gotoStation(+b.dataset.st)));
+
+/* ============================================================
+   MINIMAP
+   ============================================================ */
+const mm=document.getElementById('minimap'), mctx=mm.getContext('2d');
+function drawMinimap(){
+  const css=getComputedStyle(document.documentElement);
+  mctx.clearRect(0,0,200,58);
+  mctx.strokeStyle=css.getPropertyValue('--ink-2').trim(); mctx.lineWidth=1;
+  mctx.beginPath(); mctx.moveTo(14,36); mctx.lineTo(186,36); mctx.stroke();
+  mctx.font='9px "IBM Plex Mono", monospace'; mctx.textAlign='center';
+  [0,1,2,3].forEach(i=>{
+    const x=14+i*(172/3);
+    mctx.beginPath(); mctx.moveTo(x,31); mctx.lineTo(x,41); mctx.stroke();
+    mctx.fillStyle=css.getPropertyValue('--ink-2').trim();
+    mctx.fillText('S'+(i+1), x, 53);
+  });
+  mctx.fillStyle=css.getPropertyValue('--ink-2').trim();
+  mctx.fillText('ELEVATION — CAMERA POSITION', 100, 13);
+  /* camera as section-cut symbol */
+  const x=14+rig.t*172;
+  const red=css.getPropertyValue('--red').trim();
+  mctx.strokeStyle=red; mctx.fillStyle=red; mctx.lineWidth=1.4;
+  mctx.beginPath(); mctx.arc(x,36,4.5,0,Math.PI*2); mctx.stroke();
+  mctx.beginPath(); mctx.moveTo(x,26); mctx.lineTo(x,20); mctx.lineTo(x+5,23); mctx.closePath(); mctx.fill();
+}
+
+/* ============================================================
+   INTRO — the world plots itself
+   ============================================================ */
+const skipBtn=document.getElementById('skip');
+const plotting=document.getElementById('plotting');
+const introCamA={pos:new THREE.Vector3(0.6,15.5,5.6), look:new THREE.Vector3(0.6,0,5.0)};
+let introT=0;
+function finishIntro(){
+  introDone=true; plotPlane.constant=14;
+  skipBtn.style.display='none'; plotting.style.display='none';
+  onStationChange(0);
+  /* hash routing */
+  const map={'#ga':0,'#bom':1,'#projects':1,'#qa':2,'#certifications':2,'#comms':3,'#contact':3};
+  if(map[location.hash]!==undefined){ rig.t=0; gotoStation(map[location.hash]); }
+}
+skipBtn.addEventListener('click', finishIntro);
+if(REDUCED){ finishIntro(); }
+
+/* ============================================================
+   LOOP
+   ============================================================ */
+let camDistScale = 1;
+/* nav labels: full on desktop, abbreviated on narrow screens */
+(function navLabels(){
+  const btns=[...document.querySelectorAll('.indexbar nav button')];
+  const link=document.querySelector('.indexbar nav a');
+  const long=btns.map(b=>b.textContent), longLink=link.textContent;
+  const short=['S1 · OPR','S2 · MAG','S3 · QA','S4 · TTY'];
+  function apply(){
+    const narrow = innerWidth<680;
+    btns.forEach((b,i)=>{ b.textContent = narrow? short[i] : long[i]; });
+    link.textContent = narrow? '2D →' : longLink;
+  }
+  apply(); addEventListener('resize', apply);
+})();
+
+function resize(){
+  const w=innerWidth,h=innerHeight;
+  renderer.setSize(w,h);
+  camera.aspect=w/h;
+  const a = camera.aspect;
+  if(a < 0.8){
+    // portrait phone: a wider lens alone would fisheye, so back the camera off
+    camera.fov = 58;
+    camDistScale = THREE.MathUtils.clamp(0.88/a, 1, 2.4);
+  } else {
+    camDistScale = 1;
+    camera.fov = a<1.2 ? 54 : a<1.8 ? 46 : 53;
+  }
+  camera.updateProjectionMatrix();
+}
+addEventListener('resize',resize); resize();
+
+let last=performance.now();
+let rpmDisp=0;
+function loop(now){
+  requestAnimationFrame(loop);
+  const dt=Math.min(0.05,(now-last)/1000); last=now;
+
+  if(!introDone){
+    if(!introT) introT = now;
+    const T=3400, u=Math.min(1,(now-introT)/T);
+    const e=u<0.5?2*u*u:1-Math.pow(-2*u+2,2)/2;
+    plotPlane.constant=0.06+e*13.9;
+    const P1=posCurve.getPoint(0), L1=lookCurve.getPoint(0);
+    const P1s=L1.clone().add(P1.clone().sub(L1).multiplyScalar(camDistScale));
+    camera.position.lerpVectors(introCamA.pos,P1s,e);
+    const lk=new THREE.Vector3().lerpVectors(introCamA.look,L1,e);
+    camera.lookAt(lk);
+    if(u>=1) finishIntro();
+  } else {
+    updateCamera(dt);
+  }
+  updateMagazine(dt);
+  updateHalftoneRuling();
+
+  /* HUD rpm */
+  const rpm=(Math.abs(rig.vel)*3+Math.abs(MAG.vel)*MAG.N)*30;
+  rpmDisp+= (rpm-rpmDisp)*Math.min(1,8*dt);
+  document.getElementById('hud-rpm').textContent=rpmDisp.toFixed(1);
+
+  drawMinimap();
+  renderer.render(scene,camera);
+}
+/* Canvas text must be measured with the real webfonts. fonts.ready can resolve
+   before lazily-fetched faces arrive, so load the exact faces explicitly and
+   also redraw on any late 'loadingdone'. */
+function redrawPlates(){ canvasPlates.forEach(c=>c.draw()); }
+if(document.fonts){
+  Promise.all([
+    document.fonts.load('900 20px Archivo'),
+    document.fonts.load('700 20px Archivo'),
+    document.fonts.load('500 20px "IBM Plex Mono"'),
+    document.fonts.load('600 20px "IBM Plex Mono"')
+  ]).then(redrawPlates).catch(()=>{});
+  document.fonts.ready.then(redrawPlates);
+  document.fonts.addEventListener('loadingdone', redrawPlates);
+}
+updateReadout(0);
+requestAnimationFrame(loop);
+</script>
+</body>
+</html>
