@@ -241,7 +241,7 @@ table.bom{width:100%;border-collapse:collapse;font-size:12px;}
 #leader{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:6;}
 
 /* ---------- SHEET 3: INSPECTION / CERTS ---------- */
-.stampgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:20px;}
+.stampgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(226px,1fr));gap:20px;}
 .certstamp{
   border:2px solid var(--ink);background:transparent;color:var(--ink);
   padding:0;text-align:left;position:relative;transition:transform .12s;
@@ -250,7 +250,9 @@ table.bom{width:100%;border-collapse:collapse;font-size:12px;}
 .certstamp:nth-child(even){transform:rotate(.7deg);}
 .certstamp:hover{transform:rotate(0) scale(1.02);border-color:var(--red);}
 .certstamp .cs-top{display:flex;justify-content:space-between;border-bottom:1px solid var(--faint);padding:7px 10px;font-size:9px;letter-spacing:.14em;color:var(--ink-2);text-transform:uppercase;}
-.certstamp .cs-name{font-family:var(--disp);font-weight:900;text-transform:uppercase;font-size:16px;padding:14px 10px 4px;line-height:1.05;}
+.certstamp .cs-name{font-family:var(--disp);font-weight:900;text-transform:uppercase;font-size:16px;padding:14px 76px 4px 10px;line-height:1.05;}
+.certstamp .cs-name.long{font-size:13px;letter-spacing:-.01em;}
+.certstamp .cs-issuer.long{font-size:9px;}
 .certstamp .cs-issuer{padding:0 10px 10px;font-size:10px;letter-spacing:.1em;color:var(--ink-2);text-transform:uppercase;}
 .certstamp .cs-pass{
   position:absolute;top:36px;right:10px;border:1.5px solid var(--red);color:var(--red);
@@ -540,7 +542,8 @@ const IMG = {
   certAP:         'ap-capstone.jpg',
   certCSWA:       'CSWACERTIFICATE.jpg',
   certCSWP:       'CSWPCERTIFICATE.png',
-  certSim:        'SIMULINKONRAMPCERT.png'
+  certSim:        'SIMULINKONRAMPCERT.png',
+  certCatia:      'CATIA3DXCERTIFICATE.jpg'
 };
 
 /* ============================================================
@@ -584,7 +587,8 @@ const CERTS = [
   {key:'certAP',   name:'AP CAPSTONE',     issuer:'COLLEGE BOARD', ref:'QC-03'},
   {key:'certCSWA', name:'CSWA',            issuer:'DASSAULT SYSTÈMES', ref:'QC-04'},
   {key:'certCSWP', name:'CSWP',            issuer:'DASSAULT SYSTÈMES', ref:'QC-05'},
-  {key:'certSim',  name:'SIMULINK ONRAMP', issuer:'MATHWORKS', ref:'QC-06'}
+  {key:'certSim',  name:'SIMULINK ONRAMP', issuer:'MATHWORKS', ref:'QC-06'},
+  {key:'certCatia',name:'3DEXPERIENCE MECHANICAL DESIGNER', issuer:'DASSAULT SYSTÈMES — CATIA ASSOCIATE', ref:'QC-07'}
 ];
 
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -806,8 +810,8 @@ function clearLeader(){
     b.innerHTML = `
       <div class="cs-top"><span>${c.ref}</span><span>INSP. RECORD</span></div>
       <div class="cs-pass">PASSED</div>
-      <div class="cs-name">${c.name}</div>
-      <div class="cs-issuer">${c.issuer}</div>`;
+      <div class="cs-name${c.name.length>18?" long":""}">${c.name}</div>
+      <div class="cs-issuer${c.issuer.length>26?" long":""}">${c.issuer}</div>`;
     b.addEventListener('click', ()=>{
       document.getElementById('apx-title').textContent = `APPENDIX ${String.fromCharCode(65+i)} — ${c.name} · ${c.issuer}`;
       mountImage(document.getElementById('apx-img'), c.key, c.name+' certificate');
