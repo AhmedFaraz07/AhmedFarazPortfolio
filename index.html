@@ -111,18 +111,37 @@ button{font-family:var(--mono);cursor:crosshair;}
   transition:opacity .25s, transform .25s;
 }
 #readout.show{opacity:1;pointer-events:auto;transform:translateY(0);}
-@media (max-width:860px){
-  #readout{left:16px;right:16px;width:auto;}
+#exprd{
+  position:fixed;left:20px;bottom:52px;transform:translateY(16px);z-index:68;
+  width:min(430px, calc(100vw - 32px));
+  border:2px solid var(--ink);background:var(--paper);opacity:0;pointer-events:none;
+  transition:opacity .25s, transform .25s;
 }
-#readout .ro-head{display:flex;justify-content:space-between;border-bottom:1px solid var(--ink);padding:7px 12px;font-size:10px;letter-spacing:.16em;color:var(--ink-2);text-transform:uppercase;}
-#readout .ro-body{padding:12px 14px 14px;position:relative;}
-#readout .ro-name{font-family:var(--disp);font-weight:900;text-transform:uppercase;font-size:19px;line-height:1.02;}
+#exprd.show{opacity:1;pointer-events:auto;transform:translateY(0);}
+#exprd .ex-kind{
+  display:inline-block;border:1px solid var(--red);color:var(--red);
+  font-size:9px;letter-spacing:.2em;padding:3px 8px;margin-bottom:9px;font-weight:600;
+}
+#exprd .ex-full{color:var(--ink-2);font-size:12px;margin:5px 0 9px;}
+#exprd .ex-period{
+  display:flex;justify-content:space-between;align-items:center;gap:10px;
+  border-top:1px solid var(--faint);border-bottom:1px solid var(--faint);
+  padding:7px 0;margin-bottom:10px;font-size:11px;letter-spacing:.1em;color:var(--ink-2);
+}
+#exprd .ex-dur{color:var(--red);font-weight:600;}
+#exprd .specslot{margin-bottom:8px;}
+@media (max-width:860px){
+  #readout,#exprd{left:16px;right:16px;width:auto;}
+}
+#readout .ro-head, #exprd .ro-head{display:flex;justify-content:space-between;border-bottom:1px solid var(--ink);padding:7px 12px;font-size:10px;letter-spacing:.16em;color:var(--ink-2);text-transform:uppercase;}
+#readout .ro-body, #exprd .ro-body{padding:12px 14px 14px;position:relative;}
+#readout .ro-name, #exprd .ro-name{font-family:var(--disp);font-weight:900;text-transform:uppercase;font-size:19px;line-height:1.02;}
 #readout.prelim-on .ro-name{padding-right:106px;}
-#readout .ro-desc{color:var(--ink-2);font-size:12px;margin:7px 0 10px;max-width:60ch;}
-#readout .specslot{border:1px dashed var(--hair);padding:7px 10px;font-size:10px;letter-spacing:.12em;color:var(--ink-2);text-transform:uppercase;margin-bottom:10px;}
-#readout .specslot.filled{border-style:solid;border-color:var(--ink);color:var(--ink);}
-#readout .specslot .lbl{color:var(--red);font-weight:600;margin-right:8px;}
-#readout .ro-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+#readout .ro-desc, #exprd .ro-desc{color:var(--ink-2);font-size:12px;margin:7px 0 10px;max-width:60ch;}
+#readout .specslot, #exprd .specslot{border:1px dashed var(--hair);padding:7px 10px;font-size:10px;letter-spacing:.12em;color:var(--ink-2);text-transform:uppercase;margin-bottom:10px;}
+#readout .specslot.filled, #exprd .specslot.filled{border-style:solid;border-color:var(--ink);color:var(--ink);}
+#readout .specslot .lbl, #exprd .specslot .lbl{color:var(--red);font-weight:600;margin-right:8px;}
+#readout .ro-row, #exprd .ro-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
 .open-dwg{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--ink);background:none;color:var(--ink);padding:8px 13px;font-size:10px;letter-spacing:.16em;text-decoration:none;text-transform:uppercase;}
 .open-dwg:hover{background:var(--ink);color:var(--paper);}
 .idx-btn{border:1px solid var(--ink);background:none;color:var(--ink);padding:8px 11px;font-size:11px;}
@@ -224,9 +243,10 @@ dialog#appendix::backdrop{background:rgba(20,20,15,.55);}
   <div class="dwgno">AF-2029 · REV D</div>
   <nav aria-label="Station index">
     <button data-st="0" class="active">S1 · OPERATOR</button>
-    <button data-st="1">S2 · PART MAGAZINE</button>
-    <button data-st="2">S3 · QA RACK</button>
-    <button data-st="3">S4 · TERMINAL</button>
+    <button data-st="1">S2 · SERVICE RECORD</button>
+    <button data-st="2">S3 · PART MAGAZINE</button>
+    <button data-st="3">S4 · QA RACK</button>
+    <button data-st="4">S5 · TERMINAL</button>
     <a href="drawing.html" title="2D drawing package (REV C)">2D DWG →</a>
   </nav>
   <div class="mediaswitch">
@@ -248,6 +268,27 @@ dialog#appendix::backdrop{background:rgba(20,20,15,.55);}
 
 <div id="hint">SCROLL · CRANK BETWEEN STATIONS</div>
 <canvas id="minimap" width="200" height="58" aria-hidden="true"></canvas>
+
+<!-- SERVICE RECORD READOUT -->
+<aside id="exprd" aria-live="polite">
+  <div class="ro-head"><span>SERVICE RECORD</span><span id="ex-ref">—</span></div>
+  <div class="ro-body">
+    <div class="ex-kind" id="ex-kind">—</div>
+    <p class="ro-name" id="ex-org">—</p>
+    <p class="ex-full" id="ex-full">—</p>
+    <div class="ex-period">
+      <span id="ex-dates">—</span>
+      <span class="ex-dur" id="ex-dur">—</span>
+    </div>
+    <div class="specslot" id="ex-role"><span class="lbl">ROLE</span>AWAITING DATA — TO BE PROVIDED</div>
+    <div class="specslot" id="ex-desc"><span class="lbl">SCOPE</span>AWAITING DATA — TO BE PROVIDED</div>
+    <div class="ro-row">
+      <button class="idx-btn" id="ex-prev" aria-label="Previous appointment">◀</button>
+      <button class="idx-btn" id="ex-next" aria-label="Next appointment">▶</button>
+      <a class="open-dwg" id="ex-link" href="#" style="display:none;">OPEN SERVICE RECORD →</a>
+    </div>
+  </div>
+</aside>
 
 <!-- S2 INSPECTION READOUT -->
 <aside id="readout" aria-live="polite">
@@ -313,8 +354,29 @@ const IMG = {
   certCSWA:       'CSWACERTIFICATE.jpg',
   certCSWP:       'CSWPCERTIFICATE.png',
   certSim:        'SIMULINKONRAMPCERT.png',
-  certCatia:      'CATIA3DXCERTIFICATE.jpg'
+  certCatia:      'CATIA3DXCERTIFICATE.jpg',
+  expTsmart:      'tsmart-cover.png',
+  expEuroWorld:   'europeanworld-cover.png'
 };
+/* ============================================================
+   SERVICE RECORD — research, jobs, internships. Append entries here;
+   the time rail rescales and re-stacks itself automatically.
+   kind: RESEARCH | INTERNSHIP | EMPLOYMENT | FELLOWSHIP
+   start/end: 'YYYY-MM'.  end:null = ongoing.
+   role/desc: '' = AWAITING DATA slot.  link: null = no detail sheet yet.
+   ============================================================ */
+const EXPERIENCE = [
+  {key:'expTsmart', ref:'EXP-01', kind:'RESEARCH',
+   org:'TSMART',
+   full:'Toronto Smart Materials & Structures',
+   role:'Undergraduate Research Fellow', desc:'',
+   start:'2026-05', end:'2026-08', link:'tsmart.html'},
+  {key:'expEuroWorld', ref:'EXP-02', kind:'INTERNSHIP',
+   org:'EUROPEAN WORLD',
+   full:'European World',
+   role:'Mechanical Engineering Intern', desc:'',
+   start:'2025-05', end:'2025-08', link:'europeanworld.html'}
+];
 /* ============================================================
    SPEC MANIFEST — one-line spec facts. '' = AWAITING DATA slot.
    ============================================================ */
@@ -404,6 +466,11 @@ function inkLine(op=1){ return reg(new THREE.LineBasicMaterial({color:PAL().ink,
 function ink2Line(op=1){ return reg(new THREE.LineBasicMaterial({color:PAL().ink2, transparent:op<1, opacity:op}), 'ink2'); }
 function redLine(op=1){ return reg(new THREE.LineBasicMaterial({color:PAL().red, transparent:op<1, opacity:op}), 'red'); }
 function paperMat(){ return reg(new THREE.MeshBasicMaterial({color:PAL().paper, polygonOffset:true, polygonOffsetFactor:1.5, polygonOffsetUnits:1.5}), 'paper'); }
+
+/* ---------- station layout: one source of truth ---------- */
+const STATION_X = [0, 28, 58, 88, 113];
+const NSTA = STATION_X.length;
+const LAST = NSTA - 1;
 
 /* ---------- helpers ---------- */
 function edgesOf(geom, mat){ return new THREE.LineSegments(new THREE.EdgesGeometry(geom, 12), mat); }
@@ -536,14 +603,14 @@ function gridLines(x0,x1,z0,z1,step,mat,y=0){
   for(let z=z0;z<=z1+0.001;z+=step) pairs.push([[x0,y,z],[x1,y,z]]);
   return segs(pairs, mat);
 }
-world.add(gridLines(-14,100,-12,16, COARSE?2:1, ink2Line(.14)));
-world.add(gridLines(-14,100,-12,16, 6, ink2Line(.3)));
+world.add(gridLines(-14,128,-12,16, COARSE?2:1, ink2Line(.14)));
+world.add(gridLines(-14,128,-12,16, 6, ink2Line(.3)));
 /* red dashed centerline along travel axis */
 {
-  const g=new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(-12,0.012,0), new THREE.Vector3(98,0.012,0)]);
+  const g=new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(-12,0.012,0), new THREE.Vector3(126,0.012,0)]);
   const m=reg(new THREE.LineDashedMaterial({color:PAL().red, transparent:true, opacity:.5, dashSize:.5, gapSize:.35}),'red');
   const l=new THREE.Line(g,m); l.computeLineDistances(); world.add(l);
-  [0,30,60,85].forEach(x=>{ world.add(segs([[[x,0.012,-.6],[x,0.012,.6]]], redLine(.5))); });
+  STATION_X.forEach(x=>{ world.add(segs([[[x,0.012,-.6],[x,0.012,.6]]], redLine(.5))); });
 }
 
 /* ============================================================
@@ -737,10 +804,139 @@ sheet.traverse(o=>{ if(o.material) o.material.clippingPlanes = []; });
 S1.add(sheet);
 
 /* ============================================================
+   S1B — SERVICE RECORD (x = 28)
+   A calibrated time rail. Each appointment is dimensioned by its
+   duration, exactly as a drawing dimensions an extent. Adding entries
+   rescales the axis and re-stacks the cards; nothing here is hand-placed.
+   ============================================================ */
+const SRV = new THREE.Group(); SRV.position.set(STATION_X[1],0,0); world.add(SRV);
+const SREC = (()=>{
+  const NOW = new Date();
+  const ym = s => { const [y,m] = s.split('-').map(Number); return y*12 + (m-1); };
+  const nowYm = NOW.getFullYear()*12 + NOW.getMonth();
+  const MONTH = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+  const label = v => MONTH[v%12] + ' ' + Math.floor(v/12);
+
+  const items = EXPERIENCE.map(e=>{
+    const a = ym(e.start), b = e.end? ym(e.end) : Math.max(a, nowYm);
+    return {...e, a, b, months: Math.max(1, b-a+1), ongoing: !e.end};
+  }).sort((x,y)=>x.a-y.a);
+
+  /* axis: pad to whole quarters either side, minimum 12-month window */
+  let lo = Math.min(...items.map(i=>i.a)), hi = Math.max(...items.map(i=>i.b));
+  lo -= 2; hi += 2;
+  if(hi-lo < 11){ const need = 11-(hi-lo); lo -= Math.ceil(need/2); hi += Math.floor(need/2); }
+  const span = hi-lo;
+  const RAILW = THREE.MathUtils.clamp(9.5 + items.length*1.2, 9.5, 22), RAILY = 2.5;
+  const X = v => (-RAILW/2) + ((v-lo)/span)*RAILW;
+
+  /* rail + graduations (machinist rule) */
+  SRV.add(segs([[[-RAILW/2,RAILY,0],[RAILW/2,RAILY,0]]], inkLine()));
+  const ticks=[];
+  for(let v=lo; v<=hi; v++){
+    const x=X(v), major = (v%12===0), quarter = (v%3===0);
+    ticks.push([[x,RAILY,0],[x,RAILY-(major?0.34:quarter?0.24:0.14),0]]);
+    if(major){
+      const sp=makeSprite(String(v/12), .32, 'ink');
+      sp.position.set(x, RAILY-0.66, 0); SRV.add(sp);
+    } else if(quarter && span<=36){
+      const sp=makeSprite(MONTH[v%12], .22, 'ink2');
+      sp.position.set(x, RAILY-0.44, 0); SRV.add(sp);
+    }
+  }
+  SRV.add(segs(ticks, ink2Line(.85)));
+  /* rule body */
+  const rule = draftBox(RAILW+0.5, 0.5, 0.6, {hidden:true});
+  rule.position.set(0, RAILY-0.28, -0.32); SRV.add(rule);
+  /* bench stands */
+  [-RAILW/2+0.9, RAILW/2-0.9].forEach(sx=>{
+    SRV.add(segs([
+      [[sx,RAILY-0.53,-0.32],[sx,0,-0.32]],
+      [[sx-0.55,0,-0.32],[sx+0.55,0,-0.32]],
+      [[sx,RAILY-0.53,-0.32],[sx-0.5,0,-0.32]],
+      [[sx,RAILY-0.53,-0.32],[sx+0.5,0,-0.32]]
+    ], ink2Line(.85)));
+  });
+
+  /* greedy row assignment so overlapping appointments never collide */
+  const rowEnd=[];
+  items.forEach(it=>{
+    let r=0; while(r<rowEnd.length && rowEnd[r] >= it.a-1) r++;
+    it.row=r; rowEnd[r]=it.b;
+  });
+
+  const cards=[];
+  const CW=3.5, CIMG=1.72, CLAB=0.78, CH=CIMG+CLAB;
+  items.forEach((it,i)=>{
+    const x0=X(it.a), x1=X(it.b+1), xm=(x0+x1)/2;
+    /* concurrent appointments ride parallel tracks above the rule, like a Gantt */
+    const barY = RAILY + 0.10 + it.row*0.24;
+    SRV.add(segs([
+      [[x0,barY,0.02],[x1,barY,0.02]],
+      [[x0,barY+0.13,0.02],[x0,barY-0.13,0.02]],
+      [[x1,barY+0.13,0.02],[x1,barY-0.13,0.02]],
+      [[xm,RAILY,0.02],[xm,barY,0.02]]
+    ], redLine()));
+    const bar = new THREE.Mesh(new THREE.PlaneGeometry(Math.max(0.12,x1-x0), 0.15),
+      reg(new THREE.MeshBasicMaterial({color:PAL().red}), 'red'));
+    bar.position.set(xm, barY, 0.01); SRV.add(bar);
+
+    /* duration dimension below the rule, one lane per row */
+    const dimY = RAILY - 0.9 - it.row*0.62;
+    const dur = it.ongoing? `${it.months} MO — ONGOING` : `${it.months} MO`;
+    const ds = makeSprite(dur, .28, 'red');
+    ds.position.set(xm, dimY-0.26, 0); SRV.add(ds);
+    SRV.add(segs([[[x0,RAILY-0.36,0],[x0,dimY,0]],[[x1,RAILY-0.36,0],[x1,dimY,0]],
+                  [[x0,dimY,0],[x1,dimY,0]]], ink2Line(.7)));
+
+    /* record card, stacked by row */
+    const cy = RAILY + 1.35 + it.row*(CH+0.9) + CH/2;
+    const g = new THREE.Group(); g.position.set(xm, cy, 0.16);
+    const imgMat = reg(new THREE.MeshBasicMaterial({map:placeholderTex(it.key)}), 'white');
+    projectTexture(it.key, t=>{ fitCover(t, CW/CIMG); imgMat.map=t; imgMat.needsUpdate=true; });
+    const im = new THREE.Mesh(new THREE.PlaneGeometry(CW,CIMG), imgMat);
+    im.position.y = CH/2 - CIMG/2; g.add(im);
+    const lab = makePlate(CW, CLAB, 900, (ctx,W,H,P)=>{
+      ctx.fillStyle=P.cssPaper; ctx.fillRect(0,0,W,H);
+      ctx.fillStyle=P.cssRed; ctx.font='600 44px "IBM Plex Mono", monospace';
+      ctx.fillText(it.ref, 22, 74);
+      ctx.fillStyle=P.cssInk; ctx.font='700 62px Archivo, sans-serif';
+      let nm=it.org; let fs=62;
+      while(fs>30 && 210+ctx.measureText(nm).width > W-24){ fs-=2; ctx.font=`700 ${fs}px Archivo, sans-serif`; }
+      ctx.fillText(nm, 210, 74);
+      ctx.fillStyle=P.cssInk2; ctx.font='500 34px "IBM Plex Mono", monospace';
+      ctx.fillText(it.kind, 22, 132);
+      const per = label(it.a)+' → '+(it.ongoing?'PRESENT':label(it.b));
+      let ps=34; ctx.font=`500 ${ps}px "IBM Plex Mono", monospace`;
+      while(ps>20 && ctx.measureText(per).width > W-330){ ps--; ctx.font=`500 ${ps}px "IBM Plex Mono", monospace`; }
+      ctx.fillText(per, 300, 132);
+    }, {noFrame:true});
+    lab.position.y = -CH/2 + CLAB/2; lab.position.z = 0.008; g.add(lab);
+    g.add(edgesOf(new THREE.PlaneGeometry(CW,CH), inkLine()));
+    const backer = new THREE.Mesh(new THREE.PlaneGeometry(CW,CH), paperMat());
+    backer.position.z=-0.02; g.add(backer);
+    /* leader from bar up to the card */
+    SRV.add(segs([[[xm,barY+0.13,0.02],[xm, cy-CH/2, 0.14]]], redLine(.9)));
+    SRV.add(edgesOf(new THREE.CircleGeometry(0.09,14), redLine()).translateX(xm).translateY(barY+0.13).translateZ(0.03));
+    g.userData = {exp:it, expIndex:i, ref:it.ref};
+    SRV.add(g); cards.push(g);
+  });
+
+  const topRow = Math.max(...items.map(i=>i.row));
+  const topY = RAILY + 1.35 + topRow*(CH+0.9) + CH;
+  const t=makeSprite('S2 — SERVICE RECORD · RESEARCH & PROFESSIONAL EXPERIENCE', .4, 'ink');
+  t.position.set(0, topY+0.95, 0); SRV.add(t);
+  const c=makeSprite(`${items.length} APPOINTMENT${items.length===1?'':'S'} ON RECORD — SCALE ${label(lo)} → ${label(hi)} · MONTHS`, .3, 'ink2');
+  c.position.set(0, topY+0.5, 0); SRV.add(c);
+
+  return {items, cards, width: RAILW+2.4, top: topY+1.2, active:-1};
+})();
+
+/* ============================================================
    S2 — PARAMETRIC CHAIN PART MAGAZINE (x = 30)
    Paternoster / ATC chain: pockets stay upright; count = PROJECTS.length
    ============================================================ */
-const S2 = new THREE.Group(); S2.position.set(30,0,0); world.add(S2);
+const S2 = new THREE.Group(); S2.position.set(58,0,0); world.add(S2);
 const MAG = (()=>{
   const N = PROJECTS.length;
   const r = 2.1;
@@ -875,7 +1071,7 @@ const MAG = (()=>{
   const capS = makeSprite(`CAPACITY = ${N} POCKETS — PARAMETRIC (EXPANDABLE)`, .34, 'ink2');
   capS.position.set(0, cy+r+0.8, 0); S2.add(capS);
   dim3D(S2, [ -L/N/2 - L/N, cy-r, 0.2], [ L/N/2 - L/N, cy-r, 0.2], [0,-2.1,0], `PITCH = ${(L/N).toFixed(2)} u`);
-  const titleS = makeSprite('S2 — BEYOND THE CURRICULUM · PART MAGAZINE', .4, 'ink');
+  const titleS = makeSprite('S3 — BEYOND THE CURRICULUM · PART MAGAZINE', .4, 'ink');
   titleS.position.set(0, cy+r+1.4, 0); S2.add(titleS);
 
   /* physics state */
@@ -970,7 +1166,7 @@ function magGoto(i){
 /* ============================================================
    S3 — QA RACK (x = 60)
    ============================================================ */
-const S3 = new THREE.Group(); S3.position.set(60,0,0); world.add(S3);
+const S3 = new THREE.Group(); S3.position.set(88,0,0); world.add(S3);
 {
   /* PARAMETRIC QA RACK — rows/columns derive from CERTS.length, so the rack
      grows with the list exactly like the magazine does. */
@@ -991,7 +1187,7 @@ const S3 = new THREE.Group(); S3.position.set(60,0,0); world.add(S3);
   for(let r=0;r<rows;r++) fr.push([[-w/2,railY(r),0],[w/2,railY(r),0]]);
   S3.add(segs(fr, inkLine()));
 
-  const t=makeSprite('S3 — INSPECTION & APPROVALS · CERTIFICATIONS', .4, 'ink');
+  const t=makeSprite('S4 — INSPECTION & APPROVALS · CERTIFICATIONS', .4, 'ink');
   t.position.set(0, railTop+1.15, 0); S3.add(t);
   const cap=makeSprite(`${N} RECORDS ON FILE — ALL PASSED`, .3, 'ink2');
   cap.position.set(0, railTop+0.68, 0); S3.add(cap);
@@ -1059,7 +1255,7 @@ const S3 = new THREE.Group(); S3.position.set(60,0,0); world.add(S3);
 /* ============================================================
    S4 — TERMINAL (x = 85)
    ============================================================ */
-const S4 = new THREE.Group(); S4.position.set(85,0,0); world.add(S4);
+const S4 = new THREE.Group(); S4.position.set(113,0,0); world.add(S4);
 let screenPlateDraw=null;
 {
   const desk = draftBox(4.6,0.16,2.0,{hidden:true}); desk.position.set(0,1.55,0); S4.add(desk);
@@ -1089,7 +1285,7 @@ let screenPlateDraw=null;
   const curve=new THREE.CatmullRomCurve3(cpts);
   const cgeo=new THREE.BufferGeometry().setFromPoints(curve.getPoints(30));
   S4.add(new THREE.Line(cgeo, ink2Line(.9)));
-  const t=makeSprite('S4 — COMMUNICATIONS · SERIAL CONSOLE', .4, 'ink');
+  const t=makeSprite('S5 — COMMUNICATIONS · SERIAL CONSOLE', .4, 'ink');
   t.position.set(0,5.1,0); S4.add(t);
   const rev=makeSprite('REV C · 2026-08 · COMPLETE REDRAW — AF   |   REV D · 2026-08 · DIGITAL TWIN — AF', .26, 'ink2');
   rev.position.set(0,4.55,0); S4.add(rev);
@@ -1099,34 +1295,45 @@ let screenPlateDraw=null;
    CAMERA RIG — crank travel between stations, orbit offsets
    ============================================================ */
 const posCurve = new THREE.CatmullRomCurve3([
-  new THREE.Vector3(0,4.6,14.8), new THREE.Vector3(30,4.3,14.6),
-  new THREE.Vector3(60,3.9,12.3), new THREE.Vector3(85,3.1,9.7)
+  new THREE.Vector3(STATION_X[0],4.6,14.8), new THREE.Vector3(STATION_X[1],SREC.top*0.60,10.4),
+  new THREE.Vector3(STATION_X[2],4.3,14.6), new THREE.Vector3(STATION_X[3],3.9,12.3),
+  new THREE.Vector3(STATION_X[4],3.1,9.7)
 ], false, 'catmullrom', 0.5);
 const lookCurve = new THREE.CatmullRomCurve3([
-  new THREE.Vector3(0,3.3,0), new THREE.Vector3(30,3.6,0),
-  new THREE.Vector3(60,3.4,0), new THREE.Vector3(85,2.7,0)
+  new THREE.Vector3(STATION_X[0],3.3,0), new THREE.Vector3(STATION_X[1],SREC.top*0.48,0),
+  new THREE.Vector3(STATION_X[2],3.6,0), new THREE.Vector3(STATION_X[3],3.4,0),
+  new THREE.Vector3(STATION_X[4],2.7,0)
 ], false, 'catmullrom', 0.5);
 
 const rig = { t:0, vel:0, ap:null, yaw:0, pitch:0, yawT:0, pitchT:0 };
-function stationOf(t){ return Math.round(t*3); }
+function stationOf(t){ return Math.round(t*LAST); }
 let curStation = 0;
 
 /* Each station declares how wide it actually is, so the camera can guarantee it
    fits at any aspect ratio. Adding projects or certificates widens the machine —
    this keeps the framing correct automatically instead of by hand-tuned numbers. */
 function stationWidths(){
-  return [12.8, (typeof MAG!=='undefined'? MAG.width : 14), (window.S3_FRAME? S3_FRAME.w+1.0 : 12), 7.0];
+  return [12.8, (typeof SREC!=='undefined'? SREC.width : 18),
+          (typeof MAG!=='undefined'? MAG.width : 14),
+          (window.S3_FRAME? S3_FRAME.w+1.0 : 12), 7.0];
+}
+/* content also grows upward (extra card rows, extra rack rails), so fit height too */
+function stationHeights(){
+  return [8.6, (typeof SREC!=='undefined'? SREC.top+2.0 : 9),
+          (typeof MAG!=='undefined'? MAG.cy+MAG.r+2.2 : 9),
+          (window.S3_FRAME? S3_FRAME.top+0.8 : 8), 6.0];
 }
 function fitScaleAt(t){
-  const W = stationWidths();
-  const s = THREE.MathUtils.clamp(t,0,1)*3;
-  const i = Math.min(2, Math.floor(s)), f = s-i;
-  const need = W[i]*(1-f) + W[i+1]*f;                 /* blend between stations */
-  const halfW = Math.tan(THREE.MathUtils.degToRad(camera.fov)/2)*camera.aspect;
+  const W = stationWidths(), H = stationHeights();
+  const s = THREE.MathUtils.clamp(t,0,1)*LAST;
+  const i = Math.min(LAST-1, Math.floor(s)), f = s-i;
+  const needW = W[i]*(1-f) + W[i+1]*f;                /* blend between stations */
+  const needH = H[i]*(1-f) + H[i+1]*f;
+  const halfV = Math.tan(THREE.MathUtils.degToRad(camera.fov)/2);
   const P0 = posCurve.getPoint(THREE.MathUtils.clamp(t,0,1));
   const L0 = lookCurve.getPoint(THREE.MathUtils.clamp(t,0,1));
   const base = P0.distanceTo(L0);
-  const dNeed = (need*0.5*1.06)/halfW;
+  const dNeed = Math.max((needW*0.5*1.06)/(halfV*camera.aspect), (needH*0.5*1.06)/halfV);
   return Math.max(1, dNeed/base);
 }
 
@@ -1140,7 +1347,7 @@ function updateCamera(dt){
   } else {
     rig.vel *= Math.exp(-2.4*dt);
     if(Math.abs(rig.vel)<0.05){
-      const near = Math.round(rig.t*3)/3;
+      const near = Math.round(rig.t*LAST)/LAST;
       rig.vel += (near - rig.t)*14*dt;
       rig.vel *= Math.exp(-5*dt);
     }
@@ -1179,24 +1386,61 @@ const hint = document.getElementById('hint');
 function onStationChange(st){
   document.querySelectorAll('.indexbar nav button').forEach(b=>b.classList.toggle('active', +b.dataset.st===st));
   document.getElementById('hud-st').textContent = 'S'+(st+1);
-  readout.classList.toggle('show', st===1);
-  conpanel.classList.toggle('show', st===3);
+  readout.classList.toggle('show', st===2);
+  exprd.classList.toggle('show', st===1);
+  conpanel.classList.toggle('show', st===LAST);
+  if(st===1 && SREC.active<0) selectExp(0);
   const hints = COARSE? [
     'SWIPE ↕ TRAVEL · TAP A STATION ABOVE',
+    'TAP A RECORD CARD · SWIPE ⟷ TO STEP THROUGH',
     'SWIPE ⟷ INDEX MAGAZINE · TAP POCKET = SELECT',
     'TAP A STAMP TO OPEN ITS CERTIFICATE',
     'TYPE COMMANDS BELOW — TRY “HELP”'
   ]:[
     'SCROLL · CRANK BETWEEN STATIONS — DRAG TO ORBIT',
+    'CLICK A RECORD CARD · ◀ ▶ STEP THROUGH APPOINTMENTS',
     'DRAG ⟷ INDEX MAGAZINE · CLICK POCKET = SELECT · SCROLL = TRAVEL',
     'CLICK A STAMP TO OPEN ITS CERTIFICATE APPENDIX',
     'SERIAL LINK OPEN — TYPE “HELP” IN THE CONSOLE'
   ];
   hint.textContent = hints[st];
-  if(st===3 && FINE) setTimeout(()=>document.getElementById('con-in').focus({preventScroll:true}), 260);
+  if(st===LAST && FINE) setTimeout(()=>document.getElementById('con-in').focus({preventScroll:true}), 260);
 }
 
-/* ---------- readout (S2 DOM panel) ---------- */
+const exprd = document.getElementById('exprd');
+let expDrag = 0;
+const MONTH_ABBR = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+function ymLabel(v){ return MONTH_ABBR[v%12] + ' ' + Math.floor(v/12); }
+function selectExp(i){
+  const N = SREC.items.length; if(!N) return;
+  i = ((i%N)+N)%N;
+  SREC.active = i;
+  const e = SREC.items[i];
+  document.getElementById('ex-ref').textContent = `${e.ref} · ${i+1} OF ${N}`;
+  document.getElementById('ex-kind').textContent = e.kind;
+  document.getElementById('ex-org').textContent = e.org;
+  document.getElementById('ex-full').textContent = e.full;
+  document.getElementById('ex-dates').textContent =
+    ymLabel(e.a) + ' → ' + (e.ongoing? 'PRESENT' : ymLabel(e.b));
+  document.getElementById('ex-dur').textContent =
+    e.months + ' MONTH' + (e.months===1?'':'S') + (e.ongoing?' · ONGOING':'');
+  const slot=(el,lbl,val)=>{
+    const n=document.getElementById(el);
+    if(val){ n.classList.add('filled'); n.innerHTML=`<span class="lbl">${lbl}</span>`+val; }
+    else { n.classList.remove('filled'); n.innerHTML=`<span class="lbl">${lbl}</span>AWAITING DATA — TO BE PROVIDED`; }
+  };
+  slot('ex-role','ROLE', e.role);
+  slot('ex-desc','SCOPE', e.desc);
+  const link=document.getElementById('ex-link');
+  if(e.link){ link.style.display='inline-flex'; link.href=e.link; } else link.style.display='none';
+  document.getElementById('hud-idx').textContent = (i+1)+'/'+N;
+  /* highlight the selected card */
+  SREC.cards.forEach((c,ci)=>{ c.position.z = 0.16 + (ci===i? 0.5 : 0); c.scale.setScalar(ci===i?1.06:1); });
+}
+document.getElementById('ex-prev').addEventListener('click', ()=> selectExp(SREC.active-1));
+document.getElementById('ex-next').addEventListener('click', ()=> selectExp(SREC.active+1));
+
+/* ---------- readout (magazine DOM panel) ---------- */
 function updateReadout(i){
   const p = PROJECTS[i];
   document.getElementById('ro-ref').textContent = 'ITEM '+(i+1)+' OF '+PROJECTS.length+' · AF-'+String(i+1).padStart(3,'0');
@@ -1238,7 +1482,8 @@ canvas.addEventListener('pointermove', e=>{
   lastX=e.clientX; lastY=e.clientY; moved += Math.abs(dx)+Math.abs(dy);
   if(!dragAxis && (Math.abs(dx)+Math.abs(dy))>2) dragAxis = Math.abs(dx)>Math.abs(dy)? 'h':'v';
   if(dragAxis==='h'){
-    if(curStation===1){ magVelKick(dx*0.00042*3); MAG.off += dx*0.00042; }
+    if(curStation===2){ magVelKick(dx*0.00042*3); MAG.off += dx*0.00042; }
+    else if(curStation===1){ expDrag += dx; if(Math.abs(expDrag)>90){ selectExp((SREC.active - Math.sign(expDrag) + SREC.items.length)%SREC.items.length); expDrag=0; } }
     else { rig.yawT = THREE.MathUtils.clamp(rig.yawT - dx*0.0035, -0.55, 0.55); }
   } else if(dragAxis==='v'){
     if(COARSE){ rig.ap=null; rig.vel += dy*0.00028; }
@@ -1252,18 +1497,19 @@ window.addEventListener('pointerup', e=>{
 window.addEventListener('keydown', e=>{
   if(!introDone) return;
   if(e.target.tagName==='INPUT') return;
-  if(e.key==='ArrowRight'){ if(curStation===1) magGoto((MAG.activeIdx+1)%MAG.N); else gotoStation(Math.min(3,curStation+1)); }
-  if(e.key==='ArrowLeft'){ if(curStation===1) magGoto((MAG.activeIdx-1+MAG.N)%MAG.N); else gotoStation(Math.max(0,curStation-1)); }
-  if(e.key==='ArrowDown'||e.key==='PageDown'){ gotoStation(Math.min(3,curStation+1)); }
+  if(e.key==='ArrowRight'){ if(curStation===2) magGoto((MAG.activeIdx+1)%MAG.N); else if(curStation===1) selectExp((SREC.active+1)%SREC.items.length); else gotoStation(Math.min(LAST,curStation+1)); }
+  if(e.key==='ArrowLeft'){ if(curStation===2) magGoto((MAG.activeIdx-1+MAG.N)%MAG.N); else if(curStation===1) selectExp((SREC.active-1+SREC.items.length)%SREC.items.length); else gotoStation(Math.max(0,curStation-1)); }
+  if(e.key==='ArrowDown'||e.key==='PageDown'){ gotoStation(Math.min(LAST,curStation+1)); }
   if(e.key==='ArrowUp'||e.key==='PageUp'){ gotoStation(Math.max(0,curStation-1)); }
 });
-function gotoStation(i){ rig.ap = i/3; }
+function gotoStation(i){ rig.ap = THREE.MathUtils.clamp(i,0,LAST)/LAST; }
 
 /* ---------- picking ---------- */
 const ray = new THREE.Raycaster(); const ndc = new THREE.Vector2();
 let hoverRef='—';
 function pickables(){
   const arr=[];
+  SREC.cards.forEach(g=>arr.push(g));
   MAG.pockets.forEach(g=>arr.push(g));
   CERT_PLATES.forEach(p=>arr.push(p));
   arr.push(sheet); arr.push(TERMINAL_PLATE);
@@ -1278,7 +1524,7 @@ function pickAt(e){
   const hits = ray.intersectObjects(pickables(), true);
   if(!hits.length) return null;
   let o = hits[0].object;
-  while(o && !o.userData.idx && o.userData.idx!==0 && !o.userData.cert && o!==sheet && !o.userData.isTerminal && o!==figG){ o=o.parent; }
+  while(o && !o.userData.idx && o.userData.idx!==0 && o.userData.expIndex===undefined && !o.userData.cert && o!==sheet && !o.userData.isTerminal && o!==figG){ o=o.parent; }
   return {obj:o, hit:hits[0]};
 }
 function onPointerMoveHUD(e){
@@ -1297,6 +1543,7 @@ function onPointerMoveHUD(e){
   if(p){
     const u=p.obj.userData;
     if(u.idx!==undefined) ref=u.ref;
+    else if(u.expIndex!==undefined) ref=u.ref;
     else if(u.cert) ref=u.cert.ref;
     else if(p.obj===sheet) ref='DOC AF-2029-C';
     else if(u.isTerminal) ref='CON-01';
@@ -1315,6 +1562,11 @@ function handleClick(e){
   if(u.idx!==undefined){
     if(MAG.activeIdx===u.idx && u.project.link) window.open(u.project.link,'_self');
     else magGoto(u.idx);
+    if(curStation!==2) gotoStation(2);
+  }
+  else if(u.expIndex!==undefined){
+    if(SREC.active===u.expIndex && u.exp.link) window.open(u.exp.link,'_self');
+    else selectExp(u.expIndex);
     if(curStation!==1) gotoStation(1);
   }
   else if(u.cert){ openAppendix(u.certIndex); }
@@ -1349,7 +1601,7 @@ const CMDS={
   help        this list
   whoami      operator identification
   ls          list stations
-  goto &lt;id&gt;   fly to station (ga | bom | qa | comms)
+  goto &lt;id&gt;   fly to station (ga | srv | bom | qa | comms)
   bom         list all line items
   index &lt;n&gt;   rotate magazine to item n
   email       copy contact email
@@ -1358,7 +1610,7 @@ const CMDS={
   2d          open the 2D drawing package (REV C)
   clear       clear terminal`);},
   whoami(){conPrint("AHMED FARAZ — MECH ENG STUDENT, UNIVERSITY OF TORONTO (2T9). DEAN'S LIST. UTFR · UTSM.");},
-  ls(){conPrint('S1 OPERATOR   S2 PART-MAGAZINE   S3 QA-RACK   S4 TERMINAL');},
+  ls(){conPrint('S1 OPERATOR   S2 SERVICE-RECORD   S3 PART-MAGAZINE   S4 QA-RACK   S5 TERMINAL');},
   bom(){conPrint(PROJECTS.map((p,i)=>`  ${i+1}  AF-${String(i+1).padStart(3,'0')}  ${p.name}`).join('\n'));},
   email(){ if(navigator.clipboard) navigator.clipboard.writeText('ahmedfarazpro@gmail.com').catch(()=>{});
     conPrint('ahmedfarazpro@gmail.com <span class="dim">— copied. I will reply as soon as I can.</span>');},
@@ -1374,9 +1626,9 @@ conIn.addEventListener('keydown', e=>{
   conPrint(`<span class="cmd">&gt; ${raw.replace(/</g,'&lt;')}</span>`);
   const [cmd,arg]=raw.toLowerCase().split(/\s+/);
   if(cmd==='goto'&&arg){
-    const map={ga:0,bom:1,projects:1,qa:2,certs:2,certifications:2,comms:3,contact:3};
+    const map={ga:0,srv:1,service:1,research:1,experience:1,exp:1,bom:2,projects:2,qa:3,certs:3,certifications:3,comms:LAST,contact:LAST};
     if(map[arg]!==undefined){gotoStation(map[arg]);conPrint(`<span class="dim">flying → S${map[arg]+1}</span>`);}
-    else conPrint(`<span class="dim">unknown station '${arg}'. try: ga bom qa comms</span>`);
+    else conPrint(`<span class="dim">unknown station '${arg}'. try: ga srv bom qa comms</span>`);
   }
   else if(cmd==='index'&&arg){
     const n=parseInt(arg,10);
@@ -1419,12 +1671,12 @@ function drawMinimap(){
   mctx.strokeStyle=css.getPropertyValue('--ink-2').trim(); mctx.lineWidth=1;
   mctx.beginPath(); mctx.moveTo(14,36); mctx.lineTo(186,36); mctx.stroke();
   mctx.font='9px "IBM Plex Mono", monospace'; mctx.textAlign='center';
-  [0,1,2,3].forEach(i=>{
-    const x=14+i*(172/3);
+  for(let i=0;i<NSTA;i++){
+    const x=14+i*(172/LAST);
     mctx.beginPath(); mctx.moveTo(x,31); mctx.lineTo(x,41); mctx.stroke();
     mctx.fillStyle=css.getPropertyValue('--ink-2').trim();
     mctx.fillText('S'+(i+1), x, 53);
-  });
+  }
   mctx.fillStyle=css.getPropertyValue('--ink-2').trim();
   mctx.fillText('ELEVATION — CAMERA POSITION', 100, 13);
   /* camera as section-cut symbol */
@@ -1447,7 +1699,7 @@ function finishIntro(){
   skipBtn.style.display='none'; plotting.style.display='none';
   onStationChange(0);
   /* hash routing */
-  const map={'#ga':0,'#bom':1,'#projects':1,'#qa':2,'#certifications':2,'#comms':3,'#contact':3};
+  const map={'#ga':0,'#service':1,'#research':1,'#experience':1,'#bom':2,'#projects':2,'#qa':3,'#certifications':3,'#comms':LAST,'#contact':LAST};
   if(map[location.hash]!==undefined){ rig.t=0; gotoStation(map[location.hash]); }
 }
 skipBtn.addEventListener('click', finishIntro);
@@ -1462,7 +1714,7 @@ let camDistScale = 1;
   const btns=[...document.querySelectorAll('.indexbar nav button')];
   const link=document.querySelector('.indexbar nav a');
   const long=btns.map(b=>b.textContent), longLink=link.textContent;
-  const short=['S1 · OPR','S2 · MAG','S3 · QA','S4 · TTY'];
+  const short=['S1 · OPR','S2 · SRV','S3 · MAG','S4 · QA','S5 · TTY'];
   function apply(){
     const narrow = innerWidth<680;
     btns.forEach((b,i)=>{ b.textContent = narrow? short[i] : long[i]; });
@@ -1513,7 +1765,7 @@ function loop(now){
   updateHalftoneRuling();
 
   /* HUD rpm */
-  const rpm=(Math.abs(rig.vel)*3+Math.abs(MAG.vel)*MAG.N)*30;
+  const rpm=(Math.abs(rig.vel)*LAST+Math.abs(MAG.vel)*MAG.N)*30;
   rpmDisp+= (rpm-rpmDisp)*Math.min(1,8*dt);
   document.getElementById('hud-rpm').textContent=rpmDisp.toFixed(1);
 
