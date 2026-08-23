@@ -258,6 +258,30 @@ table.bom{width:100%;border-collapse:collapse;font-size:12px;}
   position:absolute;top:36px;right:10px;border:1.5px solid var(--red);color:var(--red);
   font-size:8px;letter-spacing:.2em;padding:2px 6px;transform:rotate(6deg);font-weight:600;
 }
+
+/* ---------- SHEET 2: SERVICE RECORD ---------- */
+.srv-row{border:2px solid var(--ink);margin-bottom:16px;}
+.srv-top{display:flex;justify-content:space-between;align-items:center;gap:12px;
+  border-bottom:1px solid var(--ink);padding:8px 12px;font-size:10px;letter-spacing:.16em;
+  color:var(--ink-2);text-transform:uppercase;flex-wrap:wrap;}
+.srv-top .kind{border:1px solid var(--red);color:var(--red);padding:2px 7px;font-weight:600;letter-spacing:.18em;}
+.srv-body{padding:14px 14px 16px;}
+.srv-cover{border:1px solid var(--ink);background:#fff;padding:10px;margin-bottom:14px;display:flex;align-items:center;justify-content:center;}
+.srv-cover img{max-width:min(340px,100%);height:auto;display:block;}
+.srv-org{font-family:var(--disp);font-weight:900;text-transform:uppercase;font-size:26px;line-height:1.02;}
+.srv-full{color:var(--ink-2);font-size:12px;margin:5px 0 12px;}
+.srv-bar{position:relative;height:34px;border:1px solid var(--hair);background:transparent;margin:6px 0 4px;}
+.srv-bar .fill{position:absolute;top:0;bottom:0;background:var(--red);}
+.srv-bar .grad{position:absolute;top:0;bottom:0;width:1px;background:var(--faint);}
+.srv-axis{display:flex;justify-content:space-between;font-size:9px;letter-spacing:.12em;color:var(--ink-2);margin-bottom:12px;}
+.srv-meta{display:flex;gap:22px;flex-wrap:wrap;font-size:11px;letter-spacing:.1em;color:var(--ink-2);margin-bottom:12px;}
+.srv-meta b{color:var(--ink);}
+.srv-meta .dur{color:var(--red);font-weight:600;}
+.srv-slot{border:1px dashed var(--hair);padding:8px 11px;font-size:10px;letter-spacing:.12em;
+  color:var(--ink-2);text-transform:uppercase;margin-bottom:9px;}
+.srv-slot.filled{border-style:solid;border-color:var(--ink);color:var(--ink);text-transform:none;letter-spacing:.02em;font-size:12.5px;}
+.srv-slot .lbl{color:var(--red);font-weight:600;margin-right:9px;letter-spacing:.16em;text-transform:uppercase;font-size:10px;}
+
 /* Appendix modal */
 dialog#appendix{
   border:2px solid var(--ink);background:var(--paper);color:var(--ink);
@@ -352,9 +376,10 @@ footer{padding:0 40px 60px;max-width:1440px;margin:0 auto;font-size:10px;letter-
   <nav aria-label="Sheet index">
     <a href="index.html" style="color:var(--red);font-weight:600;">REV D — 3D ↗</a>
     <a href="#ga">S1 · GENERAL ARRANGEMENT</a>
-    <a href="#bom">S2 · BILL OF MATERIALS</a>
-    <a href="#qa">S3 · INSPECTION</a>
-    <a href="#comms">S4 · SERIAL CONSOLE</a>
+    <a href="#service">S2 · SERVICE RECORD</a>
+    <a href="#bom">S3 · BILL OF MATERIALS</a>
+    <a href="#qa">S4 · INSPECTION</a>
+    <a href="#comms">S5 · SERIAL CONSOLE</a>
   </nav>
   <div class="mediaswitch">
     <span>MEDIA</span>
@@ -367,7 +392,7 @@ footer{padding:0 40px 60px;max-width:1440px;margin:0 auto;font-size:10px;letter-
 
 <!-- ================= SHEET 1 : GENERAL ARRANGEMENT ================= -->
 <section class="sheet" id="ga" data-ref="SHT-1">
-  <div class="sheet-head"><span><b>SHEET 1 OF 4</b> — GENERAL ARRANGEMENT</span><span>SCALE: NTS · THIRD-ANGLE PROJECTION</span></div>
+  <div class="sheet-head"><span><b>SHEET 1 OF 5</b> — GENERAL ARRANGEMENT</span><span>SCALE: NTS · THIRD-ANGLE PROJECTION</span></div>
   <div class="sheet-body">
     <svg class="svg-anno" id="anno-ga" aria-hidden="true"></svg>
 
@@ -422,15 +447,22 @@ footer{padding:0 40px 60px;max-width:1440px;margin:0 auto;font-size:10px;letter-
       <div class="tb-cell"><small>UNITS</small><b>MM</b></div>
       <div class="tb-cell"><small>DWG NO.</small><b>AF-2029</b></div>
       <div class="tb-cell"><small>REV</small><b>C</b></div>
-      <div class="tb-cell"><small>SHEET</small><b>1 OF 4</b></div>
+      <div class="tb-cell"><small>SHEET</small><b>1 OF 5</b></div>
       <div class="tb-cell"><small>MATERIAL</small><b>CURIOSITY, 6061-T6</b></div>
     </div>
   </div>
 </section>
 
 <!-- ================= SHEET 2 : BILL OF MATERIALS ================= -->
-<section class="sheet" id="bom" data-ref="SHT-2">
-  <div class="sheet-head"><span><b>SHEET 2 OF 4</b> — BILL OF MATERIALS · BEYOND THE CURRICULUM</span><span>QTY REQ'D: ALL</span></div>
+<section class="sheet" id="service" data-ref="SHT-2">
+  <div class="sheet-head"><span><b>SHEET 2 OF 5</b> — SERVICE RECORD · RESEARCH &amp; PROFESSIONAL EXPERIENCE</span><span>SCALE IN MONTHS</span></div>
+  <p class="eyebrow">APPOINTMENT LOG</p>
+  <h2 class="sheet-title">SERVICE RECORD</h2>
+  <div id="srvlog"></div>
+</section>
+
+<section class="sheet" id="bom" data-ref="SHT-3">
+  <div class="sheet-head"><span><b>SHEET 3 OF 5</b> — BILL OF MATERIALS · BEYOND THE CURRICULUM</span><span>QTY REQ'D: ALL</span></div>
   <div class="sheet-body">
     <p class="eyebrow">PARTS LIST</p>
     <h2 class="blocktitle" id="dim-bom" style="margin-bottom:22px;">BEYOND THE CURRICULUM</h2>
@@ -464,8 +496,8 @@ footer{padding:0 40px 60px;max-width:1440px;margin:0 auto;font-size:10px;letter-
 </section>
 
 <!-- ================= SHEET 3 : INSPECTION ================= -->
-<section class="sheet" id="qa" data-ref="SHT-3">
-  <div class="sheet-head"><span><b>SHEET 3 OF 4</b> — INSPECTION &amp; APPROVALS · CERTIFICATIONS</span><span>ALL ITEMS: PASSED</span></div>
+<section class="sheet" id="qa" data-ref="SHT-4">
+  <div class="sheet-head"><span><b>SHEET 4 OF 5</b> — INSPECTION &amp; APPROVALS · CERTIFICATIONS</span><span>ALL ITEMS: PASSED</span></div>
   <div class="sheet-body">
     <p class="eyebrow">QUALITY RECORD</p>
     <h2 class="blocktitle" style="margin-bottom:22px;">RELEVANT CERTIFICATIONS</h2>
@@ -477,8 +509,8 @@ footer{padding:0 40px 60px;max-width:1440px;margin:0 auto;font-size:10px;letter-
 </section>
 
 <!-- ================= SHEET 4 : SERIAL CONSOLE ================= -->
-<section class="sheet" id="comms" data-ref="SHT-4">
-  <div class="sheet-head"><span><b>SHEET 4 OF 4</b> — COMMUNICATIONS · SERIAL CONSOLE</span><span>115200 BAUD · 8-N-1</span></div>
+<section class="sheet" id="comms" data-ref="SHT-5">
+  <div class="sheet-head"><span><b>SHEET 5 OF 5</b> — COMMUNICATIONS · SERIAL CONSOLE</span><span>115200 BAUD · 8-N-1</span></div>
   <div class="sheet-body">
     <div class="comms-grid">
       <div class="console" data-ref="CON-01">
@@ -543,7 +575,9 @@ const IMG = {
   certCSWA:       'CSWACERTIFICATE.jpg',
   certCSWP:       'CSWPCERTIFICATE.png',
   certSim:        'SIMULINKONRAMPCERT.png',
-  certCatia:      'CATIA3DXCERTIFICATE.jpg'
+  certCatia:      'CATIA3DXCERTIFICATE.jpg',
+  expTsmart:      'tsmart-cover.png',
+  expEuroWorld:   'europeanworld-cover.png'
 };
 
 /* ============================================================
@@ -581,6 +615,18 @@ const PROJECTS = [
    status:'RELEASED', link:'mount.html'}
 ];
 
+const EXPERIENCE = [
+  {key:'expTsmart', ref:'EXP-01', kind:'RESEARCH',
+   org:'TSMART',
+   full:'Toronto Smart Materials & Structures',
+   role:'Undergraduate Research Fellow', desc:'',
+   start:'2026-05', end:'2026-08', link:'tsmart.html'},
+  {key:'expEuroWorld', ref:'EXP-02', kind:'INTERNSHIP',
+   org:'EUROPEAN WORLD',
+   full:'European World',
+   role:'Mechanical Engineering Intern', desc:'',
+   start:'2025-05', end:'2025-08', link:'europeanworld.html'}
+];
 const CERTS = [
   {key:'certAI',   name:'AI FOR DESIGN',   issuer:'UNIVERSITY OF MICHIGAN', ref:'QC-01'},
   {key:'certLead', name:'EMERGING LEADERS',issuer:'U OF T — TROOST INSTITUTE', ref:'QC-02'},
@@ -799,6 +845,48 @@ function clearLeader(){
   document.getElementById('leader').innerHTML='';
   if(window._stickyKey) selectProject(window._stickyKey, true);
 }
+
+
+/* ---------- SERVICE RECORD ---------- */
+(function srvlog(){
+  const host=document.getElementById('srvlog'); if(!host) return;
+  const M=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+  const ym=s=>{const[a,b]=s.split('-').map(Number);return a*12+(b-1);};
+  const now=new Date(); const nowYm=now.getFullYear()*12+now.getMonth();
+  const lab=v=>M[v%12]+' '+Math.floor(v/12);
+  const items=EXPERIENCE.map(e=>{
+    const a=ym(e.start), b=e.end?ym(e.end):Math.max(ym(e.start),nowYm);
+    return {...e,a,b,months:Math.max(1,b-a+1),ongoing:!e.end};
+  }).sort((x,y)=>y.a-x.a);
+  let lo=Math.min(...items.map(i=>i.a))-2, hi=Math.max(...items.map(i=>i.b))+2;
+  if(hi-lo<11){const n=11-(hi-lo); lo-=Math.ceil(n/2); hi+=Math.floor(n/2);}
+  const span=hi-lo;
+  items.forEach(it=>{
+    const row=document.createElement('article'); row.className='srv-row';
+    const pct=v=>((v-lo)/span*100);
+    let grads=''; for(let v=lo;v<=hi;v++){ if(v%3===0) grads+=`<span class="grad" style="left:${pct(v)}%"></span>`; }
+    const slot=(l,v)=> v
+      ? `<div class="srv-slot filled"><span class="lbl">${l}</span>${v}</div>`
+      : `<div class="srv-slot"><span class="lbl">${l}</span>AWAITING DATA — TO BE PROVIDED</div>`;
+    row.innerHTML=`
+      <div class="srv-top"><span>${it.ref} · APPOINTMENT</span><span class="kind">${it.kind}</span></div>
+      <div class="srv-body">
+        ${IMG[it.key]?`<div class="srv-cover"><img src="${encodeURI(IMG[it.key])}" alt="${it.full} logo" onerror="this.parentNode.remove()"></div>`:''}
+        <p class="srv-org">${it.org}</p>
+        <p class="srv-full">${it.full}</p>
+        <div class="srv-bar">${grads}<span class="fill" style="left:${pct(it.a)}%;width:${Math.max(1.2,pct(it.b+1)-pct(it.a))}%"></span></div>
+        <div class="srv-axis"><span>${lab(lo)}</span><span>${lab(hi)}</span></div>
+        <div class="srv-meta">
+          <span>PERIOD <b>${lab(it.a)} → ${it.ongoing?'PRESENT':lab(it.b)}</b></span>
+          <span>DURATION <span class="dur">${it.months} MONTH${it.months===1?'':'S'}${it.ongoing?' · ONGOING':''}</span></span>
+        </div>
+        ${slot('ROLE', it.role)}
+        ${slot('SCOPE', it.desc)}
+        ${it.link?`<a class="open-dwg" href="${it.link}">OPEN SERVICE RECORD →</a>`:''}
+      </div>`;
+    host.appendChild(row);
+  });
+})();
 
 /* ---------- CERT STAMPS + APPENDIX ---------- */
 (function certs(){
