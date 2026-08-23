@@ -312,7 +312,8 @@ const IMG = {
   certAP:         'ap-capstone.jpg',
   certCSWA:       'CSWACERTIFICATE.jpg',
   certCSWP:       'CSWPCERTIFICATE.png',
-  certSim:        'SIMULINKONRAMPCERT.png'
+  certSim:        'SIMULINKONRAMPCERT.png',
+  certCatia:      'CATIA3DXCERTIFICATE.jpg'
 };
 /* ============================================================
    SPEC MANIFEST — one-line spec facts. '' = AWAITING DATA slot.
@@ -343,7 +344,8 @@ const CERTS = [
   {key:'certAP',   name:'AP CAPSTONE',      issuer:'COLLEGE BOARD',             ref:'QC-03'},
   {key:'certCSWA', name:'CSWA',             issuer:'DASSAULT SYSTÈMES',         ref:'QC-04'},
   {key:'certCSWP', name:'CSWP',             issuer:'DASSAULT SYSTÈMES',         ref:'QC-05'},
-  {key:'certSim',  name:'SIMULINK ONRAMP',  issuer:'MATHWORKS',                 ref:'QC-06'}
+  {key:'certSim',  name:'SIMULINK ONRAMP',  issuer:'MATHWORKS',                 ref:'QC-06'},
+  {key:'certCatia',name:'3DEXPERIENCE MECHANICAL DESIGNER', issuer:'DASSAULT SYSTÈMES — CATIA ASSOCIATE', ref:'QC-07'}
 ];
 
 /* ---------- palettes ---------- */
@@ -879,7 +881,7 @@ const MAG = (()=>{
   /* physics state */
   const st = {
     N, L, P, off: 0, vel: 0, target:null,
-    cL, cR, cy, r,
+    cL, cR, cy, r, width: straight + 2*r + 4.4,
     pockets, gearL, gearR, crankArm, linkVerts, linkSegGeo, pinCount, activeIdx: -1
   };
   return st;
@@ -970,44 +972,88 @@ function magGoto(i){
    ============================================================ */
 const S3 = new THREE.Group(); S3.position.set(60,0,0); world.add(S3);
 {
-  const w=10.4, R0=4.35, R1=2.3;
+  /* PARAMETRIC QA RACK — rows/columns derive from CERTS.length, so the rack
+     grows with the list exactly like the magazine does. */
+  const N = CERTS.length;
+  const perRow = N<=4 ? Math.max(1,N) : Math.ceil(N/Math.ceil(N/4));
+  const rows   = Math.ceil(N/perRow);
+  const PW=2.6, PH=1.75, COLP=3.3, ROWP=2.05;
+  const w = Math.max(6, perRow*COLP + 1.1);
+  const railTop = 1.45 + (rows-1)*ROWP + PH*0.62;   /* top rail height */
+  const railY = r => railTop - r*ROWP;
   /* frame */
-  S3.add(segs([
-    [[-w/2,0,0],[-w/2,R0+0.35,0]], [[w/2,0,0],[w/2,R0+0.35,0]],
-    [[-w/2,R0+0.35,0],[w/2,R0+0.35,0]],
-    [[-w/2,R0,0],[w/2,R0,0]], [[-w/2,R1,0],[w/2,R1,0]],
+  const fr = [
+    [[-w/2,0,0],[-w/2,railTop+0.35,0]], [[w/2,0,0],[w/2,railTop+0.35,0]],
+    [[-w/2,railTop+0.35,0],[w/2,railTop+0.35,0]],
     [[-w/2,0,0],[-w/2-0.8,0,0.9]], [[w/2,0,0],[w/2+0.8,0,0.9]],
     [[-w/2,0,0],[-w/2-0.8,0,-0.9]], [[w/2,0,0],[w/2+0.8,0,-0.9]]
-  ], inkLine()));
+  ];
+  for(let r=0;r<rows;r++) fr.push([[-w/2,railY(r),0],[w/2,railY(r),0]]);
+  S3.add(segs(fr, inkLine()));
+
   const t=makeSprite('S3 — INSPECTION & APPROVALS · CERTIFICATIONS', .4, 'ink');
-  t.position.set(0,5.5,0); S3.add(t);
+  t.position.set(0, railTop+1.15, 0); S3.add(t);
+  const cap=makeSprite(`${N} RECORDS ON FILE — ALL PASSED`, .3, 'ink2');
+  cap.position.set(0, railTop+0.68, 0); S3.add(cap);
+
   window.CERT_PLATES = [];
   CERTS.forEach((c,i)=>{
-    const col=i%3, row=Math.floor(i/3);
-    const plate = makePlate(2.6,1.75,900,(ctx,W,H,P)=>{
+    const row = Math.floor(i/perRow);
+    const inRow = Math.min(perRow, N - row*perRow);   /* last row may be short */
+    const col = i % perRow;
+    const plate = makePlate(PW,PH,900,(ctx,W,H,P)=>{
       ctx.fillStyle=P.cssPaper; ctx.fillRect(0,0,W,H);
       ctx.fillStyle=P.cssInk2; ctx.font='500 34px "IBM Plex Mono", monospace';
       ctx.fillText(c.ref, 40, 70); ctx.fillText('INSP. RECORD', W-270, 70);
       ctx.strokeStyle='rgba(128,128,128,.4)'; ctx.lineWidth=2;
       ctx.beginPath(); ctx.moveTo(0,96); ctx.lineTo(W,96); ctx.stroke();
-      ctx.fillStyle=P.cssInk; ctx.font='900 74px Archivo, sans-serif';
-      ctx.fillText(c.name, 40, 320);
-      ctx.fillStyle=P.cssInk2; ctx.font='500 34px "IBM Plex Mono", monospace';
-      ctx.fillText(c.issuer, 40, 386);
+      /* NAME — auto-fit + wrap so long certifications never overflow the plate */
+      const NW = W-80, stampW = 250;
+      let fs=74, lines=[];
+      const wrap=(size)=>{
+        ctx.font=`900 ${size}px Archivo, sans-serif`;
+        const words=c.name.split(' '); const out=[]; let cur='';
+        words.forEach(wd=>{
+          const test = cur? cur+' '+wd : wd;
+          const limit = (out.length===0)? NW-stampW : NW;   /* line 1 clears the stamp */
+          if(ctx.measureText(test).width > limit && cur){ out.push(cur); cur=wd; }
+          else cur=test;
+        });
+        if(cur) out.push(cur);
+        return out;
+      };
+      for(; fs>=30; fs-=4){
+        lines = wrap(fs);
+        const widest = Math.max(...lines.map((l,li)=>ctx.measureText(l).width + (li===0?stampW:0)));
+        if(lines.length<=3 && widest<=NW) break;
+      }
+      ctx.fillStyle=P.cssInk; ctx.font=`900 ${fs}px Archivo, sans-serif`;
+      const lh = fs*1.02;
+      const blockH = lines.length*lh;
+      let y = 300 - blockH + lh;                 /* bottom-anchored above issuer */
+      if(lines.length>=3) y = 250 - blockH + lh;
+      lines.forEach(l=>{ ctx.fillText(l, 40, y); y+=lh; });
+      /* ISSUER — shrink to fit one line */
+      let is=34; ctx.font=`500 ${is}px "IBM Plex Mono", monospace`;
+      while(is>18 && ctx.measureText(c.issuer).width > NW){ is--; ctx.font=`500 ${is}px "IBM Plex Mono", monospace`; }
+      ctx.fillStyle=P.cssInk2; ctx.fillText(c.issuer, 40, 386);
+      /* PASSED stamp */
       ctx.save(); ctx.translate(W-160,190); ctx.rotate(0.1);
       ctx.strokeStyle=P.cssRed; ctx.lineWidth=6; ctx.strokeRect(-110,-34,220,68);
       ctx.fillStyle=P.cssRed; ctx.font='600 40px "IBM Plex Mono", monospace'; ctx.textAlign='center';
       ctx.fillText('PASSED',0,14); ctx.restore(); ctx.textAlign='left';
     });
-    const x = (col-1)*3.3, rail = row===0? R0 : R1;
+    const x = (col - (inRow-1)/2) * COLP;          /* centre short rows */
+    const rail = railY(row);
     plate.position.set(x, rail-0.98, 0.12);
-    /* hangers */
     S3.add(segs([[[x-0.5,rail,0.12],[x-0.5,rail-0.1,0.12]],
                  [[x+0.5,rail,0.12],[x+0.5,rail-0.1,0.12]]], ink2Line(.9)));
     plate.userData.cert = c; plate.userData.certIndex = i;
     S3.add(plate);
     CERT_PLATES.push(plate);
   });
+  /* camera framing follows rack size */
+  window.S3_FRAME = {w, top: railTop+1.4};
 }
 
 /* ============================================================
@@ -1054,16 +1100,35 @@ let screenPlateDraw=null;
    ============================================================ */
 const posCurve = new THREE.CatmullRomCurve3([
   new THREE.Vector3(0,4.6,14.8), new THREE.Vector3(30,4.3,14.6),
-  new THREE.Vector3(60,3.75,11.9), new THREE.Vector3(85,3.1,9.7)
+  new THREE.Vector3(60,3.9,12.3), new THREE.Vector3(85,3.1,9.7)
 ], false, 'catmullrom', 0.5);
 const lookCurve = new THREE.CatmullRomCurve3([
   new THREE.Vector3(0,3.3,0), new THREE.Vector3(30,3.6,0),
-  new THREE.Vector3(60,3.2,0), new THREE.Vector3(85,2.7,0)
+  new THREE.Vector3(60,3.4,0), new THREE.Vector3(85,2.7,0)
 ], false, 'catmullrom', 0.5);
 
 const rig = { t:0, vel:0, ap:null, yaw:0, pitch:0, yawT:0, pitchT:0 };
 function stationOf(t){ return Math.round(t*3); }
 let curStation = 0;
+
+/* Each station declares how wide it actually is, so the camera can guarantee it
+   fits at any aspect ratio. Adding projects or certificates widens the machine —
+   this keeps the framing correct automatically instead of by hand-tuned numbers. */
+function stationWidths(){
+  return [12.8, (typeof MAG!=='undefined'? MAG.width : 14), (window.S3_FRAME? S3_FRAME.w+1.0 : 12), 7.0];
+}
+function fitScaleAt(t){
+  const W = stationWidths();
+  const s = THREE.MathUtils.clamp(t,0,1)*3;
+  const i = Math.min(2, Math.floor(s)), f = s-i;
+  const need = W[i]*(1-f) + W[i+1]*f;                 /* blend between stations */
+  const halfW = Math.tan(THREE.MathUtils.degToRad(camera.fov)/2)*camera.aspect;
+  const P0 = posCurve.getPoint(THREE.MathUtils.clamp(t,0,1));
+  const L0 = lookCurve.getPoint(THREE.MathUtils.clamp(t,0,1));
+  const base = P0.distanceTo(L0);
+  const dNeed = (need*0.5*1.06)/halfW;
+  return Math.max(1, dNeed/base);
+}
 
 function updateCamera(dt){
   /* autopilot */
@@ -1099,7 +1164,7 @@ function updateCamera(dt){
   const sph = new THREE.Spherical().setFromVector3(offset);
   sph.theta += rig.yaw; sph.phi = THREE.MathUtils.clamp(sph.phi + rig.pitch, 0.7, 1.9);
   offset.setFromSpherical(sph);
-  offset.multiplyScalar(camDistScale);
+  offset.multiplyScalar(Math.max(camDistScale, fitScaleAt(rig.t)));
   camera.position.copy(L0).add(offset);
   camera.lookAt(L0);
 
@@ -1435,7 +1500,8 @@ function loop(now){
     const e=u<0.5?2*u*u:1-Math.pow(-2*u+2,2)/2;
     plotPlane.constant=0.06+e*13.9;
     const P1=posCurve.getPoint(0), L1=lookCurve.getPoint(0);
-    const P1s=L1.clone().add(P1.clone().sub(L1).multiplyScalar(camDistScale));
+    const sc = Math.max(camDistScale, fitScaleAt(0));
+    const P1s=L1.clone().add(P1.clone().sub(L1).multiplyScalar(sc));
     camera.position.lerpVectors(introCamA.pos,P1s,e);
     const lk=new THREE.Vector3().lerpVectors(introCamA.look,L1,e);
     camera.lookAt(lk);
