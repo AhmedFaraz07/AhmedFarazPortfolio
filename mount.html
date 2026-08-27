@@ -253,49 +253,54 @@ footer{padding:0 40px 60px;max-width:1240px;margin:0 auto;font-size:10px;letter-
     </div>
 
     <div class="note">
-      <div class="note-head"><span class="num">3</span><h2>Static Structural Analysis</h2><span class="tag">ANSYS MECHANICAL</span></div>
-      <p>The mount was analysed in Ansys Mechanical as a static structural problem. A <strong>500 N tensile load</strong> was applied at the top hole, and the model was solved for maximum shear stress and maximum total deformation.</p>
+      <div class="note-head"><span class="num">3</span><h2>Static Structural Analysis</h2><span class="tag">ANSYS 2026 R1</span></div>
+      <p>The mount was analysed in Ansys Mechanical as a static structural problem under a <strong>500 N tensile load</strong> applied at the top hole. That figure is a <strong>conservative estimate pending physical test data</strong> — chosen deliberately high so the result bounds the real service load rather than under-predicting it.</p>
       <div class="tblwrap"><table class="restable">
-        <tr><th>Parameter</th><th>Value</th></tr>
+        <tr><th>Parameter</th><th>Definition</th></tr>
         <tr><td>Analysis type</td><td>Static structural, linear elastic</td></tr>
-        <tr><td>Applied load</td><td class="num">500 N tensile — top hole</td></tr>
+        <tr><td>Applied load</td><td class="num">500 N tensile at the top hole — conservative, pending test data</td></tr>
+        <tr><td>Constraint — slots</td><td>Fixed support on both mounting slots</td></tr>
+        <tr><td>Constraint — central bore</td><td>Cylindrical support</td></tr>
         <tr><td>Young's modulus</td><td class="num">E = 71 GPa (aluminium alloy)</td></tr>
         <tr><td>Solver mesh</td><td class="num">124,000 nodes — student licence ceiling</td></tr>
       </table></div>
       <p class="tblcap">TABLE 1 — ANALYSIS SETUP</p>
-      <div class="pending"><b>AWAITING DATA</b>Boundary conditions, element type, and material designation — to be provided.</div>
+
+      <div class="keyfig">
+        <div><small>Max total deformation</small><b>7.7129 × 10⁻⁴ mm</b></div>
+        <div><small>Max shear stress (XY)</small><b class="red">7.6683 MPa</b></div>
+        <div><small>Min shear stress (XY)</small><b>−7.4297 MPa</b></div>
+      </div>
+
       <div class="viewgrid">
         <div class="figframe">
-          <div data-slot="mesh" data-alt="Refined mesh on the back wheel mount"></div>
-          <div class="vf-cap"><span><b>FIG. 1</b> — REFINED MESH · 124,000 NODES</span><span>ANSYS</span></div>
+          <div data-slot="deform" data-alt="Ansys total deformation contour plot of the back wheel mount"></div>
+          <div class="vf-cap"><span><b>FIG. 1</b> — TOTAL DEFORMATION · MAX 7.7129 × 10⁻⁴ mm</span><span>ANSYS 2026 R1</span></div>
         </div>
         <div class="figframe">
-          <div data-slot="stress" data-alt="Maximum shear stress contour plot"></div>
-          <div class="vf-cap"><span><b>FIG. 2</b> — MAX SHEAR STRESS CONTOUR</span><span>ANSYS</span></div>
+          <div data-slot="shear" data-alt="Ansys shear stress XY component contour plot of the back wheel mount"></div>
+          <div class="vf-cap"><span><b>FIG. 2</b> — SHEAR STRESS, XY COMPONENT · MAX 7.6683 MPa</span><span>ANSYS 2026 R1</span></div>
         </div>
       </div>
+      <p>The deformation field behaves the way the boundary conditions demand: peak displacement sits at the loaded top hole and falls to zero at the fixed slots. A result that disagreed with its own constraints would be the first sign of a badly built model.</p>
+      <div class="pending"><b>AWAITING DATA</b>Alloy designation and yield strength — to be provided, to state a factor of safety.</div>
     </div>
 
     <div class="note">
       <div class="note-head"><span class="num">4</span><h2>Hand-Calculation Cross-Check</h2><span class="tag">VERIFICATION</span></div>
-      <p>This was my first static structural model, so before trusting any of the output I verified it independently. Treating the loaded section as a simple bar in uniaxial tension, I calculated the expected extension by hand and compared it against the solver.</p>
+      <p>This was my first static structural model, so before trusting the output I verified it independently. Treating the loaded section as a bar in uniaxial tension, I calculated the expected extension by hand and compared it against the solver.</p>
       <div class="tblwrap"><table class="restable">
-        <tr><th>Quantity</th><th>Hand calculation</th><th>FEA — initial mesh</th><th>FEA — refined mesh</th></tr>
+        <tr><th>Max total deformation</th><th>Hand calculation</th><th>FEA — initial mesh</th><th>FEA — refined mesh</th></tr>
         <tr>
-          <td>Max deformation</td>
+          <td>Value</td>
           <td class="num">6.34 × 10⁻⁴ mm</td>
           <td class="num">7.4 × 10⁻⁴ mm</td>
-          <td class="num hi">7.712 × 10⁻⁴ mm</td>
-        </tr>
-        <tr>
-          <td>Max stress</td>
-          <td class="num">4.17 MPa <span style="color:var(--ink-2);">(nominal σ = F/A)</span></td>
-          <td class="num">≈ 9.5 MPa</td>
-          <td class="num hi">≈ 7.668 MPa</td>
+          <td class="num hi">7.7129 × 10⁻⁴ mm</td>
         </tr>
       </table></div>
-      <p class="tblcap">TABLE 2 — HAND CALCULATION vs. SOLVER</p>
-      <p>The hand calculation lands within <strong>≈18% of the converged FEA deformation</strong> — close enough to confirm the model was set up correctly and was not producing garbage from garbage. The hand figure sits slightly low by design: it assumes uniform stress across an idealised prismatic section and ignores the stress concentration around the hole, both of which the solver captures.</p>
+      <p class="tblcap">TABLE 2 — DEFORMATION: HAND CALCULATION vs. SOLVER</p>
+      <p>The hand calculation lands within <strong>≈18% of the converged FEA deformation</strong> — close enough to confirm the model was set up correctly and was not producing garbage from garbage. The hand figure sits slightly low by design: it idealises the loaded region as a prismatic bar and ignores the stress concentration around the hole, both of which the solver captures.</p>
+      <p>Deformation is the honest quantity to cross-check here. The hand calculation produces a <em>nominal direct stress</em> of σ = F/A = 4.17 MPa, whereas the solver reports the <em>XY shear component</em> at 7.6683 MPa — two different stress measures, so comparing them directly would prove nothing. The displacement comparison is like-for-like, which is why the verification rests on it.</p>
       <div class="figframe" style="max-width:760px;">
         <div data-slot="handcalcs" data-alt="Handwritten stress and deflection calculations for the back wheel mount"></div>
         <div class="vf-cap"><span><b>FIG. 3</b> — HAND CALCULATION SHEET</span><span>WORKING</span></div>
@@ -315,40 +320,46 @@ footer{padding:0 40px 60px;max-width:1240px;margin:0 auto;font-size:10px;letter-
 
     <div class="note">
       <div class="note-head"><span class="num">6</span><h2>Structural Optimisation</h2><span class="tag">MASS REDUCTION</span></div>
-      <p>With the baseline model verified, I ran an Ansys structural optimisation on the mount to remove material wherever it was not carrying load, constrained so that <strong>maximum stress remained at 7.7 MPa</strong> — the converged value from the verified baseline. The optimised geometry achieved a <strong>51% reduction in mass</strong> with no increase in peak stress.</p>
+      <p>With the baseline model verified, I ran an Ansys structural optimisation on the mount to remove material wherever it was not carrying load, constrained so that <strong>maximum stress remained at 7.7 MPa</strong> — the converged value from the verified baseline. The optimised geometry took the part from <strong>28.76 g to 14.09 g — a 51.0% reduction in mass</strong>.</p>
       <div class="keyfig">
-        <div><small>Mass reduction</small><b class="red">−51%</b></div>
+        <div><small>Mass before</small><b>28.76 g</b></div>
+        <div><small>Mass after</small><b>14.09 g</b></div>
+        <div><small>Mass reduction</small><b class="red">−51.0%</b></div>
         <div><small>Stress constraint</small><b>≤ 7.7 MPa</b></div>
-        <div><small>Objective</small><b>Minimise mass</b></div>
       </div>
       <p>For a Supermileage prototype this matters directly: every gram removed from an unsprung structural component is energy the vehicle no longer has to carry, which is the entire premise of the competition.</p>
-      <div class="viewgrid">
+      <div class="viewgrid" style="grid-template-columns:1fr;">
         <div class="figframe">
           <div data-slot="optim" data-alt="Ansys structural optimisation result showing removable material"></div>
-          <div class="vf-cap"><span><b>FIG. 4</b> — OPTIMISATION RESULT</span><span>ANSYS</span></div>
-        </div>
-        <div class="figframe">
-          <div data-slot="optim2" data-alt="Surface mesh of the optimised mount geometry"></div>
-          <div class="vf-cap"><span><b>FIG. 5</b> — OPTIMISED GEOMETRY · SURFACE MESH</span><span>ANSYS</span></div>
+          <div class="vf-cap"><span><b>FIG. 5</b> — OPTIMISATION RESULT</span><span>ANSYS</span></div>
         </div>
       </div>
       <div class="pending"><b>AWAITING DATA</b>Optimisation type, retained-mass target, exclusion regions, and before/after mass figures — to be provided.</div>
     </div>
 
     <div class="note">
-      <div class="note-head"><span class="num">7</span><h2>Assumptions &amp; Limitations</h2><span class="tag">SCOPE OF VALIDITY</span></div>
+      <div class="note-head"><span class="num">7</span><h2>Post-Optimisation Validation</h2><span class="tag">RE-ANALYSIS</span></div>
+      <p>An optimisation result is not a verified part until it has been solved again in its own right, so the optimised geometry was re-meshed and re-run through the same static structural setup. <strong>Maximum stress came back at approximately the same value as the verified baseline</strong>, confirming that the 51% of material removed was genuinely not carrying load rather than the constraint simply being reported as satisfied.</p>
+      <div class="figframe" style="max-width:760px;">
+        <div data-slot="optim2" data-alt="Surface mesh of the optimised mount geometry used for re-analysis"></div>
+        <div class="vf-cap"><span><b>FIG. 6</b> — OPTIMISED GEOMETRY RE-MESHED FOR VALIDATION</span><span>ANSYS</span></div>
+      </div>
+    </div>
+
+    <div class="note">
+      <div class="note-head"><span class="num">8</span><h2>Assumptions &amp; Limitations</h2><span class="tag">SCOPE OF VALIDITY</span></div>
       <p>Stated plainly, so the results are read for what they are:</p>
       <ul class="assume">
         <li>Linear elastic, isotropic material response — no plasticity or material non-linearity.</li>
         <li>Static loading only; fatigue, impact, and vibration are outside the scope of this analysis.</li>
-        <li>A single 500 N tensile load case at the top hole; combined cornering and braking cases were not analysed.</li>
-        <li>Fastener preload and contact behaviour at the mating faces were not modelled.</li>
+        <li>A single 500 N tensile load case at the top hole — a conservative placeholder pending measured data; combined cornering and braking cases were not analysed.</li>
+        <li>Fastener preload and contact behaviour at the mating faces were not modelled; the slots are idealised as fixed supports and the central bore as a cylindrical support.</li>
         <li>Hand calculation treats the loaded region as an idealised prismatic bar, which is why it under-predicts the solver.</li>
       </ul>
     </div>
 
     <div class="note">
-      <div class="note-head"><span class="num">8</span><h2>Method &amp; Learning Curve</h2><span class="tag">PROCESS NOTES</span></div>
+      <div class="note-head"><span class="num">9</span><h2>Method &amp; Learning Curve</h2><span class="tag">PROCESS NOTES</span></div>
       <p>The simulation methodology used here — meshing strategy, convergence checking, and validating solver output against independent hand calculations — came from <strong>A Hands-on Introduction to Engineering Simulations</strong> (CornellX), which I took specifically to make sure I could run and defend an FEA properly rather than simply generating a colourful contour plot.</p>
       <p>Being new to SolidWorks, the CAD side was its own learning curve. Moving from technical requirements to a 3D parametric model required a deep dive into sketch relations, extrusions, and hole-callout features, and working through it gave me a practical understanding of design for manufacturing (DFM) and structural optimisation.</p>
     </div>
@@ -383,7 +394,9 @@ const IMG = {
   front:'mount4.jpeg', top:'mount3.jpeg', side:'mount2.jpeg',
   optimiso:'mount-optimised-iso.png',
   handcalcs:'mount-handcalcs.jpg',
-  mesh:'', stress:'', optim:'',
+  deform:'mount-fea-deformation.png',
+  shear:'mount-fea-shear.png',
+  optim:'',
   optim2:'mount-optimised-mesh.png'
 };
 
