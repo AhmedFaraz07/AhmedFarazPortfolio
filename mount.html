@@ -328,13 +328,7 @@ footer{padding:0 40px 60px;max-width:1240px;margin:0 auto;font-size:10px;letter-
         <div><small>Stress constraint</small><b>≤ 7.7 MPa</b></div>
       </div>
       <p>For a Supermileage prototype this matters directly: every gram removed from an unsprung structural component is energy the vehicle no longer has to carry, which is the entire premise of the competition.</p>
-      <div class="viewgrid" style="grid-template-columns:1fr;">
-        <div class="figframe">
-          <div data-slot="optim" data-alt="Ansys structural optimisation result showing removable material"></div>
-          <div class="vf-cap"><span><b>FIG. 5</b> — OPTIMISATION RESULT</span><span>ANSYS</span></div>
-        </div>
-      </div>
-      <div class="pending"><b>AWAITING DATA</b>Optimisation type, retained-mass target, exclusion regions, and before/after mass figures — to be provided.</div>
+      <div class="pending"><b>AWAITING DATA</b>Optimisation type, retained-mass target, and exclusion regions — to be provided.</div>
     </div>
 
     <div class="note">
@@ -342,7 +336,7 @@ footer{padding:0 40px 60px;max-width:1240px;margin:0 auto;font-size:10px;letter-
       <p>An optimisation result is not a verified part until it has been solved again in its own right, so the optimised geometry was re-meshed and re-run through the same static structural setup. <strong>Maximum stress came back at approximately the same value as the verified baseline</strong>, confirming that the 51% of material removed was genuinely not carrying load rather than the constraint simply being reported as satisfied.</p>
       <div class="figframe" style="max-width:760px;">
         <div data-slot="optim2" data-alt="Surface mesh of the optimised mount geometry used for re-analysis"></div>
-        <div class="vf-cap"><span><b>FIG. 6</b> — OPTIMISED GEOMETRY RE-MESHED FOR VALIDATION</span><span>ANSYS</span></div>
+        <div class="vf-cap"><span><b>FIG. 4</b> — OPTIMISED GEOMETRY RE-MESHED FOR VALIDATION</span><span>ANSYS</span></div>
       </div>
     </div>
 
@@ -396,7 +390,6 @@ const IMG = {
   handcalcs:'mount-handcalcs.jpg',
   deform:'mount-fea-deformation.png',
   shear:'mount-fea-shear.png',
-  optim:'',
   optim2:'mount-optimised-mesh.png'
 };
 
