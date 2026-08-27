@@ -224,15 +224,16 @@ footer{padding:0 40px 60px;max-width:1240px;margin:0 auto;font-size:10px;letter-
     </div>
 
     <div class="note">
-      <div class="note-head"><span class="num">1</span><h2>Projection Views</h2><span class="tag">SHEET LAYOUT</span></div>
+      <div class="note-head"><span class="num">1</span><h2>General Views</h2><span class="tag">SHEET LAYOUT</span></div>
+      <p>Views A–C are the modelled component. View D is the <strong>as-optimised geometry</strong> returned by the structural optimisation described in note 6 — shown as the raw faceted solver output, before any reinterpretation for manufacture.</p>
       <div class="viewgrid">
         <div class="figframe">
           <div data-slot="top" data-alt="Mount top view"></div>
           <div class="vf-cap"><span><b>VIEW A</b> — TOP</span><span>CAD REF</span></div>
         </div>
         <div class="figframe">
-          <div data-slot="iso" data-alt="Mount isometric view"></div>
-          <div class="vf-cap"><span><b>VIEW D</b> — ISOMETRIC</span><span>CAD REF</span></div>
+          <div data-slot="optimiso" data-alt="Topology-optimised mount geometry, isometric view"></div>
+          <div class="vf-cap"><span><b>VIEW D</b> — OPTIMISED GEOMETRY, ISOMETRIC</span><span>ANSYS · AS-OPTIMISED</span></div>
         </div>
         <div class="figframe">
           <div data-slot="front" data-alt="Mount front view"></div>
@@ -327,8 +328,8 @@ footer{padding:0 40px 60px;max-width:1240px;margin:0 auto;font-size:10px;letter-
           <div class="vf-cap"><span><b>FIG. 4</b> — OPTIMISATION RESULT</span><span>ANSYS</span></div>
         </div>
         <div class="figframe">
-          <div data-slot="optim2" data-alt="Optimised mount geometry"></div>
-          <div class="vf-cap"><span><b>FIG. 5</b> — OPTIMISED GEOMETRY</span><span>ANSYS</span></div>
+          <div data-slot="optim2" data-alt="Surface mesh of the optimised mount geometry"></div>
+          <div class="vf-cap"><span><b>FIG. 5</b> — OPTIMISED GEOMETRY · SURFACE MESH</span><span>ANSYS</span></div>
         </div>
       </div>
       <div class="pending"><b>AWAITING DATA</b>Optimisation type, retained-mass target, exclusion regions, and before/after mass figures — to be provided.</div>
@@ -379,9 +380,11 @@ footer{padding:0 40px 60px;max-width:1240px;margin:0 auto;font-size:10px;letter-
 <script>
 /* IMAGE MANIFEST — edit filenames here */
 const IMG = {
-  front:'mount4.jpeg', top:'mount3.jpeg', side:'mount2.jpeg', iso:'mount1.jpeg',
+  front:'mount4.jpeg', top:'mount3.jpeg', side:'mount2.jpeg',
+  optimiso:'mount-optimised-iso.png',
   handcalcs:'mount-handcalcs.jpg',
-  mesh:'', stress:'', optim:'', optim2:''
+  mesh:'', stress:'', optim:'',
+  optim2:'mount-optimised-mesh.png'
 };
 
 function setMedia(m){
