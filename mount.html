@@ -153,6 +153,35 @@ footer{padding:0 40px 60px;max-width:1240px;margin:0 auto;font-size:10px;letter-
 .vidframe .vf-cap{border-top:1px solid var(--ink);padding:7px 10px;font-size:9px;letter-spacing:.12em;color:var(--ink-2);display:flex;justify-content:space-between;text-transform:uppercase;}
 .vidframe .vf-cap b{color:var(--ink);}
 .risk-g{font-weight:600;}
+/* analysis tables */
+.restable{width:100%;border-collapse:collapse;margin:14px 0 6px;font-size:12.5px;}
+.restable th{
+  text-align:left;font-size:9px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-2);font-weight:500;border-bottom:1px solid var(--ink);padding:8px 10px;
+}
+.restable td{border-bottom:1px solid var(--faint);padding:9px 10px;vertical-align:top;}
+.restable td:first-child{font-weight:600;letter-spacing:.02em;}
+.restable .num{font-variant-numeric:tabular-nums;white-space:nowrap;}
+.restable .hi{color:var(--red);font-weight:600;}
+.restable tr:last-child td{border-bottom:none;}
+.tblwrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+@media (max-width:720px){ .restable{min-width:540px;} .keyfig div{flex:1 1 100%;border-right:none;border-bottom:1px solid var(--hair);} .keyfig div:last-child{border-bottom:none;} }
+.tblcap{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-2);margin-bottom:16px;}
+.keyfig{
+  display:flex;gap:0;flex-wrap:wrap;border:2px solid var(--ink);margin:18px 0 22px;
+}
+.keyfig div{flex:1 1 150px;padding:12px 14px;border-right:1px solid var(--hair);}
+.keyfig div:last-child{border-right:none;}
+.keyfig small{display:block;font-size:9px;letter-spacing:.18em;color:var(--ink-2);text-transform:uppercase;margin-bottom:5px;}
+.keyfig b{font-size:19px;font-weight:900;font-family:var(--disp);letter-spacing:.01em;}
+.keyfig b.red{color:var(--red);}
+.assume{margin:0;padding-left:20px;}
+.assume li{margin-bottom:7px;font-size:13px;line-height:1.6;}
+.pending{
+  border:1px dashed var(--hair);padding:14px 16px;margin-bottom:14px;
+  font-size:10px;letter-spacing:.14em;color:var(--ink-2);text-transform:uppercase;
+}
+.pending b{display:block;color:var(--red);font-size:9px;letter-spacing:.2em;margin-bottom:6px;}
 .risk-r{color:var(--red);font-weight:600;}
 @media (max-width:720px){ .viewgrid,.vidgrid{grid-template-columns:1fr;} }
 </style>
@@ -179,7 +208,7 @@ footer{padding:0 40px 60px;max-width:1240px;margin:0 auto;font-size:10px;letter-
 
 <main>
 <section class="sheet">
-  <div class="stamp">IN TEST — ANSYS FEA</div>
+  <div class="stamp">ANALYSIS COMPLETE</div>
 
   <div class="sheet-head"><span><b>DETAIL DRAWING</b> — ITEM 7 · DWG REF AF-007</span><span>SCALE: NTS · THIRD-ANGLE PROJECTION</span></div>
   <div class="sheet-body">
@@ -189,9 +218,9 @@ footer{padding:0 40px 60px;max-width:1240px;margin:0 auto;font-size:10px;letter-
 
     <div class="meta-strip">
       <div class="meta-cell"><small>TEAM</small>UofT Supermileage (UTSM)</div>
-      <div class="meta-cell"><small>TOOL</small>SolidWorks</div>
+      <div class="meta-cell"><small>TOOL</small>SolidWorks · Ansys Mechanical</div>
       <div class="meta-cell"><small>PERIOD</small>March 2026</div>
-      <div class="meta-cell"><small>STATUS</small>In Test — Ansys</div>
+      <div class="meta-cell"><small>STATUS</small>FEA Verified · Mass Optimised</div>
     </div>
 
     <div class="note">
@@ -223,16 +252,104 @@ footer{padding:0 40px 60px;max-width:1240px;margin:0 auto;font-size:10px;letter-
     </div>
 
     <div class="note">
-      <div class="note-head"><span class="num">3</span><h2>The Learning Curve</h2><span class="tag">PROCESS NOTES</span></div>
-      <p>Being new to SolidWorks, this project represented a significant learning curve. Mastering the transition from technical requirements to a 3D parametric model required a deep dive into sketch relations, extrusions, and hole-callout features. Overcoming these initial challenges allowed me to understand the nuances of design for manufacturing (DFM) and structural optimization.</p>
+      <div class="note-head"><span class="num">3</span><h2>Static Structural Analysis</h2><span class="tag">ANSYS MECHANICAL</span></div>
+      <p>The mount was analysed in Ansys Mechanical as a static structural problem. A <strong>500 N tensile load</strong> was applied at the top hole, and the model was solved for maximum shear stress and maximum total deformation.</p>
+      <div class="tblwrap"><table class="restable">
+        <tr><th>Parameter</th><th>Value</th></tr>
+        <tr><td>Analysis type</td><td>Static structural, linear elastic</td></tr>
+        <tr><td>Applied load</td><td class="num">500 N tensile — top hole</td></tr>
+        <tr><td>Young's modulus</td><td class="num">E = 71 GPa (aluminium alloy)</td></tr>
+        <tr><td>Solver mesh</td><td class="num">124,000 nodes — student licence ceiling</td></tr>
+      </table></div>
+      <p class="tblcap">TABLE 1 — ANALYSIS SETUP</p>
+      <div class="pending"><b>AWAITING DATA</b>Boundary conditions, element type, and material designation — to be provided.</div>
+      <div class="viewgrid">
+        <div class="figframe">
+          <div data-slot="mesh" data-alt="Refined mesh on the back wheel mount"></div>
+          <div class="vf-cap"><span><b>FIG. 1</b> — REFINED MESH · 124,000 NODES</span><span>ANSYS</span></div>
+        </div>
+        <div class="figframe">
+          <div data-slot="stress" data-alt="Maximum shear stress contour plot"></div>
+          <div class="vf-cap"><span><b>FIG. 2</b> — MAX SHEAR STRESS CONTOUR</span><span>ANSYS</span></div>
+        </div>
+      </div>
     </div>
 
     <div class="note">
-      <div class="note-head"><span class="num">4</span><h2>Verification Status</h2><span class="tag">QA</span></div>
-      <div class="ncr">
-        <div class="ncr-head"><span><b>TEST-01</b> — FINITE ELEMENT ANALYSIS</span><span>DISPOSITION: IN PROGRESS</span></div>
-        <div class="ncr-body"><p>Currently being tested in Ansys.</p></div>
+      <div class="note-head"><span class="num">4</span><h2>Hand-Calculation Cross-Check</h2><span class="tag">VERIFICATION</span></div>
+      <p>This was my first static structural model, so before trusting any of the output I verified it independently. Treating the loaded section as a simple bar in uniaxial tension, I calculated the expected extension by hand and compared it against the solver.</p>
+      <div class="tblwrap"><table class="restable">
+        <tr><th>Quantity</th><th>Hand calculation</th><th>FEA — initial mesh</th><th>FEA — refined mesh</th></tr>
+        <tr>
+          <td>Max deformation</td>
+          <td class="num">6.34 × 10⁻⁴ mm</td>
+          <td class="num">7.4 × 10⁻⁴ mm</td>
+          <td class="num hi">7.712 × 10⁻⁴ mm</td>
+        </tr>
+        <tr>
+          <td>Max stress</td>
+          <td class="num">4.17 MPa <span style="color:var(--ink-2);">(nominal σ = F/A)</span></td>
+          <td class="num">≈ 9.5 MPa</td>
+          <td class="num hi">≈ 7.668 MPa</td>
+        </tr>
+      </table></div>
+      <p class="tblcap">TABLE 2 — HAND CALCULATION vs. SOLVER</p>
+      <p>The hand calculation lands within <strong>≈18% of the converged FEA deformation</strong> — close enough to confirm the model was set up correctly and was not producing garbage from garbage. The hand figure sits slightly low by design: it assumes uniform stress across an idealised prismatic section and ignores the stress concentration around the hole, both of which the solver captures.</p>
+      <div class="figframe" style="max-width:760px;">
+        <div data-slot="handcalcs" data-alt="Handwritten stress and deflection calculations for the back wheel mount"></div>
+        <div class="vf-cap"><span><b>FIG. 3</b> — HAND CALCULATION SHEET</span><span>WORKING</span></div>
       </div>
+    </div>
+
+    <div class="note">
+      <div class="note-head"><span class="num">5</span><h2>Mesh Refinement &amp; Convergence</h2><span class="tag">SOLUTION QUALITY</span></div>
+      <p>A single mesh proves nothing on its own, so the model was refined until the result stopped moving. The mesh was driven to <strong>124,000 nodes</strong> — the ceiling of the Ansys student licence — and the deformation result changed by only <strong>4.2%</strong> between the initial and refined meshes, indicating the solution had effectively converged.</p>
+      <div class="keyfig">
+        <div><small>Refined mesh</small><b>124,000</b></div>
+        <div><small>Δ deformation on refinement</small><b>+4.2%</b></div>
+        <div><small>Converged max deformation</small><b>7.712 × 10⁻⁴ mm</b></div>
+        <div><small>Converged max stress</small><b class="red">7.668 MPa</b></div>
+      </div>
+    </div>
+
+    <div class="note">
+      <div class="note-head"><span class="num">6</span><h2>Structural Optimisation</h2><span class="tag">MASS REDUCTION</span></div>
+      <p>With the baseline model verified, I ran an Ansys structural optimisation on the mount to remove material wherever it was not carrying load, constrained so that <strong>maximum stress remained at 7.7 MPa</strong> — the converged value from the verified baseline. The optimised geometry achieved a <strong>51% reduction in mass</strong> with no increase in peak stress.</p>
+      <div class="keyfig">
+        <div><small>Mass reduction</small><b class="red">−51%</b></div>
+        <div><small>Stress constraint</small><b>≤ 7.7 MPa</b></div>
+        <div><small>Objective</small><b>Minimise mass</b></div>
+      </div>
+      <p>For a Supermileage prototype this matters directly: every gram removed from an unsprung structural component is energy the vehicle no longer has to carry, which is the entire premise of the competition.</p>
+      <div class="viewgrid">
+        <div class="figframe">
+          <div data-slot="optim" data-alt="Ansys structural optimisation result showing removable material"></div>
+          <div class="vf-cap"><span><b>FIG. 4</b> — OPTIMISATION RESULT</span><span>ANSYS</span></div>
+        </div>
+        <div class="figframe">
+          <div data-slot="optim2" data-alt="Optimised mount geometry"></div>
+          <div class="vf-cap"><span><b>FIG. 5</b> — OPTIMISED GEOMETRY</span><span>ANSYS</span></div>
+        </div>
+      </div>
+      <div class="pending"><b>AWAITING DATA</b>Optimisation type, retained-mass target, exclusion regions, and before/after mass figures — to be provided.</div>
+    </div>
+
+    <div class="note">
+      <div class="note-head"><span class="num">7</span><h2>Assumptions &amp; Limitations</h2><span class="tag">SCOPE OF VALIDITY</span></div>
+      <p>Stated plainly, so the results are read for what they are:</p>
+      <ul class="assume">
+        <li>Linear elastic, isotropic material response — no plasticity or material non-linearity.</li>
+        <li>Static loading only; fatigue, impact, and vibration are outside the scope of this analysis.</li>
+        <li>A single 500 N tensile load case at the top hole; combined cornering and braking cases were not analysed.</li>
+        <li>Fastener preload and contact behaviour at the mating faces were not modelled.</li>
+        <li>Hand calculation treats the loaded region as an idealised prismatic bar, which is why it under-predicts the solver.</li>
+      </ul>
+    </div>
+
+    <div class="note">
+      <div class="note-head"><span class="num">8</span><h2>Method &amp; Learning Curve</h2><span class="tag">PROCESS NOTES</span></div>
+      <p>The simulation methodology used here — meshing strategy, convergence checking, and validating solver output against independent hand calculations — came from <strong>A Hands-on Introduction to Engineering Simulations</strong> (CornellX), which I took specifically to make sure I could run and defend an FEA properly rather than simply generating a colourful contour plot.</p>
+      <p>Being new to SolidWorks, the CAD side was its own learning curve. Moving from technical requirements to a 3D parametric model required a deep dive into sketch relations, extrusions, and hole-callout features, and working through it gave me a practical understanding of design for manufacturing (DFM) and structural optimisation.</p>
     </div>
 
     <a class="open-dwg" href="index.html#bom">← RETURN TO BILL OF MATERIALS</a>
@@ -261,7 +378,11 @@ footer{padding:0 40px 60px;max-width:1240px;margin:0 auto;font-size:10px;letter-
 
 <script>
 /* IMAGE MANIFEST — edit filenames here */
-const IMG = { front:'mount4.jpeg', top:'mount3.jpeg', side:'mount2.jpeg', iso:'mount1.jpeg' };
+const IMG = {
+  front:'mount4.jpeg', top:'mount3.jpeg', side:'mount2.jpeg', iso:'mount1.jpeg',
+  handcalcs:'mount-handcalcs.jpg',
+  mesh:'', stress:'', optim:'', optim2:''
+};
 
 function setMedia(m){
   document.documentElement.dataset.media = m;
