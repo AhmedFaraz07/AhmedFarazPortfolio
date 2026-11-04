@@ -2,15 +2,16 @@
 <html lang="en" data-media="vellum">
 <head>
 <meta charset="UTF-8">
+<script>try{var m=localStorage.getItem('af-media');if(m==='ozalid'||m==='vellum')document.documentElement.dataset.media=m;}catch(e){}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TriggerPredict CDSS — DWG NO. AF-005 | Ahmed Faraz</title>
+<title>TriggerPredict CDSS — DWG NO. AF-007 | Ahmed Faraz</title>
 <meta name="description" content="Clinical Decision Support Software developed to optimize IVF trigger shot timing for Mount Sinai Fertility.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
-   DETAIL DRAWING — DWG NO. AF-005 (TRIGGERPREDICT CDSS)
+   DETAIL DRAWING — DWG NO. AF-007 (TRIGGERPREDICT CDSS)
    Child sheet of AF-2029. Same media system.
    ============================================================ */
 :root{
@@ -141,12 +142,12 @@ footer{padding:0 40px 60px;max-width:1240px;margin:0 auto;font-size:10px;letter-
 <div id="chy" aria-hidden="true"></div>
 
 <header class="indexbar">
-  <div class="dwgno">AF-005 · CHILD OF AF-2029</div>
+  <div class="dwgno">AF-007 · CHILD OF AF-2029</div>
   <a class="back" href="index.html">← 3D MODEL</a>
   <a class="back" href="drawing.html#bom">2D BOM</a>
   <span class="spacer"></span>
-  <a class="nav" href="faceguard.html" title="Previous detail drawing">◀ AF-004</a>
-  <a class="nav" href="chassis.html" title="Next detail drawing">AF-006 ▶</a>
+  <a class="nav" href="faceguard.html" title="Previous detail drawing">◀ AF-006</a>
+  <a class="nav" href="chassis.html" title="Next detail drawing">AF-008 ▶</a>
   <div class="mediaswitch">
     <span>MEDIA</span>
     <button id="btn-vellum" aria-pressed="true" onclick="setMedia('vellum')">VELLUM</button>
@@ -156,7 +157,7 @@ footer{padding:0 40px 60px;max-width:1240px;margin:0 auto;font-size:10px;letter-
 
 <main>
 <section class="sheet">
-  <div class="sheet-head"><span><b>DETAIL DRAWING</b> — ITEM 5 · DWG REF AF-005</span><span>SCALE: NTS</span></div>
+  <div class="sheet-head"><span><b>DETAIL DRAWING</b> — ITEM 7 · DWG REF AF-007</span><span>SCALE: NTS</span></div>
   <div class="sheet-body">
 
     <p class="eyebrow">CLINICAL DECISION SUPPORT SOFTWARE</p>
@@ -251,8 +252,8 @@ footer{padding:0 40px 60px;max-width:1240px;margin:0 auto;font-size:10px;letter-
       <div class="tb-cell tb-title"><small>TITLE</small><b>TRIGGERPREDICT CDSS — DETAIL DRAWING</b></div>
       <div class="tb-cell"><small>SCALE</small><b>NTS</b></div>
       <div class="tb-cell"><small>UNITS</small><b>MM</b></div>
-      <div class="tb-cell"><small>DWG NO.</small><b>AF-005</b></div>
-      <div class="tb-cell"><small>REV</small><b>C</b></div>
+      <div class="tb-cell"><small>DWG NO.</small><b>AF-007</b></div>
+      <div class="tb-cell"><small>REV</small><b>F</b></div>
       <div class="tb-cell"><small>SHEET</small><b>1 OF 1</b></div>
       <div class="tb-cell"><small>PARENT DWG</small><b>AF-2029</b></div>
     </div>
@@ -262,7 +263,7 @@ footer{padding:0 40px 60px;max-width:1240px;margin:0 auto;font-size:10px;letter-
 
 <footer>
   <span>AHMED FARAZ · UNIVERSITY OF TORONTO · MECH ENG 2T9</span>
-  <span>DWG NO. AF-005 · REV C · DO NOT SCALE DRAWING</span>
+  <span>DWG NO. AF-007 · REV F · DO NOT SCALE DRAWING</span>
 </footer>
 
 <script>
@@ -273,7 +274,9 @@ function setMedia(m){
   document.documentElement.dataset.media = m;
   document.getElementById('btn-vellum').setAttribute('aria-pressed', m==='vellum');
   document.getElementById('btn-ozalid').setAttribute('aria-pressed', m==='ozalid');
+  try{ localStorage.setItem('af-media', m); }catch(e){}
 }
+setMedia(document.documentElement.dataset.media==='ozalid' ? 'ozalid' : 'vellum');
 /* crosshair */
 (function(){
   if(!window.matchMedia('(hover:hover) and (pointer:fine)').matches) return;
@@ -286,7 +289,7 @@ function setMedia(m){
 (function(){
   const box = document.getElementById('teamimg');
   function ph(){
-    box.innerHTML = `<div class="placeholder"><b>NO IMAGE REF</b><span>SLOT: TEAM</span><span>SET FILENAME IN IMAGE MANIFEST</span></div>`;
+    const fr=box.closest('.figframe')||box; fr.remove();
   }
   if(!IMG.team){ ph(); return; }
   const im = new Image();

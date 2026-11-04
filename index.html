@@ -2,8 +2,9 @@
 <html lang="en" data-media="vellum">
 <head>
 <meta charset="UTF-8">
+<script>try{var m=localStorage.getItem('af-media');if(m==='ozalid'||m==='vellum')document.documentElement.dataset.media=m;}catch(e){}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ahmed Faraz — AF-2029 REV E · Digital Twin</title>
+<title>Ahmed Faraz — AF-2029 REV F · Digital Twin</title>
 <meta name="description" content="Mechanical Engineering student at the University of Toronto exploring Mechatronics, Aerospace, and Smart Materials.">
 <meta property="og:title" content="Ahmed Faraz | Portfolio">
 <meta property="og:description" content="Mechanical Engineering student at the University of Toronto exploring Mechatronics, Aerospace, and Smart Materials.">
@@ -17,8 +18,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
-   DWG NO. AF-2029 · REV E — "THE DIGITAL TWIN"
-   The machine described by drawing.html (REV E).
+   DWG NO. AF-2029 · REV F — "THE DIGITAL TWIN"
+   The machine described by drawing.html (REV F).
    ============================================================ */
 :root{
   --paper:#F7F5EC; --paper-2:#EFECE0; --ink:#191913; --ink-2:#5E5D50;
@@ -237,7 +238,7 @@ dialog#appendix::backdrop{background:rgba(20,20,15,.55);}
               letter-spacing:.06em;line-height:1.7;">
     <div style="max-width:46ch;">
       <p style="font-size:10px;letter-spacing:.2em;color:var(--red);font-weight:600;margin-bottom:14px;">
-        AF-2029 · REV E</p>
+        AF-2029 · REV F</p>
       <p>This machine is driven by JavaScript and WebGL, both of which are switched off or unavailable.</p>
       <p style="margin-top:16px;"><a href="drawing.html" style="color:var(--red);font-weight:600;">
         OPEN THE 2D DRAWING PACKAGE INSTEAD →</a><br>
@@ -258,14 +259,14 @@ dialog#appendix::backdrop{background:rgba(20,20,15,.55);}
 <div id="chy" aria-hidden="true"></div>
 
 <header class="indexbar">
-  <div class="dwgno">AF-2029 · REV E</div>
+  <div class="dwgno">AF-2029 · REV F</div>
   <nav aria-label="Station index">
     <button data-st="0" class="active">S1 · OPERATOR</button>
     <button data-st="1">S2 · SERVICE RECORD</button>
     <button data-st="2">S3 · PART MAGAZINE</button>
     <button data-st="3">S4 · QA RACK</button>
     <button data-st="4">S5 · TERMINAL</button>
-    <a href="drawing.html" title="2D drawing package (REV E)">2D DWG →</a>
+    <a href="drawing.html" title="2D drawing package (REV F)">2D DWG →</a>
   </nav>
   <div class="mediaswitch">
     <span>MEDIA</span>
@@ -340,7 +341,7 @@ dialog#appendix::backdrop{background:rgba(20,20,15,.55);}
 <button id="skip">SKIP PLOT ⏎</button>
 <div id="plotting">PLOTTING WORLD…</div>
 
-<div id="nogl"><p>THIS MACHINE REQUIRES WEBGL.<br><br><a href="drawing.html">OPEN THE 2D DRAWING PACKAGE (REV E) INSTEAD →</a></p></div>
+<div id="nogl"><p>THIS MACHINE REQUIRES WEBGL.<br><br><a href="drawing.html">OPEN THE 2D DRAWING PACKAGE (REV F) INSTEAD →</a></p></div>
 
 <dialog id="appendix">
   <div class="apx-head">
@@ -360,10 +361,10 @@ dialog#appendix::backdrop{background:rgba(20,20,15,.55);}
 const IMG = {
   headshot:       'headshot.jpeg',
   /* ---- parts, in running order ---- */
-  ut27:           '',
-  hijra:          '',
+  ut27:           'ut27-pack-iso.jpg',
+  hijra:          'hijra-robot.jpg',
   scd:            'SCDCHAMBER.jpg',
-  composite:      '',
+  composite:      'cnf-sample-bags.jpg',
   raidio:         'RAIDIOTHUMBNAIL.PNG',
   faceguard:      '1771220731975.jpeg',
   triggerpredict: 'image_690bba.png',
@@ -380,26 +381,35 @@ const IMG = {
   certCatia:      'CATIA3DXCERTIFICATE.jpg',
   /* ---- service record ---- */
   expTsmart:      'tsmart-cover.png',
-  expEuroWorld:   'europeanworld-cover.png'
+  expEuroWorld:   'europeanworld-cover.png',
+  expMaingen:     'utesca-maingen-cover.png'
 };
 /* ============================================================
    SERVICE RECORD — research, jobs, internships. Append entries here;
    the time rail rescales and re-stacks itself automatically.
-   kind: RESEARCH | INTERNSHIP | EMPLOYMENT | FELLOWSHIP
+   kind: RESEARCH | INTERNSHIP | EMPLOYMENT | FELLOWSHIP | CONSULTING
    start/end: 'YYYY-MM'.  end:null = ongoing.
    role/desc: '' = AWAITING DATA slot.  link: null = no detail sheet yet.
    ============================================================ */
 const EXPERIENCE = [
   {key:'expEuroWorld', ref:'EXP-01', kind:'INTERNSHIP',
    org:'EUROPEAN WORLD',
-   full:'European World',
-   role:'Mechanical Engineering Intern', desc:'',
-   start:'2025-05', end:'2025-08', link:null},
+   full:'European World Company — Dammam, Saudi Arabia',
+   role:'Mechanical Engineering Intern',
+   desc:'20+ fabrication drawings in SolidWorks with DFM and GD&amp;T; reviewed 30+ drawings and caught 2 errors before fabrication; structural calculations for plate weights, beam sizing and connection loads; on-site measurement and alignment checks.',
+   start:'2025-05', end:'2025-08', link:'europeanworld.html'},
   {key:'expTsmart', ref:'EXP-02', kind:'RESEARCH',
    org:'TSMART',
-   full:'Toronto Smart Materials & Structures',
-   role:'Undergraduate Research Fellow', desc:'',
-   start:'2026-05', end:'2026-08', link:null}
+   full:'Toronto Smart Materials & Structures — Prof. Hani Naguib',
+   role:'Undergraduate Research Fellow',
+   desc:'MIE Summer Research Award 2026. Four-point carbon-nanofibre composite series for Magna R&amp;D (TGA, DSC, Instron, dielectric, rheometry); co-designed and assembled a supercritical CO₂ drying chamber for polyimide aerogels; Ansys Fluent CFD of the drying process.',
+   start:'2026-05', end:null, link:'tsmart.html'},
+  {key:'expMaingen', ref:'EXP-03', kind:'CONSULTING',
+   org:'UTESCA × MAINGEN',
+   full:'U of T Engineering Student Consulting Association — for Maingen (Y Combinator S26)',
+   role:'Co-Head Mechanical Engineer',
+   desc:'AI consulting engagement delivered through UTESCA. Building an evaluation environment in which an AI agent takes a real recurring operations decision and is scored against a human operator baseline; mechanical expertise on fabrication jobs; Python.',
+   start:'2026-10', end:null, link:'utesca-maingen.html'}
 ];
 /* ============================================================
    SPEC MANIFEST — one-line spec facts. '' = AWAITING DATA slot.
@@ -470,7 +480,7 @@ const CERTS = [
   {key:'certCSWA', name:'CSWA',             issuer:'DASSAULT SYSTÈMES',         ref:'QC-04'},
   {key:'certCSWP', name:'CSWP',             issuer:'DASSAULT SYSTÈMES',         ref:'QC-05'},
   {key:'certSim',  name:'SIMULINK ONRAMP',  issuer:'MATHWORKS',                 ref:'QC-06'},
-  {key:'certCatia',name:'CATIA ASSOCIATE', issuer:'DASSAULT SYSTÈMES', ref:'QC-07'}
+  {key:'certCatia',name:'3DEXPERIENCE MECH. DESIGNER', issuer:'DASSAULT SYSTÈMES · ASSOCIATE', ref:'QC-07'}
 ];
 
 /* ---------- palettes ---------- */
@@ -480,7 +490,7 @@ const PALETTES = {
   ozalid:{paper:0x13273C, ink:0xDFE9F2, ink2:0x8CA4B8, red:0xFF6A50, white:0x0B1A2B,
           cssPaper:'#13273C', cssInk:'#DFE9F2', cssInk2:'#8CA4B8', cssRed:'#FF6A50', cssWhite:'#0B1A2B', cssPaper2:'#0E2033'}
 };
-let MEDIA = 'vellum';
+let MEDIA = (document.documentElement.dataset.media==='ozalid') ? 'ozalid' : 'vellum';
 const PAL = ()=>PALETTES[MEDIA];
 
 const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -497,7 +507,7 @@ const FINE    = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
     document.getElementById('nogl').style.display='flex';
     document.getElementById('skip').style.display='none';
     document.getElementById('plotting').style.display='none';
-    throw new Error('no webgl — offered REV E');
+    throw new Error('no webgl — offered REV F');
   }
 })();
 
@@ -605,10 +615,10 @@ function placeholderTex(slot){
     x.strokeStyle='rgba(128,128,128,.35)'; x.lineWidth=3;
     x.beginPath(); x.moveTo(0,0); x.lineTo(640,440); x.moveTo(640,0); x.lineTo(0,440); x.stroke();
     x.fillStyle=P.cssInk; x.font='600 26px "IBM Plex Mono", monospace'; x.textAlign='center';
-    x.fillText('NO IMAGE REF', 320, 200);
+    x.fillText('IMAGE WITHHELD', 320, 200);
     x.fillStyle=P.cssInk2; x.font='500 20px "IBM Plex Mono", monospace';
-    x.fillText('SLOT: '+slot.toUpperCase(), 320, 238);
-    x.fillText('SET FILENAME IN IMAGE MANIFEST', 320, 270);
+    x.fillText('TEAM IP — IN MANUFACTURE', 320, 238);
+    x.fillText('SEE DETAIL DWG', 320, 270);
     tex.needsUpdate=true;};
   canvasPlates.push({draw}); draw();
   return tex;
@@ -771,10 +781,10 @@ function setFigPlaceholder(){
     ctx.beginPath(); ctx.moveTo(0,0); ctx.lineTo(W,H); ctx.moveTo(W,0); ctx.lineTo(0,H); ctx.stroke();
     ctx.textAlign='center';
     ctx.fillStyle=P.cssInk; ctx.font='600 44px "IBM Plex Mono", monospace';
-    ctx.fillText('NO IMAGE REF', W/2, H/2-30);
+    ctx.fillText('PHOTO REF', W/2, H/2-30);
     ctx.fillStyle=P.cssInk2; ctx.font='500 30px "IBM Plex Mono", monospace';
-    ctx.fillText('SLOT: HEADSHOT', W/2, H/2+22);
-    ctx.fillText('SET FILENAME IN IMAGE MANIFEST', W/2, H/2+68);
+    ctx.fillText('OPERATOR', W/2, H/2+22);
+    ctx.fillText('IMAGE UNAVAILABLE', W/2, H/2+68);
     ctx.textAlign='left';
   },{noFrame:true});
   ph.position.z=0.012; figG.add(ph);
@@ -837,7 +847,7 @@ const notes = makePlate(6.6, 5.0, 1400, (ctx,W,H,P)=>{
 notes.position.set(3.4, 2.9, 0); S1.add(notes);
 notes.add(segs([[[-3.3,-2.5,0],[-3.3,-2.9,0]],[[3.3,-2.5,0],[3.3,-2.9,0]]], inkLine()));
 
-/* GA sheet lying on floor (the REV E 2D document) — clickable */
+/* GA sheet lying on floor (the REV F 2D document) — clickable */
 const sheet = makePlate(7.6, 5.0, 1500, (ctx,W,H,P)=>{
   ctx.fillStyle=P.cssPaper; ctx.fillRect(0,0,W,H);
   ctx.strokeStyle=P.cssInk; ctx.lineWidth=5; ctx.strokeRect(18,18,W-36,H-36);
@@ -858,7 +868,7 @@ const sheet = makePlate(7.6, 5.0, 1500, (ctx,W,H,P)=>{
   const val=['AF-2029','E','1:1','1 OF 5','VELLUM']; val.forEach((v,i)=>ctx.fillText(v, bx+bw*[0,0.22,0.44,0.62,0.8][i]+12, by+56));
   ctx.fillStyle=P.cssRed; ctx.font='600 24px "IBM Plex Mono", monospace';
   ctx.fillText('THIS DOCUMENT DESCRIBES THE MACHINE ABOVE.', bx+12, by+96);
-  ctx.fillText('CLICK TO OPEN 2D DRAWING (REV E) ↗', bx+12, by+124);
+  ctx.fillText('CLICK TO OPEN 2D DRAWING (REV F) ↗', bx+12, by+124);
 }, {});
 sheet.rotation.x = -Math.PI/2;
 sheet.position.set(0.6, 0.02, 5.0);
@@ -1357,7 +1367,7 @@ let screenPlateDraw=null;
   S4.add(new THREE.Line(cgeo, ink2Line(.9)));
   const t=makeSprite('S5 — COMMUNICATIONS · SERIAL CONSOLE', .4, 'ink');
   t.position.set(0,5.1,0); S4.add(t);
-  const rev=makeSprite('REV C · 2026-08 · COMPLETE REDRAW   |   REV D · 2026-08 · DIGITAL TWIN   |   REV E · 2026-11 · PARTS LIST EXPANDED TO 9 — AF', .26, 'ink2');
+  const rev=makeSprite('REV C · 2026-08 · COMPLETE REDRAW   |   REV D · 2026-08 · DIGITAL TWIN   |   REV E · 2026-11 · PARTS LIST EXPANDED TO 9   |   REV F · 2026-11 · SERVICE RECORD EXP-03, PHOTO REFS, RENUMBERED DETAILS — AF', .26, 'ink2');
   rev.position.set(0,4.55,0); S4.add(rev);
 }
 
@@ -1654,7 +1664,7 @@ function mountImage(container, slotKey, alt){
   container.innerHTML='';
   const file = IMG[slotKey];
   const ph = ()=>{ container.innerHTML =
-    `<div class="placeholder"><b>NO IMAGE REF</b><span>SLOT: ${slotKey.toUpperCase()}</span><span>SET FILENAME IN IMAGE MANIFEST</span></div>`; };
+    `<div class="placeholder"><b>IMAGE UNAVAILABLE</b><span>${slotKey.toUpperCase()}</span></div>`; };
   if(!file){ ph(); return; }
   const im=new Image(); im.src=file; im.alt=alt||slotKey;
   im.onerror=ph; container.appendChild(im);
@@ -1682,7 +1692,7 @@ const CMDS={
   email       copy contact email
   linkedin    open linkedin profile
   media       toggle vellum / ozalid
-  2d          open the 2D drawing package (REV E)
+  2d          open the 2D drawing package (REV F)
   clear       clear terminal`);},
   whoami(){conPrint("AHMED FARAZ — MECH ENG STUDENT, UNIVERSITY OF TORONTO (2T9). DEAN'S LIST. UTFR · UTSM.");},
   ls(){conPrint('S1 OPERATOR   S2 SERVICE-RECORD   S3 PART-MAGAZINE   S4 QA-RACK   S5 TERMINAL');},
@@ -1720,6 +1730,7 @@ conPrint('<span class="dim">AF-2029 serial link established @ 115200 baud.\ntype
    ============================================================ */
 function setMedia(m){
   MEDIA=m;
+  try{ localStorage.setItem('af-media', m); }catch(e){}
   document.documentElement.dataset.media=m;
   document.getElementById('btn-vellum').setAttribute('aria-pressed', m==='vellum');
   document.getElementById('btn-ozalid').setAttribute('aria-pressed', m==='ozalid');
@@ -1734,6 +1745,7 @@ function setMedia(m){
 }
 document.getElementById('btn-vellum').addEventListener('click',()=>setMedia('vellum'));
 document.getElementById('btn-ozalid').addEventListener('click',()=>setMedia('ozalid'));
+if(MEDIA!=='vellum') setMedia(MEDIA);
 document.querySelectorAll('.indexbar nav button').forEach(b=>b.addEventListener('click',()=>gotoStation(+b.dataset.st)));
 
 /* ============================================================

@@ -2,8 +2,9 @@
 <html lang="en" data-media="vellum">
 <head>
 <meta charset="UTF-8">
+<script>try{var m=localStorage.getItem('af-media');if(m==='ozalid'||m==='vellum')document.documentElement.dataset.media=m;}catch(e){}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FaceGuard — DWG NO. AF-004 | Ahmed Faraz</title>
+<title>FaceGuard — DWG NO. AF-006 | Ahmed Faraz</title>
 <meta name="description" content="All-in-one safety hub and multi-sensor hazard detection system for disaster response environments.">
 <meta property="og:title" content="FaceGuard | Ahmed Faraz">
 <meta property="og:description" content="All-in-one safety hub and multi-sensor hazard detection system for disaster response environments.">
@@ -16,7 +17,7 @@
 <style>
 
 /* ============================================================
-   DETAIL DRAWING — DWG NO. AF-005 (TRIGGERPREDICT CDSS)
+   DETAIL DRAWING — DWG NO. AF-006 (FACEGUARD)
    Child sheet of AF-2029. Same media system.
    ============================================================ */
 :root{
@@ -164,12 +165,12 @@ footer{padding:0 40px 60px;max-width:1240px;margin:0 auto;font-size:10px;letter-
 <div id="chy" aria-hidden="true"></div>
 
 <header class="indexbar">
-  <div class="dwgno">AF-004 · CHILD OF AF-2029</div>
+  <div class="dwgno">AF-006 · CHILD OF AF-2029</div>
   <a class="back" href="index.html">← 3D MODEL</a>
   <a class="back" href="drawing.html#bom">2D BOM</a>
   <span class="spacer"></span>
-  <a class="nav" href="raidio.html" title="Previous detail drawing">◀ AF-003</a>
-  <a class="nav" href="triggerpredict.html" title="Next detail drawing">AF-005 ▶</a>
+  <a class="nav" href="raidio.html" title="Previous detail drawing">◀ AF-005</a>
+  <a class="nav" href="triggerpredict.html" title="Next detail drawing">AF-007 ▶</a>
   <div class="mediaswitch">
     <span>MEDIA</span>
     <button id="btn-vellum" aria-pressed="true" onclick="setMedia('vellum')">VELLUM</button>
@@ -180,7 +181,7 @@ footer{padding:0 40px 60px;max-width:1240px;margin:0 auto;font-size:10px;letter-
 <main>
 <section class="sheet">
 
-  <div class="sheet-head"><span><b>DETAIL DRAWING</b> — ITEM 4 · DWG REF AF-004</span><span>SCALE: NTS</span></div>
+  <div class="sheet-head"><span><b>DETAIL DRAWING</b> — ITEM 6 · DWG REF AF-006</span><span>SCALE: NTS</span></div>
   <div class="sheet-body">
 
     <p class="eyebrow">MULTI-SENSOR HAZARD DETECTION SYSTEM — THEME: "D-DAY" DISASTER PREPAREDNESS</p>
@@ -295,8 +296,8 @@ footer{padding:0 40px 60px;max-width:1240px;margin:0 auto;font-size:10px;letter-
       <div class="tb-cell tb-title"><small>TITLE</small><b>FACEGUARD — HAZARD DETECTION HUB · DETAIL DRAWING</b></div>
       <div class="tb-cell"><small>SCALE</small><b>NTS</b></div>
       <div class="tb-cell"><small>UNITS</small><b>MM</b></div>
-      <div class="tb-cell"><small>DWG NO.</small><b>AF-004</b></div>
-      <div class="tb-cell"><small>REV</small><b>C</b></div>
+      <div class="tb-cell"><small>DWG NO.</small><b>AF-006</b></div>
+      <div class="tb-cell"><small>REV</small><b>F</b></div>
       <div class="tb-cell"><small>SHEET</small><b>1 OF 1</b></div>
       <div class="tb-cell"><small>PARENT DWG</small><b>AF-2029</b></div>
     </div>
@@ -307,7 +308,7 @@ footer{padding:0 40px 60px;max-width:1240px;margin:0 auto;font-size:10px;letter-
 
 <footer>
   <span>AHMED FARAZ · UNIVERSITY OF TORONTO · MECH ENG 2T9</span>
-  <span>DWG NO. AF-004 · REV C · DO NOT SCALE DRAWING</span>
+  <span>DWG NO. AF-006 · REV F · DO NOT SCALE DRAWING</span>
 </footer>
 
 <script>
@@ -320,7 +321,9 @@ function setMedia(m){
   document.documentElement.dataset.media = m;
   document.getElementById('btn-vellum').setAttribute('aria-pressed', m==='vellum');
   document.getElementById('btn-ozalid').setAttribute('aria-pressed', m==='ozalid');
+  try{ localStorage.setItem('af-media', m); }catch(e){}
 }
+setMedia(document.documentElement.dataset.media==='ozalid' ? 'ozalid' : 'vellum');
 /* crosshair */
 (function(){
   if(!window.matchMedia('(hover:hover) and (pointer:fine)').matches) return;
@@ -331,26 +334,28 @@ function setMedia(m){
 })();
 /* mount every [data-slot] figure from the IMG manifest, white slot fallback */
 (function(){
+  /* Empty slots are dropped rather than shown as placeholders; an empty figure grid removes its section. */
+  const drop=(box)=>{
+    const f=box.closest('.figframe')||box, grid=f.parentElement; f.remove();
+    if(grid && grid.classList.contains('viewgrid') && !grid.querySelector('.figframe')){
+      const note=grid.closest('.note'); if(note) note.remove(); else grid.remove();
+    }
+  };
   document.querySelectorAll('[data-slot]').forEach(box=>{
-    const key = box.dataset.slot;
-    const file = IMG[key];
-    const ph = ()=>{ box.innerHTML =
-      `<div class="placeholder"><b>NO IMAGE REF</b><span>SLOT: ${key.toUpperCase()}</span><span>SET FILENAME IN IMAGE MANIFEST</span></div>`; };
-    if(!file){ ph(); return; }
-    const im=new Image(); im.src=encodeURI(file); im.alt=box.dataset.alt||key;
-    im.onerror=ph; box.appendChild(im);
+    const key=box.dataset.slot, file=IMG[key];
+    if(!file){ drop(box); return; }
+    const im=new Image(); im.src=encodeURI(file); im.alt=box.dataset.alt||key; im.onerror=()=>drop(box); box.appendChild(im);
   });
-  /* videos */
+  document.querySelectorAll('.viewgrid').forEach(g=>{ if(g.querySelectorAll('.figframe').length===1) g.style.gridTemplateColumns='1fr'; });
+  /* renumber the figures that remain in each grid */
+  document.querySelectorAll('.viewgrid').forEach(g=>{ let n=0; g.querySelectorAll('.figframe .vf-cap b').forEach(b=>{ if(/^FIG\. \d+$/.test(b.textContent.trim())) b.textContent='FIG. '+(++n); }); });
+  /* videos (pages that declare a VID manifest) */
   document.querySelectorAll('[data-vslot]').forEach(box=>{
-    const key = box.dataset.vslot;
-    const file = (typeof VID!=='undefined') ? VID[key] : '';
-    const ph = ()=>{ box.innerHTML =
-      `<div class="placeholder" style="aspect-ratio:16/10;"><b>NO VIDEO REF</b><span>SLOT: ${key.toUpperCase()}</span><span>SET FILENAME IN VIDEO MANIFEST</span></div>`; };
-    if(!file){ ph(); return; }
-    const v=document.createElement('video');
-    v.controls=true; v.preload='metadata'; v.src=encodeURI(file);
-    v.addEventListener('error', ph, {once:true});
-    box.appendChild(v);
+    const key=box.dataset.vslot, file=(typeof VID!=='undefined')?VID[key]:'';
+    const dropv=()=>{ const f=box.closest('.vidframe')||box, grid=f.parentElement; f.remove(); if(grid && grid.classList.contains('vidgrid') && !grid.children.length){ const note=grid.closest('.note'); if(note) note.remove(); else grid.remove(); } };
+    if(!file){ dropv(); return; }
+    const v=document.createElement('video'); v.controls=true; v.preload='metadata'; v.playsInline=true; v.src=encodeURI(file);
+    v.addEventListener('error', dropv, {once:true}); box.appendChild(v);
   });
 })();
 </script>
