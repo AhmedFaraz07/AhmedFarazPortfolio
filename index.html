@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ahmed Faraz — AF-2029 REV D · Digital Twin</title>
+<title>Ahmed Faraz — AF-2029 REV E · Digital Twin</title>
 <meta name="description" content="Mechanical Engineering student at the University of Toronto exploring Mechatronics, Aerospace, and Smart Materials.">
 <meta property="og:title" content="Ahmed Faraz | Portfolio">
 <meta property="og:description" content="Mechanical Engineering student at the University of Toronto exploring Mechatronics, Aerospace, and Smart Materials.">
@@ -17,8 +17,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
-   DWG NO. AF-2029 · REV D — "THE DIGITAL TWIN"
-   The machine described by drawing.html (REV C).
+   DWG NO. AF-2029 · REV E — "THE DIGITAL TWIN"
+   The machine described by drawing.html (REV E).
    ============================================================ */
 :root{
   --paper:#F7F5EC; --paper-2:#EFECE0; --ink:#191913; --ink-2:#5E5D50;
@@ -231,6 +231,24 @@ dialog#appendix::backdrop{background:rgba(20,20,15,.55);}
 
 <canvas id="gl"></canvas>
 
+<noscript>
+  <div style="position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;
+              background:var(--paper);color:var(--ink);padding:28px;text-align:center;font-size:13px;
+              letter-spacing:.06em;line-height:1.7;">
+    <div style="max-width:46ch;">
+      <p style="font-size:10px;letter-spacing:.2em;color:var(--red);font-weight:600;margin-bottom:14px;">
+        AF-2029 · REV E</p>
+      <p>This machine is driven by JavaScript and WebGL, both of which are switched off or unavailable.</p>
+      <p style="margin-top:16px;"><a href="drawing.html" style="color:var(--red);font-weight:600;">
+        OPEN THE 2D DRAWING PACKAGE INSTEAD →</a><br>
+        <span style="color:var(--ink-2);font-size:11px;">It carries a plain-text copy of every sheet.</span></p>
+      <p style="margin-top:16px;font-size:11px;color:var(--ink-2);">
+        AHMED FARAZ · <a href="mailto:ahmedfarazpro@gmail.com" style="color:inherit;">ahmedfarazpro@gmail.com</a><br>
+        <a href="https://www.linkedin.com/in/ahmedfarazuoft/" style="color:inherit;">linkedin.com/in/ahmedfarazuoft</a></p>
+    </div>
+  </div>
+</noscript>
+
 <div class="frame" aria-hidden="true"></div>
 <div class="zones top" aria-hidden="true"></div>
 <div class="zones bottom" aria-hidden="true"></div>
@@ -240,14 +258,14 @@ dialog#appendix::backdrop{background:rgba(20,20,15,.55);}
 <div id="chy" aria-hidden="true"></div>
 
 <header class="indexbar">
-  <div class="dwgno">AF-2029 · REV D</div>
+  <div class="dwgno">AF-2029 · REV E</div>
   <nav aria-label="Station index">
     <button data-st="0" class="active">S1 · OPERATOR</button>
     <button data-st="1">S2 · SERVICE RECORD</button>
     <button data-st="2">S3 · PART MAGAZINE</button>
     <button data-st="3">S4 · QA RACK</button>
     <button data-st="4">S5 · TERMINAL</button>
-    <a href="drawing.html" title="2D drawing package (REV C)">2D DWG →</a>
+    <a href="drawing.html" title="2D drawing package (REV E)">2D DWG →</a>
   </nav>
   <div class="mediaswitch">
     <span>MEDIA</span>
@@ -285,7 +303,7 @@ dialog#appendix::backdrop{background:rgba(20,20,15,.55);}
     <div class="ro-row">
       <button class="idx-btn" id="ex-prev" aria-label="Previous appointment">◀</button>
       <button class="idx-btn" id="ex-next" aria-label="Next appointment">▶</button>
-      <a class="open-dwg" id="ex-link" href="#" style="display:none;">OPEN SERVICE RECORD →</a>
+      <a class="open-dwg" id="ex-link" href="drawing.html#service" style="display:none;">OPEN SERVICE RECORD →</a>
     </div>
   </div>
 </aside>
@@ -301,7 +319,7 @@ dialog#appendix::backdrop{background:rgba(20,20,15,.55);}
     <div class="ro-row">
       <button class="idx-btn" id="ro-prev" aria-label="Previous item">◀</button>
       <button class="idx-btn" id="ro-next" aria-label="Next item">▶</button>
-      <a class="open-dwg" id="ro-link" href="#" style="display:none;">OPEN DETAIL DWG →</a>
+      <a class="open-dwg" id="ro-link" href="drawing.html#bom" style="display:none;">OPEN DETAIL DWG →</a>
     </div>
   </div>
 </aside>
@@ -322,7 +340,7 @@ dialog#appendix::backdrop{background:rgba(20,20,15,.55);}
 <button id="skip">SKIP PLOT ⏎</button>
 <div id="plotting">PLOTTING WORLD…</div>
 
-<div id="nogl"><p>THIS MACHINE REQUIRES WEBGL.<br><br><a href="drawing.html">OPEN THE 2D DRAWING PACKAGE (REV C) INSTEAD →</a></p></div>
+<div id="nogl"><p>THIS MACHINE REQUIRES WEBGL.<br><br><a href="drawing.html">OPEN THE 2D DRAWING PACKAGE (REV E) INSTEAD →</a></p></div>
 
 <dialog id="appendix">
   <div class="apx-head">
@@ -341,13 +359,18 @@ dialog#appendix::backdrop{background:rgba(20,20,15,.55);}
    ============================================================ */
 const IMG = {
   headshot:       'headshot.jpeg',
-  hijra:          'image_1c8627.png',
+  /* ---- parts, in running order ---- */
+  ut27:           '',
+  hijra:          '',
   scd:            'SCDCHAMBER.jpg',
+  composite:      '',
   raidio:         'RAIDIOTHUMBNAIL.PNG',
   faceguard:      '1771220731975.jpeg',
   triggerpredict: 'image_690bba.png',
   chassis:        'chassis_dynoi.jpeg',
   mount:          'mount-fea-deformation.png',
+  maingen:        '',
+  /* ---- inspection records ---- */
   certAI:         'ai-certificate.jpg',
   certLead:       'ilead-certificate.jpg',
   certAP:         'ap-capstone.jpg',
@@ -355,6 +378,7 @@ const IMG = {
   certCSWP:       'CSWPCERTIFICATE.png',
   certSim:        'SIMULINKONRAMPCERT.png',
   certCatia:      'CATIA3DXCERTIFICATE.jpg',
+  /* ---- service record ---- */
   expTsmart:      'tsmart-cover.png',
   expEuroWorld:   'europeanworld-cover.png'
 };
@@ -380,26 +404,64 @@ const EXPERIENCE = [
 /* ============================================================
    SPEC MANIFEST — one-line spec facts. '' = AWAITING DATA slot.
    ============================================================ */
-const SPEC = { hijra:'', scd:'', raidio:'', faceguard:'', triggerpredict:'', chassis:'',
-               mount:'MASS \u221251% (28.8 \u2192 14.1 GRAMS) — FEA VERIFIED' };
+const SPEC = {
+  ut27:'UTFR UT27, IN MANUFACTURE NOV 2026 — POUCH CELLS, LiCoO₂, 14,000 mAh, 10C — 8 BATTERY-TO-CHASSIS MOUNTS — 7 FAILURE MODES ANALYSED, TEAROUT GOVERNING AT FoS 3.4, e/D 2.6 — ALUMINIUM 6061',
+  hijra:'PAYLOAD ≥ 300 g — SPEED 0.1 m/s — BUDGET $300 CAD — CHASSIS 250 × 163 × 3 mm, 3D-PRINTED PLA — ESP32, CAMERA, DC GEAR-MOTOR DRIVE',
+  scd:'CO-DESIGNED AND ASSEMBLED IN-HOUSE — REPLACES A FREEZE-DRYING ROUTE — TSMART, PROF. HANI NAGUIB — MIE SUMMER RESEARCH AWARD 2026',
+  composite:'GLASS-FILLED POLYPROPYLENE MATRIX — CNF LOADING ACROSS FOUR POINTS — MELT TEMPERATURE, SCREW SPEED AND MIXING TIME HELD FIXED — EVERY FORMULATION RUN IN DUPLICATE — TSMART, PROF. HANI NAGUIB — MIE SUMMER RESEARCH AWARD 2026',
+  raidio:'HACK WITHOUT BORDERS 2026 — SSTV (MARTIN 1) — GEMINI 2.5 FLASH — GOOGLE TEXT-TO-SPEECH — PYTHON BACKEND PACKAGED TO ANDROID VIA BUILDOZER',
+  faceguard:'MAKEUOFT 2026 — 24-HOUR BUILD — MPU6050 ACCELEROMETER, FLAME, SMOKE/GAS, SOUND, PIR — LED AND BUZZER DIAGNOSTICS',
+  triggerpredict:'APS112 (ENGINEERING STRATEGIES &amp; PRACTICE II) — FIRST-YEAR TEAM DESIGN PROJECT — CLINICAL DECISION SUPPORT SYSTEM',
+  chassis:'UofT SUPERMILEAGE (UTSM) — 2025–2026 — MECHANICAL DESIGN, MACHINING AND FABRICATION — TEAM OF FOUR',
+  mount:'28.76 g → 14.09 g (51% MASS REDUCTION) — PEAK STRESS HELD AT 7.7 MPa — BASELINE FEA VALIDATED AGAINST HAND CALCULATIONS TO WITHIN 18% — THIRD-ANGLE DETAIL DRAWING RELEASED WITH GD&amp;T',
+  /* held: */ maingen:'MAINGEN (Y COMBINATOR S26) × UNIVERSITY OF TORONTO — SCOPED OCT 2026 — CO-HEAD MECHANICAL ENGINEER, CONSULTING — PYTHON — WEEKLY EXECUTION, TECHNICAL REVIEW EVERY TWO WEEKS'
+};
 /* ============================================================
    PARTS LIST — append entries here; the magazine rebuilds itself.
    ============================================================ */
 const PROJECTS = [
+  {key:'ut27', name:'UT27 HV BATTERY ENCLOSURE', full:'UT27 High-Voltage Battery Enclosure',
+   desc:'Sole-owned design of the high-voltage battery enclosure for UTFR\'s UT27 — materials, thermal, electrical isolation and structure inside one fixed envelope.',
+   status:'IN MANUFACTURE', link:'ut27.html'},
   {key:'hijra', name:'HIJRA', full:'Highly Intuitive Jointed Robotic Assistant',
-   desc:'Under construction over the summer — please stay tuned.', status:'PRELIMINARY', link:null},
-  {key:'scd', name:'SUPERCRITICAL DRYING CHAMBER', full:'Supercritical Drying Chamber',
-   desc:'Supercritical drying process chamber designed for advanced aerogel synthesis and thermal management research.', status:'RELEASED', link:null},
+   desc:'Voice-controlled assistive robot that retrieves and delivers objects across a room for users with limited mobility.',
+   status:'RELEASED', link:'hijra.html'},
+  {key:'scd', name:'SUPERCRITICAL CO₂ DRYING APPARATUS', full:'Supercritical CO₂ Drying Apparatus',
+   desc:'Lab-built pressure vessel for drying polyimide aerogels without collapsing their pore structure.',
+   status:'RELEASED', link:'scd.html'},
+  {key:'composite', name:'CNF COMPOSITE SERIES', full:'Carbon-Nanofiber Composite Series',
+   desc:'Four-point carbon-nanofiber composite series developed and characterised against an industry partner\'s performance targets.',
+   status:'RELEASED', link:'composite.html'},
   {key:'raidio', name:'RAIDIO', full:'RAIDIO — Radio-Vision AI',
-   desc:'"Radio-Vision AI" engineered for Hack Without Borders — a system providing offline AI access via analog radio protocols.', status:'RELEASED', link:'raidio.html'},
+   desc:'Offline AI access for remote communities — encodes images into audio for transmission over standard radio, no internet required.',
+   status:'RELEASED', link:'raidio.html'},
   {key:'faceguard', name:'FACEGUARD', full:'FaceGuard',
-   desc:'All-in-one safety hub and multi-sensor hazard detection system for disaster response environments.', status:'RELEASED', link:'faceguard.html'},
+   desc:'Arduino-based multi-sensor hazard hub classifying environmental risk into three real-time alert levels.',
+   status:'RELEASED', link:'faceguard.html'},
   {key:'triggerpredict', name:'TRIGGERPREDICT CDSS', full:'TriggerPredict CDSS',
-   desc:'Clinical Decision Support Software developed to optimize IVF trigger shot timing for Mount Sinai Fertility.', status:'RELEASED', link:'triggerpredict.html'},
+   desc:'Clinical Decision Support Software developed to optimize IVF trigger shot timing for Mount Sinai Fertility.',
+   status:'RELEASED', link:'triggerpredict.html'},
   {key:'chassis', name:'CHASSIS DYNAMOMETER', full:'Chassis Dynamometer',
-   desc:'Redesigned and manufactured the 2026 prototype vehicle dynamometer for UTSM prototype vehicles.', status:'RELEASED', link:'chassis.html'},
+   desc:'Redesigned and manufactured the 2026 prototype vehicle dynamometer for UTSM prototype vehicles.',
+   status:'RELEASED', link:'chassis.html'},
   {key:'mount', name:'UTSM BACK WHEEL MOUNT', full:'UTSM Back Wheel Mount',
-   desc:'Optimized 2027 prototype car component designed to enhance mass distribution and structural stress properties.', status:'RELEASED', link:'mount.html'}
+   desc:'Reverse-engineered mount taken through stress-constrained optimisation to half its mass.',
+   status:'RELEASED', link:'mount.html'},
+
+/* ── HOLD — NOT FOR RELEASE ─────────────────────────────────────────────
+   MAINGEN pocket. Content written and ready; withheld pending sign-off
+   from Maingen. It is an active commercial engagement and the copy
+   describes their internal operations pipeline and evaluation method.
+   TO RELEASE: delete this comment wrapper so the entry joins the array,
+   and add its SPEC line (already written below the SPEC manifest).
+   Everything else — DWG numbers, chain length, BOM, mini-map — follows
+   automatically. link stays null until a detail sheet exists for it.
+   Keep real operational data out of every image.
+
+  {key:'maingen', name:'MAINGEN', full:'Maingen — Real-Operations Agent Environment',
+   desc:'Building an evaluation environment where an AI agent takes a real recurring operations decision, scored against a real human operator.',
+   status:'SCOPED', link:null}
+   ──────────────────────────────────────────────────────────────────── */
 ];
 const CERTS = [
   {key:'certAI',   name:'AI FOR DESIGN',    issuer:'UNIVERSITY OF MICHIGAN',    ref:'QC-01'},
@@ -435,7 +497,7 @@ const FINE    = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
     document.getElementById('nogl').style.display='flex';
     document.getElementById('skip').style.display='none';
     document.getElementById('plotting').style.display='none';
-    throw new Error('no webgl — offered REV C');
+    throw new Error('no webgl — offered REV E');
   }
 })();
 
@@ -739,7 +801,7 @@ const notes = makePlate(6.6, 5.0, 1400, (ctx,W,H,P)=>{
   ctx.strokeStyle=P.cssInk2; ctx.lineWidth=2; ctx.beginPath(); ctx.moveTo(M,y+14); ctx.lineTo(W-M,y+14); ctx.stroke();
   y+=64;
   const items=[
-    'OPERATOR IS A FIRST-YEAR STUDENT AT THE UNIVERSITY OF','TORONTO EXPLORING VARIOUS AREAS OF ENGINEERING.',
+    'OPERATOR IS AN UNDERGRADUATE STUDENT AT THE UNIVERSITY','OF TORONTO EXPLORING VARIOUS AREAS OF ENGINEERING.',
     'ACTIVE DESIGN-TEAM EXPERIENCE: UTFR AND UTSM.',
     'LEARNS BEYOND THE CURRICULUM THROUGH ONLINE COURSES.',
     'BUILDS PRACTICAL SKILLS THROUGH HACKATHONS AND','PERSONAL PROJECTS.',
@@ -775,7 +837,7 @@ const notes = makePlate(6.6, 5.0, 1400, (ctx,W,H,P)=>{
 notes.position.set(3.4, 2.9, 0); S1.add(notes);
 notes.add(segs([[[-3.3,-2.5,0],[-3.3,-2.9,0]],[[3.3,-2.5,0],[3.3,-2.9,0]]], inkLine()));
 
-/* GA sheet lying on floor (the REV C document) — clickable */
+/* GA sheet lying on floor (the REV E 2D document) — clickable */
 const sheet = makePlate(7.6, 5.0, 1500, (ctx,W,H,P)=>{
   ctx.fillStyle=P.cssPaper; ctx.fillRect(0,0,W,H);
   ctx.strokeStyle=P.cssInk; ctx.lineWidth=5; ctx.strokeRect(18,18,W-36,H-36);
@@ -793,10 +855,10 @@ const sheet = makePlate(7.6, 5.0, 1500, (ctx,W,H,P)=>{
   ctx.fillStyle=P.cssInk2; ctx.font='500 17px "IBM Plex Mono", monospace';
   const lab=['DWG NO.','REV','SCALE','SHEET','MEDIA']; lab.forEach((l,i)=>ctx.fillText(l, bx+bw*[0,0.22,0.44,0.62,0.8][i]+12, by+26));
   ctx.fillStyle=P.cssInk; ctx.font='600 24px "IBM Plex Mono", monospace';
-  const val=['AF-2029','C','1:1','1 OF 4','VELLUM']; val.forEach((v,i)=>ctx.fillText(v, bx+bw*[0,0.22,0.44,0.62,0.8][i]+12, by+56));
+  const val=['AF-2029','E','1:1','1 OF 5','VELLUM']; val.forEach((v,i)=>ctx.fillText(v, bx+bw*[0,0.22,0.44,0.62,0.8][i]+12, by+56));
   ctx.fillStyle=P.cssRed; ctx.font='600 24px "IBM Plex Mono", monospace';
   ctx.fillText('THIS DOCUMENT DESCRIBES THE MACHINE ABOVE.', bx+12, by+96);
-  ctx.fillText('CLICK TO OPEN 2D DRAWING (REV C) ↗', bx+12, by+124);
+  ctx.fillText('CLICK TO OPEN 2D DRAWING (REV E) ↗', bx+12, by+124);
 }, {});
 sheet.rotation.x = -Math.PI/2;
 sheet.position.set(0.6, 0.02, 5.0);
@@ -1045,8 +1107,15 @@ const MAG = (()=>{
       ctx.fillStyle=P2.cssPaper; ctx.fillRect(0,0,W,H);
       ctx.fillStyle=P2.cssRed; ctx.font='600 62px "IBM Plex Mono", monospace';
       ctx.fillText(String(i+1).padStart(2,'0'), 26, 132);
-      ctx.fillStyle=P2.cssInk; ctx.font='700 58px Archivo, sans-serif';
-      let nm = p.name; if(nm.length>22) nm = nm.slice(0,21)+'…';
+      /* shrink the part name to fit rather than truncating it — names grow as the list does */
+      ctx.fillStyle=P2.cssInk;
+      let ns=58; ctx.font=`700 ${ns}px Archivo, sans-serif`;
+      while(ns>30 && 118+ctx.measureText(p.name).width > W-24){ ns-=2; ctx.font=`700 ${ns}px Archivo, sans-serif`; }
+      let nm = p.name;
+      if(118+ctx.measureText(nm).width > W-24){            /* still over at the floor size: then clip */
+        while(nm.length>4 && 118+ctx.measureText(nm+'…').width > W-24) nm = nm.slice(0,-1);
+        nm += '…';
+      }
       ctx.fillText(nm, 118, 130);
     },{noFrame:true});
     label.position.y = -0.575; label.position.z = 0.008; plate.add(label);
@@ -1288,7 +1357,7 @@ let screenPlateDraw=null;
   S4.add(new THREE.Line(cgeo, ink2Line(.9)));
   const t=makeSprite('S5 — COMMUNICATIONS · SERIAL CONSOLE', .4, 'ink');
   t.position.set(0,5.1,0); S4.add(t);
-  const rev=makeSprite('REV C · 2026-08 · COMPLETE REDRAW — AF   |   REV D · 2026-08 · DIGITAL TWIN — AF', .26, 'ink2');
+  const rev=makeSprite('REV C · 2026-08 · COMPLETE REDRAW   |   REV D · 2026-08 · DIGITAL TWIN   |   REV E · 2026-11 · PARTS LIST EXPANDED TO 9 — AF', .26, 'ink2');
   rev.position.set(0,4.55,0); S4.add(rev);
 }
 
@@ -1405,6 +1474,11 @@ function onStationChange(st){
     'SERIAL LINK OPEN — TYPE “HELP” IN THE CONSOLE'
   ];
   hint.textContent = hints[st];
+  /* IDX belongs to whichever indexed station you are standing at */
+  const idx = document.getElementById('hud-idx');
+  if(st===1)      idx.textContent = (SREC.active+1)+'/'+SREC.items.length;
+  else if(st===2) idx.textContent = (Math.max(0,MAG.activeIdx)+1)+'/'+MAG.N;
+  else            idx.textContent = '—';
   if(st===LAST && FINE) setTimeout(()=>document.getElementById('con-in').focus({preventScroll:true}), 260);
 }
 
@@ -1608,7 +1682,7 @@ const CMDS={
   email       copy contact email
   linkedin    open linkedin profile
   media       toggle vellum / ozalid
-  2d          open the 2D drawing package (REV C)
+  2d          open the 2D drawing package (REV E)
   clear       clear terminal`);},
   whoami(){conPrint("AHMED FARAZ — MECH ENG STUDENT, UNIVERSITY OF TORONTO (2T9). DEAN'S LIST. UTFR · UTSM.");},
   ls(){conPrint('S1 OPERATOR   S2 SERVICE-RECORD   S3 PART-MAGAZINE   S4 QA-RACK   S5 TERMINAL');},
