@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ahmed Faraz — DWG NO. AF-2029 · REV C (2D)</title>
+<title>Ahmed Faraz — DWG NO. AF-2029 · REV E (2D)</title>
 <meta name="description" content="Mechanical Engineering student at the University of Toronto exploring Mechatronics, Aerospace, and Smart Materials.">
 <meta property="og:title" content="Ahmed Faraz | Portfolio">
 <meta property="og:description" content="Mechanical Engineering student at the University of Toronto exploring Mechatronics, Aerospace, and Smart Materials.">
@@ -14,7 +14,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
-   DWG NO. AF-2029  REV C — "THE DRAWING PACKAGE"
+   DWG NO. AF-2029  REV E — "THE DRAWING PACKAGE"
    MEDIA: VELLUM (default) / OZALID (diazo negative)
    ============================================================ */
 :root{
@@ -96,7 +96,9 @@ button{font-family:var(--mono);cursor:pointer;}
   background:var(--paper);height:40px;font-size:11px;letter-spacing:.1em;
 }
 .indexbar .dwgno{display:flex;align-items:center;padding:0 14px;border-right:1px solid var(--hair);font-weight:600;white-space:nowrap;}
-.indexbar nav{display:flex;flex:1;}
+.indexbar nav{display:flex;flex:1;min-width:0;overflow-x:auto;scrollbar-width:none;}
+.indexbar nav::-webkit-scrollbar{display:none;}
+.mediaswitch{flex:none;}
 .indexbar nav a{
   display:flex;align-items:center;padding:0 14px;text-decoration:none;
   border-right:1px solid var(--faint);color:var(--ink-2);white-space:nowrap;
@@ -282,6 +284,22 @@ table.bom{width:100%;border-collapse:collapse;font-size:12px;}
 .srv-slot.filled{border-style:solid;border-color:var(--ink);color:var(--ink);text-transform:none;letter-spacing:.02em;font-size:12.5px;}
 .srv-slot .lbl{color:var(--red);font-weight:600;margin-right:9px;letter-spacing:.16em;text-transform:uppercase;font-size:10px;}
 
+
+/* no-JS text fallback — the sheets below are JS-rendered */
+.ns{max-width:900px;margin:0 auto;padding:72px 28px 60px;line-height:1.65;}
+.ns-head{font-size:10px;letter-spacing:.2em;color:var(--red);font-weight:600;text-transform:uppercase;margin-bottom:14px;}
+.ns h2{font-family:var(--disp);font-weight:900;text-transform:uppercase;font-size:34px;margin:26px 0 10px;}
+.ns h3{font-family:var(--disp);font-weight:900;text-transform:uppercase;font-size:17px;margin:30px 0 10px;
+  border-bottom:2px solid var(--ink);padding-bottom:6px;}
+.ns p{margin-bottom:12px;max-width:72ch;}
+.ns ul{margin:0 0 12px 20px;}
+.ns li{margin-bottom:7px;}
+.ns-table{width:100%;border-collapse:collapse;font-size:13px;}
+.ns-table th{text-align:left;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-2);
+  border-bottom:1px solid var(--ink);padding:8px 10px;}
+.ns-table td{border-bottom:1px solid var(--faint);padding:9px 10px;vertical-align:top;}
+.ns-table td:first-child,.ns-table td:nth-child(2){white-space:nowrap;color:var(--ink-2);width:1%;}
+
 /* Appendix modal */
 dialog#appendix{
   border:2px solid var(--ink);background:var(--paper);color:var(--ink);
@@ -338,6 +356,22 @@ footer{padding:0 40px 60px;max-width:1440px;margin:0 auto;font-size:10px;letter-
   .tb-title{grid-column:span 3;}
   .indexbar .dwgno{display:none;}
   .indexbar nav{overflow-x:auto;}
+  .mediaswitch span{display:none;}
+  /* a four-column parts list does not fit a phone — stack each line item instead */
+  .bom thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
+  .bom, .bom tbody{display:block;width:100%;}
+  .bom tbody tr{
+    display:grid;grid-template-columns:auto auto 1fr;
+    grid-template-areas:"num ref status" "desc desc desc";
+    gap:2px 10px;align-items:baseline;
+    border:1px solid var(--hair);padding:12px 14px 14px 18px;margin-bottom:12px;}
+  .bom tbody tr.active{box-shadow:inset 3px 0 0 var(--red);}
+  .bom tbody tr:hover td,.bom tbody tr.active td{background:none;}
+  .bom td{display:block;border:none;padding:0;}
+  .bom td.item-no{grid-area:num;font-size:19px;line-height:1;}
+  .bom td.dwgref{grid-area:ref;font-size:11px;}
+  .bom td.status{grid-area:status;text-align:right;font-size:9px;}
+  .bom td:nth-child(3){grid-area:desc;margin-top:9px;}
   .frame{inset:4px;}
   .zones{display:none !important;}
   .svg-anno{display:none;}
@@ -356,6 +390,52 @@ footer{padding:0 40px 60px;max-width:1440px;margin:0 auto;font-size:10px;letter-
 <body>
 
 <!-- SHEET FRAME -->
+<noscript>
+  <div class="ns">
+    <p class="ns-head">AF-2029 · REV E — TEXT FALLBACK</p>
+    <p>This drawing package renders its sheets with JavaScript, which is switched off. Everything on it is
+       reproduced below in plain text.</p>
+
+    <h2>Ahmed Faraz</h2>
+    <p>Mechanical Engineering student at the University of Toronto, BASc, Class of 2T9. Dean&#39;s List.
+       Eligible for Canadian co-op/internship employment through UofT PEY/co-op work authorization.
+       Design-team experience with UTFR and UTSM.</p>
+    <p>Contact: <a href="mailto:ahmedfarazpro@gmail.com">ahmedfarazpro@gmail.com</a> ·
+       <a href="https://www.linkedin.com/in/ahmedfarazuoft/">linkedin.com/in/ahmedfarazuoft</a></p>
+
+    <h3>Service record</h3>
+    <ul>
+      <li><b>EXP-01</b> — European World, Mechanical Engineering Intern (May 2025 → Aug 2025)</li>
+      <li><b>EXP-02</b> — Toronto Smart Materials &amp; Structures (TSMART), Undergraduate Research Fellow (May 2026 → Aug 2026)</li>
+    </ul>
+
+    <h3>Beyond the curriculum — bill of materials</h3>
+    <table class="ns-table">
+      <tr><th>Item</th><th>DWG</th><th>Part</th></tr>
+      <tr><td>01</td><td>AF-001</td><td><b>UT27 High-Voltage Battery Enclosure</b><br>Sole-owned design of the high-voltage battery enclosure for UTFR&#39;s UT27 — materials, thermal, electrical isolation and structure inside one fixed envelope.</td></tr>
+      <tr><td>02</td><td>AF-002</td><td><b>Highly Intuitive Jointed Robotic Assistant</b><br>Voice-controlled assistive robot that retrieves and delivers objects across a room for users with limited mobility.</td></tr>
+      <tr><td>03</td><td>AF-003</td><td><b>Supercritical CO₂ Drying Apparatus</b><br>Lab-built pressure vessel for drying polyimide aerogels without collapsing their pore structure.</td></tr>
+      <tr><td>04</td><td>AF-004</td><td><b>Carbon-Nanofiber Composite Series</b><br>Four-point carbon-nanofiber composite series developed and characterised against an industry partner&#39;s performance targets.</td></tr>
+      <tr><td>05</td><td>AF-005</td><td><b>RAIDIO — Radio-Vision AI</b><br>Offline AI access for remote communities — encodes images into audio for transmission over standard radio, no internet required.</td></tr>
+      <tr><td>06</td><td>AF-006</td><td><b>FaceGuard</b><br>Arduino-based multi-sensor hazard hub classifying environmental risk into three real-time alert levels.</td></tr>
+      <tr><td>07</td><td>AF-007</td><td><b>TriggerPredict CDSS</b><br>Clinical Decision Support Software developed to optimize IVF trigger shot timing for Mount Sinai Fertility.</td></tr>
+      <tr><td>08</td><td>AF-008</td><td><b>Chassis Dynamometer</b><br>Redesigned and manufactured the 2026 prototype vehicle dynamometer for UTSM prototype vehicles.</td></tr>
+      <tr><td>09</td><td>AF-009</td><td><b>UTSM Back Wheel Mount</b><br>Reverse-engineered mount taken through stress-constrained optimisation to half its mass.</td></tr>
+    </table>
+
+    <h3>Relevant certifications</h3>
+    <ul>
+      <li><b>AI for Design</b> — University of Michigan</li>
+      <li><b>Emerging Leaders</b> — U of T — Troost Institute</li>
+      <li><b>AP Capstone</b> — College Board</li>
+      <li><b>CSWA</b> — Dassault Systèmes</li>
+      <li><b>CSWP</b> — Dassault Systèmes</li>
+      <li><b>Simulink Onramp</b> — MathWorks</li>
+      <li><b>CATIA Associate</b> — Dassault Systèmes</li>
+    </ul>
+  </div>
+</noscript>
+
 <div class="frame" aria-hidden="true"></div>
 <div class="zones top" aria-hidden="true"></div>
 <div class="zones bottom" aria-hidden="true"></div>
@@ -372,9 +452,9 @@ footer{padding:0 40px 60px;max-width:1440px;margin:0 auto;font-size:10px;letter-
 
 <!-- INDEX STRIP -->
 <header class="indexbar">
-  <div class="dwgno">AF-2029 · REV C</div>
+  <div class="dwgno">AF-2029 · REV E</div>
   <nav aria-label="Sheet index">
-    <a href="index.html" style="color:var(--red);font-weight:600;">REV D — 3D ↗</a>
+    <a href="index.html" style="color:var(--red);font-weight:600;">REV E — 3D ↗</a>
     <a href="#ga">S1 · GENERAL ARRANGEMENT</a>
     <a href="#service">S2 · SERVICE RECORD</a>
     <a href="#bom">S3 · BILL OF MATERIALS</a>
@@ -406,7 +486,7 @@ footer{padding:0 40px 60px;max-width:1440px;margin:0 auto;font-size:10px;letter-
       <div class="notes">
         <h3>GENERAL NOTES — UNLESS OTHERWISE SPECIFIED</h3>
         <ol>
-          <li>Operator is a first-year student at the University of Toronto exploring various areas of engineering.</li>
+          <li>Operator is an undergraduate student at the University of Toronto exploring various areas of engineering.</li>
           <li>Active design-team experience: UTFR and UTSM.</li>
           <li>Learns beyond the curriculum through online courses.</li>
           <li>Builds practical skills through hackathons and personal projects.</li>
@@ -488,7 +568,7 @@ footer{padding:0 40px 60px;max-width:1440px;margin:0 auto;font-size:10px;letter-
           <p class="pname" id="detail-name">—</p>
           <p class="pdesc" id="detail-desc">—</p>
           <div class="specslot" id="detail-spec"><span class="lbl">SPEC</span>AWAITING DATA — TO BE PROVIDED</div>
-          <a class="open-dwg" id="detail-link" href="#" style="display:none;">OPEN DETAIL DWG →</a>
+          <a class="open-dwg" id="detail-link" href="index.html#bom" style="display:none;">OPEN DETAIL DWG →</a>
         </div>
       </aside>
     </div>
@@ -529,7 +609,9 @@ footer{padding:0 40px 60px;max-width:1440px;margin:0 auto;font-size:10px;letter-
         <h3 class="datatable-cap" style="font-size:11px;letter-spacing:.16em;font-weight:600;border-bottom:1px solid var(--hair);padding-bottom:6px;margin-bottom:10px;">REVISION HISTORY</h3>
         <table class="revtable">
           <tr><th>REV</th><th>DATE</th><th>DESCRIPTION</th><th>BY</th></tr>
-          <tr><td>C</td><td id="rev-date">2026-08</td><td>Complete redraw — drawing-package format</td><td>AF</td></tr>
+          <tr><td>C</td><td>2026-08</td><td>Complete redraw — drawing-package format</td><td>AF</td></tr>
+          <tr><td>D</td><td>2026-08</td><td>Digital twin issued — 3D model package (index.html)</td><td>AF</td></tr>
+          <tr><td>E</td><td id="rev-date">2026-11</td><td>Parts list expanded to 9 items; service record and inspection sheets added; both packages synchronised</td><td>AF</td></tr>
         </table>
         <a class="open-dwg" href="https://www.linkedin.com/in/ahmedfarazuoft/" target="_blank" rel="noopener">LINKEDIN PROFILE ↗</a>
       </div>
@@ -541,7 +623,7 @@ footer{padding:0 40px 60px;max-width:1440px;margin:0 auto;font-size:10px;letter-
 
 <footer>
   <span>AHMED FARAZ · UNIVERSITY OF TORONTO · MECH ENG 2T9</span>
-  <span>DWG NO. AF-2029 · REV C · DO NOT SCALE DRAWING</span>
+  <span>DWG NO. AF-2029 · REV E · DO NOT SCALE DRAWING</span>
 </footer>
 
 <!-- APPENDIX MODAL -->
@@ -562,13 +644,18 @@ footer{padding:0 40px 60px;max-width:1440px;margin:0 auto;font-size:10px;letter-
    ============================================================ */
 const IMG = {
   headshot:       'headshot.jpeg',
-  hijra:          'image_1c8627.png',
+  /* ---- parts, in running order ---- */
+  ut27:           '',
+  hijra:          '',
   scd:            'SCDCHAMBER.jpg',
+  composite:      '',
   raidio:         'RAIDIOTHUMBNAIL.PNG',
   faceguard:      '1771220731975.jpeg',
   triggerpredict: 'image_690bba.png',
   chassis:        'chassis_dynoi.jpeg',
   mount:          'mount-fea-deformation.png',
+  maingen:        '',
+  /* ---- inspection records ---- */
   certAI:         'ai-certificate.jpg',
   certLead:       'ilead-certificate.jpg',
   certAP:         'ap-capstone.jpg',
@@ -576,6 +663,7 @@ const IMG = {
   certCSWP:       'CSWPCERTIFICATE.png',
   certSim:        'SIMULINKONRAMPCERT.png',
   certCatia:      'CATIA3DXCERTIFICATE.jpg',
+  /* ---- service record ---- */
   expTsmart:      'tsmart-cover.png',
   expEuroWorld:   'europeanworld-cover.png'
 };
@@ -586,34 +674,62 @@ const IMG = {
    Example: scd: 'RATED 10.3 MPa @ 40°C — CO2 SUPERCRITICAL'
    ============================================================ */
 const SPEC = {
-  hijra: '', scd: '', raidio: '', faceguard: '',
-  triggerpredict: '', chassis: '',
-  mount: 'MASS \u221251% (28.8 \u2192 14.1 GRAMS) — FEA VERIFIED'
+  ut27:'UTFR UT27, IN MANUFACTURE NOV 2026 — POUCH CELLS, LiCoO₂, 14,000 mAh, 10C — 8 BATTERY-TO-CHASSIS MOUNTS — 7 FAILURE MODES ANALYSED, TEAROUT GOVERNING AT FoS 3.4, e/D 2.6 — ALUMINIUM 6061',
+  hijra:'PAYLOAD ≥ 300 g — SPEED 0.1 m/s — BUDGET $300 CAD — CHASSIS 250 × 163 × 3 mm, 3D-PRINTED PLA — ESP32, CAMERA, DC GEAR-MOTOR DRIVE',
+  scd:'CO-DESIGNED AND ASSEMBLED IN-HOUSE — REPLACES A FREEZE-DRYING ROUTE — TSMART, PROF. HANI NAGUIB — MIE SUMMER RESEARCH AWARD 2026',
+  composite:'GLASS-FILLED POLYPROPYLENE MATRIX — CNF LOADING ACROSS FOUR POINTS — MELT TEMPERATURE, SCREW SPEED AND MIXING TIME HELD FIXED — EVERY FORMULATION RUN IN DUPLICATE — TSMART, PROF. HANI NAGUIB — MIE SUMMER RESEARCH AWARD 2026',
+  raidio:'HACK WITHOUT BORDERS 2026 — SSTV (MARTIN 1) — GEMINI 2.5 FLASH — GOOGLE TEXT-TO-SPEECH — PYTHON BACKEND PACKAGED TO ANDROID VIA BUILDOZER',
+  faceguard:'MAKEUOFT 2026 — 24-HOUR BUILD — MPU6050 ACCELEROMETER, FLAME, SMOKE/GAS, SOUND, PIR — LED AND BUZZER DIAGNOSTICS',
+  triggerpredict:'APS112 (ENGINEERING STRATEGIES &amp; PRACTICE II) — FIRST-YEAR TEAM DESIGN PROJECT — CLINICAL DECISION SUPPORT SYSTEM',
+  chassis:'UofT SUPERMILEAGE (UTSM) — 2025–2026 — MECHANICAL DESIGN, MACHINING AND FABRICATION — TEAM OF FOUR',
+  mount:'28.76 g → 14.09 g (51% MASS REDUCTION) — PEAK STRESS HELD AT 7.7 MPa — BASELINE FEA VALIDATED AGAINST HAND CALCULATIONS TO WITHIN 18% — THIRD-ANGLE DETAIL DRAWING RELEASED WITH GD&amp;T',
+  /* held: */ maingen:'MAINGEN (Y COMBINATOR S26) × UNIVERSITY OF TORONTO — SCOPED OCT 2026 — CO-HEAD MECHANICAL ENGINEER, CONSULTING — PYTHON — WEEKLY EXECUTION, TECHNICAL REVIEW EVERY TWO WEEKS'
 };
 
 /* ---------- PROJECT DATA (content preserved from site) ---------- */
 const PROJECTS = [
-  {key:'hijra', item:1, ref:'AF-001', name:'HIJRA', full:'Highly Intuitive Jointed Robotic Assistant',
-   desc:'Under construction over the summer — please stay tuned.',
-   status:'PRELIMINARY', link:null},
-  {key:'scd', item:2, ref:'AF-002', name:'SUPERCRITICAL DRYING CHAMBER', full:'Supercritical Drying Chamber',
-   desc:'Supercritical drying process chamber designed for advanced aerogel synthesis and thermal management research.',
-   status:'RELEASED', link:null},
-  {key:'raidio', item:3, ref:'AF-003', name:'RAIDIO', full:'Radio-Vision AI',
-   desc:'"Radio-Vision AI" engineered for Hack Without Borders — a system providing offline AI access via analog radio protocols.',
+  {key:'ut27', item:1, ref:'AF-001', name:'UT27 HV BATTERY ENCLOSURE', full:'UT27 High-Voltage Battery Enclosure',
+   desc:'Sole-owned design of the high-voltage battery enclosure for UTFR\'s UT27 — materials, thermal, electrical isolation and structure inside one fixed envelope.',
+   status:'IN MANUFACTURE', link:'ut27.html'},
+  {key:'hijra', item:2, ref:'AF-002', name:'HIJRA', full:'Highly Intuitive Jointed Robotic Assistant',
+   desc:'Voice-controlled assistive robot that retrieves and delivers objects across a room for users with limited mobility.',
+   status:'RELEASED', link:'hijra.html'},
+  {key:'scd', item:3, ref:'AF-003', name:'SUPERCRITICAL CO₂ DRYING APPARATUS', full:'Supercritical CO₂ Drying Apparatus',
+   desc:'Lab-built pressure vessel for drying polyimide aerogels without collapsing their pore structure.',
+   status:'RELEASED', link:'scd.html'},
+  {key:'composite', item:4, ref:'AF-004', name:'CNF COMPOSITE SERIES', full:'Carbon-Nanofiber Composite Series',
+   desc:'Four-point carbon-nanofiber composite series developed and characterised against an industry partner\'s performance targets.',
+   status:'RELEASED', link:'composite.html'},
+  {key:'raidio', item:5, ref:'AF-005', name:'RAIDIO', full:'RAIDIO — Radio-Vision AI',
+   desc:'Offline AI access for remote communities — encodes images into audio for transmission over standard radio, no internet required.',
    status:'RELEASED', link:'raidio.html'},
-  {key:'faceguard', item:4, ref:'AF-004', name:'FACEGUARD', full:'FaceGuard',
-   desc:'All-in-one safety hub and multi-sensor hazard detection system for disaster response environments.',
+  {key:'faceguard', item:6, ref:'AF-006', name:'FACEGUARD', full:'FaceGuard',
+   desc:'Arduino-based multi-sensor hazard hub classifying environmental risk into three real-time alert levels.',
    status:'RELEASED', link:'faceguard.html'},
-  {key:'triggerpredict', item:5, ref:'AF-005', name:'TRIGGERPREDICT CDSS', full:'TriggerPredict CDSS',
+  {key:'triggerpredict', item:7, ref:'AF-007', name:'TRIGGERPREDICT CDSS', full:'TriggerPredict CDSS',
    desc:'Clinical Decision Support Software developed to optimize IVF trigger shot timing for Mount Sinai Fertility.',
    status:'RELEASED', link:'triggerpredict.html'},
-  {key:'chassis', item:6, ref:'AF-006', name:'CHASSIS DYNAMOMETER', full:'Chassis Dynamometer',
+  {key:'chassis', item:8, ref:'AF-008', name:'CHASSIS DYNAMOMETER', full:'Chassis Dynamometer',
    desc:'Redesigned and manufactured the 2026 prototype vehicle dynamometer for UTSM prototype vehicles.',
    status:'RELEASED', link:'chassis.html'},
-  {key:'mount', item:7, ref:'AF-007', name:'UTSM BACK WHEEL MOUNT', full:'UTSM Back Wheel Mount',
-   desc:'Optimized 2027 prototype car component designed to enhance mass distribution and structural stress properties.',
-   status:'RELEASED', link:'mount.html'}
+  {key:'mount', item:9, ref:'AF-009', name:'UTSM BACK WHEEL MOUNT', full:'UTSM Back Wheel Mount',
+   desc:'Reverse-engineered mount taken through stress-constrained optimisation to half its mass.',
+   status:'RELEASED', link:'mount.html'},
+
+/* ── HOLD — NOT FOR RELEASE ─────────────────────────────────────────────
+   MAINGEN pocket. Content written and ready; withheld pending sign-off
+   from Maingen. It is an active commercial engagement and the copy
+   describes their internal operations pipeline and evaluation method.
+   TO RELEASE: delete this comment wrapper so the entry joins the array,
+   and add its SPEC line (already written below the SPEC manifest).
+   Everything else — DWG numbers, chain length, BOM, mini-map — follows
+   automatically. link stays null until a detail sheet exists for it.
+   Keep real operational data out of every image.
+
+  {key:'maingen', item:10, ref:'AF-010', name:'MAINGEN', full:'Maingen — Real-Operations Agent Environment',
+   desc:'Building an evaluation environment where an AI agent takes a real recurring operations decision, scored against a real human operator.',
+   status:'SCOPED', link:null}
+   ──────────────────────────────────────────────────────────────────── */
 ];
 
 const EXPERIENCE = [
