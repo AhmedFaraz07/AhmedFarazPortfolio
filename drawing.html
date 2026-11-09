@@ -2,9 +2,8 @@
 <html lang="en" data-media="vellum">
 <head>
 <meta charset="UTF-8">
-<script>try{var m=localStorage.getItem('af-media');if(m==='ozalid'||m==='vellum')document.documentElement.dataset.media=m;}catch(e){}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ahmed Faraz — DWG NO. AF-2029 · REV F (2D)</title>
+<title>Ahmed Faraz — DWG NO. AF-2029 · REV E (2D)</title>
 <meta name="description" content="Mechanical Engineering student at the University of Toronto exploring Mechatronics, Aerospace, and Smart Materials.">
 <meta property="og:title" content="Ahmed Faraz | Portfolio">
 <meta property="og:description" content="Mechanical Engineering student at the University of Toronto exploring Mechatronics, Aerospace, and Smart Materials.">
@@ -15,7 +14,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
-   DWG NO. AF-2029  REV F — "THE DRAWING PACKAGE"
+   DWG NO. AF-2029  REV E — "THE DRAWING PACKAGE"
    MEDIA: VELLUM (default) / OZALID (diazo negative)
    ============================================================ */
 :root{
@@ -105,6 +104,13 @@ button{font-family:var(--mono);cursor:pointer;}
   border-right:1px solid var(--faint);color:var(--ink-2);white-space:nowrap;
 }
 .indexbar nav a:hover{background:var(--ink);color:var(--paper);}
+/* the AUDIO switch costs ~100px — tighten the sheet index before it clips */
+@media (max-width:1620px){
+  .indexbar nav a{padding:0 9px;}
+  .mediaswitch{padding:0 7px;}
+  .mediaswitch span{margin-right:5px;}
+}
+@media (max-width:1430px){ .mediaswitch span{display:none;} }
 .mediaswitch{display:flex;align-items:center;gap:0;padding:0 10px;border-left:1px solid var(--hair);margin-left:auto;}
 .mediaswitch span{font-size:10px;color:var(--ink-2);margin-right:8px;letter-spacing:.1em;}
 .mediaswitch button{
@@ -113,6 +119,8 @@ button{font-family:var(--mono);cursor:pointer;}
 }
 .mediaswitch button[aria-pressed="true"]{background:var(--ink);color:var(--paper);}
 .mediaswitch button+button{border-left:none;}
+.audioswitch{margin-left:0;}
+.audioswitch button[aria-pressed="true"]{background:var(--red);border-color:var(--red);color:#fff;}
 
 /* ---------- SHEET SECTIONS ---------- */
 main{padding:72px 40px 40px;max-width:1440px;margin:0 auto;}
@@ -393,7 +401,7 @@ footer{padding:0 40px 60px;max-width:1440px;margin:0 auto;font-size:10px;letter-
 <!-- SHEET FRAME -->
 <noscript>
   <div class="ns">
-    <p class="ns-head">AF-2029 · REV F — TEXT FALLBACK</p>
+    <p class="ns-head">AF-2029 · REV E — TEXT FALLBACK</p>
     <p>This drawing package renders its sheets with JavaScript, which is switched off. Everything on it is
        reproduced below in plain text.</p>
 
@@ -407,8 +415,7 @@ footer{padding:0 40px 60px;max-width:1440px;margin:0 auto;font-size:10px;letter-
     <h3>Service record</h3>
     <ul>
       <li><b>EXP-01</b> — European World, Mechanical Engineering Intern (May 2025 → Aug 2025)</li>
-      <li><b>EXP-02</b> — Toronto Smart Materials &amp; Structures (TSMART), Undergraduate Research Fellow (May 2026 → present)</li>
-      <li><b>EXP-03</b> — UTESCA × Maingen (Y Combinator S26), Co-Head Mechanical Engineer, consulting (Oct 2026 → present)</li>
+      <li><b>EXP-02</b> — Toronto Smart Materials &amp; Structures (TSMART), Undergraduate Research Fellow (May 2026 → Aug 2026)</li>
     </ul>
 
     <h3>Beyond the curriculum — bill of materials</h3>
@@ -433,7 +440,7 @@ footer{padding:0 40px 60px;max-width:1440px;margin:0 auto;font-size:10px;letter-
       <li><b>CSWA</b> — Dassault Systèmes</li>
       <li><b>CSWP</b> — Dassault Systèmes</li>
       <li><b>Simulink Onramp</b> — MathWorks</li>
-      <li><b>Certified 3DEXPERIENCE Mechanical Designer — Associate</b> — Dassault Systèmes</li>
+      <li><b>CATIA Associate</b> — Dassault Systèmes</li>
     </ul>
   </div>
 </noscript>
@@ -454,9 +461,9 @@ footer{padding:0 40px 60px;max-width:1440px;margin:0 auto;font-size:10px;letter-
 
 <!-- INDEX STRIP -->
 <header class="indexbar">
-  <div class="dwgno">AF-2029 · REV F</div>
+  <div class="dwgno">AF-2029 · REV E</div>
   <nav aria-label="Sheet index">
-    <a href="index.html" style="color:var(--red);font-weight:600;">REV F — 3D ↗</a>
+    <a href="index.html" style="color:var(--red);font-weight:600;">REV E — 3D ↗</a>
     <a href="#ga">S1 · GENERAL ARRANGEMENT</a>
     <a href="#service">S2 · SERVICE RECORD</a>
     <a href="#bom">S3 · BILL OF MATERIALS</a>
@@ -467,6 +474,10 @@ footer{padding:0 40px 60px;max-width:1440px;margin:0 auto;font-size:10px;letter-
     <span>MEDIA</span>
     <button id="btn-vellum" aria-pressed="true" onclick="setMedia('vellum')">VELLUM</button>
     <button id="btn-ozalid" aria-pressed="false" onclick="setMedia('ozalid')">OZALID</button>
+  </div>
+  <div class="mediaswitch audioswitch">
+    <span>AUDIO</span>
+    <button id="btn-audio" aria-pressed="false" title="Sheet sound — synthesised, no audio files">OFF</button>
   </div>
 </header>
 
@@ -515,7 +526,7 @@ footer{padding:0 40px 60px;max-width:1440px;margin:0 auto;font-size:10px;letter-
           <canvas id="halftone" aria-label="Halftone plot render of Ahmed Faraz"></canvas>
           <div class="lens" id="lens"></div>
         </div>
-        <figcaption class="fig-cap"><span><b>FIG. 1</b> — OPERATOR</span><span>PHOTO REF · HOVER TO MAGNIFY</span></figcaption>
+        <figcaption class="fig-cap"><span><b>FIG. 1</b> — OPERATOR</span><span>PLOT RENDER · HOVER FOR PHOTO REF</span></figcaption>
       </figure>
     </div>
 
@@ -528,7 +539,7 @@ footer{padding:0 40px 60px;max-width:1440px;margin:0 auto;font-size:10px;letter-
       <div class="tb-cell"><small>SCALE</small><b>NTS</b></div>
       <div class="tb-cell"><small>UNITS</small><b>MM</b></div>
       <div class="tb-cell"><small>DWG NO.</small><b>AF-2029</b></div>
-      <div class="tb-cell"><small>REV</small><b>F</b></div>
+      <div class="tb-cell"><small>REV</small><b>C</b></div>
       <div class="tb-cell"><small>SHEET</small><b>1 OF 5</b></div>
       <div class="tb-cell"><small>MATERIAL</small><b>CURIOSITY, 6061-T6</b></div>
     </div>
@@ -613,8 +624,7 @@ footer{padding:0 40px 60px;max-width:1440px;margin:0 auto;font-size:10px;letter-
           <tr><th>REV</th><th>DATE</th><th>DESCRIPTION</th><th>BY</th></tr>
           <tr><td>C</td><td>2026-08</td><td>Complete redraw — drawing-package format</td><td>AF</td></tr>
           <tr><td>D</td><td>2026-08</td><td>Digital twin issued — 3D model package (index.html)</td><td>AF</td></tr>
-          <tr><td>E</td><td>2026-11</td><td>Parts list expanded to 9 items; service record and inspection sheets added; both packages synchronised</td><td>AF</td></tr>
-          <tr><td>F</td><td id="rev-date">2026-11</td><td>Service record EXP-03 (UTESCA × Maingen) added and scopes filled; photo refs loaded for items 2, 3, 4; detail drawings renumbered to the BOM; media setting now persists; FIG. 1 issued as photo ref</td><td>AF</td></tr>
+          <tr><td>E</td><td id="rev-date">2026-11</td><td>Parts list expanded to 9 items; service record and inspection sheets added; both packages synchronised</td><td>AF</td></tr>
         </table>
         <a class="open-dwg" href="https://www.linkedin.com/in/ahmedfarazuoft/" target="_blank" rel="noopener">LINKEDIN PROFILE ↗</a>
       </div>
@@ -626,19 +636,157 @@ footer{padding:0 40px 60px;max-width:1440px;margin:0 auto;font-size:10px;letter-
 
 <footer>
   <span>AHMED FARAZ · UNIVERSITY OF TORONTO · MECH ENG 2T9</span>
-  <span>DWG NO. AF-2029 · REV F · DO NOT SCALE DRAWING</span>
+  <span>DWG NO. AF-2029 · REV E · DO NOT SCALE DRAWING</span>
 </footer>
 
 <!-- APPENDIX MODAL -->
 <dialog id="appendix">
   <div class="apx-head">
     <span id="apx-title">APPENDIX</span>
-    <button onclick="document.getElementById('appendix').close()">CLOSE ✕</button>
+    <button onclick="AFSound.paper();document.getElementById('appendix').close()">CLOSE ✕</button>
   </div>
   <div class="apx-img" id="apx-img"></div>
 </dialog>
 
 <script>
+/* ============================================================
+   AUDIO — the machine's own noise, synthesised at runtime from
+   its own state. There are no sound files: every click, detent
+   and shaft whir is built from one noise buffer and an
+   oscillator, so nothing is downloaded and the pitch can follow
+   the physics directly instead of triggering a canned clip.
+   Silent until the operator switches it on; remembered per browser.
+   ============================================================ */
+const AFSound = (function(){
+  const AC = window.AudioContext || window.webkitAudioContext;
+  let ctx=null, bus=null, noise=null, whir=null, on=false, lastRatchet=-1;
+  try{ on = localStorage.getItem('af-audio') === 'on'; }catch(e){}
+
+  function init(){
+    if(ctx || !AC) return;
+    try{ ctx = new AC(); }catch(e){ return; }
+    bus = ctx.createGain(); bus.gain.value = 0.0001;      /* ramped up on enable */
+    const lp = ctx.createBiquadFilter();
+    lp.type='lowpass'; lp.frequency.value=11000;          /* dry and mechanical, not tinny */
+    bus.connect(lp); lp.connect(ctx.destination);
+
+    const n = Math.floor(ctx.sampleRate);
+    const b = ctx.createBuffer(1, n, ctx.sampleRate), d = b.getChannelData(0);
+    for(let i=0;i<n;i++) d[i] = Math.random()*2-1;
+    noise = b;
+
+  }
+
+  /* The continuous shaft/chain voice is built on first use, so a page that
+     never calls drive() never runs an oscillator it does not need. */
+  function buildWhir(){
+    if(whir || !ctx) return;
+    const src = ctx.createBufferSource(); src.buffer = noise; src.loop = true;
+    const bp  = ctx.createBiquadFilter(); bp.type='bandpass'; bp.frequency.value=320; bp.Q.value=1.1;
+    const ng  = ctx.createGain(); ng.gain.value=0;
+    const osc = ctx.createOscillator(); osc.type='sawtooth'; osc.frequency.value=52;
+    const olp = ctx.createBiquadFilter(); olp.type='lowpass'; olp.frequency.value=400;
+    const og  = ctx.createGain(); og.gain.value=0;
+    src.connect(bp); bp.connect(ng); ng.connect(bus);
+    osc.connect(olp); olp.connect(og); og.connect(bus);
+    src.start(); osc.start();
+    whir = {ng, og, bp, osc};
+  }
+
+  /* --- two primitives: a filtered noise burst and a pitched blip --- */
+  function burst(o){
+    if(!ctx || !on) return;
+    o = o||{};
+    const dur = o.dur||0.04, t0 = ctx.currentTime + (o.delay||0);
+    const s = ctx.createBufferSource(); s.buffer = noise;
+    s.playbackRate.value = o.rate || 1;
+    const f = ctx.createBiquadFilter();
+    f.type = o.type || 'bandpass'; f.frequency.value = o.freq||1800; f.Q.value = o.q||1.2;
+    const g = ctx.createGain();
+    g.gain.setValueAtTime(0.0001, t0);
+    g.gain.exponentialRampToValueAtTime(Math.max(0.0002,o.gain||0.2), t0+(o.attack||0.0015));
+    g.gain.exponentialRampToValueAtTime(0.0001, t0+dur);
+    s.connect(f); f.connect(g); g.connect(bus);
+    s.start(t0, Math.random()*0.5); s.stop(t0+dur+0.03);
+  }
+  function tone(o){
+    if(!ctx || !on) return;
+    o = o||{};
+    const dur = o.dur||0.1, t0 = ctx.currentTime + (o.delay||0);
+    const osc = ctx.createOscillator(); osc.type = o.type||'triangle';
+    osc.frequency.setValueAtTime(o.f0||180, t0);
+    osc.frequency.exponentialRampToValueAtTime(Math.max(20, o.f1!==undefined?o.f1:90), t0+dur);
+    const g = ctx.createGain();
+    g.gain.setValueAtTime(0.0001, t0);
+    g.gain.exponentialRampToValueAtTime(Math.max(0.0002,o.gain||0.2), t0+0.004);
+    g.gain.exponentialRampToValueAtTime(0.0001, t0+dur);
+    osc.connect(g); g.connect(bus);
+    osc.start(t0); osc.stop(t0+dur+0.03);
+  }
+
+  const API = {
+    /* --- discrete events --- */
+    tick(){   burst({dur:0.014, freq:2400, q:0.8, gain:0.30, type:'highpass', rate:1.4}); },
+    key(){    burst({dur:0.011, freq:3000, q:0.8, gain:0.38, type:'highpass', rate:1.6}); },
+    click(){  burst({dur:0.024, freq:1500, q:0.9, gain:0.55});
+              tone ({f0:420, f1:260, dur:0.030, gain:0.07}); },
+    ratchet(v){
+      if(!ctx || !on) return;
+      if(ctx.currentTime - lastRatchet < 0.022) return;   /* a fast chain buzzes, it does not machine-gun */
+      lastRatchet = ctx.currentTime;
+      burst({dur:0.018, freq:1300+Math.random()*900, q:1.1, gain:0.62+0.45*Math.min(1,v||0)});
+    },
+    detent(){ burst({dur:0.032, freq:900, q:0.9, gain:0.55});
+              tone ({f0:150, f1:72, dur:0.10, gain:0.16}); },
+    clunk(){  burst({dur:0.048, freq:480, q:0.8, gain:0.70});
+              tone ({f0:120, f1:50, dur:0.18, gain:0.26}); },
+    stamp(){  burst({dur:0.052, freq:620, q:0.7, gain:0.85});
+              burst({dur:0.022, freq:2800, q:0.8, gain:0.35, type:'highpass'});
+              tone ({f0:105, f1:46, dur:0.16, gain:0.30}); },
+    paper(){  burst({dur:0.28, freq:2600, q:0.4, gain:0.22, type:'highpass', attack:0.08, rate:0.8}); },
+    relay(){  burst({dur:0.015, freq:2000, q:0.9, gain:0.42, type:'highpass'});
+              burst({dur:0.022, freq:1000, q:1.0, gain:0.30, delay:0.045}); },
+    beep(){   tone({type:'square', f0:880,  f1:880,  dur:0.05, gain:0.075});
+              tone({type:'square', f0:1320, f1:1320, dur:0.05, gain:0.055, delay:0.062}); },
+
+    /* --- continuous: shaft travel and chain motion, 0..1 each --- */
+    drive(shaft, chain){
+      if(!ctx || !on) return;
+      buildWhir(); if(!whir) return;
+      const now = ctx.currentTime;
+      const sh = Math.min(1, shaft||0), ch = Math.min(1, chain||0);
+      whir.og.gain.setTargetAtTime(0.075*sh,              now, 0.09);
+      whir.ng.gain.setTargetAtTime(0.070*sh + 0.110*ch,   now, 0.09);
+      whir.osc.frequency.setTargetAtTime(44 + 74*sh,      now, 0.11);
+      whir.bp.frequency.setTargetAtTime(250 + 950*ch + 180*sh, now, 0.11);
+    },
+
+    get on(){ return on; },
+    set(v){
+      on = !!v;
+      try{ localStorage.setItem('af-audio', on?'on':'off'); }catch(e){}
+      if(on){
+        init();
+        if(ctx){
+          try{ if(ctx.state==='suspended') ctx.resume(); }catch(e){}
+          bus.gain.setTargetAtTime(1.0, ctx.currentTime, 0.015);
+        }
+      } else if(ctx){
+        bus.gain.setTargetAtTime(0.0001, ctx.currentTime, 0.03);
+        setTimeout(()=>{ if(!on && ctx && ctx.state==='running') ctx.suspend(); }, 400);
+      }
+      return on;
+    },
+    /* browsers refuse to start audio without a gesture — call on the first one */
+    arm(){ if(!on) return; init();
+           if(ctx){ try{ if(ctx.state==='suspended') ctx.resume(); }catch(e){}
+                    bus.gain.setTargetAtTime(1.0, ctx.currentTime, 0.015); } }
+  };
+  return API;
+})();
+['pointerdown','keydown','wheel'].forEach(ev=>
+  window.addEventListener(ev, ()=>AFSound.arm(), {once:true, passive:true}));
+
 /* ============================================================
    IMAGE MANIFEST — EDIT FILENAMES HERE.
    Leave '' (empty) for a white "NO IMAGE REF" frame that shows
@@ -648,10 +796,10 @@ footer{padding:0 40px 60px;max-width:1440px;margin:0 auto;font-size:10px;letter-
 const IMG = {
   headshot:       'headshot.jpeg',
   /* ---- parts, in running order ---- */
-  ut27:           'ut27-pack-iso.jpg',
-  hijra:          'hijra-robot.jpg',
+  ut27:           'ut27-enclosure-cad.png',
+  hijra:          'hijra-build.jpg',
   scd:            'SCDCHAMBER.jpg',
-  composite:      'cnf-sample-bags.jpg',
+  composite:      'cnf-samples.jpg',
   raidio:         'RAIDIOTHUMBNAIL.PNG',
   faceguard:      '1771220731975.jpeg',
   triggerpredict: 'image_690bba.png',
@@ -669,7 +817,7 @@ const IMG = {
   /* ---- service record ---- */
   expTsmart:      'tsmart-cover.png',
   expEuroWorld:   'europeanworld-cover.png',
-  expMaingen:     'utesca-maingen-cover.png'
+  expUtesca:      'utesca-maingen-cover.png'
 };
 
 /* ============================================================
@@ -739,22 +887,20 @@ const PROJECTS = [
 const EXPERIENCE = [
   {key:'expEuroWorld', ref:'EXP-01', kind:'INTERNSHIP',
    org:'EUROPEAN WORLD',
-   full:'European World Company — Dammam, Saudi Arabia',
-   role:'Mechanical Engineering Intern',
-   desc:'20+ fabrication drawings in SolidWorks with DFM and GD&amp;T; reviewed 30+ drawings and caught 2 errors before fabrication; structural calculations for plate weights, beam sizing and connection loads; on-site measurement and alignment checks.',
-   start:'2025-05', end:'2025-08', link:'europeanworld.html'},
+   full:'European World',
+   role:'Mechanical Engineering Intern', desc:'',
+   start:'2025-05', end:'2025-08', link:null},
   {key:'expTsmart', ref:'EXP-02', kind:'RESEARCH',
    org:'TSMART',
-   full:'Toronto Smart Materials & Structures — Prof. Hani Naguib',
-   role:'Undergraduate Research Fellow',
-   desc:'MIE Summer Research Award 2026. Four-point carbon-nanofibre composite series for Magna R&amp;D (TGA, DSC, Instron, dielectric, rheometry); co-designed and assembled a supercritical CO₂ drying chamber for polyimide aerogels; Ansys Fluent CFD of the drying process.',
-   start:'2026-05', end:null, link:'tsmart.html'},
-  {key:'expMaingen', ref:'EXP-03', kind:'CONSULTING',
-   org:'UTESCA × MAINGEN',
-   full:'U of T Engineering Student Consulting Association — for Maingen (Y Combinator S26)',
-   role:'Co-Head Mechanical Engineer',
-   desc:'AI consulting engagement delivered through UTESCA. Building an evaluation environment in which an AI agent takes a real recurring operations decision and is scored against a human operator baseline; mechanical expertise on fabrication jobs; Python.',
-   start:'2026-10', end:null, link:'utesca-maingen.html'}
+   full:'Toronto Smart Materials & Structures',
+   role:'Undergraduate Research Fellow', desc:'',
+   start:'2026-05', end:'2026-08', link:null},
+  {key:'expUtesca', ref:'EXP-03', kind:'CONSULTING',
+   org:'UTESCA \u00d7 MAINGEN',
+   full:'UTESCA \u2014 consulting engagement with Maingen (Y Combinator S26)',
+   role:'Co-Head Mechanical Engineer \u2014 Consulting',
+   desc:'Advisory engagement through UTESCA with Maingen, a Y Combinator S26 company.',
+   start:'2026-10', end:null, link:null}
 ];
 const CERTS = [
   {key:'certAI',   name:'AI FOR DESIGN',   issuer:'UNIVERSITY OF MICHIGAN', ref:'QC-01'},
@@ -763,7 +909,7 @@ const CERTS = [
   {key:'certCSWA', name:'CSWA',            issuer:'DASSAULT SYSTÈMES', ref:'QC-04'},
   {key:'certCSWP', name:'CSWP',            issuer:'DASSAULT SYSTÈMES', ref:'QC-05'},
   {key:'certSim',  name:'SIMULINK ONRAMP', issuer:'MATHWORKS', ref:'QC-06'},
-  {key:'certCatia',name:'3DEXPERIENCE MECH. DESIGNER', issuer:'DASSAULT SYSTÈMES · ASSOCIATE', ref:'QC-07'}
+  {key:'certCatia',name:'CATIA ASSOCIATE', issuer:'DASSAULT SYSTÈMES', ref:'QC-07'}
 ];
 
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -773,7 +919,7 @@ const finePointer = window.matchMedia('(hover:hover) and (pointer:fine)').matche
 function el(tag, cls, html){const e=document.createElement(tag);if(cls)e.className=cls;if(html!==undefined)e.innerHTML=html;return e;}
 function placeholderNode(slotKey){
   const p = el('div','placeholder');
-  p.innerHTML = `<b>IMAGE WITHHELD</b><span>TEAM IP — IN MANUFACTURE</span><span>SEE DETAIL DWG</span>`;
+  p.innerHTML = `<b>NO IMAGE REF</b><span>SLOT: ${slotKey.toUpperCase()}</span><span>SET FILENAME IN IMAGE MANIFEST</span>`;
   return p;
 }
 function mountImage(container, slotKey, alt){
@@ -788,15 +934,14 @@ function mountImage(container, slotKey, alt){
 
 /* ---------- MEDIA SWITCH ---------- */
 function setMedia(m){
+  AFSound.relay();
   document.documentElement.dataset.media = m;
   document.getElementById('btn-vellum').setAttribute('aria-pressed', m==='vellum');
   document.getElementById('btn-ozalid').setAttribute('aria-pressed', m==='ozalid');
-  try{ localStorage.setItem('af-media', m); }catch(e){}
   drawHalftone(); // re-ink the plot
   conPrint(`<span class="dim">media set → ${m.toUpperCase()}</span>`);
 }
 
-(function(){ const m=document.documentElement.dataset.media; if(m==='ozalid'){ document.getElementById('btn-vellum').setAttribute('aria-pressed','false'); document.getElementById('btn-ozalid').setAttribute('aria-pressed','true'); } })();
 /* ---------- ZONE TICKS ---------- */
 (function zones(){
   const mk = (sel, arr)=>{const c=document.querySelector(sel); arr.forEach(t=>c.appendChild(el('span','',t)));};
@@ -863,8 +1008,6 @@ function drawHalftone(){
   if(sRatio > dRatio){ sh = figImg.height; sw = sh*dRatio; sx=(figImg.width-sw)/2; sy=0; }
   else { sw = figImg.width; sh = sw/dRatio; sx=0; sy=(figImg.height-sh)/2; }
   octx.drawImage(figImg, sx, sy, sw, sh, 0, 0, cols, rows);
-  /* REV F: the operator figure is issued as a colour photo ref; the halftone plot below is retained but bypassed. */
-  ctx.drawImage(figImg, sx, sy, sw, sh, 0, 0, cv.width, cv.height); return;
   let data;
   try { data = octx.getImageData(0,0,cols,rows).data; }
   catch(e){ // canvas tainted (cross-origin during preview) → draw the raw image instead
@@ -928,9 +1071,9 @@ function initLens(){
       <td class="dwgref">${p.ref}</td>
       <td><div class="pname">${p.name}</div><div class="pdesc">${p.desc}</div></td>
       <td class="status ${p.status==='PRELIMINARY'?'pre':'rel'}">${p.status}</td>`;
-    tr.addEventListener('mouseenter', ()=>{ selectProject(p.key,false); drawLeader(tr); });
+    tr.addEventListener('mouseenter', ()=>{ AFSound.tick(); selectProject(p.key,false); drawLeader(tr); });
     tr.addEventListener('mouseleave', clearLeader);
-    tr.addEventListener('click', ()=> selectProject(p.key,true));
+    tr.addEventListener('click', ()=>{ AFSound.click(); selectProject(p.key,true); });
     tr.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();selectProject(p.key,true);} });
     tbody.appendChild(tr);
   });
@@ -1074,6 +1217,8 @@ const CMDS = {
   clear(){ conOut.innerHTML=''; }
 };
 conIn && conIn.addEventListener('keydown', e=>{
+  if(e.key.length===1 || e.key==='Backspace') AFSound.key();
+  if(e.key==='Enter') AFSound.beep();
   if(e.key!=='Enter') return;
   const raw = conIn.value.trim(); conIn.value='';
   if(!raw) return;
@@ -1129,6 +1274,15 @@ document.querySelectorAll('section.sheet').forEach(s=>io.observe(s));
   const d = new Date();
   const iso = d.toISOString().slice(0,10);
   document.getElementById('tb-date').textContent = iso;
+})();
+/* ---------- audio toggle ---------- */
+(function(){
+  const btn = document.getElementById('btn-audio');
+  if(!btn) return;
+  function paint(){ btn.textContent = AFSound.on?'ON':'OFF';
+                    btn.setAttribute('aria-pressed', AFSound.on?'true':'false'); }
+  btn.addEventListener('click', ()=>{ const v=AFSound.set(!AFSound.on); paint(); if(v) AFSound.relay(); });
+  paint();
 })();
 </script>
 </body>
